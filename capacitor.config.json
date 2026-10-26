@@ -1,0 +1,9 @@
+{
+  "appId": "com.tdfilmstudio.calmpath",
+  "appName": "Calm Path",
+  "webDir": "dist",
+  "android": { "allowMixedContent": false },
+  "plugins": {
+    "LocalNotifications": { "smallIcon": "ic_stat_calm", "iconColor": "#3f7d5c" }
+  }
+}

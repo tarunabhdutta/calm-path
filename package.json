@@ -1,0 +1,94 @@
+{
+  "name": "calm-path",
+  "productName": "Calm Path",
+  "private": true,
+  "version": "1.2.0",
+  "description": "Calm Path - a free, offline, playful companion for recovering from health anxiety",
+  "author": "Tarunabh Dutta",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "audio": "node tools/sync-audio.mjs",
+    "build": "node tools/sync-audio.mjs && tsc --noEmit && vite build",
+    "test": "vitest run",
+    "export-content": "tsx tools/export-content.ts",
+    "electron": "electron .",
+    "dist:pc": "npm run build && electron-builder --win nsis",
+    "cap:sync": "npm run build && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/local-notifications": "^8.3.1",
+    "@fontsource-variable/nunito": "^5.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  },
+  "build": {
+    "appId": "com.tdfilmstudio.calmpath",
+    "productName": "Calm Path",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "!src/**",
+      "!tests/**",
+      "!tools/**",
+      "!android/**",
+      "!public/**",
+      "!release/**",
+      "!*.md",
+      "!.claude/**",
+      "!tsconfig.json",
+      "!vite.config.ts",
+      "!capacitor.config.json",
+      "!index.html",
+      "!docs/**",
+      "!voice-audio/**",
+      "!.github/**",
+      "!LICENSE",
+      "!build/**"
+    ],
+    "extraFiles": [],
+    "npmRebuild": false,
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "shortcutName": "Calm Path",
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "Calm-Path-Setup-${version}.exe"
+    }
+  },
+  "license": "MIT",
+  "repository": "https://github.com/tarunabhdutta/calm-path"
+}

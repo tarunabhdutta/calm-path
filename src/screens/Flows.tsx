@@ -1,0 +1,293 @@
+import { useEffect, useRef, useState } from 'react';
+import { Back, Chips, Scale, useNav } from '../components/ui';
+import { AUDIO, SURGE, SURGE_REPEAT, URGE_PROMPTS, WIND_DOWN_TEXT } from '../content/scripts';
+import type { Line } from '../content/scripts';
+import { breathTone, hasClip, playClip, stopClip } from '../lib/audio';
+import { useStore } from '../lib/store';
+import { today, uid, emptyCounts } from '../lib/model';
+import { LotusBloom, Ocean, SurfScene } from '../game/Scenes';
+import { Tulu } from '../game/Mascot';
+
+function useVoice(): boolean {
+  const { data } = useStore();
+  return data ? data.settings.voice : true;
+}
+
+/** Plays a caption timeline over the dusk ocean (and the matching clip when bundled). */
+function Timeline({ lines, clip, onDone }: { lines: Line[]; clip: string; onDone: () => void }) {
+  const voice = useVoice();
+  const [i, setI] = useState(0);
+  const total = lines.reduce((a, l) => a + l.secs, 0);
+  const [elapsed, setElapsed] = useState(0);
+  useEffect(() => {
+    if (voice) playClip(clip);
+    return () => stopClip();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (i >= lines.length) { onDone(); return; }
+    const t = window.setTimeout(() => setI(i + 1), lines[i].secs * 1000);
+    return () => window.clearTimeout(t);
+  }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const t = window.setInterval(() => setElapsed((e) => e + 1), 1000);
+    return () => window.clearInterval(t);
+  }, []);
+  const line = lines[Math.min(i, lines.length - 1)];
+  return (
+    <>
+      <div className="scene-bg"><Ocean breath={line.breath} /></div>
+      <div className="flow over">
+        <div className="caption glass" key={i} aria-live="polite">{line.text}</div>
+        <div className="bar glass-bar" aria-hidden><i style={{ width: `${Math.min(100, (elapsed / total) * 100)}%` }} /></div>
+        <button className="link light" onClick={() => { stopClip(); onDone(); }}>Finish</button>
+      </div>
+    </>
+  );
+}
+
+export function Surge({ practice = false, onFinished }: { practice?: boolean; onFinished?: () => void }) {
+  const { data, update } = useStore();
+  const { back, go, toast } = useNav();
+  const [stage, setStage] = useState<'play' | 'repeat' | 'log'>('play');
+  const [repeated, setRepeated] = useState(false);
+  const [strength, setStrength] = useState(6);
+  const [minutes, setMinutes] = useState(['A few minutes']);
+  const [helped, setHelped] = useState<string[]>([]);
+  const [note, setNote] = useState('');
+  const started = useRef(new Date().toISOString());
+
+  const finish = () => {
+    if (data && !practice) {
+      const mins = { 'Under 2 minutes': 1, 'A few minutes': 4, '5–15 minutes': 10, 'Longer': 25 }[minutes[0]] ?? 4;
+      update((d) => d.surges.push({ id: uid(), at: started.current, strength, minutes: mins, helped, note, repeat: repeated }));
+      if (hasClip(AUDIO.win) && data.settings.voice) playClip(AUDIO.win);
+      toast('Logged. You let it pass.');
+    }
+    onFinished ? onFinished() : back();
+  };
+
+  return (
+    <div className="full scene-screen">
+      {stage === 'log' && <div className="scene-bg"><Ocean /></div>}
+      <div className="row spread over">
+        <span className="light-back"><Back label={practice ? 'Back' : 'Close'} /></span>
+        <button className="link light" onClick={() => go({ name: 'safety' })}>Different from usual?</button>
+      </div>
+      {stage === 'play' && <Timeline lines={SURGE} clip={AUDIO.surge} onDone={() => setStage('log')} />}
+      {stage === 'repeat' && <Timeline lines={SURGE_REPEAT} clip={AUDIO.surgeRepeat} onDone={() => setStage('log')} />}
+      {stage === 'log' && (
+        <div className="over" style={{ marginTop: 'auto' }}>
+          <div className="sheet">
+            <div style={{ textAlign: 'center', marginTop: -70 }}><Tulu size={110} mood="calm" /></div>
+            <h1 style={{ textAlign: 'center' }}>{practice ? 'Rehearsal done' : 'You floated through it'}</h1>
+            {practice ? (
+              <p className="ink2" style={{ textAlign: 'center' }}>Now you know the way. When a real wave comes, press SURGE and float along.</p>
+            ) : (
+              <>
+                <button className="btn soft block" onClick={() => { setRepeated(true); setStage('repeat'); }}>It's still strong. Stay with me.</button>
+                {data ? (
+                  <>
+                    <label className="f">How big was the wave at its peak?</label>
+                    <Scale value={strength} onChange={setStrength} low="ripple" high="huge" />
+                    <label className="f">How long did it last, roughly?</label>
+                    <Chips options={['Under 2 minutes', 'A few minutes', '5–15 minutes', 'Longer']} value={minutes} onChange={setMinutes} />
+                    <label className="f">What helped you float?</label>
+                    <Chips multi options={['Letting it come', 'Slow breathing out', 'Floating', 'Letting time pass', 'Moving / a small task', 'Nothing yet']} value={helped} onChange={setHelped} />
+                    <label className="f">Anything to note? (optional)</label>
+                    <input type="text" value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. after a strong tea, while resting" />
+                  </>
+                ) : (
+                  <p className="muted" style={{ textAlign: 'center' }}>Unlock the app afterwards if you want to log this wave.</p>
+                )}
+              </>
+            )}
+            <button className="btn block" style={{ marginTop: 14 }} onClick={finish}>{practice ? 'Done' : data ? 'Save · +3 💧 for the island' : 'Finish'}</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+const URGE_KINDS = ['Heart rate / watch', 'ECG', 'Feeling my pulse', 'Googling', 'Asking someone', 'Something else'];
+const COUNTER_FOR: Record<string, 'checks' | 'ecg' | 'google' | 'reassurance'> = {
+  'Heart rate / watch': 'checks', 'ECG': 'ecg', 'Feeling my pulse': 'checks', 'Googling': 'google', 'Asking someone': 'reassurance', 'Something else': 'checks',
+};
+
+export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished?: () => void }) {
+  const { data, update } = useStore();
+  const { back, toast } = useNav();
+  const [stage, setStage] = useState<'start' | 'surf' | 'end'>('start');
+  const [kind, setKind] = useState<string[]>([]);
+  const [start, setStart] = useState(6);
+  const [end, setEnd] = useState(4);
+  const [total, setTotal] = useState(minutes * 60);
+  const [sec, setSec] = useState(0);
+  const voice = useVoice();
+  const at = useRef(new Date().toISOString());
+
+  useEffect(() => {
+    if (stage !== 'surf') return;
+    if (sec === 0 && total === minutes * 60 && voice) playClip(AUDIO.urge);
+    if (sec >= total) { stopClip(); setStage('end'); return; }
+    const t = window.setTimeout(() => setSec(sec + 1), 1000);
+    return () => window.clearTimeout(t);
+  }, [stage, sec, total]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => stopClip(), []);
+
+  const prompt = [...URGE_PROMPTS].reverse().find((p) => p.at <= (sec % 180))?.text ?? URGE_PROMPTS[0].text;
+  const left = total - sec;
+  // The wave starts at her rating and settles as time passes: urges rise, peak and fall.
+  const h = stage === 'start' ? start / 10
+    : stage === 'surf' ? Math.max(0.12, (start / 10) * (1 - 0.85 * Math.min(1, sec / total)) + 0.04 * Math.sin(sec / 2))
+    : 0.1;
+
+  const save = (outcome: 'surfed' | 'checked') => {
+    if (data) {
+      update((d) => {
+        d.urges.push({ id: uid(), at: at.current, kind: kind[0] ?? 'Something else', start, end, minutes: Math.round(sec / 60), outcome });
+        if (outcome === 'checked') {
+          const k = today();
+          d.counts[k] ??= emptyCounts();
+          d.counts[k][COUNTER_FOR[kind[0] ?? 'Something else']]++;
+        }
+      });
+      toast(outcome === 'surfed' ? 'Surfed! That urge is a little weaker next time.' : 'Logged honestly. You still paddled out.');
+    }
+    onFinished ? onFinished() : back();
+  };
+
+  return (
+    <div className="full scene-screen surf">
+      <div className="scene-bg"><SurfScene h={h} ashore={stage === 'end'} /></div>
+      <span className="over"><Back label="Close" /></span>
+      {stage === 'start' && (
+        <div className="sheet over" style={{ marginTop: 'auto' }}>
+          <h1>Surf the urge 🏄‍♀️</h1>
+          <p className="ink2">An urge is a wave: it rises, peaks and falls by itself. Let's ride this one with {data?.game.mascotName || 'Tulu'}. What's pulling you?</p>
+          <Chips options={URGE_KINDS} value={kind} onChange={setKind} />
+          <label className="f">How big is the wave right now?</label>
+          <Scale value={start} onChange={setStart} low="ripple" high="huge" />
+          <button className="btn block" style={{ marginTop: 16 }} onClick={() => setStage('surf')}>Paddle out · {minutes} minutes</button>
+        </div>
+      )}
+      {stage === 'surf' && (
+        <div className="flow over top">
+          <div className="caption glass small" key={prompt} aria-live="polite">{prompt}</div>
+          <div className="timer-pill">{Math.floor(left / 60)}:{String(left % 60).padStart(2, '0')}</div>
+          <button className="link" onClick={() => { stopClip(); setStage('end'); }}>I'm back on the shore</button>
+        </div>
+      )}
+      {stage === 'end' && (
+        <div className="sheet over" style={{ marginTop: 'auto' }}>
+          <h1>Back on the shore! 🏝️</h1>
+          <p className="ink2">How big is the wave now? It started at {start}.</p>
+          <Scale value={end} onChange={setEnd} low="ripple" high="huge" />
+          <div className="grid2" style={{ marginTop: 12 }}>
+            <button className="btn" onClick={() => save('surfed')}>Surfed it! +3 💧</button>
+            <button className="btn soft" onClick={() => save('checked')}>I checked anyway</button>
+          </div>
+          <button className="btn ghost block" style={{ marginTop: 10 }} onClick={() => { setTotal(sec + 600); setStage('surf'); }}>Paddle out again · 10 more minutes</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function Breathe({ minutes: initial, onFinished }: { minutes?: number; onFinished?: () => void }) {
+  const { data, update } = useStore();
+  const { back, toast } = useNav();
+  const [minutes, setMinutes] = useState<number | null>(initial ?? null);
+  const [phase, setPhase] = useState<'in' | 'out'>('in');
+  const [cycle, setCycle] = useState(0);
+  const [running, setRunning] = useState(false);
+  const voice = useVoice();
+  const tone = data ? data.settings.tone : true;
+  const startAt = useRef(0);
+  const IN = 4, OUT = 6;
+  const cycles = minutes ? Math.round((minutes * 60) / (IN + OUT)) : 0;
+
+  useEffect(() => {
+    if (!running) return;
+    if (cycle >= cycles) { finish(true); return; }
+    if (tone) breathTone(phase, phase === 'in' ? IN : OUT);
+    if (voice && cycle < 3) playClip(phase === 'in' ? AUDIO.breatheIn : AUDIO.breatheOut);
+    if (voice && phase === 'in' && cycle === Math.floor(cycles / 2) && cycles > 12) playClip(AUDIO.breatheMid);
+    const t = window.setTimeout(() => {
+      if (phase === 'in') setPhase('out');
+      else { setPhase('in'); setCycle((c) => c + 1); }
+    }, (phase === 'in' ? IN : OUT) * 1000);
+    return () => window.clearTimeout(t);
+  }, [running, phase, cycle]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => stopClip(), []);
+
+  const begin = () => {
+    startAt.current = Date.now();
+    if (voice && hasClip(AUDIO.breatheIntro)) playClip(AUDIO.breatheIntro, () => setRunning(true));
+    else setRunning(true);
+  };
+
+  function finish(complete: boolean) {
+    setRunning(false);
+    const mins = Math.round((Date.now() - startAt.current) / 60000);
+    if (data && mins >= 1) update((d) => d.breaths.push({ at: new Date().toISOString(), minutes: mins }));
+    if (complete && voice) playClip(AUDIO.breatheClose);
+    if (mins >= 1) toast(`${mins} minute${mins > 1 ? 's' : ''} of lotus breathing. Lovely.`);
+    onFinished ? onFinished() : back();
+  }
+
+  if (!minutes) {
+    return (
+      <div className="full lotus-screen">
+        <Back />
+        <div className="flow">
+          <LotusBloom phase="in" running={false} secs={1} />
+          <h1>Lotus breathing</h1>
+          <p className="ink2" style={{ maxWidth: '30ch' }}>The lotus opens as you breathe in for 4, and closes as you breathe out for 6. Every minute waters the island.</p>
+          <div className="grid2" style={{ width: '100%', maxWidth: 360 }}>
+            {[1, 3, 5, 10].map((m) => <button key={m} className="btn soft" onClick={() => setMinutes(m)}>{m} min · +{Math.min(10, m)} 💧</button>)}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="full lotus-screen">
+      <Back label="Close" onClick={() => (running ? finish(false) : back())} />
+      <div className="flow">
+        <LotusBloom phase={phase} running={running} secs={phase === 'in' ? IN : OUT} />
+        <div className="caption">{!running ? `${minutes} minute${minutes > 1 ? 's' : ''} with the lotus` : phase === 'in' ? 'Breathe in… the lotus opens' : 'And out… slowly, it closes'}</div>
+        {running ? <div className="breath-dots" aria-label={`${cycles - cycle} breaths to go`}>{Array.from({ length: Math.min(cycles, 30) }).map((_, k) => <i key={k} className={k < cycle ? 'on' : ''} />)}</div>
+          : <button className="btn" onClick={begin}>Begin</button>}
+        {running && <button className="link" onClick={() => finish(false)}>Finish early</button>}
+      </div>
+    </div>
+  );
+}
+
+export function WindDown() {
+  const voice = useVoice();
+  const [i, setI] = useState(0);
+  const audio = voice && hasClip(AUDIO.winddown);
+  useEffect(() => {
+    if (audio) playClip(AUDIO.winddown);
+    return () => stopClip();
+  }, [audio]);
+  useEffect(() => {
+    if (i >= WIND_DOWN_TEXT.length - 1) return;
+    const t = window.setTimeout(() => setI(i + 1), 26_000);
+    return () => window.clearTimeout(t);
+  }, [i]);
+  return (
+    <div className="full night-screen">
+      <div className="stars" aria-hidden>{Array.from({ length: 30 }).map((_, k) => <i key={k} style={{ left: `${(k * 37) % 100}%`, top: `${(k * 53) % 70}%`, animationDelay: `${(k % 7) * 0.6}s` }} />)}</div>
+      <span className="light-back"><Back label="Close" /></span>
+      <div className="flow">
+        <div className="moon" aria-hidden />
+        <Tulu size={170} mood="sleep" />
+        <div className="caption" key={i}>{WIND_DOWN_TEXT[i]}</div>
+        {!audio && <p className="muted">The voice version plays here once the audio is added.</p>}
+      </div>
+    </div>
+  );
+}
