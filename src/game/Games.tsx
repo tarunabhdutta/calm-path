@@ -6,6 +6,8 @@
 //  NotingGame     - map where an urge sits in the body and name it with curiosity
 //  RecipeGame     - "After I…, I will…, then I celebrate" little-habit recipe
 import { useEffect, useMemo, useState } from 'react';
+import { useIntroClip } from '../components/VoiceCaption';
+import { AUDIO } from '../content/scripts';
 import { Back, Chips, Scale, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
 import { uid } from '../lib/model';
@@ -159,6 +161,8 @@ export function ForecastGame({ onFinished, task: initialTask }: { onFinished?: (
   const [came, setCame] = useState<'yes' | 'no' | 'partly' | ''>('');
   const [learned, setLearned] = useState('');
   const [safety, setSafety] = useState<string[]>([]);
+  const voice = !!data!.settings.voice;
+  useIntroClip(stage === 'after' ? AUDIO.exposureEnd : AUDIO.exposureStart, voice && stage !== 'doing');
   const save = () => {
     update((d) => {
       d.entries.exposureLog ??= [];

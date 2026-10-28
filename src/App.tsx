@@ -11,6 +11,9 @@ import { CheckIn, WorryBox, WorryTime } from './screens/Logs';
 import { BudgetView, FormView, LogsView, MeasureView, SessionView } from './screens/Path';
 import { Journey } from './screens/Journey';
 import { Celebrations } from './game/Celebrate';
+import { VoiceCaption } from './components/VoiceCaption';
+import { AUDIO } from './content/scripts';
+import { isPlaying, playClip } from './lib/audio';
 import { Tulu } from './game/Mascot';
 import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from './game/Games';
 import { BodyLab, ListeningGarden, SwitchGame, TheoryGame } from './game/Games2';
@@ -141,6 +144,18 @@ export default function App() {
     else document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
   useEffect(() => { if (status === 'open' && data) void scheduleReminders(data.settings.reminders); }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
+  // After two or more days away: a friendly "welcome back" on her first tap (never a "missed" tone).
+  useEffect(() => {
+    if (status !== 'open' || !data) return;
+    const today = new Date().toISOString().slice(0, 10);
+    let last: string | null = null;
+    try { last = localStorage.getItem('cp.lastOpen'); localStorage.setItem('cp.lastOpen', today); } catch { /* storage unavailable */ }
+    if (!last || !data.settings.voice) return;
+    if ((Date.parse(today) - Date.parse(last)) / 86_400_000 < 2) return;
+    const once = () => window.setTimeout(() => { if (!isPlaying()) playClip(AUDIO.missed); }, 400);
+    window.addEventListener('pointerdown', once, { once: true });
+    return () => window.removeEventListener('pointerdown', once);
+  }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (status === 'loading') return <div className="full" />;
   if (status === 'setup') return <Setup />;
@@ -152,6 +167,7 @@ export default function App() {
         <div key={routeKey(r)} className={FULL.has(r.name) ? 'page-fade' : 'page'}><Screen r={r} /></div>
         <Tabs />
         <Celebrations />
+        <VoiceCaption />
       </>
     )}</NavProvider>
   );

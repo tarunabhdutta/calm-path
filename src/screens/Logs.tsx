@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useIntroClip } from '../components/VoiceCaption';
 import { Back, Chips, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
 import { emptyCounts, today, uid } from '../lib/model';
@@ -52,6 +53,7 @@ export function CheckIn() {
   const [emotions, setEmotions] = useState<string[]>(prev?.emotions ?? []);
   const [context, setContext] = useState(prev?.context ?? '');
   const [more, setMore] = useState(false);
+  useIntroClip(AUDIO.morning, !!data!.settings.voice && !prev);
   const save = () => {
     update((d) => {
       d.checkins = d.checkins.filter((c) => c.date !== today());
@@ -117,6 +119,7 @@ export function WorryBox() {
   const [text, setText] = useState('');
   const [launching, setLaunching] = useState(false);
   const parked = data!.worries.filter((w) => w.status === 'parked');
+  useIntroClip(AUDIO.worry, !!data!.settings.voice);
   const add = () => {
     if (!text.trim()) return;
     if (crisisText(text)) { update((d) => d.safetyEvents.push({ at: new Date().toISOString(), source: 'worry' })); go({ name: 'safety', crisis: true }); }

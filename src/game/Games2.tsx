@@ -4,6 +4,8 @@
 //  TheoryGame       - the Danger story vs the Alarm story: evidence jars and belief ratings
 //  SwitchGame       - the fight switch: the feeling itself vs the struggle we add
 import { useEffect, useRef, useState } from 'react';
+import { useIntroClip } from '../components/VoiceCaption';
+import { AUDIO } from '../content/scripts';
 import { Back, Chips, Scale, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
 import { localDate } from '../lib/progress';
@@ -62,6 +64,7 @@ export function BodyLab({ onFinished }: { onFinished?: () => void }) {
   const [sim, setSim] = useState(5);
   const [happened, setHappened] = useState<string[]>([]);
   const timer = useRef<number | null>(null);
+  useIntroClip(AUDIO.lab, !!data!.settings.voice && ok && stage === 'menu');
 
   useEffect(() => () => { if (timer.current) window.clearInterval(timer.current); }, []);
   const tick = (secs: number, then: () => void) => {
@@ -259,6 +262,8 @@ export function ListeningGarden({ onFinished }: { onFinished?: () => void }) {
   const [focus, setFocus] = useState<number[]>([]);
   const [rating, setRating] = useState<number | null>(null);
   const g = useRef<Garden | null>(null);
+  const { data } = useStore();
+  useIntroClip(AUDIO.garden, !!data?.settings.voice && !mins);
   const total = (mins ?? 12) * 60;
   const p1 = Math.round(total * 5 / 12), p2 = Math.round(total * 10 / 12);
   const phase = sec < p1 ? 1 : sec < p2 ? 2 : 3;

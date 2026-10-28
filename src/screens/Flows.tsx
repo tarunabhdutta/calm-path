@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Back, Chips, Scale, useNav } from '../components/ui';
 import { AUDIO, NIGHT_GUIDE, SURGE, SURGE_REPEAT, URGE_PROMPTS, WIND_DOWN_TEXT } from '../content/scripts';
 import type { Line } from '../content/scripts';
-import { breathTone, hasClip, playClip, stopClip } from '../lib/audio';
+import { breathTone, clipDuration, hasClip, playClip, stopClip } from '../lib/audio';
+import { useSpeaking } from '../components/VoiceCaption';
 import { useStore } from '../lib/store';
 import { today, uid, emptyCounts } from '../lib/model';
 import { LotusBloom, Ocean, SurfScene } from '../game/Scenes';
@@ -13,32 +14,41 @@ function useVoice(): boolean {
   return data ? data.settings.voice : true;
 }
 
-/** Plays a caption timeline over the dusk ocean (and the matching clip when bundled). */
+/** Plays a caption timeline over the dusk ocean. With the clip bundled, the captions follow the voice
+ *  and the timeline ends with the recording; without it, each line holds for its own seconds. */
 function Timeline({ lines, clip, onDone }: { lines: Line[]; clip: string; onDone: () => void }) {
   const voice = useVoice();
+  const [audio, setAudio] = useState(() => voice && hasClip(clip));
+  const speaking = useSpeaking();
+  const said = useRef(lines[0].text);
   const [i, setI] = useState(0);
-  const total = lines.reduce((a, l) => a + l.secs, 0);
+  const total = audio ? clipDuration(clip) : lines.reduce((a, l) => a + l.secs, 0);
   const [elapsed, setElapsed] = useState(0);
   useEffect(() => {
-    if (voice) playClip(clip);
-    return () => stopClip();
+    let t = 0;
+    if (audio) playClip(clip, () => { t = window.setTimeout(onDone, 2500); }, () => setAudio(false));
+    return () => { window.clearTimeout(t); stopClip(); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
+    if (audio) return;
     if (i >= lines.length) { onDone(); return; }
     const t = window.setTimeout(() => setI(i + 1), lines[i].secs * 1000);
     return () => window.clearTimeout(t);
-  }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [i, audio]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     const t = window.setInterval(() => setElapsed((e) => e + 1), 1000);
     return () => window.clearInterval(t);
   }, []);
-  const line = lines[Math.min(i, lines.length - 1)];
+  if (audio && speaking?.clip === clip && speaking.text) said.current = speaking.text;
+  const line = audio
+    ? { text: said.current, breath: lines.find((l) => l.text.startsWith(said.current.slice(0, 18)))?.breath }
+    : lines[Math.min(i, lines.length - 1)];
   return (
     <>
       <div className="scene-bg"><Ocean breath={line.breath} /></div>
       <div className="flow over">
-        <div className="caption glass" key={i} aria-live="polite">{line.text}</div>
-        <div className="bar glass-bar" aria-hidden><i style={{ width: `${Math.min(100, (elapsed / total) * 100)}%` }} /></div>
+        <div className="caption glass" key={line.text} aria-live="polite">{line.text}</div>
+        <div className="bar glass-bar" aria-hidden><i style={{ width: `${Math.min(100, (elapsed / (total || 1)) * 100)}%` }} /></div>
         <button className="link light" onClick={() => { stopClip(); onDone(); }}>Finish</button>
       </div>
     </>
@@ -143,7 +153,10 @@ export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished
   }, [stage, sec, total]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => stopClip(), []);
 
-  const prompt = [...URGE_PROMPTS].reverse().find((p) => p.at <= (sec % 180))?.text ?? URGE_PROMPTS[0].text;
+  const speaking = useSpeaking();
+  const said = useRef('');
+  if (speaking?.clip === AUDIO.urge && speaking.text) said.current = speaking.text;
+  const prompt = said.current || ([...URGE_PROMPTS].reverse().find((p) => p.at <= (sec % 180))?.text ?? URGE_PROMPTS[0].text);
   const left = total - sec;
   // The wave starts at her rating and settles as time passes: urges rise, peak and fall.
   const h = stage === 'start' ? start / 10
@@ -280,16 +293,21 @@ export function Breathe({ minutes: initial, onFinished }: { minutes?: number; on
 export function WindDown() {
   const voice = useVoice();
   const [i, setI] = useState(0);
-  const audio = voice && hasClip(AUDIO.winddown);
+  const [audio, setAudio] = useState(() => voice && hasClip(AUDIO.winddown));
+  const speaking = useSpeaking();
+  const said = useRef(WIND_DOWN_TEXT[0]);
   useEffect(() => {
-    if (audio) playClip(AUDIO.winddown);
+    if (audio) playClip(AUDIO.winddown, undefined, () => setAudio(false));
     return () => stopClip();
-  }, [audio]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (i >= WIND_DOWN_TEXT.length - 1) return;
+    if (audio || i >= WIND_DOWN_TEXT.length - 1) return;
     const t = window.setTimeout(() => setI(i + 1), 26_000);
     return () => window.clearTimeout(t);
-  }, [i]);
+  }, [i, audio]); // eslint-disable-line react-hooks/exhaustive-deps
+  if (audio && speaking?.clip === AUDIO.winddown && speaking.text) said.current = speaking.text;
+  const text = audio ? said.current : WIND_DOWN_TEXT[i];
+  const night = (open: boolean) => { if (open && voice) playClip(AUDIO.night); else if (!open) stopClip(); };
   return (
     <div className="full night-screen">
       <div className="stars" aria-hidden>{Array.from({ length: 30 }).map((_, k) => <i key={k} style={{ left: `${(k * 37) % 100}%`, top: `${(k * 53) % 70}%`, animationDelay: `${(k % 7) * 0.6}s` }} />)}</div>
@@ -297,9 +315,9 @@ export function WindDown() {
       <div className="flow">
         <div className="moon" aria-hidden />
         <Tulu size={170} mood="sleep" />
-        <div className="caption" key={i}>{WIND_DOWN_TEXT[i]}</div>
+        <div className="caption" key={text}>{text}</div>
         {!audio && <p className="muted">The voice version plays here once the audio is added.</p>}
-        <details className="night-guide">
+        <details className="night-guide" onToggle={(e) => night((e.target as HTMLDetailsElement).open)}>
           <summary>Awake in the night? 🌙</summary>
           {NIGHT_GUIDE.map((l) => <p key={l}>{l}</p>)}
         </details>
