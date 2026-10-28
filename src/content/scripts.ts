@@ -1,53 +1,48 @@
-// On-screen captions that mirror the ElevenLabs voice scripts
-// (docs/VOICE_SCRIPTS.md). When a clip's MP3 is bundled it
-// plays alongside; without it, the captions alone guide her at the same pace.
+// On-screen captions that mirror the voice scripts (docs/VOICE_SCRIPTS.md, v1.3).
+// When a clip's MP3 is bundled it plays alongside; without it, the captions alone guide her at the same pace.
+//
+// SURGE follows Weekes (first fear / second fear; face, go with it, float, let time pass), with
+// McDonagh's light reply and Engage, and Harris's observe-and-make-room. It never promises calm,
+// never says the heart is fine, and never uses the breath to push the feeling away.
 
 export interface Line { text: string; secs: number; breath?: 'out' | 'in' }
 
 export const SURGE: Line[] = [
-  { text: 'You pressed the button. That was the right thing to do.', secs: 5 },
-  { text: 'Something is rising in your body. A fast heart. Maybe that thump. Maybe trembling hands.', secs: 7 },
-  { text: 'You know this wave. It is adrenaline, the body\'s alarm, ringing loudly.', secs: 7 },
-  { text: 'We are not going to fight it. And we are not going to check it.', secs: 5 },
-  { text: 'Put the phone down if you can, or just let your hand rest.', secs: 6 },
-  { text: 'Say to yourself, quietly: let it come.', secs: 5 },
-  { text: 'Let it do whatever it wants to do. It is allowed to be here.', secs: 7 },
-  { text: 'A long, slow breath out, as if through a straw…', secs: 6, breath: 'out' },
-  { text: 'And let the next breath come in by itself.', secs: 4, breath: 'in' },
-  { text: 'Again, slowly out…', secs: 6, breath: 'out' },
-  { text: 'And let it come in.', secs: 4, breath: 'in' },
-  { text: 'One more, long and slow, all the way out…', secs: 6, breath: 'out' },
-  { text: 'Let your shoulders drop. Unclench your jaw. Soften your hands.', secs: 8 },
-  { text: 'If the heart races, let it race.', secs: 4 },
-  { text: 'You are lying on warm, still water. You don\'t swim. You float.', secs: 7 },
-  { text: 'The water holds you, and the feeling moves through you.', secs: 10 },
-  { text: 'Time is on your side. Every wave rises, reaches its top, and falls, without you doing anything.', secs: 8 },
-  { text: 'Your only job is to let time pass.', secs: 12 },
-  { text: 'The wave may already be lower. Or it may still be here. Either way is all right.', secs: 7 },
-  { text: 'When you are ready, do one small, ordinary thing: a sip of water, a look out of the window.', secs: 8 },
-  { text: 'You let the wave pass through. That is exactly how this gets weaker.', secs: 6 },
+  { text: 'You pressed the button. Good. Let\'s meet this wave together.', secs: 5 },
+  { text: 'Here is the flash: the jolt, the fast heart, maybe that thump. That is the first fear. It came by itself.', secs: 8 },
+  { text: 'Now listen for the second voice: "What if… this time…" That is the second fear. You don\'t have to answer it.', secs: 8 },
+  { text: 'You can reply, lightly: "So it races. Let it race."', secs: 6 },
+  { text: 'Turn towards the feeling, like a curious scientist. Where is it? How big? What is it like?', secs: 9 },
+  { text: 'Now go with it. Not gritting your teeth. Loosening.', secs: 5 },
+  { text: 'Let your shoulders drop. Soften your jaw. Open your hands. Let your tummy go soft.', secs: 8 },
+  { text: 'Make room for the feeling. Let it be as strong as it wants. The switch is off. You are adding nothing.', secs: 9 },
+  { text: 'Let your breath be soft and slow on its own. Breathe around the feeling, not against it.', secs: 7, breath: 'out' },
+  { text: 'Imagine floating on warm, still water. You don\'t swim. The water holds you, and the feeling moves through.', secs: 10 },
+  { text: 'Now let time pass. Waves rise, peak and fall in their own time.', secs: 8 },
+  { text: 'Your only job is to let the seconds go by.', secs: 14 },
+  { text: 'Whatever the wave is doing now (higher, lower, or the same), it is allowed to be here.', secs: 8 },
+  { text: 'Now step back into your day. Pick up the next ordinary thing, and let the feeling come along if it wants.', secs: 8 },
+  { text: 'You met the wave without fighting it. That is how it loses its power over you.', secs: 6 },
 ];
 
 export const SURGE_REPEAT: Line[] = [
-  { text: 'It\'s still here, and that is all right. Some waves are longer.', secs: 5 },
-  { text: 'Nothing needs to be fixed right now. Let it stay as long as it wants.', secs: 6 },
-  { text: 'Breathe out slowly, long and soft…', secs: 6, breath: 'out' },
-  { text: 'And let the breath come back in.', secs: 4, breath: 'in' },
-  { text: 'Again, out…', secs: 6, breath: 'out' },
-  { text: 'And in.', secs: 4, breath: 'in' },
-  { text: 'Let it come. Float. Let time pass.', secs: 14 },
-  { text: 'Staying with it, without checking, is the work. Keep floating.', secs: 6 },
+  { text: 'Still strong? That is allowed. Some waves are longer.', secs: 5 },
+  { text: 'Nothing needs fixing right now. Let it stay as long as it wants.', secs: 6 },
+  { text: 'Where is it now? Has its shape changed? Just notice.', secs: 8 },
+  { text: 'Soften around it. Shoulders, jaw, hands.', secs: 7, breath: 'out' },
+  { text: 'Float. Let time pass.', secs: 14 },
+  { text: 'Staying with it, without checking, is the whole of the work. Keep floating.', secs: 6 },
 ];
 
 export const URGE_PROMPTS: { at: number; text: string }[] = [
-  { at: 0, text: 'You feel the pull to check. That pull is the anxiety asking for reassurance.' },
-  { at: 10, text: 'Notice where you feel the urge. Your chest? Your hands? Your stomach?' },
-  { at: 25, text: 'An urge is a wave. It builds, it peaks, and it falls, whether you act on it or not.' },
-  { at: 45, text: 'Just watch it, with curiosity. Breathe out slowly.' },
-  { at: 75, text: 'If the thought says "just one check", answer: "Thank you, mind. I\'m surfing this one."' },
-  { at: 110, text: 'Look at the wave now. Same, stronger, or a little lower? Either way, you\'re still on the board.' },
-  { at: 150, text: 'Keep breathing. Let the urge be there without doing what it says.' },
-  { at: 175, text: 'Every urge you surf makes the next one weaker.' },
+  { at: 0, text: 'The pull to check is here. You noticed it. That is already the win.' },
+  { at: 10, text: 'R: Recognise it. Say quietly: "urge to check."' },
+  { at: 25, text: 'A: Allow it. You don\'t have to push it away, and you don\'t have to obey it.' },
+  { at: 45, text: 'I: Investigate. Where do you feel it: chest, hands, throat? What is it like: tight, buzzy, pulling?' },
+  { at: 75, text: 'N: Note it in a word, each time it changes. "Tight"… "pulling"… "fading"…' },
+  { at: 110, text: 'If the thought says "just one quick check", answer: "Thank you, mind. I\'m surfing this one."' },
+  { at: 140, text: 'Ask gently: what did the last check really give me, ten minutes later?' },
+  { at: 170, text: 'Every urge you notice and ride makes the next one weaker.' },
 ];
 
 export const AUDIO = {
@@ -67,15 +62,28 @@ export const AUDIO = {
   missed: 'V-06D_MISSED_DAY.mp3',
   exposureStart: 'V-06E_EXPOSURE_START.mp3',
   exposureEnd: 'V-06F_EXPOSURE_END.mp3',
+  lab: 'V-07_BODY_LAB.mp3',
+  garden: 'V-08_SOUND_GARDEN.mp3',
+  night: 'V-09_NIGHT_GUIDE.mp3',
 } as const;
 
 export const WIND_DOWN_TEXT = [
-  'The day is done. Let\'s put it down gently.',
-  'Lie back, and let the bed take your weight. Breathe out slowly.',
+  'The day is done. The worries are parked for tonight. Nothing more to solve.',
+  'Lie back, and let the bed take your weight.',
   'Feet heavy and warm. Legs sinking a little deeper.',
-  'Belly rising and falling on its own.',
-  'Whatever your heart is doing, let it do it. You don\'t need to listen to it.',
-  'Shoulders, arms, hands, loose. Jaw, forehead, eyes, soft.',
+  'If your heart is noticeable, let it be noticeable. You don\'t need to listen to it.',
+  'Notice the sounds outside: something near… something far…',
+  'Shoulders, arms, hands loose. Jaw, forehead, eyes soft.',
   'If a thought comes, let it pass by, like a boat on the river.',
-  'Nothing more to do tonight. Just rest.',
+  'Sleep can\'t be forced, and it doesn\'t need to be. Resting is enough.',
+];
+
+/** Night Guide: for waking at night (Carney & Manber; Weekes). */
+export const NIGHT_GUIDE = [
+  'Awake at night? That happens to everyone. Nothing needs to be done about it.',
+  'If you are calm, stay and rest. If you are upset and wide awake for a while, get up, go to another room, and keep the light dim.',
+  'Do something quiet you chose in the daytime: a gentle book, folding clothes, a warm (caffeine-free) drink.',
+  'If worries come, they are parked until tomorrow\'s worry time. You can say: "Not now. Tomorrow at worry time."',
+  'If your body feels strange as you wake (a fast heart, a jolt), that is common when waking between sleep stages. Let it be there, like weather.',
+  'When you feel sleepy, go back to bed. Tomorrow, get up at your usual time, whatever the night was like.',
 ];

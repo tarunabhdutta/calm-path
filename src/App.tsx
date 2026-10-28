@@ -12,6 +12,9 @@ import { BudgetView, FormView, LogsView, MeasureView, SessionView } from './scre
 import { Journey } from './screens/Journey';
 import { Celebrations } from './game/Celebrate';
 import { Tulu } from './game/Mascot';
+import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from './game/Games';
+import { BodyLab, SoundGarden, SwitchGame, TheoryGame } from './game/Games2';
+import { Family, HospitalUrge } from './screens/Family';
 import { Progress } from './screens/Progress';
 import { Safety, Settings } from './screens/Settings';
 
@@ -35,8 +38,20 @@ function Screen({ r }: { r: Route }) {
     case 'logs': return <LogsView formId={r.formId} />;
     case 'measure': return <MeasureView key={r.id} id={r.id} />;
     case 'budget': return <BudgetView />;
+    case 'game': {
+      if (r.id === 'forecast') return <ForecastGame task={r.task} />;
+      const G = GAMES[r.id];
+      return <G />;
+    }
+    case 'family': return <Family />;
+    case 'hospital': return <HospitalUrge />;
   }
 }
+
+const FULL = new Set(['surge', 'urge', 'breathe', 'winddown']);
+const GAMES = { fearCycle: FearCycleGame, leaves: LeavesGame, forecast: ForecastGame, ladder: LadderGame, noting: NotingGame, recipe: RecipeGame,
+  bodyLab: BodyLab, soundGarden: SoundGarden, theory: TheoryGame, switch: SwitchGame } as const;
+const routeKey = (r: Route) => r.name + ('id' in r ? String(r.id) : '') + ('formId' in r ? r.formId : '') + ('entryId' in r ? r.entryId ?? '' : '');
 
 const TABS = [
   { name: 'home', label: 'Island' }, { name: 'path', label: 'Journey' }, { name: 'tools', label: 'Toolbox' },
@@ -131,7 +146,14 @@ export default function App() {
   if (status === 'setup') return <Setup />;
   if (status === 'legacy') return <BringAcross />;
   return (
-    <NavProvider>{(r) => (<><Screen r={r} /><Tabs /><Celebrations /></>)}</NavProvider>
+    <NavProvider>{(r) => (
+      <>
+        {/* full-screen scenes fade (a transform would break their fixed backgrounds); other screens slide in */}
+        <div key={routeKey(r)} className={FULL.has(r.name) ? 'page-fade' : 'page'}><Screen r={r} /></div>
+        <Tabs />
+        <Celebrations />
+      </>
+    )}</NavProvider>
   );
 }
 

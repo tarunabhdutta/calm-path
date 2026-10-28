@@ -1,194 +1,201 @@
-# Voice scripts (for ElevenLabs or any text-to-speech)
+# Voice scripts (ElevenLabs or any text-to-speech), Calm Path v1.3
 
 **Save each finished clip, named exactly as below, into the `voice-audio/` folder of this repository**, then run `npm run build`.
 
+> **Rewritten for v1.3.**
+> - **SURGE** follows Claire Weekes's exact structure: name the first fear, notice the second, face it, go with it (not grit your teeth), float, let time pass. Then a step back into the day (McDonagh's "Engage").
+> - **Breathing** is now calm-time training only. Barlow & Craske, Harris, Hedman-Lagerlöf, Abramowitz and Bourne all warn that breathing used to stop a wave keeps the fear alive.
+> - **The urge script** uses Brewer's RAIN steps.
+> - **New clips:** Body Lab, Sound Garden, Night Guide.
+> - No line says "you're safe", "your heart is fine" or "it's harmless", and none promises calm.
 
 ## How to produce (read once)
 
-**Voice:** one warm, unhurried, gentle voice for every clip, so she learns to link that one voice
-with calm. A soft Indian-English voice is ideal. Avoid "meditation-guru" breathiness and anything
-that sounds like a news reader. Use the **same voice and settings for every clip.**
+**Voice:**
+- One warm, unhurried, gentle voice for every clip. Same voice, same settings, every clip.
+- A soft Indian-English voice is ideal.
+- Avoid "meditation-guru" breathiness and anything that sounds like a news reader.
 
-**Settings (starting point, adjust by ear):**
-- Model: **Eleven Multilingual v2**. It obeys the `<break>` pause tags used below.
-- Speed: **0.85–0.90**
-- Stability: **~65%**, so the voice stays calm and even.
-- Similarity: **~75%**
-- Style exaggeration: **0**
+**Settings (starting point):**
+- Model: **Eleven Multilingual v2**, which obeys `<break>` tags.
+- Speed **0.85–0.90**, Stability **~65%**, Similarity **~75%**, Style exaggeration **0**.
 - Output: MP3 44.1 kHz.
 
 **Pauses:**
-- `<break time="2.0s" />` is a pause ElevenLabs makes itself. Its maximum is 3 seconds.
-- `[SILENCE 6s]` is longer. Generate the text on either side as separate parts, then join them with
-  that much silence in an audio editor (Audacity or Vegas). Or simply give me the separate parts and
-  I will join them during the build.
+- `<break time="2.0s" />` gives a pause of up to 3 seconds.
+- `[SILENCE 8s]` means a longer pause. Generate the parts on either side separately and join them
+  with that much silence (Audacity or Vegas), or let the app's build join them.
 
-**Rules these scripts follow (please don't edit them out):**
-- **No promise that nothing is wrong**, and no "you're safe, your heart is fine". Reassurance feeds
-  health anxiety. The scripts teach her to *allow* the feeling, not to argue it away.
-- **No heart-rate numbers. No instruction to check the pulse.**
-- Medical red flags (chest pain with breathlessness, fainting) are on the app screen, not in the
-  audio.
+**Tone:** curious, warm, steady, slightly matter-of-fact, like a kind coach standing beside her. It
+is not pitying and not hushed.
 
 ---
 
-## V-01_SURGE.mp3 — the SURGE button (about 2½ minutes)
-*Plays when she presses SURGE. This is the most important clip.*
+## V-01_SURGE.mp3 — SURGE (about 2½ minutes)
+*Plays when she presses SURGE. The most important clip.*
 
-> You pressed the button. That was the right thing to do. <break time="2.0s" />
-> Something is rising in your body. A fast heart. Maybe that thump. Maybe trembling hands. <break time="1.5s" />
-> You know this wave. You have met it before. It is adrenaline, the body's alarm, ringing loudly. <break time="2.5s" />
+> You pressed the button. Good. <break time="1.0s" /> Let's meet this wave together. <break time="2.5s" />
 >
-> We are not going to fight it. And we are not going to check it. <break time="1.5s" />
-> Put the phone down if you can, or just let your hand rest. <break time="3.0s" />
+> Here is the flash. <break time="1.0s" /> The jolt, the fast heart, maybe that thump. <break time="1.5s" /> That is the first fear. It came by itself. <break time="2.5s" />
 >
-> Say to yourself, quietly: *Let it come.* <break time="2.0s" />
-> Let it do whatever it wants to do. <break time="2.0s" />
-> You don't have to slow it down. It is allowed to be here. <break time="3.0s" />
+> Now listen for the second voice. <break time="1.0s" /> "What if… this time…" <break time="1.5s" /> That is the second fear. <break time="1.0s" /> You don't have to answer it. <break time="2.5s" />
 >
-> Now, a long, slow breath out, as if you are blowing through a straw. <break time="3.0s" />
-> And let the next breath come in by itself. <break time="2.5s" />
-> Again, slowly out. <break time="3.0s" />
-> And let it come in. <break time="2.5s" />
-> One more, long and slow, all the way out. <break time="3.0s" />
+> You can reply, lightly: <break time="1.0s" /> "So it races. <break time="0.6s" /> Let it race." <break time="3.0s" />
 >
-> Let your shoulders drop. <break time="1.5s" /> Unclench your jaw. <break time="1.5s" /> Soften your hands. <break time="3.0s" />
+> Turn towards the feeling, like a curious scientist. <break time="1.5s" /> Where is it? <break time="2.0s" /> How big? <break time="2.0s" /> What is it like? <break time="3.0s" />
 >
-> If the heart races, let it race. <break time="1.5s" />
-> Imagine you are lying on warm, still water. You don't swim, you don't struggle. You float. <break time="2.5s" />
-> The water holds you, and the feeling moves through you. <break time="3.0s" />
+> Now go with it. <break time="1.0s" /> Not gritting your teeth. <break time="1.0s" /> Loosening. <break time="2.5s" />
 >
-> [SILENCE 6s]
+> Let your shoulders drop. <break time="1.5s" /> Soften your jaw. <break time="1.5s" /> Open your hands. <break time="1.5s" /> Let your tummy go soft. <break time="3.0s" />
 >
-> Time is on your side. Every wave rises, <break time="1.0s" /> reaches its top, <break time="1.0s" /> and falls, without you doing anything at all. <break time="3.0s" />
-> Your only job is to let time pass. <break time="3.0s" />
+> Make room for the feeling. <break time="1.0s" /> Let it be as strong as it wants. <break time="1.5s" /> The switch is off. You are adding nothing. <break time="3.0s" />
 >
-> [SILENCE 8s]
+> Let your breath be soft and slow on its own. <break time="1.0s" /> Breathe around the feeling, <break time="0.6s" /> not against it. <break time="3.0s" />
 >
-> The wave may already be lower. Or it may still be here. Either way is all right. You are letting it be. <break time="3.0s" />
+> Imagine floating on warm, still water. <break time="1.5s" /> You don't swim. <break time="1.0s" /> The water holds you, <break time="1.0s" /> and the feeling moves through. <break time="3.0s" />
 >
-> When you are ready, open your eyes, and do one small, ordinary thing. <break time="1.0s" /> A sip of water. <break time="1.0s" /> A look out of the window. <break time="1.0s" /> A few steps around the room. <break time="2.5s" />
->
-> You let the wave pass through. That is exactly how this gets weaker. <break time="1.5s" /> Well done.
-
----
-
-## V-01B_SURGE_REPEAT.mp3 — "Still here?" (about 1 minute)
-*The app offers this after V-01 if she taps "It's still strong".*
-
-> It's still here, and that is all right. Some waves are longer. <break time="2.0s" />
-> Nothing needs to be fixed right now. <break time="1.5s" /> Let it stay as long as it wants. <break time="2.5s" />
-> Breathe out slowly, long and soft. <break time="3.0s" /> And let the breath come back in. <break time="2.5s" />
-> Again, out. <break time="3.0s" /> And in. <break time="2.5s" />
-> Let it come. <break time="1.5s" /> Float. <break time="1.5s" /> Let time pass. <break time="3.0s" />
+> Now let time pass. <break time="1.5s" /> Waves rise, <break time="0.8s" /> peak, <break time="0.8s" /> and fall, in their own time. <break time="2.5s" />
+> Your only job is to let the seconds go by. <break time="3.0s" />
 >
 > [SILENCE 10s]
 >
-> You are doing it. Staying with it, without checking, is the work. <break time="1.5s" /> Keep floating.
+> Whatever the wave is doing now (higher, lower, or the same), <break time="1.0s" /> it is allowed to be here. <break time="3.0s" />
+>
+> Now step back into your day. <break time="1.0s" /> Pick up the next ordinary thing, <break time="0.8s" /> and let the feeling come along if it wants. <break time="2.5s" />
+>
+> You met the wave without fighting it. <break time="1.0s" /> That is how it loses its power over you.
 
 ---
 
-## V-02 BREATHE — resonance breathing (the app plays these as separate pieces)
-*The app plays a soft tone at 6 breaths a minute (4 seconds in, 6 seconds out). The voice is only
-the opening, the first few cues, and the close.*
+## V-01B_SURGE_REPEAT.mp3 — "Still strong?" (about 1 minute)
+
+> Still strong? <break time="1.0s" /> That is allowed. Some waves are longer. <break time="2.0s" />
+> Nothing needs fixing right now. <break time="1.0s" /> Let it stay as long as it wants. <break time="2.5s" />
+> Where is it now? <break time="1.5s" /> Has its shape changed? <break time="1.5s" /> Just notice. <break time="3.0s" />
+> Soften around it. <break time="1.0s" /> Shoulders. <break time="1.0s" /> Jaw. <break time="1.0s" /> Hands. <break time="3.0s" />
+> Float. <break time="1.5s" /> Let time pass. <break time="3.0s" />
+>
+> [SILENCE 10s]
+>
+> Staying with it, without checking, is the whole of the work. <break time="1.0s" /> Keep floating.
+
+---
+
+## V-02 CALM-TIME BREATHING (played as pieces)
+*Daily training on calm days, about 6 breaths a minute. NOT for use in a wave. The app plays a soft
+tone for the pace; the voice gives the opening, the first few cues and the close.*
 
 **V-02A_BREATHE_INTRO.mp3**
-> Let's breathe together for a few minutes. <break time="1.5s" />
-> Sit comfortably, feet on the floor, shoulders loose. <break time="2.0s" />
-> Breathe in gently through your nose, and out slowly, a little longer than the in-breath. <break time="1.5s" />
-> No need to breathe deeply. Just slowly. Follow the sound.
+> This is calm-time practice: training for your nervous system, like a gentle gym. <break time="1.5s" />
+> Sit comfortably, eyes open or closed. <break time="1.5s" /> Breathe in gently through your nose, <break time="0.8s" /> and out a little longer. <break time="1.5s" />
+> Keep it soft and unforced. There's nothing to achieve. <break time="1.0s" /> Just follow the sound.
 
 **V-02B_IN.mp3**
 > In…
 
 **V-02C_OUT.mp3**
-> And out… slowly.
+> And out… softly.
 
 **V-02D_MIDWAY.mp3**
-> Good. Let the sound lead you now. If your mind wanders, that's fine. Just come back to the next breath.
+> If your mind wanders, that's fine. Notice where it went, and come back to the next breath. No effort needed.
 
 **V-02E_CLOSE.mp3**
-> Let your breathing return to its own rhythm. <break time="2.0s" />
-> Notice how your body feels now, whatever it feels. <break time="2.0s" />
-> Two slow breaths a day, every day, teach your body that it knows how to settle. Well done.
+> Let your breathing find its own rhythm again. <break time="2.0s" />
+> Notice whatever your body feels now, without needing it to be anything. <break time="1.5s" />
+> A little every day is how this skill grows. Well done.
 
 ---
 
-## V-03_URGE_SURF.mp3 — the urge to check (about 3 minutes)
-*Plays when she taps "Urge to check" (the watch, an ECG, Google, or asking someone).*
+## V-03_URGE_SURF.mp3 — the urge to check, RAIN (about 3 minutes)
 
-> You feel the pull to check. <break time="1.5s" /> That pull is the anxiety asking for reassurance. <break time="2.0s" />
-> Checking gives relief for a minute, and then the worry comes back stronger. So today, we're going to surf this urge instead. <break time="2.5s" />
+> The pull to check is here. <break time="1.0s" /> You noticed it. <break time="0.8s" /> That is already the win. <break time="2.5s" />
 >
-> Notice where you feel the urge. Your chest? Your hands? A tight feeling in your stomach? <break time="3.0s" />
-> Rate it in your mind. How strong, from zero to ten? <break time="3.0s" />
+> R: Recognise it. <break time="1.0s" /> Say quietly: "urge to check." <break time="3.0s" />
 >
-> An urge is like a wave. It builds, <break time="1.0s" /> it peaks, <break time="1.0s" /> and it falls, whether you act on it or not. <break time="2.0s" />
-> You don't need to push it away. Just watch it, with curiosity. <break time="3.0s" />
+> A: Allow it. <break time="1.0s" /> You don't have to push it away, <break time="0.8s" /> and you don't have to obey it. <break time="3.0s" />
 >
-> [SILENCE 15s]
+> I: Investigate, with curiosity. <break time="1.0s" /> Where do you feel it? <break time="1.5s" /> Your chest? <break time="1.0s" /> Your hands? <break time="1.0s" /> Your throat? <break time="2.0s" />
+> What is it like: <break time="0.8s" /> tight, <break time="0.6s" /> buzzy, <break time="0.6s" /> pulling? <break time="3.0s" />
 >
-> Breathe out slowly. <break time="3.0s" /> And in. <break time="2.5s" />
-> If the thought says, *"Just one check, to be sure,"* <break time="1.0s" /> you can answer: *"Thank you, mind. I'm surfing this one."* <break time="3.0s" />
+> N: Note it in a word, each time it changes. <break time="1.0s" /> "Tight." <break time="2.0s" /> "Pulling." <break time="2.0s" /> "Fading." <break time="3.0s" />
 >
 > [SILENCE 20s]
 >
-> Check the wave now. Is it the same, <break time="1.0s" /> stronger, <break time="1.0s" /> or a little lower? <break time="2.5s" />
-> Whatever it is, you're still on the board. <break time="3.0s" />
+> If the thought says, "just one quick check", <break time="1.0s" /> you can answer: <break time="0.8s" /> "Thank you, mind. I'm surfing this one." <break time="3.0s" />
 >
-> [SILENCE 30s]
+> [SILENCE 20s]
 >
-> Three minutes. <break time="1.0s" /> You didn't check, and you're still here. <break time="1.5s" />
-> If the urge is still there, the app can give you ten more minutes. If it's lower, go on with your day. <break time="1.5s" />
-> Every urge you surf makes the next one weaker. That's a real win.
+> Ask gently: <break time="0.8s" /> what did the last check really give me, <break time="0.6s" /> ten minutes later? <break time="3.0s" />
+>
+> [SILENCE 20s]
+>
+> Every urge you notice and ride makes the next one weaker. <break time="1.0s" /> You're doing it.
 
 ---
 
 ## V-04_WORRY_TIME.mp3 — evening worry time (about 45 seconds)
-*Opens her daily 15-minute worry time.*
 
-> This is your worry time. For the next fifteen minutes, worries are allowed. <break time="2.0s" />
-> Open the worry box, and look at what you parked today. <break time="2.0s" />
-> For each one, ask: is this something I can act on? If yes, write one small step. <break time="1.5s" /> If no, let it go back in the box. <break time="2.0s" />
-> When the time is up, close the box. Tomorrow's worries can wait for tomorrow's worry time.
+> This is your worry time: early in the evening, never in bed. <break time="1.5s" />
+> Open the worry river and look at today's paper boats. <break time="1.5s" />
+> For each one, ask: is there one small next step I can take? <break time="1.0s" /> If yes, write it. <break time="1.0s" /> If it's a health "what if", there is no step. Let it float away. <break time="2.0s" />
+> When the time is up, close it. <break time="1.0s" /> Tomorrow's worries can wait for tomorrow's worry time.
 
 ---
 
-## V-05_WIND_DOWN.mp3 — sleep wind-down (about 4 minutes)
-*The last thing she hears at night. It must be sleepy, slower, and without effort.*
+## V-05_WIND_DOWN.mp3 — wind-down (about 4 minutes)
+*Sleepy, slower, effortless. The last thing she hears at night.*
 
-> The day is done. <break time="2.0s" /> Let's put it down gently. <break time="3.0s" />
+> The day is done. <break time="2.0s" /> The worries are parked for tonight. Nothing more to solve. <break time="3.0s" />
 > Lie back, and let the bed take your weight. <break time="3.0s" />
-> Breathe out slowly, <break time="3.0s" /> and let the breath return. <break time="3.0s" />
->
-> Let your attention rest on your feet. <break time="1.5s" /> Heavy. <break time="1.5s" /> Warm. <break time="3.0s" />
-> Your legs, <break time="1.0s" /> sinking a little deeper. <break time="3.0s" />
-> Your belly, <break time="1.0s" /> rising and falling on its own. <break time="3.0s" />
-> Your chest. <break time="1.0s" /> Whatever your heart is doing, let it do it. You don't need to listen to it. Let it look after itself, as it always has, all through the night. <break time="3.0s" />
-> Your shoulders, <break time="1.0s" /> your arms, <break time="1.0s" /> your hands, loose. <break time="3.0s" />
-> Your jaw, <break time="1.0s" /> your forehead, <break time="1.0s" /> your eyes, soft. <break time="3.0s" />
+> Feet heavy and warm. <break time="2.0s" /> Legs sinking a little deeper. <break time="3.0s" />
+> If your heart is noticeable, let it be noticeable. <break time="1.5s" /> You don't need to listen to it. <break time="3.0s" />
+> Notice the sounds outside. <break time="1.5s" /> Something near… <break time="2.5s" /> something far… <break time="3.0s" />
+> Shoulders, arms, hands loose. <break time="2.0s" /> Jaw, forehead, eyes soft. <break time="3.0s" />
 >
 > [SILENCE 10s]
 >
-> If a thought comes, let it pass by, like a boat on the river. You don't need to climb aboard. <break time="3.0s" />
+> If a thought comes, let it pass by, like a boat on the river. <break time="1.0s" /> You don't need to climb aboard. <break time="3.0s" />
 >
 > [SILENCE 15s]
 >
-> Nothing more to do tonight. <break time="2.0s" /> Just rest. <break time="3.0s" /> Good night.
+> Sleep can't be forced, and it doesn't need to be. <break time="1.5s" /> Resting is enough. <break time="3.0s" /> Good night.
 
 ---
 
 ## V-06 SHORT LINES (each its own small file)
 | File | Line |
 |---|---|
-| `V-06A_MORNING.mp3` | "Good morning. Thirty seconds for your check-in: how did you sleep, and how is the body today?" |
-| `V-06B_WIN.mp3` | "You let that wave pass. That's a real step. Well done." |
-| `V-06C_LOGGED.mp3` | "Logged. Thank you for noticing it. Noticing is half the work." |
-| `V-06D_MISSED_DAY.mp3` | "Welcome back. No catching up needed. Let's just do today." |
-| `V-06E_EXPOSURE_START.mp3` | "Before you start: what do you think will happen, and how sure are you? Write it down, then begin. Let the feeling come, and stay with it." |
-| `V-06F_EXPOSURE_END.mp3` | "Done. Now write what actually happened. The difference between what you feared and what happened is how your brain learns." |
+| `V-06A_MORNING.mp3` | "Good morning. Thirty seconds for your weather check: how was the night, and what's the weather inside today?" |
+| `V-06B_WIN.mp3` | "You stayed with it. That's the real step. Well done." |
+| `V-06C_LOGGED.mp3` | "Noted. Thank you for noticing. Noticing is half the work." |
+| `V-06D_MISSED_DAY.mp3` | "Welcome back. Nothing is lost. Let's just do today, even a tiny bit." |
+| `V-06E_EXPOSURE_START.mp3` | "Before you start: what does the anxiety predict, and how sure is it? Then do it fully: no checking, no escaping early. Let the feelings come along." |
+| `V-06F_EXPOSURE_END.mp3` | "Done. Now write what actually happened, and how you coped. The gap between the forecast and what happened is how the brain learns." |
 
 ---
 
-**Clip count:** V-01, V-01B, V-02A–E (5), V-03, V-04, V-05, V-06A–F (6) = **16 clips.**
-More scripts (lesson narrations for each week) will follow in build phase B0.
+## V-07_BODY_LAB.mp3 — Body Lab intro (about 40 seconds)
+
+> Welcome to the Body Lab. <break time="1.0s" /> Here you bring on a feeling on purpose, for a short time, and see what really happens. <break time="2.0s" />
+> Make it as strong as you can. <break time="0.8s" /> Keep going about thirty seconds after the feeling starts. <break time="1.0s" /> No checking, no sitting down to recover, no breathing tricks. <break time="2.0s" />
+> Then rate it, let it settle by itself, and go again. <break time="1.0s" /> Three rounds. <break time="1.0s" /> You're a scientist today.
+
+## V-08_SOUND_GARDEN.mp3 — Sound Garden intro (about 30 seconds)
+
+> Welcome to the Sound Garden. <break time="1.0s" /> Keep your eyes open, resting on one spot. <break time="1.5s" />
+> First you'll focus on one sound at a time, then switch quickly between them, then hear them all at once. <break time="1.5s" />
+> Thoughts and feelings may come. <break time="0.8s" /> Let them, and return to the sounds. <break time="1.0s" /> This is a gym for your attention.
+
+## V-09_NIGHT_GUIDE.mp3 — Night Guide (about 1 minute)
+
+> Awake at night? <break time="1.0s" /> That happens to everyone. Nothing needs to be done about it. <break time="2.0s" />
+> If you're calm, stay and rest. <break time="1.0s" /> If you're upset and wide awake for a while, get up, go to another room, and keep the light dim. <break time="2.0s" />
+> Do something quiet you chose in the daytime. <break time="2.0s" />
+> If worries come: <break time="0.8s" /> "Not now. <break time="0.6s" /> Tomorrow, at worry time." <break time="2.0s" />
+> If your body feels strange as you wake, let it be there, like weather. <break time="2.0s" />
+> When you feel sleepy, go back to bed. <break time="1.0s" /> Tomorrow, get up at your usual time, whatever the night was like.
+
+---
+
+**Clip count: 19.** That is V-01, V-01B, V-02A–E (5), V-03, V-04, V-05, V-06A–F (6), V-07, V-08 and
+V-09. The app plays any clip it finds and shows captions for the rest.

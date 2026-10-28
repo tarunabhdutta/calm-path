@@ -108,7 +108,7 @@ export function Home() {
 
       <div className="grid2" style={{ marginTop: 12 }}>
         <button className="tile play" onClick={() => go({ name: 'urge' })}><i>🏄‍♀️</i><b>Surf an urge</b><span>Instead of checking</span></button>
-        <button className="tile play" onClick={() => go({ name: 'breathe' })}><i>🪷</i><b>Lotus breathing</b><span>Open and close with the lotus</span></button>
+        <button className="tile play" onClick={() => go({ name: 'breathe' })}><i>🪷</i><b>Calm-time breathing</b><span>Daily training, not for waves</span></button>
         <button className="tile play" onClick={() => go({ name: 'checkin' })}><i>⛅</i><b>Inner weather</b><span>30-second check-in</span></button>
         <button className="tile play" onClick={() => go({ name: 'worry' })}><i>🛶</i><b>Worry river</b><span>{parked ? `${parked} boat${parked > 1 ? 's' : ''} waiting` : 'Fold a worry into a boat'}</span></button>
       </div>
@@ -133,14 +133,15 @@ export function Home() {
       <div className="row wrap" style={{ marginTop: 18 }}>
         <button className="btn ghost" onClick={() => go({ name: 'winddown' })}>🌙 Wind down</button>
         <button className="btn ghost" onClick={() => go({ name: 'safety' })}>Safety card</button>
+        <button className="btn ghost" onClick={() => go({ name: 'hospital' })}>🏥 Urge to go to hospital?</button>
       </div>
     </div>
   );
 }
 
 const TOOL_FORMS: [string, string][] = [
-  ['fearCycle', '🌀'], ['safetyInventory', '🎒'], ['watchSetup', '⌚'], ['reassurancePlan', '🤝'], ['ladder', '🪜'],
-  ['exposureLog', '⛰️'], ['worstCase', '📜'], ['bodyPractice', '🥁'], ['thoughtRecord', '🔍'], ['evidenceCheck', '🌦️'],
+  ['fearCycle', '🌀'], ['safetyInventory', '🎒'], ['watchSetup', '⌚'], ['checkingPlan', '🫙'], ['reassurancePlan', '🤝'], ['medicalPlan', '🩺'], ['ladder', '🪜'],
+  ['exposureLog', '⛰️'], ['worstCase', '📜'], ['thoughtRecord', '🔍'], ['evidenceCheck', '🌦️'],
   ['defusion', '☁️'], ['values', '🧡'], ['activityPlan', '🎈'], ['relapsePlan', '🗺️'],
 ];
 
@@ -158,6 +159,24 @@ export function Tools() {
         <button className="tile play" onClick={() => go({ name: 'winddown' })}><i>🌙</i><b>Wind down</b><span>Before sleep</span></button>
         <button className="tile play" onClick={() => go({ name: 'worrytime' })}><i>🛶</i><b>Worry time</b><span>Evening, 15 minutes</span></button>
         <button className="tile play" onClick={() => go({ name: 'budget' })}><i>🦋</i><b>Checking budget</b><span>Level {data!.settings.budgetLevel || '–'} of 4</span></button>
+      </div>
+      <h2>Practice games</h2>
+      <div className="grid2">
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'bodyLab' })}><i>🧪</i><b>Body Lab</b><span>Feel it on purpose</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'soundGarden' })}><i>🎧</i><b>Sound Garden</b><span>Attention training</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'forecast' })}><i>⛈️</i><b>Forecaster</b><span>An experiment</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'ladder' })}><i>🪜</i><b>My ladder</b><span>Climb or draw at random</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'theory' })}><i>⚖️</i><b>Theory A or B</b><span>Weigh the evidence</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'leaves' })}><i>🍃</i><b>Leaves</b><span>Unhook a thought</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'switch' })}><i>🔌</i><b>Struggle switch</b><span>Stop adding sparks</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'noting' })}><i>🔍</i><b>Get curious</b><span>Notice, name</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'fearCycle' })}><i>🌀</i><b>Fear loop</b><span>See it, break it</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'recipe' })}><i>🌱</i><b>Tiny habit</b><span>My recipe</span></button>
+      </div>
+      <h2>Help</h2>
+      <div className="grid2">
+        <button className="tile play" onClick={() => go({ name: 'family' })}><i>🤝</i><b>For family</b><span>How to help without reassuring</span></button>
+        <button className="tile play" onClick={() => go({ name: 'hospital' })}><i>🏥</i><b>Urge to go to hospital?</b><span>Red flags first</span></button>
       </div>
       <h2>My pages and logs</h2>
       <div className="grid2">

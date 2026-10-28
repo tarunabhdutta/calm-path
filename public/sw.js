@@ -1,5 +1,5 @@
 // Calm Path web version: works offline after the first visit.
-const CACHE = 'calmpath-v1.2.0';
+const CACHE = 'calmpath-v1.3.0';
 self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'])));

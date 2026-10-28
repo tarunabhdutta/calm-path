@@ -48,10 +48,14 @@ export function CheckIn() {
   const [mood, setMood] = useState<string[]>(prev?.mood ? [MOODS.find((m) => m.endsWith(prev.mood)) ?? prev.mood] : []);
   const [caffeine, setCaffeine] = useState(prev?.caffeine ?? 1);
   const [moveMin, setMoveMin] = useState(prev?.moveMin ?? 0);
+  const [sl, setSl] = useState(prev?.sleepLog ?? {});
+  const [emotions, setEmotions] = useState<string[]>(prev?.emotions ?? []);
+  const [context, setContext] = useState(prev?.context ?? '');
+  const [more, setMore] = useState(false);
   const save = () => {
     update((d) => {
       d.checkins = d.checkins.filter((c) => c.date !== today());
-      d.checkins.push({ date: today(), anxiety, sleep, mood: (mood[0] ?? '').replace(/^\S+\s/, ''), caffeine, moveMin });
+      d.checkins.push({ date: today(), anxiety, sleep, mood: (mood[0] ?? '').replace(/^\S+\s/, ''), caffeine, moveMin, sleepLog: sl, emotions, context });
     });
     if (data!.settings.voice) playClip(AUDIO.logged);
     toast('Weather noted. Every sky passes.');
@@ -82,6 +86,24 @@ export function CheckIn() {
         <label className="f">Walking or movement</label>
         <Chips options={['0', '10', '20', '30', '45', '60+']} value={[moveMin >= 60 ? '60+' : String(moveMin)]} onChange={(v) => setMoveMin(v[0] === '60+' ? 60 : Number(v[0]))} />
         <p className="muted" style={{ marginTop: 4 }}>minutes 🚶‍♀️</p>
+        <button className="link" onClick={() => setMore(!more)}>{more ? 'Fewer questions' : '+ Sleep diary and feelings (optional)'}</button>
+        {more && (
+          <div className="pop-in">
+            <p className="muted">Rough estimates are perfect. No clock-watching at night. Weekly patterns matter, not single nights.</p>
+            <div className="grid2">
+              <div><label className="f">Lights out</label><input type="time" value={sl.lightsOut ?? ''} onChange={(e) => setSl({ ...sl, lightsOut: e.target.value })} /></div>
+              <div><label className="f">Got up</label><input type="time" value={sl.rise ?? ''} onChange={(e) => setSl({ ...sl, rise: e.target.value })} /></div>
+            </div>
+            <label className="f">Time to fall asleep, roughly</label>
+            <Chips options={['under 15 min', '15–30 min', '30–60 min', 'over an hour']} value={sl.toSleep ? [sl.toSleep] : []} onChange={(v) => setSl({ ...sl, toSleep: v[0] })} />
+            <label className="f">Woke in the night</label>
+            <Chips options={['no', 'once', 'twice', '3+ times']} value={sl.wakings ? [sl.wakings] : []} onChange={(v) => setSl({ ...sl, wakings: v[0] })} />
+            <label className="f">Other feelings today (just naming them)</label>
+            <Chips multi options={['stressed', 'sad', 'irritated', 'lonely', 'excited', 'grateful', 'content', 'tired']} value={emotions} onChange={setEmotions} />
+            <label className="f">Anything going on around me today?</label>
+            <input type="text" value={context} onChange={(e) => setContext(e.target.value)} placeholder="e.g. busy at work, guests at home, poor night" />
+          </div>
+        )}
       </div>
       <button className="btn block" disabled={!anxiety || !sleep} onClick={save}>Save · +1 💧</button>
       <button className="link" onClick={() => go({ name: 'measure', id: 'GAD7' })}>Compass check (weekly questionnaire)</button>

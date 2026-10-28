@@ -12,6 +12,9 @@ import { Breathe, Surge, Urge } from './Flows';
 import { WorryTime } from './Logs';
 import { LANDS } from '../game/rewards';
 import { Tulu } from '../game/Mascot';
+import { LessonArt } from '../game/LessonArt';
+import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from '../game/Games';
+import { BodyLab, SoundGarden, SwitchGame, TheoryGame } from '../game/Games2';
 
 const PHASES = [
   { key: 'quickstart', title: 'Quick Start', sub: 'Week 1 · one a day' },
@@ -53,6 +56,12 @@ export function PathList() {
   );
 }
 
+const GAME_LABEL: Record<string, string> = {
+  fearCycle: '🌀 Build your fear loop, then break it', leaves: '🍃 Leaves on the stream', forecast: '⛈️→☀️ The anxiety forecaster',
+  ladder: '🪜 Climb your ladder', noting: '🔍 Get curious about the feeling', recipe: '🌱 Make a tiny-habit recipe',
+  bodyLab: '🧪 The Body Lab', soundGarden: '🎧 The Sound Garden', theory: '⚖️ Theory A or B?', switch: '🔌 The struggle switch',
+};
+
 function practiceLabel(p: Practice): string {
   switch (p.type) {
     case 'breathe': return `Breathe for ${p.minutes} minutes`;
@@ -62,6 +71,7 @@ function practiceLabel(p: Practice): string {
     case 'measure': return MEASURES[p.measureId].name;
     case 'budget': return 'Set your checking budget';
     case 'worry-time': return 'Open worry time';
+    case 'game': return GAME_LABEL[p.game];
     default: return '';
   }
 }
@@ -88,6 +98,10 @@ export function SessionView({ id }: { id: string }) {
     if (p.type === 'measure') return <MeasureView id={p.measureId} onFinished={fin} />;
     if (p.type === 'budget') return <BudgetView week={s.week} onFinished={fin} />;
     if (p.type === 'worry-time') return <WorryTime onFinished={fin} />;
+    if (p.type === 'game') {
+      const G = { fearCycle: FearCycleGame, leaves: LeavesGame, forecast: ForecastGame, ladder: LadderGame, noting: NotingGame, recipe: RecipeGame, bodyLab: BodyLab, soundGarden: SoundGarden, theory: TheoryGame, switch: SwitchGame }[p.game];
+      return <G onFinished={fin} />;
+    }
   }
 
   const complete = () => {
@@ -110,7 +124,8 @@ export function SessionView({ id }: { id: string }) {
       {onCards && <div className="pager-dots" aria-hidden>{s.cards.map((_, k) => <i key={k} className={k <= page ? 'on' : ''} />)}<i className="flag">🏁</i></div>}
       {onCards ? (
         <>
-          <div className="card lesson">
+          <div className="card lesson" key={page}>
+            {s.cards[page].art && <LessonArt id={s.cards[page].art!} />}
             {s.cards[page].title && <h3>{s.cards[page].title}</h3>}
             <Body lines={s.cards[page].body} />
           </div>

@@ -6,228 +6,234 @@ Generated from the app's source (`src/content/`). This is exactly what the app s
 
 ## QUICK START · week 1
 
-### QS1 — Welcome. Your story, and the way out (10 min)
+### QS1 — Welcome. Two theories (10 min)
 
-**Why this app exists**
+**Why you are here**
 
-Maybe for months your heart has raced, thumped and frightened you. You may have been through many tests, and your doctors found no heart disease. What drives the fear has a name: health anxiety.
+Maybe for months your heart has raced, thumped and frightened you. You have probably been through tests, and the answer pointed to health anxiety: a real problem, with real sensations, and a well-studied way out.
 
-Knowing that is a big step. But knowing alone does not switch the fear off, which is why a wave can still arrive. This app is the training that teaches your body and mind to let those waves pass.
-
-
-**How it works**
-
-Health anxiety is kept alive by a loop: a sensation, a frightening thought, fear, more sensations, and then checking or asking for reassurance. Checking brings relief for a few minutes, and that relief teaches the brain that the danger was real.
-
-So this app will not hand you reassurance. It will teach you something stronger: how to let the feeling come, and how to stop checking, so that your brain learns for itself.
+Knowing that does not switch the fear off. That is not a failure of yours. Fear is unlearned by doing, not by being told. This app is the doing part, made as gentle and playful as possible.
 
 
-**The plan**
+**Two theories**
 
-- Week 1, Quick Start: 7 short daily sessions. You learn the SURGE button, slow breathing and the urge timer.
+Theory A: "Something is wrong with my heart, so I must watch it, check it and get reassurance."
 
-- Weeks 2–10, Strengthen: three sessions of 10–15 minutes a week. You drop the checking, face what you avoid, and unhook from the thoughts.
+Theory B: "I have a sensitive alarm system. My watching, checking and reassurance-seeking keep the alarm loud."
 
-- After that, Stay Well: a short check-in once a month.
-
-Small and steady beats big and rare. Missing a day is fine. Just do the next one.
+Only one can be the main story. You don't have to believe B today. For the next ten weeks, you will simply act as if B were true, and collect your own evidence. At the end you decide.
 
 
-*Practice:* breathe 3 min
+**How the journey works**
+
+- Week 1, Quick Start: seven short daily steps.
+
+- Weeks 2–10, Strengthen: about three steps a week, 10–15 minutes each.
+
+- Every day: a tiny practice. Tiny counts fully.
+
+The more you practise, the more it works. That is the strongest finding in all the research behind this app. A little, often, beats a lot, rarely.
+
+
+*Practice:* game
 
 *Reflection:* If the anxiety took up much less space in your life, what would you do more of?
 
-### QS2 — The body's alarm (10 min)
+### QS2 — The alarm and the magnifying glass (10 min)
 
 **A smoke alarm, set too sensitive**
 
-Your body has an alarm system built to protect you. When it fires, it releases adrenaline. The heart beats faster and harder, breathing quickens, hands may tremble, you feel hot or shaky, and your attention locks onto the body.
+Your body has an alarm built to protect you. When it fires, adrenaline flows: the heart beats harder and faster, breathing quickens, hands may shake, you feel hot or unreal.
 
-In health anxiety the alarm has become oversensitive. It fires at ordinary signals, such as a single strong beat or a flutter, the way a kitchen smoke alarm shrieks at toast.
-
-
-**Noticing makes it louder**
-
-The more you watch your heart, the more you notice it, and every beat you notice feels like a message. Attention works like a magnifying glass.
-
-This is why the app does not show heart rate. Watching the number keeps the magnifying glass in place.
+After a long stressful time, the alarm becomes trigger-happy. It fires at ordinary signals, such as one strong beat, the way a kitchen alarm shrieks at toast. Doctors call this sensitisation.
 
 
-**Your tool for the alarm: SURGE**
+**Attention turns up the volume**
 
-The big SURGE button guides you through about two minutes of: notice → let it come → breathe out slowly → float → let time pass.
+Try this now. For one minute, pay close attention to your left foot. Notice the toes, the sock, any tingle or pressure.
 
-Today, while you are calm, try it once as a rehearsal, so that you know it well before you need it.
+Did your foot suddenly have more sensations? It had them all along. Attention works like a magnifying glass. The more you watch your heart, the more beats you notice, and every beat noticed feels like a message.
+
+That is why this app never shows a heart-rate number, and why later you will train your attention like a muscle.
 
 
-*Practice:* surge-practice · breathe 5 min
+**Your tool for a wave: SURGE**
 
-*Reflection:* What sensation usually sets your alarm off first?
+The big SURGE button guides you through a wave: notice it, let it come, float, let time pass, then step back into your day.
 
-### QS3 — Your fear cycle (12 min)
+SURGE does not try to switch the feeling off. It teaches you to let it be there. That is what makes the next wave smaller. Today, try it once while calm, as a rehearsal.
 
-**Drawing the circle**
 
-Every wave follows the same circle. When you can see the circle, you can step out of it.
+*Practice:* surge-practice
 
-Think of a recent wave. Write down what happened at each step: what you noticed, what you thought, what you felt, what your body did, and what you did to feel safe.
+*Reflection:* What did you notice in the foot experiment?
+
+### QS3 — Your fear loop (12 min)
+
+**The loop that keeps it going**
+
+Every wave follows the same loop: a sensation → a frightening thought → fear → more adrenaline and more sensations → something you do to feel safe → brief relief → more watching.
+
+You will draw your own loop now, from a real recent wave. When you can see the loop, you can step out of it.
 
 
 **Where you can step out**
 
-You cannot stop a sensation from arriving. But you can change two links: how you respond to the thought ("Here is the alarm again"), and what you do (let it come instead of checking). The next sessions train exactly these two links.
+You can't stop a sensation from arriving. But you can change the last link: what you do. Every check, every "am I OK?", every search is a small payment that keeps the loop running.
+
+In the coming weeks you will stop paying, one link at a time.
 
 
-*Practice:* form: My fear cycle
+*Practice:* game
 
-*Reflection:* Looking at your circle, which link feels easiest to change first?
+*Reflection:* Which link of your loop surprised you?
 
-### QS4 — First fear, second fear (10 min)
+### QS4 — First fear, second fear, and the struggle switch (10 min)
 
 **Two different fears**
 
-Dr Claire Weekes noticed that every frightening wave has two parts. The first fear is the automatic jolt that comes by itself, like a flash. The second fear is what we add afterwards: "Oh no, here it comes again, what if this time it is serious?"
+The first fear is the automatic flash: a jolt that comes by itself. The second fear is what we add: "Oh no, here it is again, what if this time it's serious?"
 
-The first fear passes quickly if it is left alone. The second fear keeps feeding adrenaline, and it is the second fear that keeps a wave going.
-
-
-**Four words**
-
-- Face it: don't run from the feeling.
-
-- Accept it: let it be there. "Let it come."
-
-- Float: loosen the body, as if lying on water.
-
-- Let time pass: waves are not cured by force, only by time.
+The flash passes quickly when it is left alone. The second fear keeps pouring in adrenaline. The second fear is the only part you can change.
 
 
-**Practise floating**
+**The struggle switch**
 
-Sit back and let your shoulders sag. Breathe out slowly. Imagine warm, still water holding you. Each time a worry comes, let it float past and go back to the water.
+Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, Google, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.
+
+When the switch is OFF, the feeling is still there. But you stop adding to it. Clean discomfort stays; the extra layer drains away. You will practise turning the switch off.
 
 
-*Practice:* breathe 5 min
+**Go with it, not put up with it**
+
+Gritting your teeth and enduring is still fighting. Real acceptance is softer: loosen the shoulders and the jaw, let the feeling come, and carry on with what you were doing.
+
+A test: can the thump be there while you keep reading this sentence? Then you are already doing it.
+
+
+*Practice:* game
 
 *Reflection:* In your last wave, what was your "second fear" thought?
 
 ### QS5 — Why checking backfires (10 min)
 
-**The reassurance trap**
+**The relief trap**
 
-Looking at the watch, taking an ECG, feeling your pulse, Googling, or asking someone "Am I OK?" all bring relief. And the relief is the trap.
+Looking at the watch, taking an ECG, feeling the pulse, Googling, asking "am I OK?": each brings a few minutes of relief. And the relief is the trap.
 
-Each time relief follows a check, your brain learns two things: that the sensation was dangerous, and that you only survived because you checked. So the next sensation feels more urgent, and the next check is needed sooner.
-
-
-**Not yet stopping, just counting**
-
-This week you don't have to stop anything. Just count. Each time you check or ask, tap the matching counter on the home screen. Counting by itself often starts to shrink the habit, because it turns an automatic act into a noticed one.
+Relief teaches the brain two things: that the sensation was dangerous, and that you were safe only because you checked. So the next sensation feels more urgent, and the next check is needed sooner.
 
 
-*Practice:* breathe 5 min
+**The slot machine**
 
-*Reflection:* Which check do you do most often in a day?
+Checking works like a slot machine. Sometimes it calms you, sometimes it shows something that worries you more. That unpredictability is exactly what makes a habit strongest.
+
+This week you don't need to stop. Just drop a pebble on the home screen each time you check, ask or search. Counting turns an automatic act into a noticed one, and noticing is the first win.
+
+
+*Practice:* game
+
+*Reflection:* Which check do you do most often?
 
 ### QS6 — Urges are waves (10 min)
 
-**Surfing instead of obeying**
+**Surf, don't obey**
 
-The pull to check is an urge, and urges behave like waves: they rise, peak and fall, even if you do nothing. You don't have to fight the urge, and you don't have to obey it. You can watch it, with curiosity.
+The pull to check is an urge, and urges behave like waves: they rise, peak and fall, even if you do nothing. You don't have to fight the urge, and you don't have to obey it.
+
+The urge timer walks you through four steps: Recognise it, Allow it, Investigate it with curiosity (where is it? what is it like?), and Note it in a word.
 
 
-**The urge timer**
+**Noticing is the win**
 
-When you feel the pull to check, tap "Urge to check". A voice guides you for three minutes. Notice where the urge sits in your body, rate it, breathe, and watch it change.
+At first, the win is not stopping the check. The win is noticing the moment of choice. Every urge you notice earns a drop, even if you check anyway.
 
-After three minutes you choose. Often the urge has dropped. If not, you can surf ten minutes more. Every urge you surf weakens the habit.
+Afterwards, ask one gentle question: "What did the last check really give me, ten minutes later?" Feeling the honest answer, again and again, is what makes the habit lose its grip.
 
 
 *Practice:* urge 3 min
 
 *Reflection:* What did you notice about the urge as the minutes passed?
 
-### QS7 — Your starting point (12 min)
+### QS7 — Your starting point and your tiny habit (12 min)
 
 **One week done**
 
-You now know the four tools: SURGE for a wave, Breathe twice a day, the urge timer when you want to check, and the counters.
+You know the tools now: SURGE, the urge timer, the pebble counters, and the loop.
 
-Today you answer two short questionnaires. They are not a test. They are a starting line, so that you can see your progress in a few weeks.
-
-
-**What comes next**
-
-From next week, sessions come three times a week. Weeks 2–3: dropping the checks and the reassurance. Weeks 4–6: facing what you avoid, gently, one step at a time. Weeks 7–8: unhooking from the thoughts. Weeks 9–10: living fully, and a plan to stay well.
+Today, two short questionnaires give you a starting line. Scores often go up a little in the first weeks, because you are looking at the anxiety more honestly. That is normal, and it is not a step back.
 
 
-*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry)
+**A tiny daily habit**
+
+Big changes grow from tiny habits tied to something you already do. Build one recipe: "After I…, I will…, then I celebrate."
+
+Also start calm-time breathing: a few minutes once or twice a day, when you are NOT in a wave. It is training for your nervous system, like a gym, not a fire extinguisher.
+
+
+*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · game
 
 *Reflection:* What has been most useful this week?
 
 ## STRENGTHEN · week 2
 
-### S2.1 — Your safety behaviours (12 min)
+### S2.1 — Everything you do to feel safe (12 min)
 
-**Everything you do to feel safe**
+**Safety behaviours**
 
-Safety behaviours are the things we do to prevent, check on or escape a feared outcome. They feel protective. But they stop the brain from ever learning that the feared outcome does not come.
+Safety behaviours are the things we do to prevent, check on or escape a feared outcome. They feel protective, but they rob the brain of the chance to learn that the feared thing doesn't come.
 
-Some are obvious, like checking the watch. Some are hidden: avoiding stairs, keeping the phone close "in case", sitting down at the first flutter, avoiding coffee, never being alone.
+Some are obvious: the watch, the pulse, the ECG, Googling, asking. Some hide: avoiding stairs, keeping the phone close, sitting down at the first flutter, avoiding coffee or heat, scanning the body, counting, replaying reassurance in your head, staying busy so you never feel it.
 
 
-**Make your list**
+**Body "hacks" count too**
 
-Write every one you can think of, and rate how hard each would be to give up. Use your counter totals from week 1. There is no need to stop anything today.
+Splashing cold water on the face, bearing down, coughing, pressing the neck, special breathing tricks aimed at the heartbeat, sleep-position rules, checking stress or HRV scores: these are all ways of controlling the heart. They are safety behaviours too, and some carry real medical risk. Put them on the list.
+
+One question sorts them: does this help me stay with the feeling, or does it try to make it go away? If it makes it go away, it is a safety behaviour.
 
 
 *Practice:* form: My safety behaviours
 
 *Reflection:* Which safety behaviour surprised you when you wrote it down?
 
-### S2.2 — Turn the watch into a calm coach (10 min)
+### S2.2 — Remove the prompts (10 min)
 
-**Change the job of your watch**
+**Change the job of your devices**
 
-If you wear a smartwatch: while your heart was still being checked, its job was to catch episodes. Once your doctors have finished, that job is done. Now each "high heart rate" buzz and each glance at a number restarts the fear cycle.
+If you wear a smartwatch: while your heart was still being checked, its job was to catch episodes. Once your doctors have finished, that job is done. Now each buzz and each glance at a number restarts the loop.
 
-So the watch gets a new job: a quick button opens a breathing exercise, and the alarms that feed the fear are switched off. The safety features (emergency SOS, fall detection, medical ID) stay on.
-
-
-**Do it now, step by step**
-
-Tick each change as you make it. It takes about ten minutes. If one step feels too hard today, leave it and come back tomorrow. No watch? Simply complete this step.
+The easiest habit to break is the one that is never prompted. Switch off heart alerts, remove the live number from the watch face, move health apps off the home screen, take the phone out of the bedroom. Safety features (emergency SOS, fall detection, medical ID) stay on.
 
 
-*Practice:* form: Smartwatch: from alarm to calm coach
+**Paraphernalia**
 
-*Reflection:* How do you feel about the watch without the heart-rate alerts?
-
-### S2.3 — Your checking budget (10 min)
-
-**Less checking, step by step**
-
-Stopping all checking at once is very hard. So we use a budget that shrinks every week or two:
-
-- Level 1: health data at most once a day, not at night
-
-- Level 2: at most every other day
-
-- Level 3: at most once a week
-
-- Level 4: no checking. Your body looks after itself.
-
-The home screen shows today's rule. When the urge comes outside the budget, use the urge timer.
+A home pulse oximeter, a blood-pressure cuff you would never own if you weren't worried, bookmarked health pages: put them away in a cupboard, or give them away. Out of sight makes the next step much easier.
 
 
-**If you slip**
+*Practice:* form: Devices: from alarm to calm coach
 
-A slip is not failure. Tap the counter honestly, notice what pulled you, and carry on. The trend over weeks is what matters.
+*Reflection:* How do you feel about the watch without the heart alerts?
+
+### S2.3 — Your checking-free plan (12 min)
+
+**One source at a time**
+
+Stopping everything at once is very hard. Instead, make a plan for each source: watch, pulse, ECG, gadgets, Googling, asking someone, scanning the body. For each one, choose stop, cap ("once a day, not at night") or delay ("wait 30 minutes"), and keep the rule the same on good and bad days.
+
+The destination is no checking at all. Each week, tighten one rule.
 
 
-*Practice:* budget · urge 3 min
+**Costs and benefits**
 
-*Reflection:* Which level did you choose, and what will help you keep it?
+Be honest: what does checking give you? A minute of relief. What does it cost? Time, attention, a louder alarm, a life organised around your heart.
+
+If you slip, drop a pebble honestly and carry on. A slip is information, not failure. The trend over weeks is what matters.
+
+
+*Practice:* form: My checking-free plan · budget
+
+*Reflection:* Which source will you tighten first?
 
 ## STRENGTHEN · week 3
 
@@ -235,14 +241,14 @@ A slip is not failure. Tap the counter honestly, notice what pulled you, and car
 
 **Love that feeds the fear**
 
-When you ask someone close "Is my heart OK?" and they reassure you, they give love, and the anxiety takes it as fuel. A few minutes later the question comes back.
+When you ask someone close "Is my heart OK?" and they reassure you, they give love, and the anxiety takes it as fuel. A few minutes later the question comes back, a little hungrier.
 
-Families can help most by not answering the question, and by helping you ride the wave instead.
+The kindest help is not an answer. It is warmth plus a nudge back to the practice: "I can see you're scared. We agreed I won't answer the heart question. Let's do the steps together."
 
 
-**Make a plan together**
+**Make the plan together, on a calm day**
 
-Sit together for ten minutes and fill in the plan: what you usually ask, the warm words they will use instead, and what you will do together (for example, SURGE and then a short walk).
+Sit together for ten minutes. Write down what you usually ask, the warm words they will use instead, and what you will do together. Show them the "For family" page in the toolbox.
 
 This is a team plan, not a rejection. They are not saying no to you. You are both saying no to the anxiety.
 
@@ -251,192 +257,196 @@ This is a team plan, not a rejection. They are not saying no to you. You are bot
 
 *Reflection:* How did it feel to make this plan together?
 
-### S3.2 — Doctor Google (10 min)
+### S3.2 — Doctor Google and real doctors (12 min)
 
-**Searching symptoms**
+**More information is not more certainty**
 
-Searching a symptom feels like gathering information. In practice it is a reassurance check that never satisfies: there is always one more page and one more rare possibility, and fear finds the worst one.
+Searching symptoms feels like gathering facts, but there is always one more page and one more rare possibility, and fear finds the worst one. From today, symptom searches become paper boats in the worry river.
 
-From today, symptom searching goes into the Worry box instead. Write the question down and park it until worry time.
-
-
-**The worry box**
-
-Tap "Worry box", write the worry in a line, and close it. That's all. You are not ignoring it. You are giving it an appointment.
+Start a no-search window: a stretch of time with no health searching, growing a little every few days.
 
 
-*Practice:* urge 3 min
+**A medical plan, not medical avoidance**
 
-*Reflection:* What do you usually search for, and how do you feel after?
+You deserve good, ordinary medical care. Write a plan with one trusted doctor: your regular check-ups, the specific signs the doctor says need a call, and a wait-a-week rule for grey sensations. Write them down, wait a week, and see whether they still matter.
 
-### S3.3 — Worry time (10 min)
-
-**A fixed time for worry**
-
-Worries that arrive during the day get parked in the box. At one set time each evening (15 minutes, never at bedtime) you open the box.
-
-For each worry, ask: is there one practical step? If yes, write it. If not, let it go back. Many parked worries have faded by the evening, which is a lesson in itself.
+Your plan always lets you act on the true red flags on the safety card at once.
 
 
-**Sleep note**
+*Practice:* form: My medical plan
 
-Poor sleep makes the alarm more sensitive. Keep regular sleep and wake times, dim the lights in the last hour, keep screens and news away from bed, and use the Wind-down audio.
+*Reflection:* What do you usually search for, and how do you feel afterwards?
+
+### S3.3 — The Body Lab: first visit (15 min)
+
+**Feeling it on purpose**
+
+The deepest fear is of the sensations themselves. The most powerful practice is to bring them on deliberately, for a short time, and watch what really happens.
+
+In the Body Lab you try a few short exercises (staring, tensing, spinning, stairs and more) and rate two things: how scary the feeling was, and how much it resembled a real wave.
 
 
-*Practice:* worry-time
+**Lab rules**
 
-*Reflection:* How many of today's parked worries still felt urgent by worry time?
+- Make the feeling as strong as you can. A timid version teaches little.
+
+- Keep going about 30 seconds after the feeling starts.
+
+- No checking, no sitting down to recover, no breathing tricks during the exercise.
+
+- The gentle exercises are always open. The ones that raise the heart rate open after your doctor has said yes once (Settings → "My doctor said yes").
+
+
+*Practice:* game
+
+*Reflection:* Which exercise felt most like a real wave?
 
 ## STRENGTHEN · week 4
 
 ### S4.1 — Why facing fear heals (10 min)
 
-**How the brain learns safety**
+**The brain learns from surprises**
 
-Fear is unlearned by experience, not by argument. When you step into a feared situation, without checking or escaping, and the feared outcome does not come, the brain writes a new memory.
+Fear is unlearned by experience. When you face something and the feared outcome doesn't come, the brain writes a new memory. The bigger the surprise (the gap between what anxiety predicted and what happened), the stronger the new memory.
 
-The bigger the gap between what you predicted and what happened, the stronger the new learning. That is why each practice starts with a prediction.
-
-
-**Fear during practice is welcome**
-
-You don't need the fear to go down for a practice to work. Feeling anxious and doing it anyway is the training. Aim to stay with it, not to feel calm.
+So every practice starts with a forecast from the anxiety, and ends with what really happened.
 
 
-*Practice:* breathe 5 min
+**Fear is welcome**
+
+You don't need the fear to go down for a practice to work. Feeling it and staying is the training. Some days it will be loud. Those are often the most useful days.
+
+Vary it: different times, places, moods; tired, hungry, after tea. The more varied the practice, the more the learning sticks everywhere.
+
+
+*Practice:* game
 
 *Reflection:* What is one thing you have stopped doing because of the fear?
 
-### S4.2 — Build your ladder (15 min)
+### S4.2 — Find the real fear, build your ladder (15 min)
 
-**Small steps up**
+**"And then?"**
 
-Make a list of 8–12 situations you avoid, or get through only with dread. Rate each one 0–100 for how frightening it would be. Include easy ones (around 20–30) and hard ones (80+).
+Behind each avoided situation sits a specific fear. Ask: "If I did it, what would happen? And then? And then?" until you reach the real one. It may be "I'll collapse alone", "I won't get help in time", or "I'll never stop feeling like this".
 
-Next session you start at the bottom. You move up a rung only after doing one twice, without checking, with fear lower than at the start.
+Knowing the real fear tells you what to test.
 
 
-**Ideas**
+**Your ladder**
 
-- A 20-minute walk alone; then a longer one
+List 8–12 situations you avoid or get through with dread, and rate each 0–100. Include one thing you stopped after a single scary sensation, and a few everyday heart-raisers: stairs, a brisk walk, a hot shower, a strong tea, a warm room.
 
-- An evening alone at home
-
-- Going somewhere far from a hospital
-
-- Reading an article about heart disease
-
-- A gentle yoga class
-
-- Leaving the watch at home for an afternoon
+You may start in the middle, and later you can let the app draw a rung at random, because real life doesn't come in order.
 
 
 *Practice:* form: My facing-fear ladder
 
-*Reflection:* Which rung would you be proud to reach by week 10?
+*Reflection:* What is the real fear underneath your ladder?
 
-### S4.3 — The first rung (15 min)
+### S4.3 — The first experiment (15 min)
 
-**Today's practice**
+**Today's experiment**
 
-Choose your lowest rung. Before you start, write your prediction and how sure you are. Then do it fully, without checking, without reassurance, and without escaping early. Stay until the end.
+Choose a rung. Let the anxiety make its forecast and rate how sure it is. Then do the step fully: no checking, no reassurance, no escaping early. When you feel like leaving, stay ten more seconds.
 
-Afterwards, write what actually happened and what you learned. Then compare it with your prediction.
+Afterwards, write what actually happened and how you coped. A rung is climbed after two practices without safety behaviours, whatever the fear did.
 
 
-*Practice:* form: Practice log
+*Practice:* game
 
-*Reflection:* How did the outcome compare with what you predicted?
+*Reflection:* How did the outcome compare with the forecast?
 
 ## STRENGTHEN · week 5
 
-### S5.1 — Up the ladder (15 min)
+### S5.1 — Body Lab, every day (15 min)
 
-**Repeat and climb**
+**The daily dose**
 
-Repeat your last rung, or move up if it has become easier. Try to practise 3–4 times this week. Short and frequent works better than long and rare.
+Pick the exercise that felt most like a real wave and was at least a little scary. Do three rounds today: each time, keep going 30 seconds past the start of the feeling, then rate it, let it settle by itself, and go again.
 
-Vary it: a different time of day, a different place, after coffee, when tired. Variety makes the new learning stronger.
+Repeat daily. When the day's highest fear stays low for a few days, move on to the next exercise.
 
 
-*Practice:* form: Practice log
+**What to watch for**
 
-*Reflection:* What made this practice easier or harder than last time?
+Doing it mildly, only when someone is home, only on calm days, or while thinking of dinner: these are ways of not really doing it. Bring it on fully. The goal is to be less afraid of the feeling, not to make the feeling disappear.
 
-### S5.2 — Writing the worry story (15 min)
+
+*Practice:* game
+
+*Reflection:* What did the feeling do across the three rounds?
+
+### S5.2 — Everyday heart-raisers (12 min) · needs the doctor's OK for heart-raising exercises
+
+**Life raises the heart rate**
+
+Climbing stairs, a brisk walk, dancing, a hot bath, a heavy meal, an exciting film, a strong cup of tea: all of them make the heart beat faster. If you have been avoiding them, they belong on your ladder.
+
+Do them on purpose, a few times a week, and do something ordinary afterwards instead of sitting and listening.
+
+
+*Practice:* game
+
+*Reflection:* Which everyday heart-raiser did you take back?
+
+### S5.3 — The Sound Garden: training attention (15 min)
+
+**A gym for attention**
+
+A mind that has spent months listening to the heart gets stuck facing inward. The Sound Garden trains attention to move where you choose: first focus on one sound, then switch quickly between sounds, then spread out to hear them all.
+
+It is not distraction. Do it once or twice a day when you are not in a wave, eyes open, about 12 minutes. Thoughts and sensations may come; let them, and return to the sounds.
+
+
+*Practice:* game
+
+*Reflection:* Where was your attention during the day: inward, outward, or both?
+
+## STRENGTHEN · week 6
+
+### S6.1 — The worry story (15 min)
 
 **Facing the thought itself**
 
-Some fears live only in the mind: the worst-case story. Avoiding the story keeps it frightening. Facing it on paper, again and again, takes its power away.
+Some fears live only as a story in the mind. Avoiding the story keeps it frightening. Write it in the present tense, with detail, as if it is happening now. End it in uncertainty: "I don't know how this ends." Never end it with a rescue.
 
-Write the feared story in the present tense, with detail, as if it is happening. Read it slowly. Rate your fear. Read it once a day this week. It will start to feel boring, and boring is the goal.
-
-
-**Be kind to yourself**
-
-This is hard. If it feels too much, write a gentler version first and build up.
+Read it slowly every day for about 15 minutes, not near bedtime, until it starts to feel boring. Boring is the goal.
 
 
 *Practice:* form: My worry story
 
-*Reflection:* How did your fear change between the first and last reading?
+*Reflection:* How did the fear change between the first and the last reading?
 
-### S5.3 — Check-in and next level (10 min)
+### S6.2 — Living with not knowing (12 min)
 
-**Look how far you have come**
+**Certainty is not on the menu**
 
-Open Progress and look at your counters and practice logs since week 1. Then answer the questionnaire again.
+Health anxiety demands certainty: 100% proof of perfect health. Nobody, anywhere, has that, about any part of the body. Every check is an attempt to buy a certainty that isn't for sale.
 
-If checking has fallen, move your checking budget down one level.
-
-
-*Practice:* questionnaire: GAD-7 (general anxiety) · budget
-
-*Reflection:* What change are you most proud of so far?
-
-## STRENGTHEN · week 6
-
-### S6.1 — Feeling it on purpose (10 min)
-
-**Making friends with the sensations**
-
-The deepest fear is of the sensations themselves: a racing heart, breathlessness, dizziness. The most powerful practice is to bring these feelings on deliberately, in a planned way, and let them peak and fade without checking.
-
-Each time, the brain learns that the sensation is something it can feel and let pass.
+The skill is not to win the argument, but to let the question stay open and carry on with life.
 
 
-**One condition first**
+**"This time it's real"**
 
-Some of these exercises raise your heart rate on purpose. They unlock only after your cardiologist has said yes once. Record it in Settings → "Doctor said yes". Until then you use the gentle versions, which still work.
+Every wave arrives saying "this one is different". That is the alarm's job: it always sounds convincing. Notice the sentence, name it ("there's the this-time-it's-real story"), and let it ride along.
 
-
-*Practice:* breathe 5 min
-
-*Reflection:* Which body sensation do you fear most?
-
-### S6.2 — Body practice (15 min) · needs the doctor's OK for heart-raising exercises
-
-**Today**
-
-Choose one exercise. Predict what you fear will happen. Do it for the full time and let the sensation build. Then sit and let it fade by itself: no checking, no Breathe button, just time. Rate it.
-
-Repeat the same exercise 2–3 times in a row if you can. The fear usually drops a little each time.
+Practise waiting: when a worry wants an answer right now, wait 30 minutes before doing anything about it, and notice what happens to the urgency.
 
 
-*Practice:* form: Body-sensation practice
+*Practice:* game
 
-*Reflection:* What did you notice when the sensation came on purpose?
+*Reflection:* What uncertainties do you already live with every day, without checking?
 
 ### S6.3 — Halfway review (12 min)
 
 **Halfway**
 
-You are halfway through Strengthen. Answer the health-worry questionnaire and look at the trend.
+Answer the health-worry questionnaire and look at your treasures, your ladder and your forecaster record.
 
-If your scores have not moved at all since the start, or the waves are more frequent, this is a good moment to book one appointment with a CBT psychologist and take your Progress page. That is not failure. It is using every tool.
+If nothing has moved at all, or waves are much more frequent, it is a good moment to book a CBT psychologist and take your progress page. Using every tool is wise, not failure.
 
 
-*Practice:* questionnaire: Whiteley Index-7 (health worry)
+*Practice:* questionnaire: Whiteley Index-7 (health worry) · game
 
 *Reflection:* What is still hardest, and what is one small step towards it?
 
@@ -444,156 +454,193 @@ If your scores have not moved at all since the start, or the waves are more freq
 
 ### S7.1 — Catching the hot thought (15 min)
 
-**Thoughts are guesses, not facts**
+**Thoughts are guesses**
 
-In a wave the mind produces a "hot thought", such as "Something is wrong with my heart." It feels like a fact, but it is a guess, and an anxious one.
+In a wave, the mind produces a "hot thought": "My heart is failing." It feels like a fact. It is a guess, and an anxious one.
 
-A thought record slows the guess down: what happened, what you thought, how strongly you believed it, the evidence on both sides, and a more balanced way of seeing it.
+A thought record slows the guess down: the situation, what you felt in your body, all the thoughts (then pick the hottest), the facts on each side, and a balanced view that you can actually believe.
+
+
+**Facts vs interpretations**
+
+"My heart beat fast for five minutes" is a fact. "It was dangerous" is an interpretation. Keep the evidence columns to facts.
+
+And don't use a thought record to argue yourself into feeling safe. That turns it into reassurance. The goal is a wider view, not a verdict.
 
 
 *Practice:* form: Thought record
 
 *Reflection:* How did writing it down change the thought?
 
-### S7.2 — Your track record (12 min)
+### S7.2 — Track record and coping record (12 min)
 
-**What actually happened, every time**
+**The forecaster's record**
 
-Anxiety predicts disaster every time. Let's check its record: count the frightening waves you have had in the past year, and how each one ended.
-
-The point is not to convince yourself of anything. The point is to see clearly how accurate the anxiety's forecasts have been.
+Anxiety forecasts disaster with every wave. Look at its record: how many waves since they began, how many forecasts of disaster, and how each actually ended. Also note how you coped each time, because anxiety underestimates you as much as it overestimates danger.
 
 
-*Practice:* form: The track record
+**All the causes**
+
+When a sensation comes, list every possible cause you can think of: adrenaline, tea, a heavy meal, tiredness, a sudden movement, heat, stress, a poor night, hormones, excitement. The scary explanation becomes one slice among many, and you don't need to know which slice it is.
+
+
+*Practice:* form: Track record and all the causes
 
 *Reflection:* If the anxiety were a weather forecaster, how would you rate it?
 
-### S7.3 — Keep climbing (15 min)
+### S7.3 — Climb with a random draw (15 min)
 
-**Ladder, with a thought record**
+**Shake up the order**
 
-Do the next rung of your ladder or a body practice. If a hot thought shows up during it, fill in a short thought record afterwards.
+Real life doesn't deliver fears in tidy order. This week, let the ladder draw a rung for you at random now and then, and try a familiar rung in a new place or at a new time of day.
+
+If a hot thought shows up during the practice, catch it in a thought record afterwards.
 
 
-*Practice:* form: Practice log · budget
+*Practice:* game · budget
 
 *Reflection:* What did today's practice teach you?
 
 ## STRENGTHEN · week 8
 
-### S8.1 — Unhooking from thoughts (12 min)
+### S8.1 — The defusion workshop (15 min)
 
 **You are not your thoughts**
 
-Sometimes arguing with a thought keeps you tangled in it. Another way is to step back and see it as a thought: words passing through the mind.
+Arguing with a thought keeps you tangled in it. Defusion means stepping back and seeing a thought as words passing through: "I'm having the thought that my heart is failing."
 
-Try it: "My heart is failing" becomes "I am having the thought that my heart is failing", then "I notice I am having the thought…". Feel the distance grow.
-
-
-**Leaves on a stream**
-
-Close your eyes. Picture a slow stream with leaves floating by. Place each thought on a leaf and watch it drift away. When you get caught, notice that, and return to the stream.
+There are many ways in: thank your mind, name the story ("ah, the heart story again"), say it in a silly voice, sing it, or put it on a leaf on a stream. Try several, keep the two or three that work for you.
 
 
-*Practice:* form: Unhooking practice
+**Not a trick to feel better**
 
-*Reflection:* Which thought loosened its grip the most?
-
-### S8.2 — Passengers on the bus (10 min)
-
-**You drive the bus**
-
-Imagine you are driving a bus towards the life you want. Passengers get on: Fear, Worry, the Thump. They shout "Turn back! Check!"
-
-You don't have to throw them off, and you don't have to obey them. They can ride along and shout while you keep driving where you choose.
+Defusion is not a way to make the thought go away. Sometimes it fades, sometimes it stays. The point is that it no longer pushes you around.
 
 
-*Practice:* form: What matters to me
+*Practice:* game
 
-*Reflection:* Where do you want your bus to go this month?
+*Reflection:* Which defusion move worked best for you?
 
-### S8.3 — Practice with passengers (15 min)
+### S8.2 — Making room for the thump (12 min)
 
-**Today**
+**Observe, breathe, allow**
 
-Choose a ladder rung or a body practice. When the passengers start shouting, name them ("Here is Worry"), and keep driving.
+When a sensation comes, try expansion. Observe it like a curious scientist: where exactly is it, how big, what shape, does it move? Breathe into and around it, softly. Allow it: make room for it, the way you would let an awkward guest sit in the corner.
+
+You are not trying to change it. You are making space for it to be there while you live.
 
 
-*Practice:* form: Practice log
+**The sky and the weather**
 
-*Reflection:* Which passenger shouted loudest, and what did you do?
+Your feelings are like weather: storms, clouds, sunshine. You are like the sky. The sky has room for every kind of weather, and no storm ever hurts the sky.
+
+
+*Practice:* game
+
+*Reflection:* What happened when you made room instead of pushing?
+
+### S8.3 — Willing, with passengers (15 min)
+
+**The willingness switch**
+
+Willingness isn't liking it. It is saying yes to the feeling, fully, for the sake of something you care about. "I'm willing to feel the thump to walk to the market."
+
+Imagine driving a bus towards your life. Fear and Worry are passengers, shouting "Turn back! Check!" You don't have to throw them off, and you don't have to obey them. They can ride along while you drive.
+
+
+*Practice:* game
+
+*Reflection:* Which passenger shouted loudest, and where did you drive anyway?
 
 ## STRENGTHEN · week 9
 
-### S9.1 — Getting life back (12 min)
+### S9.1 — Your compass (12 min)
 
 **Filling the space**
 
-As the anxiety shrinks, it leaves space. Fill that space with what matters, or the worry will move back in.
+As the anxiety shrinks, it leaves space. Fill it with what matters, or the worry will move back in.
 
-Look at your values page and the things you stopped doing. Pick one valued activity for this week and give it a day and time.
+Choose what matters in a few areas of life (family, health, joy, work, friends) and pick one small, specific step for this week: what, when, where.
 
 
-*Practice:* form: This week's plan
+**Goals for the living**
+
+"No more palpitations" is a goal a statue could achieve. Choose goals that a living person does: "walk to the temple with my family on Sunday", "say yes to my friend's invitation".
+
+
+*Practice:* form: My compass · form: This week's step
 
 *Reflection:* What would you love to do again?
 
-### S9.2 — Movement and the body (12 min)
+### S9.2 — Sleep, movement and tea (12 min)
 
-**Moving freely**
+**Sleep, the gentle way**
 
-Regular movement lowers baseline anxiety. It also gives the heart a healthy reason to beat fast, which helps the brain separate "fast" from "dangerous".
+- Get up at the same time every day, and get daylight in the morning.
 
-Aim for a daily walk and two gentle yoga or movement sessions a week, kind to your neck and back. If your doctor has said yes, include some brisk effort that makes you breathe harder.
+- Do your worry planning early in the evening, not in bed.
 
+- Keep the last hour before bed free of demands.
 
-**Everyday basics**
+- Bed is for sleep. If you are awake and upset for a long while, get up, do something calm in dim light, and come back when sleepy.
 
-- Regular meals and water; caffeine in moderation, earlier in the day
-
-- Take the iron, vitamin D and zinc as your doctor advised
-
-- Daylight every morning, and regular sleep
+- After a poor night, change nothing: keep your plans and skip the nap.
 
 
-*Practice:* form: This week's plan
+**Movement and caffeine**
 
-*Reflection:* How did your body feel after moving?
+Regular movement lowers baseline arousal and gives the heart honest reasons to beat fast. Aim for a daily walk and some gentle yoga.
 
-### S9.3 — The top rungs (15 min)
-
-**Reaching higher**
-
-Try one of the top rungs of your ladder this week. It will feel big. Use everything you've learned: predict, do it fully, let the passengers shout, no checking, then write what happened.
+Caffeine can itself cause palpitations. If you drink a lot of tea or coffee, taper gently, and none in the six hours before bed. Not because it is dangerous, simply so your alarm has less to react to.
 
 
-*Practice:* form: Practice log · budget
+*Practice:* form: This week's step
+
+*Reflection:* Which sleep rule will you try first?
+
+### S9.3 — Harder conditions, top rungs (15 min)
+
+**Stronger than daily life needs**
+
+Now combine things: a top rung after a strong tea, on a tired day, alone, without the watch. Practising in harder conditions makes you stronger than everyday life will ever demand.
+
+Use everything you've learned: forecast, do it fully, let the passengers shout, no checking, stay ten more seconds, then write what happened.
+
+
+*Practice:* game · budget
 
 *Reflection:* What does reaching this rung say about you?
 
 ## STRENGTHEN · week 10
 
-### S10.1 — What helped (12 min)
+### S10.1 — What helped: the verdict on the theories (12 min)
 
 **Look back**
 
-Answer the two questionnaires and open Progress. Compare them with your starting point in week 1. Look at your counters, your ladder and your practice logs.
+Answer the questionnaires and re-rate the two theories. Look at your forecaster record, your ladder, your pebbles over the weeks.
+
+You don't have to be certain. You only need to decide which theory you will live by.
 
 
-*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry)
+*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · game
 
 *Reflection:* Which three things helped you most?
 
-### S10.2 — If it comes back (15 min)
+### S10.2 — Your flare-up plan (15 min)
 
-**A lapse is not a relapse**
+**A flare is not a relapse**
 
-Waves may visit again, after a stressful week, illness, poor sleep or a hormonal change. A wave does not mean you are back at the start. You now have the skills, and the second time is usually shorter.
+Waves may visit again: after a stressful week, an illness, poor sleep, a hormonal change. A flare-up is a flat tyre, not a return to the start. You have the tools now, and the second time is usually shorter.
 
-Write your plan now, while you feel well: your early warning signs, your first three actions, and who you will talk to.
+Warning signs are things you DO, not things you feel: checking again, Googling, asking, avoiding, dropping practice.
 
 
-*Practice:* form: If it comes back
+**Write it while you are well**
+
+Your plan: what I learned about my anxiety; what helps short-term but hurts long-term; what really helps. And the steps for a flare: remind yourself it is temporary, write the forecasts, no checking or reassurance, return quickly to anything you've started avoiding, and, if it doesn't settle within a few weeks, see a professional.
+
+
+*Practice:* form: My flare-up plan
 
 *Reflection:* What would you say to yourself on the day a wave returns?
 
@@ -601,12 +648,21 @@ Write your plan now, while you feel well: your early warning signs, your first t
 
 **You did this**
 
-Ten weeks of practice. You let waves pass, surfed urges, faced what you avoided and gave your watch a gentler job. The learning lives in you now, not in this app.
+Ten weeks. You let waves come, surfed urges, stopped paying the loop, felt sensations on purpose, faced what you avoided. The learning lives in you now, not in this app.
 
-From now on: Breathe on most days, practise a ladder rung now and then so the learning stays fresh, and do a monthly check-in here. SURGE is always one tap away.
+Feeling a little flat after finishing something big is common. It isn't a sign of anything going wrong.
 
 
-*Practice:* breathe 5 min · budget
+**Keeping it fresh**
+
+- A short practice on most days.
+
+- A booster practice from your ladder now and then, because skipping practice for months lets fear grow back.
+
+- A monthly visit to Home Shore.
+
+
+*Practice:* game · budget
 
 *Reflection:* Write a short note to yourself, to read on a hard day.
 
@@ -616,131 +672,163 @@ From now on: Breathe on most days, practise a ladder rung now and then so the le
 
 **Staying well**
 
-A quick monthly look: answer the questionnaires, glance at your counters, and do one practice from your ladder to keep the learning fresh.
+A quick monthly visit: answer the questionnaires, glance at your pebbles, and do one booster practice from your ladder or the Body Lab.
 
-If the scores are climbing, open your "If it comes back" plan, restart the urge timer, and repeat a few Strengthen sessions.
+If you notice old behaviours creeping back (checking, searching, avoiding), open your flare-up plan and restart a few Strengthen steps. That is not going backwards. It is maintenance.
 
 
-*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · questionnaire: PHQ-9 (mood)
+*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · questionnaire: PHQ-9 (mood) · game
 
 *Reflection:* How has this month been?
 
 ## Forms (living pages and logs)
 
-### My fear cycle (persistent)
+### My fear loop (persistent)
 
-Use a real, recent wave. Fill in each link of the circle in your own words.
+Use a real, recent wave. Fill in each link of the loop in your own words.
 
-- 1. Trigger: what did I notice first?
-- 2. Thought: what did my mind say it meant?
-- 3. Feeling: what emotion came?
-- 4. Body: what happened in my body next?
-- 5. What did I do to feel safe?
-- 6. What happened afterwards, a few hours later?
+- 0. What was going on around me before it
+- 1. What I noticed first
+- 2. What my mind said it meant
+- 3. What I felt
+- 4. What my body did next
+- 5. What I did to feel safe
 
 ### My safety behaviours (persistent)
 
-List everything you do to check, to get reassurance, or to avoid the feeling. Rate how hard each one would be to drop (0 = easy, 100 = very hard).
+Everything you do to check, to get reassurance, to avoid the feeling, or to make it go away. Rate how hard each would be to drop (0 = easy, 100 = very hard).
 
 - Safety behaviours
 
-### Smartwatch: from alarm to calm coach (persistent)
+### Devices: from alarm to calm coach (persistent)
 
-For anyone who wears a smartwatch or fitness band. Names differ between brands; on an Apple Watch the paths are shown in brackets. Tick each change once it is done. If you have no watch, skip this page.
+For anyone with a smartwatch, fitness band or health gadgets. Names differ between brands (Apple Watch paths in brackets). Tick each change once it is done. No watch? Tick the ones that apply.
 
-- Changes — High heart rate alerts: OFF (Apple: Watch app → Heart → High Heart Rate) / Live heart-rate number removed from the watch face / A quick button or shortcut opens a breathing exercise (Apple Watch Ultra: Action Button → Mindfulness) / Breathing reminders set to 2 a day / Emergency SOS and fall detection left ON / Medical ID / emergency info up to date (allergies, emergency contact) / ECG app kept, but not opened out of worry
+- Changes — High heart rate alerts: OFF (Apple: Watch app → Heart → High Heart Rate) / Live heart-rate number removed from the watch face / Health, stress, HRV and "readiness" scores hidden or apps moved off the home screen / A quick button or shortcut opens a breathing exercise for calm-time practice (Apple Watch Ultra: Action Button → Mindfulness) / Phone sleeps outside the bedroom / Home gadgets (oximeter, BP cuff, extra ECG devices) put away or given away / Health bookmarks and newsletters deleted / Emergency SOS and fall detection left ON / Medical ID / emergency info up to date (allergies, emergency contact)
+
+### My checking-free plan (persistent)
+
+One line per source. Choose STOP, CAP ("once a day, never at night") or DELAY ("wait 30 minutes"), and keep the rule the same on good and bad days. Tighten one line each week. The destination is no checking.
+
+- ⌚ Watch / heart-rate screen
+- ✋ Feeling my pulse
+- 📈 ECG / gadgets
+- 🔎 Googling symptoms
+- 💬 Asking "am I OK?"
+- 🫀 Scanning my body / listening for beats
+- 🩺 Extra doctor visits / tests
+- What checking costs me (time, attention, mood, family)
+- What it really gives me, ten minutes later
 
 ### Our reassurance plan (persistent)
 
-Agree this together with someone close to you. When you ask "Am I OK?", they answer with this instead of "You're fine".
+Agree this together with someone close to you, on a calm day. When you ask "Am I OK?", they answer with warmth and a nudge back to practice instead of "You're fine".
 
 - What I usually ask
 - What they will say instead
 - What we will do together
+- What they will praise afterwards
+
+### My medical plan (persistent)
+
+Good, ordinary medical care, without extra checking. Fill this in with your doctor's guidance where you can. The safety card (108) always comes first for true red flags.
+
+- My one main doctor
+- My regular check-ups (what, how often)
+- Signs my doctor says need a call or emergency care
+- For grey sensations: my wait-a-week rule
+- Questions saved for my next visit
 
 ### My facing-fear ladder (persistent)
 
-List situations you avoid or endure with dread. Rate how frightening each would be (0–100). Start practising from the low end.
+Situations you avoid or endure with dread. Rate each 0–100. Include something you stopped after one scary sensation, and everyday heart-raisers.
 
 - Situations
 
-### Practice log (repeatable)
+### Experiment log (repeatable)
 
-Fill in the first two lines BEFORE you start, and the rest afterwards.
+Fill in the first lines BEFORE you start, and the rest afterwards.
 
 - What I am going to do
-- What I fear will happen
-- How sure am I that it will happen? (0–100)
+- What the anxiety predicts will happen
+- How sure is it? (0–100)
 - Afterwards: the highest fear I felt (0–100)
 - What actually happened
-- What I learned
-- Did I use any safety behaviour? Which one?
+- What I learned, and how I coped
+- Did I use any safety behaviour, even a small or mental one?
 
 ### My worry story (persistent)
 
-Write the feared story in full, in the present tense, as if it is happening now. Then read it slowly once a day until it becomes boring.
+Write the feared story in the present tense, as if it is happening now, with details. End it in uncertainty ("I don't know how this ends"), never with a rescue or a doctor's verdict. Read it slowly every day, not near bedtime, until it becomes boring.
 
 - The story
 - Fear while reading today (0–100)
 
-### Body-sensation practice (repeatable)
+### Body-sensation practice (old log) (repeatable)
 
-Bring on the feeling on purpose, let it peak, and do not check anything. Rate before and after.
-
-- Exercise — Climb stairs quickly, 1 minute / Spot-running, 1 minute / Fast breathing, 30 seconds / Breathe through a thin straw, 1 minute / Spin slowly on a chair, 30 seconds / Hold your breath, 20 seconds / Stare at your hand, 1 minute (gentle) / Sit in a warm, closed room, 5 minutes (gentle) / Stand up quickly from lying down (gentle)
-- What I fear will happen
+- Exercise
 - Peak fear (0–100)
-- How similar to a real wave? (0–100)
 - What I noticed or learned
 
 ### Thought record (repeatable)
 
-- Situation: where, when, what was happening?
-- Hot thought: what went through my mind?
+For one specific moment. Facts in the evidence boxes, not interpretations. The aim is a wider view, not to argue yourself into feeling safe.
+
+- 1. Situation: where, when, what was happening?
+- 2. What I felt in my body, and the emotion (0–100)
+- 3. All the thoughts that went through my mind
+- 4. The hottest thought
 - How much do I believe it? (0–100)
-- Evidence that seems to support it
-- Evidence that does not fit it
-- A balanced thought
+- 5. Facts that seem to support it
+- 6. Facts that don't fit it
+- 7. A wider view ("…and…")
 - How much do I believe the hot thought now? (0–100)
 
-### The track record (persistent)
+### Track record and all the causes (persistent)
 
 - Roughly how many frightening heart waves have I had in the past year?
-- In how many did I fear something terrible was happening?
-- How did each of them end?
-- What does this track record tell me about the next one?
+- In how many did the anxiety forecast something terrible?
+- How did they end?
+- How did I cope, each time?
+- Every cause I can think of for a racing or thumping heart
+- What does this tell me about the next wave?
 
 ### Unhooking practice (repeatable)
 
 - The sticky thought
 - Rewrite it: "I am having the thought that…"
-- Again: "I notice I am having the thought that…"
 - How strongly does it grip me now? (0–10)
 
-### What matters to me (persistent)
+### My compass (persistent)
+
+What matters to you in each area. Not goals, directions.
 
 - Family and loved ones
-- My health and body (movement, rest, food)
-- Joy, hobbies, friends
-- Work, learning, contribution
+- Body and rest (movement, food, sleep)
+- Joy, play, creativity, friends
+- Work, learning, contribution, spirit
 - Things I stopped doing because of the anxiety
 
-### This week's plan (repeatable)
+### This week's step (repeatable)
 
-- One valued activity I will do
-- When
+- One valued step I will take
+- When and where
+- Feelings I am willing to have for it
 - Afterwards: how did it go?
 - Enjoyment (0–10)
 
-### If it comes back (persistent)
+### My flare-up plan (persistent)
 
-Your own plan, written while you feel well.
+Written while you feel well. Keep it where you can find it.
 
-- My early warning signs
-- My first three actions
-- What helped me most in this programme
-- Who I will talk to
-- When I will book a professional
+- What I have learned about my anxiety
+- Things that help short-term but hurt long-term
+- What really helps me
+- My early warning signs (things I DO)
+- High-risk times
+- My flare-up steps
+- Who I will tell
+- A note to myself for that day
 
 ## Questionnaires
 

@@ -1,192 +1,203 @@
 import type { Session } from './types';
 
-// CALM PATH: the programme (content v1.2).
-// Self-guided CBT for health anxiety: Quick Start (week 1, daily), then Strengthen (weeks 2-10,
-// three short sessions a week), then Stay Well. Grounded in Veale & Willson (Overcoming Health
-// Anxiety), Weekes (Self-Help for Your Nerves), McDonagh (DARE), Greenberger & Padesky (Mind Over
-// Mood), exposure by inhibitory learning (Abramowitz/Craske), ACT (Harris), habit loops (Brewer).
-// Written fresh in plain words; no book text is copied.
+// CALM PATH: the programme (content v1.3, 28 Oct 2026).
 //
-// House rules for every line here: never promise that a symptom is harmless, never mention a
-// heart-rate number, never tell her to check anything. Teach allowing, not arguing.
+// Built from a full reading of 35 books. The method:
+//   - Frame: two theories (Veale & Willson; Taylor & Asmundson).
+//   - Engine: exposure plus stopping relief-seeking (Hedman-Lagerlöf's internet CBT; Abramowitz;
+//     Cassiday).
+//   - Body-sensation practice early and properly dosed (Barlow & Craske; Bourne).
+//   - Every practice an experiment (Greenberger & Padesky; Burns).
+//   - Acceptance and defusion (Weekes; Harris; McKay; McDonagh).
+//   - Urge habits (Brewer; Fogg), attention training (Wells, via Veale & Willson), sleep
+//     (Carney & Manber), and family (Thieda).
+// All text is written fresh; no book text is copied.
+//
+// House rules for every line (enforced by src/selftest.ts):
+//   - never promise a symptom is harmless or safe, and never mention a heart-rate number;
+//   - never tell her to check anything;
+//   - breathing and floating are for staying with a feeling, never for switching it off.
 
 export const PROGRAMME: Session[] = [
   // ───────────────────────── QUICK START · week 1 (one a day) ─────────────────────────
   {
-    id: 'QS1', phase: 'quickstart', week: 1, title: 'Welcome. Your story, and the way out', minutes: 10,
+    id: 'QS1', phase: 'quickstart', week: 1, title: 'Welcome. Two theories', minutes: 10,
     cards: [
-      { title: 'Why this app exists', body: [
-        'Maybe for months your heart has raced, thumped and frightened you. You may have been through many tests, and your doctors found no heart disease. What drives the fear has a name: health anxiety.',
-        'Knowing that is a big step. But knowing alone does not switch the fear off, which is why a wave can still arrive. This app is the training that teaches your body and mind to let those waves pass.',
+      { title: 'Why you are here', art: 'welcome', body: [
+        'Maybe for months your heart has raced, thumped and frightened you. You have probably been through tests, and the answer pointed to health anxiety: a real problem, with real sensations, and a well-studied way out.',
+        'Knowing that does not switch the fear off. That is not a failure of yours. Fear is unlearned by doing, not by being told. This app is the doing part, made as gentle and playful as possible.',
       ]},
-      { title: 'How it works', body: [
-        'Health anxiety is kept alive by a loop: a sensation, a frightening thought, fear, more sensations, and then checking or asking for reassurance. Checking brings relief for a few minutes, and that relief teaches the brain that the danger was real.',
-        'So this app will not hand you reassurance. It will teach you something stronger: how to let the feeling come, and how to stop checking, so that your brain learns for itself.',
+      { title: 'Two theories', art: 'theory', body: [
+        'Theory A: "Something is wrong with my heart, so I must watch it, check it and get reassurance."',
+        'Theory B: "I have a sensitive alarm system. My watching, checking and reassurance-seeking keep the alarm loud."',
+        'Only one can be the main story. You don\'t have to believe B today. For the next ten weeks, you will simply act as if B were true, and collect your own evidence. At the end you decide.',
       ]},
-      { title: 'The plan', body: [
-        '- Week 1, Quick Start: 7 short daily sessions. You learn the SURGE button, slow breathing and the urge timer.',
-        '- Weeks 2–10, Strengthen: three sessions of 10–15 minutes a week. You drop the checking, face what you avoid, and unhook from the thoughts.',
-        '- After that, Stay Well: a short check-in once a month.',
-        'Small and steady beats big and rare. Missing a day is fine. Just do the next one.',
+      { title: 'How the journey works', art: 'map', body: [
+        '- Week 1, Quick Start: seven short daily steps.',
+        '- Weeks 2–10, Strengthen: about three steps a week, 10–15 minutes each.',
+        '- Every day: a tiny practice. Tiny counts fully.',
+        'The more you practise, the more it works. That is the strongest finding in all the research behind this app. A little, often, beats a lot, rarely.',
       ]},
     ],
-    practice: [{ type: 'breathe', minutes: 3 }],
+    practice: [{ type: 'game', game: 'theory' }],
     reflection: 'If the anxiety took up much less space in your life, what would you do more of?',
   },
   {
-    id: 'QS2', phase: 'quickstart', week: 1, title: 'The body\'s alarm', minutes: 10,
+    id: 'QS2', phase: 'quickstart', week: 1, title: 'The alarm and the magnifying glass', minutes: 10,
     cards: [
-      { title: 'A smoke alarm, set too sensitive', body: [
-        'Your body has an alarm system built to protect you. When it fires, it releases adrenaline. The heart beats faster and harder, breathing quickens, hands may tremble, you feel hot or shaky, and your attention locks onto the body.',
-        'In health anxiety the alarm has become oversensitive. It fires at ordinary signals, such as a single strong beat or a flutter, the way a kitchen smoke alarm shrieks at toast.',
+      { title: 'A smoke alarm, set too sensitive', art: 'alarm', body: [
+        'Your body has an alarm built to protect you. When it fires, adrenaline flows: the heart beats harder and faster, breathing quickens, hands may shake, you feel hot or unreal.',
+        'After a long stressful time, the alarm becomes trigger-happy. It fires at ordinary signals, such as one strong beat, the way a kitchen alarm shrieks at toast. Doctors call this sensitisation.',
       ]},
-      { title: 'Noticing makes it louder', body: [
-        'The more you watch your heart, the more you notice it, and every beat you notice feels like a message. Attention works like a magnifying glass.',
-        'This is why the app does not show heart rate. Watching the number keeps the magnifying glass in place.',
+      { title: 'Attention turns up the volume', art: 'magnifier', body: [
+        'Try this now. For one minute, pay close attention to your left foot. Notice the toes, the sock, any tingle or pressure.',
+        'Did your foot suddenly have more sensations? It had them all along. Attention works like a magnifying glass. The more you watch your heart, the more beats you notice, and every beat noticed feels like a message.',
+        'That is why this app never shows a heart-rate number, and why later you will train your attention like a muscle.',
       ]},
-      { title: 'Your tool for the alarm: SURGE', body: [
-        'The big SURGE button guides you through about two minutes of: notice → let it come → breathe out slowly → float → let time pass.',
-        'Today, while you are calm, try it once as a rehearsal, so that you know it well before you need it.',
+      { title: 'Your tool for a wave: SURGE', art: 'float', body: [
+        'The big SURGE button guides you through a wave: notice it, let it come, float, let time pass, then step back into your day.',
+        'SURGE does not try to switch the feeling off. It teaches you to let it be there. That is what makes the next wave smaller. Today, try it once while calm, as a rehearsal.',
       ]},
     ],
-    practice: [{ type: 'surge-practice' }, { type: 'breathe', minutes: 5 }],
-    reflection: 'What sensation usually sets your alarm off first?',
+    practice: [{ type: 'surge-practice' }],
+    reflection: 'What did you notice in the foot experiment?',
   },
   {
-    id: 'QS3', phase: 'quickstart', week: 1, title: 'Your fear cycle', minutes: 12,
+    id: 'QS3', phase: 'quickstart', week: 1, title: 'Your fear loop', minutes: 12,
     cards: [
-      { title: 'Drawing the circle', body: [
-        'Every wave follows the same circle. When you can see the circle, you can step out of it.',
-        'Think of a recent wave. Write down what happened at each step: what you noticed, what you thought, what you felt, what your body did, and what you did to feel safe.',
+      { title: 'The loop that keeps it going', art: 'cycle', body: [
+        'Every wave follows the same loop: a sensation → a frightening thought → fear → more adrenaline and more sensations → something you do to feel safe → brief relief → more watching.',
+        'You will draw your own loop now, from a real recent wave. When you can see the loop, you can step out of it.',
       ]},
-      { title: 'Where you can step out', body: [
-        'You cannot stop a sensation from arriving. But you can change two links: how you respond to the thought ("Here is the alarm again"), and what you do (let it come instead of checking). The next sessions train exactly these two links.',
+      { title: 'Where you can step out', art: 'hook', body: [
+        'You can\'t stop a sensation from arriving. But you can change the last link: what you do. Every check, every "am I OK?", every search is a small payment that keeps the loop running.',
+        'In the coming weeks you will stop paying, one link at a time.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'fearCycle' }],
-    reflection: 'Looking at your circle, which link feels easiest to change first?',
+    practice: [{ type: 'game', game: 'fearCycle' }],
+    reflection: 'Which link of your loop surprised you?',
   },
   {
-    id: 'QS4', phase: 'quickstart', week: 1, title: 'First fear, second fear', minutes: 10,
+    id: 'QS4', phase: 'quickstart', week: 1, title: 'First fear, second fear, and the struggle switch', minutes: 10,
     cards: [
-      { title: 'Two different fears', body: [
-        'Dr Claire Weekes noticed that every frightening wave has two parts. The first fear is the automatic jolt that comes by itself, like a flash. The second fear is what we add afterwards: "Oh no, here it comes again, what if this time it is serious?"',
-        'The first fear passes quickly if it is left alone. The second fear keeps feeding adrenaline, and it is the second fear that keeps a wave going.',
+      { title: 'Two different fears', art: 'twoFears', body: [
+        'The first fear is the automatic flash: a jolt that comes by itself. The second fear is what we add: "Oh no, here it is again, what if this time it\'s serious?"',
+        'The flash passes quickly when it is left alone. The second fear keeps pouring in adrenaline. The second fear is the only part you can change.',
       ]},
-      { title: 'Four words', body: [
-        '- Face it: don\'t run from the feeling.',
-        '- Accept it: let it be there. "Let it come."',
-        '- Float: loosen the body, as if lying on water.',
-        '- Let time pass: waves are not cured by force, only by time.',
+      { title: 'The struggle switch', art: 'switch', body: [
+        'Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, Google, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.',
+        'When the switch is OFF, the feeling is still there. But you stop adding to it. Clean discomfort stays; the extra layer drains away. You will practise turning the switch off.',
       ]},
-      { title: 'Practise floating', body: [
-        'Sit back and let your shoulders sag. Breathe out slowly. Imagine warm, still water holding you. Each time a worry comes, let it float past and go back to the water.',
+      { title: 'Go with it, not put up with it', art: 'float', body: [
+        'Gritting your teeth and enduring is still fighting. Real acceptance is softer: loosen the shoulders and the jaw, let the feeling come, and carry on with what you were doing.',
+        'A test: can the thump be there while you keep reading this sentence? Then you are already doing it.',
       ]},
     ],
-    practice: [{ type: 'breathe', minutes: 5 }],
+    practice: [{ type: 'game', game: 'switch' }],
     reflection: 'In your last wave, what was your "second fear" thought?',
   },
   {
     id: 'QS5', phase: 'quickstart', week: 1, title: 'Why checking backfires', minutes: 10,
     cards: [
-      { title: 'The reassurance trap', body: [
-        'Looking at the watch, taking an ECG, feeling your pulse, Googling, or asking someone "Am I OK?" all bring relief. And the relief is the trap.',
-        'Each time relief follows a check, your brain learns two things: that the sensation was dangerous, and that you only survived because you checked. So the next sensation feels more urgent, and the next check is needed sooner.',
+      { title: 'The relief trap', art: 'hook', body: [
+        'Looking at the watch, taking an ECG, feeling the pulse, Googling, asking "am I OK?": each brings a few minutes of relief. And the relief is the trap.',
+        'Relief teaches the brain two things: that the sensation was dangerous, and that you were safe only because you checked. So the next sensation feels more urgent, and the next check is needed sooner.',
       ]},
-      { title: 'Not yet stopping, just counting', body: [
-        'This week you don\'t have to stop anything. Just count. Each time you check or ask, tap the matching counter on the home screen. Counting by itself often starts to shrink the habit, because it turns an automatic act into a noticed one.',
+      { title: 'The slot machine', art: 'counter', body: [
+        'Checking works like a slot machine. Sometimes it calms you, sometimes it shows something that worries you more. That unpredictability is exactly what makes a habit strongest.',
+        'This week you don\'t need to stop. Just drop a pebble on the home screen each time you check, ask or search. Counting turns an automatic act into a noticed one, and noticing is the first win.',
       ]},
     ],
-    practice: [{ type: 'breathe', minutes: 5 }],
-    reflection: 'Which check do you do most often in a day?',
+    practice: [{ type: 'game', game: 'noting' }],
+    reflection: 'Which check do you do most often?',
   },
   {
     id: 'QS6', phase: 'quickstart', week: 1, title: 'Urges are waves', minutes: 10,
     cards: [
-      { title: 'Surfing instead of obeying', body: [
-        'The pull to check is an urge, and urges behave like waves: they rise, peak and fall, even if you do nothing. You don\'t have to fight the urge, and you don\'t have to obey it. You can watch it, with curiosity.',
+      { title: 'Surf, don\'t obey', art: 'urgeWave', body: [
+        'The pull to check is an urge, and urges behave like waves: they rise, peak and fall, even if you do nothing. You don\'t have to fight the urge, and you don\'t have to obey it.',
+        'The urge timer walks you through four steps: Recognise it, Allow it, Investigate it with curiosity (where is it? what is it like?), and Note it in a word.',
       ]},
-      { title: 'The urge timer', body: [
-        'When you feel the pull to check, tap "Urge to check". A voice guides you for three minutes. Notice where the urge sits in your body, rate it, breathe, and watch it change.',
-        'After three minutes you choose. Often the urge has dropped. If not, you can surf ten minutes more. Every urge you surf weakens the habit.',
+      { title: 'Noticing is the win', art: 'curious', body: [
+        'At first, the win is not stopping the check. The win is noticing the moment of choice. Every urge you notice earns a drop, even if you check anyway.',
+        'Afterwards, ask one gentle question: "What did the last check really give me, ten minutes later?" Feeling the honest answer, again and again, is what makes the habit lose its grip.',
       ]},
     ],
     practice: [{ type: 'urge', minutes: 3 }],
     reflection: 'What did you notice about the urge as the minutes passed?',
   },
   {
-    id: 'QS7', phase: 'quickstart', week: 1, title: 'Your starting point', minutes: 12,
+    id: 'QS7', phase: 'quickstart', week: 1, title: 'Your starting point and your tiny habit', minutes: 12,
     cards: [
-      { title: 'One week done', body: [
-        'You now know the four tools: SURGE for a wave, Breathe twice a day, the urge timer when you want to check, and the counters.',
-        'Today you answer two short questionnaires. They are not a test. They are a starting line, so that you can see your progress in a few weeks.',
+      { title: 'One week done', art: 'calendar', body: [
+        'You know the tools now: SURGE, the urge timer, the pebble counters, and the loop.',
+        'Today, two short questionnaires give you a starting line. Scores often go up a little in the first weeks, because you are looking at the anxiety more honestly. That is normal, and it is not a step back.',
       ]},
-      { title: 'What comes next', body: [
-        'From next week, sessions come three times a week. Weeks 2–3: dropping the checks and the reassurance. Weeks 4–6: facing what you avoid, gently, one step at a time. Weeks 7–8: unhooking from the thoughts. Weeks 9–10: living fully, and a plan to stay well.',
+      { title: 'A tiny daily habit', art: 'garden', body: [
+        'Big changes grow from tiny habits tied to something you already do. Build one recipe: "After I…, I will…, then I celebrate."',
+        'Also start calm-time breathing: a few minutes once or twice a day, when you are NOT in a wave. It is training for your nervous system, like a gym, not a fire extinguisher.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }],
+    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'game', game: 'recipe' }],
     reflection: 'What has been most useful this week?',
   },
 
-  // ───────────────────────── STRENGTHEN · week 2: map and loosen the safety behaviours ─────────────────────────
+  // ───────────────────────── week 2: stop paying the loop ─────────────────────────
   {
-    id: 'S2.1', phase: 'strengthen', week: 2, title: 'Your safety behaviours', minutes: 12,
+    id: 'S2.1', phase: 'strengthen', week: 2, title: 'Everything you do to feel safe', minutes: 12,
     cards: [
-      { title: 'Everything you do to feel safe', body: [
-        'Safety behaviours are the things we do to prevent, check on or escape a feared outcome. They feel protective. But they stop the brain from ever learning that the feared outcome does not come.',
-        'Some are obvious, like checking the watch. Some are hidden: avoiding stairs, keeping the phone close "in case", sitting down at the first flutter, avoiding coffee, never being alone.',
+      { title: 'Safety behaviours', art: 'backpack', body: [
+        'Safety behaviours are the things we do to prevent, check on or escape a feared outcome. They feel protective, but they rob the brain of the chance to learn that the feared thing doesn\'t come.',
+        'Some are obvious: the watch, the pulse, the ECG, Googling, asking. Some hide: avoiding stairs, keeping the phone close, sitting down at the first flutter, avoiding coffee or heat, scanning the body, counting, replaying reassurance in your head, staying busy so you never feel it.',
       ]},
-      { title: 'Make your list', body: [
-        'Write every one you can think of, and rate how hard each would be to give up. Use your counter totals from week 1. There is no need to stop anything today.',
+      { title: 'Body "hacks" count too', art: 'detective', body: [
+        'Splashing cold water on the face, bearing down, coughing, pressing the neck, special breathing tricks aimed at the heartbeat, sleep-position rules, checking stress or HRV scores: these are all ways of controlling the heart. They are safety behaviours too, and some carry real medical risk. Put them on the list.',
+        'One question sorts them: does this help me stay with the feeling, or does it try to make it go away? If it makes it go away, it is a safety behaviour.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'safetyInventory' }],
     reflection: 'Which safety behaviour surprised you when you wrote it down?',
   },
   {
-    id: 'S2.2', phase: 'strengthen', week: 2, title: 'Turn the watch into a calm coach', minutes: 10,
+    id: 'S2.2', phase: 'strengthen', week: 2, title: 'Remove the prompts', minutes: 10,
     cards: [
-      { title: 'Change the job of your watch', body: [
-        'If you wear a smartwatch: while your heart was still being checked, its job was to catch episodes. Once your doctors have finished, that job is done. Now each "high heart rate" buzz and each glance at a number restarts the fear cycle.',
-        'So the watch gets a new job: a quick button opens a breathing exercise, and the alarms that feed the fear are switched off. The safety features (emergency SOS, fall detection, medical ID) stay on.',
+      { title: 'Change the job of your devices', art: 'watch', body: [
+        'If you wear a smartwatch: while your heart was still being checked, its job was to catch episodes. Once your doctors have finished, that job is done. Now each buzz and each glance at a number restarts the loop.',
+        'The easiest habit to break is the one that is never prompted. Switch off heart alerts, remove the live number from the watch face, move health apps off the home screen, take the phone out of the bedroom. Safety features (emergency SOS, fall detection, medical ID) stay on.',
       ]},
-      { title: 'Do it now, step by step', body: [
-        'Tick each change as you make it. It takes about ten minutes. If one step feels too hard today, leave it and come back tomorrow. No watch? Simply complete this step.',
+      { title: 'Paraphernalia', art: 'backpack', body: [
+        'A home pulse oximeter, a blood-pressure cuff you would never own if you weren\'t worried, bookmarked health pages: put them away in a cupboard, or give them away. Out of sight makes the next step much easier.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'watchSetup' }],
-    reflection: 'How do you feel about the watch without the heart-rate alerts?',
+    reflection: 'How do you feel about the watch without the heart alerts?',
   },
   {
-    id: 'S2.3', phase: 'strengthen', week: 2, title: 'Your checking budget', minutes: 10,
+    id: 'S2.3', phase: 'strengthen', week: 2, title: 'Your checking-free plan', minutes: 12,
     cards: [
-      { title: 'Less checking, step by step', body: [
-        'Stopping all checking at once is very hard. So we use a budget that shrinks every week or two:',
-        '- Level 1: health data at most once a day, not at night',
-        '- Level 2: at most every other day',
-        '- Level 3: at most once a week',
-        '- Level 4: no checking. Your body looks after itself.',
-        'The home screen shows today\'s rule. When the urge comes outside the budget, use the urge timer.',
+      { title: 'One source at a time', art: 'jars', body: [
+        'Stopping everything at once is very hard. Instead, make a plan for each source: watch, pulse, ECG, gadgets, Googling, asking someone, scanning the body. For each one, choose stop, cap ("once a day, not at night") or delay ("wait 30 minutes"), and keep the rule the same on good and bad days.',
+        'The destination is no checking at all. Each week, tighten one rule.',
       ]},
-      { title: 'If you slip', body: [
-        'A slip is not failure. Tap the counter honestly, notice what pulled you, and carry on. The trend over weeks is what matters.',
+      { title: 'Costs and benefits', art: 'scale', body: [
+        'Be honest: what does checking give you? A minute of relief. What does it cost? Time, attention, a louder alarm, a life organised around your heart.',
+        'If you slip, drop a pebble honestly and carry on. A slip is information, not failure. The trend over weeks is what matters.',
       ]},
     ],
-    practice: [{ type: 'budget' }, { type: 'urge', minutes: 3 }],
-    reflection: 'Which level did you choose, and what will help you keep it?',
+    practice: [{ type: 'form', formId: 'checkingPlan' }, { type: 'budget' }],
+    reflection: 'Which source will you tighten first?',
   },
 
-  // ───────────────────────── week 3: reassurance, Google, worry time ─────────────────────────
+  // ───────────────────────── week 3: reassurance, doctors, and the body lab ─────────────────────────
   {
     id: 'S3.1', phase: 'strengthen', week: 3, title: 'Reassurance from loved ones', minutes: 12,
     cards: [
-      { title: 'Love that feeds the fear', body: [
-        'When you ask someone close "Is my heart OK?" and they reassure you, they give love, and the anxiety takes it as fuel. A few minutes later the question comes back.',
-        'Families can help most by not answering the question, and by helping you ride the wave instead.',
+      { title: 'Love that feeds the fear', art: 'team', body: [
+        'When you ask someone close "Is my heart OK?" and they reassure you, they give love, and the anxiety takes it as fuel. A few minutes later the question comes back, a little hungrier.',
+        'The kindest help is not an answer. It is warmth plus a nudge back to the practice: "I can see you\'re scared. We agreed I won\'t answer the heart question. Let\'s do the steps together."',
       ]},
-      { title: 'Make a plan together', body: [
-        'Sit together for ten minutes and fill in the plan: what you usually ask, the warm words they will use instead, and what you will do together (for example, SURGE and then a short walk).',
+      { title: 'Make the plan together, on a calm day', art: 'family', body: [
+        'Sit together for ten minutes. Write down what you usually ask, the warm words they will use instead, and what you will do together. Show them the "For family" page in the toolbox.',
         'This is a team plan, not a rejection. They are not saying no to you. You are both saying no to the anxiety.',
       ]},
     ],
@@ -194,284 +205,307 @@ export const PROGRAMME: Session[] = [
     reflection: 'How did it feel to make this plan together?',
   },
   {
-    id: 'S3.2', phase: 'strengthen', week: 3, title: 'Doctor Google', minutes: 10,
+    id: 'S3.2', phase: 'strengthen', week: 3, title: 'Doctor Google and real doctors', minutes: 12,
     cards: [
-      { title: 'Searching symptoms', body: [
-        'Searching a symptom feels like gathering information. In practice it is a reassurance check that never satisfies: there is always one more page and one more rare possibility, and fear finds the worst one.',
-        'From today, symptom searching goes into the Worry box instead. Write the question down and park it until worry time.',
+      { title: 'More information is not more certainty', art: 'search', body: [
+        'Searching symptoms feels like gathering facts, but there is always one more page and one more rare possibility, and fear finds the worst one. From today, symptom searches become paper boats in the worry river.',
+        'Start a no-search window: a stretch of time with no health searching, growing a little every few days.',
       ]},
-      { title: 'The worry box', body: [
-        'Tap "Worry box", write the worry in a line, and close it. That\'s all. You are not ignoring it. You are giving it an appointment.',
+      { title: 'A medical plan, not medical avoidance', art: 'doctor', body: [
+        'You deserve good, ordinary medical care. Write a plan with one trusted doctor: your regular check-ups, the specific signs the doctor says need a call, and a wait-a-week rule for grey sensations. Write them down, wait a week, and see whether they still matter.',
+        'Your plan always lets you act on the true red flags on the safety card at once.',
       ]},
     ],
-    practice: [{ type: 'urge', minutes: 3 }],
-    reflection: 'What do you usually search for, and how do you feel after?',
+    practice: [{ type: 'form', formId: 'medicalPlan' }],
+    reflection: 'What do you usually search for, and how do you feel afterwards?',
   },
   {
-    id: 'S3.3', phase: 'strengthen', week: 3, title: 'Worry time', minutes: 10,
+    id: 'S3.3', phase: 'strengthen', week: 3, title: 'The Body Lab: first visit', minutes: 15,
     cards: [
-      { title: 'A fixed time for worry', body: [
-        'Worries that arrive during the day get parked in the box. At one set time each evening (15 minutes, never at bedtime) you open the box.',
-        'For each worry, ask: is there one practical step? If yes, write it. If not, let it go back. Many parked worries have faded by the evening, which is a lesson in itself.',
+      { title: 'Feeling it on purpose', art: 'lab', body: [
+        'The deepest fear is of the sensations themselves. The most powerful practice is to bring them on deliberately, for a short time, and watch what really happens.',
+        'In the Body Lab you try a few short exercises (staring, tensing, spinning, stairs and more) and rate two things: how scary the feeling was, and how much it resembled a real wave.',
       ]},
-      { title: 'Sleep note', body: [
-        'Poor sleep makes the alarm more sensitive. Keep regular sleep and wake times, dim the lights in the last hour, keep screens and news away from bed, and use the Wind-down audio.',
+      { title: 'Lab rules', art: 'curious', body: [
+        '- Make the feeling as strong as you can. A timid version teaches little.',
+        '- Keep going about 30 seconds after the feeling starts.',
+        '- No checking, no sitting down to recover, no breathing tricks during the exercise.',
+        '- The gentle exercises are always open. The ones that raise the heart rate open after your doctor has said yes once (Settings → "My doctor said yes").',
       ]},
     ],
-    practice: [{ type: 'worry-time' }],
-    reflection: 'How many of today\'s parked worries still felt urgent by worry time?',
+    practice: [{ type: 'game', game: 'bodyLab' }],
+    reflection: 'Which exercise felt most like a real wave?',
   },
 
   // ───────────────────────── week 4: facing it ─────────────────────────
   {
     id: 'S4.1', phase: 'strengthen', week: 4, title: 'Why facing fear heals', minutes: 10,
     cards: [
-      { title: 'How the brain learns safety', body: [
-        'Fear is unlearned by experience, not by argument. When you step into a feared situation, without checking or escaping, and the feared outcome does not come, the brain writes a new memory.',
-        'The bigger the gap between what you predicted and what happened, the stronger the new learning. That is why each practice starts with a prediction.',
+      { title: 'The brain learns from surprises', art: 'learning', body: [
+        'Fear is unlearned by experience. When you face something and the feared outcome doesn\'t come, the brain writes a new memory. The bigger the surprise (the gap between what anxiety predicted and what happened), the stronger the new memory.',
+        'So every practice starts with a forecast from the anxiety, and ends with what really happened.',
       ]},
-      { title: 'Fear during practice is welcome', body: [
-        'You don\'t need the fear to go down for a practice to work. Feeling anxious and doing it anyway is the training. Aim to stay with it, not to feel calm.',
+      { title: 'Fear is welcome', art: 'expand', body: [
+        'You don\'t need the fear to go down for a practice to work. Feeling it and staying is the training. Some days it will be loud. Those are often the most useful days.',
+        'Vary it: different times, places, moods; tired, hungry, after tea. The more varied the practice, the more the learning sticks everywhere.',
       ]},
     ],
-    practice: [{ type: 'breathe', minutes: 5 }],
+    practice: [{ type: 'game', game: 'theory' }],
     reflection: 'What is one thing you have stopped doing because of the fear?',
   },
   {
-    id: 'S4.2', phase: 'strengthen', week: 4, title: 'Build your ladder', minutes: 15,
+    id: 'S4.2', phase: 'strengthen', week: 4, title: 'Find the real fear, build your ladder', minutes: 15,
     cards: [
-      { title: 'Small steps up', body: [
-        'Make a list of 8–12 situations you avoid, or get through only with dread. Rate each one 0–100 for how frightening it would be. Include easy ones (around 20–30) and hard ones (80+).',
-        'Next session you start at the bottom. You move up a rung only after doing one twice, without checking, with fear lower than at the start.',
+      { title: '"And then?"', art: 'detective', body: [
+        'Behind each avoided situation sits a specific fear. Ask: "If I did it, what would happen? And then? And then?" until you reach the real one. It may be "I\'ll collapse alone", "I won\'t get help in time", or "I\'ll never stop feeling like this".',
+        'Knowing the real fear tells you what to test.',
       ]},
-      { title: 'Ideas', body: [
-        '- A 20-minute walk alone; then a longer one',
-        '- An evening alone at home',
-        '- Going somewhere far from a hospital',
-        '- Reading an article about heart disease',
-        '- A gentle yoga class',
-        '- Leaving the watch at home for an afternoon',
+      { title: 'Your ladder', art: 'ladder', body: [
+        'List 8–12 situations you avoid or get through with dread, and rate each 0–100. Include one thing you stopped after a single scary sensation, and a few everyday heart-raisers: stairs, a brisk walk, a hot shower, a strong tea, a warm room.',
+        'You may start in the middle, and later you can let the app draw a rung at random, because real life doesn\'t come in order.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'ladder' }],
-    reflection: 'Which rung would you be proud to reach by week 10?',
+    reflection: 'What is the real fear underneath your ladder?',
   },
   {
-    id: 'S4.3', phase: 'strengthen', week: 4, title: 'The first rung', minutes: 15,
+    id: 'S4.3', phase: 'strengthen', week: 4, title: 'The first experiment', minutes: 15,
     cards: [
-      { title: 'Today\'s practice', body: [
-        'Choose your lowest rung. Before you start, write your prediction and how sure you are. Then do it fully, without checking, without reassurance, and without escaping early. Stay until the end.',
-        'Afterwards, write what actually happened and what you learned. Then compare it with your prediction.',
+      { title: 'Today\'s experiment', art: 'forecast', body: [
+        'Choose a rung. Let the anxiety make its forecast and rate how sure it is. Then do the step fully: no checking, no reassurance, no escaping early. When you feel like leaving, stay ten more seconds.',
+        'Afterwards, write what actually happened and how you coped. A rung is climbed after two practices without safety behaviours, whatever the fear did.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'exposureLog' }],
-    reflection: 'How did the outcome compare with what you predicted?',
+    practice: [{ type: 'game', game: 'forecast' }],
+    reflection: 'How did the outcome compare with the forecast?',
   },
 
-  // ───────────────────────── week 5: climbing; the worry story ─────────────────────────
+  // ───────────────────────── week 5: daily body practice and attention ─────────────────────────
   {
-    id: 'S5.1', phase: 'strengthen', week: 5, title: 'Up the ladder', minutes: 15,
+    id: 'S5.1', phase: 'strengthen', week: 5, title: 'Body Lab, every day', minutes: 15,
     cards: [
-      { title: 'Repeat and climb', body: [
-        'Repeat your last rung, or move up if it has become easier. Try to practise 3–4 times this week. Short and frequent works better than long and rare.',
-        'Vary it: a different time of day, a different place, after coffee, when tired. Variety makes the new learning stronger.',
+      { title: 'The daily dose', art: 'lab', body: [
+        'Pick the exercise that felt most like a real wave and was at least a little scary. Do three rounds today: each time, keep going 30 seconds past the start of the feeling, then rate it, let it settle by itself, and go again.',
+        'Repeat daily. When the day\'s highest fear stays low for a few days, move on to the next exercise.',
+      ]},
+      { title: 'What to watch for', art: 'curious', body: [
+        'Doing it mildly, only when someone is home, only on calm days, or while thinking of dinner: these are ways of not really doing it. Bring it on fully. The goal is to be less afraid of the feeling, not to make the feeling disappear.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'exposureLog' }],
-    reflection: 'What made this practice easier or harder than last time?',
+    practice: [{ type: 'game', game: 'bodyLab' }],
+    reflection: 'What did the feeling do across the three rounds?',
   },
   {
-    id: 'S5.2', phase: 'strengthen', week: 5, title: 'Writing the worry story', minutes: 15,
+    id: 'S5.2', phase: 'strengthen', week: 5, title: 'Everyday heart-raisers', minutes: 12, needsDoctorOk: true,
     cards: [
-      { title: 'Facing the thought itself', body: [
-        'Some fears live only in the mind: the worst-case story. Avoiding the story keeps it frightening. Facing it on paper, again and again, takes its power away.',
-        'Write the feared story in the present tense, with detail, as if it is happening. Read it slowly. Rate your fear. Read it once a day this week. It will start to feel boring, and boring is the goal.',
+      { title: 'Life raises the heart rate', art: 'walk', body: [
+        'Climbing stairs, a brisk walk, dancing, a hot bath, a heavy meal, an exciting film, a strong cup of tea: all of them make the heart beat faster. If you have been avoiding them, they belong on your ladder.',
+        'Do them on purpose, a few times a week, and do something ordinary afterwards instead of sitting and listening.',
       ]},
-      { title: 'Be kind to yourself', body: [
-        'This is hard. If it feels too much, write a gentler version first and build up.',
+    ],
+    practice: [{ type: 'game', game: 'forecast' }],
+    gentleAlternative: [{ type: 'game', game: 'bodyLab' }],
+    reflection: 'Which everyday heart-raiser did you take back?',
+  },
+  {
+    id: 'S5.3', phase: 'strengthen', week: 5, title: 'The Sound Garden: training attention', minutes: 15,
+    cards: [
+      { title: 'A gym for attention', art: 'sound', body: [
+        'A mind that has spent months listening to the heart gets stuck facing inward. The Sound Garden trains attention to move where you choose: first focus on one sound, then switch quickly between sounds, then spread out to hear them all.',
+        'It is not distraction. Do it once or twice a day when you are not in a wave, eyes open, about 12 minutes. Thoughts and sensations may come; let them, and return to the sounds.',
+      ]},
+    ],
+    practice: [{ type: 'game', game: 'soundGarden' }],
+    reflection: 'Where was your attention during the day: inward, outward, or both?',
+  },
+
+  // ───────────────────────── week 6: the worry story and uncertainty ─────────────────────────
+  {
+    id: 'S6.1', phase: 'strengthen', week: 6, title: 'The worry story', minutes: 15,
+    cards: [
+      { title: 'Facing the thought itself', art: 'story', body: [
+        'Some fears live only as a story in the mind. Avoiding the story keeps it frightening. Write it in the present tense, with detail, as if it is happening now. End it in uncertainty: "I don\'t know how this ends." Never end it with a rescue.',
+        'Read it slowly every day for about 15 minutes, not near bedtime, until it starts to feel boring. Boring is the goal.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'worstCase' }],
-    reflection: 'How did your fear change between the first and last reading?',
+    reflection: 'How did the fear change between the first and the last reading?',
   },
   {
-    id: 'S5.3', phase: 'strengthen', week: 5, title: 'Check-in and next level', minutes: 10,
+    id: 'S6.2', phase: 'strengthen', week: 6, title: 'Living with not knowing', minutes: 12,
     cards: [
-      { title: 'Look how far you have come', body: [
-        'Open Progress and look at your counters and practice logs since week 1. Then answer the questionnaire again.',
-        'If checking has fallen, move your checking budget down one level.',
+      { title: 'Certainty is not on the menu', art: 'sky', body: [
+        'Health anxiety demands certainty: 100% proof of perfect health. Nobody, anywhere, has that, about any part of the body. Every check is an attempt to buy a certainty that isn\'t for sale.',
+        'The skill is not to win the argument, but to let the question stay open and carry on with life.',
+      ]},
+      { title: '"This time it\'s real"', art: 'forecast', body: [
+        'Every wave arrives saying "this one is different". That is the alarm\'s job: it always sounds convincing. Notice the sentence, name it ("there\'s the this-time-it\'s-real story"), and let it ride along.',
+        'Practise waiting: when a worry wants an answer right now, wait 30 minutes before doing anything about it, and notice what happens to the urgency.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'budget' }],
-    reflection: 'What change are you most proud of so far?',
-  },
-
-  // ───────────────────────── week 6: body sensations (gated) ─────────────────────────
-  {
-    id: 'S6.1', phase: 'strengthen', week: 6, title: 'Feeling it on purpose', minutes: 10,
-    cards: [
-      { title: 'Making friends with the sensations', body: [
-        'The deepest fear is of the sensations themselves: a racing heart, breathlessness, dizziness. The most powerful practice is to bring these feelings on deliberately, in a planned way, and let them peak and fade without checking.',
-        'Each time, the brain learns that the sensation is something it can feel and let pass.',
-      ]},
-      { title: 'One condition first', body: [
-        'Some of these exercises raise your heart rate on purpose. They unlock only after your cardiologist has said yes once. Record it in Settings → "Doctor said yes". Until then you use the gentle versions, which still work.',
-      ]},
-    ],
-    practice: [{ type: 'breathe', minutes: 5 }],
-    reflection: 'Which body sensation do you fear most?',
-  },
-  {
-    id: 'S6.2', phase: 'strengthen', week: 6, title: 'Body practice', minutes: 15, needsDoctorOk: true,
-    cards: [
-      { title: 'Today', body: [
-        'Choose one exercise. Predict what you fear will happen. Do it for the full time and let the sensation build. Then sit and let it fade by itself: no checking, no Breathe button, just time. Rate it.',
-        'Repeat the same exercise 2–3 times in a row if you can. The fear usually drops a little each time.',
-      ]},
-    ],
-    practice: [{ type: 'form', formId: 'bodyPractice' }],
-    gentleAlternative: [{ type: 'form', formId: 'bodyPractice' }],
-    reflection: 'What did you notice when the sensation came on purpose?',
+    practice: [{ type: 'game', game: 'leaves' }],
+    reflection: 'What uncertainties do you already live with every day, without checking?',
   },
   {
     id: 'S6.3', phase: 'strengthen', week: 6, title: 'Halfway review', minutes: 12,
     cards: [
-      { title: 'Halfway', body: [
-        'You are halfway through Strengthen. Answer the health-worry questionnaire and look at the trend.',
-        'If your scores have not moved at all since the start, or the waves are more frequent, this is a good moment to book one appointment with a CBT psychologist and take your Progress page. That is not failure. It is using every tool.',
+      { title: 'Halfway', art: 'compass', body: [
+        'Answer the health-worry questionnaire and look at your treasures, your ladder and your forecaster record.',
+        'If nothing has moved at all, or waves are much more frequent, it is a good moment to book a CBT psychologist and take your progress page. Using every tool is wise, not failure.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'WI7' }],
+    practice: [{ type: 'measure', measureId: 'WI7' }, { type: 'game', game: 'theory' }],
     reflection: 'What is still hardest, and what is one small step towards it?',
   },
 
-  // ───────────────────────── week 7: thoughts ─────────────────────────
+  // ───────────────────────── week 7: thoughts as guesses ─────────────────────────
   {
     id: 'S7.1', phase: 'strengthen', week: 7, title: 'Catching the hot thought', minutes: 15,
     cards: [
-      { title: 'Thoughts are guesses, not facts', body: [
-        'In a wave the mind produces a "hot thought", such as "Something is wrong with my heart." It feels like a fact, but it is a guess, and an anxious one.',
-        'A thought record slows the guess down: what happened, what you thought, how strongly you believed it, the evidence on both sides, and a more balanced way of seeing it.',
+      { title: 'Thoughts are guesses', art: 'detective', body: [
+        'In a wave, the mind produces a "hot thought": "My heart is failing." It feels like a fact. It is a guess, and an anxious one.',
+        'A thought record slows the guess down: the situation, what you felt in your body, all the thoughts (then pick the hottest), the facts on each side, and a balanced view that you can actually believe.',
+      ]},
+      { title: 'Facts vs interpretations', art: 'scale', body: [
+        '"My heart beat fast for five minutes" is a fact. "It was dangerous" is an interpretation. Keep the evidence columns to facts.',
+        'And don\'t use a thought record to argue yourself into feeling safe. That turns it into reassurance. The goal is a wider view, not a verdict.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'thoughtRecord' }],
     reflection: 'How did writing it down change the thought?',
   },
   {
-    id: 'S7.2', phase: 'strengthen', week: 7, title: 'Your track record', minutes: 12,
+    id: 'S7.2', phase: 'strengthen', week: 7, title: 'Track record and coping record', minutes: 12,
     cards: [
-      { title: 'What actually happened, every time', body: [
-        'Anxiety predicts disaster every time. Let\'s check its record: count the frightening waves you have had in the past year, and how each one ended.',
-        'The point is not to convince yourself of anything. The point is to see clearly how accurate the anxiety\'s forecasts have been.',
+      { title: 'The forecaster\'s record', art: 'forecast', body: [
+        'Anxiety forecasts disaster with every wave. Look at its record: how many waves since they began, how many forecasts of disaster, and how each actually ended. Also note how you coped each time, because anxiety underestimates you as much as it overestimates danger.',
+      ]},
+      { title: 'All the causes', art: 'pie', body: [
+        'When a sensation comes, list every possible cause you can think of: adrenaline, tea, a heavy meal, tiredness, a sudden movement, heat, stress, a poor night, hormones, excitement. The scary explanation becomes one slice among many, and you don\'t need to know which slice it is.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'evidenceCheck' }],
     reflection: 'If the anxiety were a weather forecaster, how would you rate it?',
   },
   {
-    id: 'S7.3', phase: 'strengthen', week: 7, title: 'Keep climbing', minutes: 15,
+    id: 'S7.3', phase: 'strengthen', week: 7, title: 'Climb with a random draw', minutes: 15,
     cards: [
-      { title: 'Ladder, with a thought record', body: [
-        'Do the next rung of your ladder or a body practice. If a hot thought shows up during it, fill in a short thought record afterwards.',
+      { title: 'Shake up the order', art: 'ladder', body: [
+        'Real life doesn\'t deliver fears in tidy order. This week, let the ladder draw a rung for you at random now and then, and try a familiar rung in a new place or at a new time of day.',
+        'If a hot thought shows up during the practice, catch it in a thought record afterwards.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'exposureLog' }, { type: 'budget' }],
+    practice: [{ type: 'game', game: 'ladder' }, { type: 'budget' }],
     reflection: 'What did today\'s practice teach you?',
   },
 
-  // ───────────────────────── week 8: unhooking (ACT) ─────────────────────────
+  // ───────────────────────── week 8: unhooking ─────────────────────────
   {
-    id: 'S8.1', phase: 'strengthen', week: 8, title: 'Unhooking from thoughts', minutes: 12,
+    id: 'S8.1', phase: 'strengthen', week: 8, title: 'The defusion workshop', minutes: 15,
     cards: [
-      { title: 'You are not your thoughts', body: [
-        'Sometimes arguing with a thought keeps you tangled in it. Another way is to step back and see it as a thought: words passing through the mind.',
-        'Try it: "My heart is failing" becomes "I am having the thought that my heart is failing", then "I notice I am having the thought…". Feel the distance grow.',
+      { title: 'You are not your thoughts', art: 'leaves', body: [
+        'Arguing with a thought keeps you tangled in it. Defusion means stepping back and seeing a thought as words passing through: "I\'m having the thought that my heart is failing."',
+        'There are many ways in: thank your mind, name the story ("ah, the heart story again"), say it in a silly voice, sing it, or put it on a leaf on a stream. Try several, keep the two or three that work for you.',
       ]},
-      { title: 'Leaves on a stream', body: [
-        'Close your eyes. Picture a slow stream with leaves floating by. Place each thought on a leaf and watch it drift away. When you get caught, notice that, and return to the stream.',
+      { title: 'Not a trick to feel better', art: 'sky', body: [
+        'Defusion is not a way to make the thought go away. Sometimes it fades, sometimes it stays. The point is that it no longer pushes you around.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'defusion' }],
-    reflection: 'Which thought loosened its grip the most?',
+    practice: [{ type: 'game', game: 'leaves' }],
+    reflection: 'Which defusion move worked best for you?',
   },
   {
-    id: 'S8.2', phase: 'strengthen', week: 8, title: 'Passengers on the bus', minutes: 10,
+    id: 'S8.2', phase: 'strengthen', week: 8, title: 'Making room for the thump', minutes: 12,
     cards: [
-      { title: 'You drive the bus', body: [
-        'Imagine you are driving a bus towards the life you want. Passengers get on: Fear, Worry, the Thump. They shout "Turn back! Check!"',
-        'You don\'t have to throw them off, and you don\'t have to obey them. They can ride along and shout while you keep driving where you choose.',
+      { title: 'Observe, breathe, allow', art: 'expand', body: [
+        'When a sensation comes, try expansion. Observe it like a curious scientist: where exactly is it, how big, what shape, does it move? Breathe into and around it, softly. Allow it: make room for it, the way you would let an awkward guest sit in the corner.',
+        'You are not trying to change it. You are making space for it to be there while you live.',
+      ]},
+      { title: 'The sky and the weather', art: 'sky', body: [
+        'Your feelings are like weather: storms, clouds, sunshine. You are like the sky. The sky has room for every kind of weather, and no storm ever hurts the sky.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'values' }],
-    reflection: 'Where do you want your bus to go this month?',
+    practice: [{ type: 'game', game: 'noting' }],
+    reflection: 'What happened when you made room instead of pushing?',
   },
   {
-    id: 'S8.3', phase: 'strengthen', week: 8, title: 'Practice with passengers', minutes: 15,
+    id: 'S8.3', phase: 'strengthen', week: 8, title: 'Willing, with passengers', minutes: 15,
     cards: [
-      { title: 'Today', body: [
-        'Choose a ladder rung or a body practice. When the passengers start shouting, name them ("Here is Worry"), and keep driving.',
+      { title: 'The willingness switch', art: 'bus', body: [
+        'Willingness isn\'t liking it. It is saying yes to the feeling, fully, for the sake of something you care about. "I\'m willing to feel the thump to walk to the market."',
+        'Imagine driving a bus towards your life. Fear and Worry are passengers, shouting "Turn back! Check!" You don\'t have to throw them off, and you don\'t have to obey them. They can ride along while you drive.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'exposureLog' }],
-    reflection: 'Which passenger shouted loudest, and what did you do?',
+    practice: [{ type: 'game', game: 'forecast' }],
+    reflection: 'Which passenger shouted loudest, and where did you drive anyway?',
   },
 
   // ───────────────────────── week 9: living fully ─────────────────────────
   {
-    id: 'S9.1', phase: 'strengthen', week: 9, title: 'Getting life back', minutes: 12,
+    id: 'S9.1', phase: 'strengthen', week: 9, title: 'Your compass', minutes: 12,
     cards: [
-      { title: 'Filling the space', body: [
-        'As the anxiety shrinks, it leaves space. Fill that space with what matters, or the worry will move back in.',
-        'Look at your values page and the things you stopped doing. Pick one valued activity for this week and give it a day and time.',
+      { title: 'Filling the space', art: 'compass', body: [
+        'As the anxiety shrinks, it leaves space. Fill it with what matters, or the worry will move back in.',
+        'Choose what matters in a few areas of life (family, health, joy, work, friends) and pick one small, specific step for this week: what, when, where.',
+      ]},
+      { title: 'Goals for the living', art: 'garden', body: [
+        '"No more palpitations" is a goal a statue could achieve. Choose goals that a living person does: "walk to the temple with my family on Sunday", "say yes to my friend\'s invitation".',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'activityPlan' }],
+    practice: [{ type: 'form', formId: 'values' }, { type: 'form', formId: 'activityPlan' }],
     reflection: 'What would you love to do again?',
   },
   {
-    id: 'S9.2', phase: 'strengthen', week: 9, title: 'Movement and the body', minutes: 12,
+    id: 'S9.2', phase: 'strengthen', week: 9, title: 'Sleep, movement and tea', minutes: 12,
     cards: [
-      { title: 'Moving freely', body: [
-        'Regular movement lowers baseline anxiety. It also gives the heart a healthy reason to beat fast, which helps the brain separate "fast" from "dangerous".',
-        'Aim for a daily walk and two gentle yoga or movement sessions a week, kind to your neck and back. If your doctor has said yes, include some brisk effort that makes you breathe harder.',
+      { title: 'Sleep, the gentle way', art: 'sleep', body: [
+        '- Get up at the same time every day, and get daylight in the morning.',
+        '- Do your worry planning early in the evening, not in bed.',
+        '- Keep the last hour before bed free of demands.',
+        '- Bed is for sleep. If you are awake and upset for a long while, get up, do something calm in dim light, and come back when sleepy.',
+        '- After a poor night, change nothing: keep your plans and skip the nap.',
       ]},
-      { title: 'Everyday basics', body: [
-        '- Regular meals and water; caffeine in moderation, earlier in the day',
-        '- Take the iron, vitamin D and zinc as your doctor advised',
-        '- Daylight every morning, and regular sleep',
+      { title: 'Movement and caffeine', art: 'walk', body: [
+        'Regular movement lowers baseline arousal and gives the heart honest reasons to beat fast. Aim for a daily walk and some gentle yoga.',
+        'Caffeine can itself cause palpitations. If you drink a lot of tea or coffee, taper gently, and none in the six hours before bed. Not because it is dangerous, simply so your alarm has less to react to.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'activityPlan' }],
-    reflection: 'How did your body feel after moving?',
+    reflection: 'Which sleep rule will you try first?',
   },
   {
-    id: 'S9.3', phase: 'strengthen', week: 9, title: 'The top rungs', minutes: 15,
+    id: 'S9.3', phase: 'strengthen', week: 9, title: 'Harder conditions, top rungs', minutes: 15,
     cards: [
-      { title: 'Reaching higher', body: [
-        'Try one of the top rungs of your ladder this week. It will feel big. Use everything you\'ve learned: predict, do it fully, let the passengers shout, no checking, then write what happened.',
+      { title: 'Stronger than daily life needs', art: 'mountain', body: [
+        'Now combine things: a top rung after a strong tea, on a tired day, alone, without the watch. Practising in harder conditions makes you stronger than everyday life will ever demand.',
+        'Use everything you\'ve learned: forecast, do it fully, let the passengers shout, no checking, stay ten more seconds, then write what happened.',
       ]},
     ],
-    practice: [{ type: 'form', formId: 'exposureLog' }, { type: 'budget' }],
+    practice: [{ type: 'game', game: 'ladder' }, { type: 'budget' }],
     reflection: 'What does reaching this rung say about you?',
   },
 
-  // ───────────────────────── week 10: stay well ─────────────────────────
+  // ───────────────────────── week 10: staying well ─────────────────────────
   {
-    id: 'S10.1', phase: 'strengthen', week: 10, title: 'What helped', minutes: 12,
+    id: 'S10.1', phase: 'strengthen', week: 10, title: 'What helped: the verdict on the theories', minutes: 12,
     cards: [
-      { title: 'Look back', body: [
-        'Answer the two questionnaires and open Progress. Compare them with your starting point in week 1. Look at your counters, your ladder and your practice logs.',
+      { title: 'Look back', art: 'theory', body: [
+        'Answer the questionnaires and re-rate the two theories. Look at your forecaster record, your ladder, your pebbles over the weeks.',
+        'You don\'t have to be certain. You only need to decide which theory you will live by.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }],
+    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'game', game: 'theory' }],
     reflection: 'Which three things helped you most?',
   },
   {
-    id: 'S10.2', phase: 'strengthen', week: 10, title: 'If it comes back', minutes: 15,
+    id: 'S10.2', phase: 'strengthen', week: 10, title: 'Your flare-up plan', minutes: 15,
     cards: [
-      { title: 'A lapse is not a relapse', body: [
-        'Waves may visit again, after a stressful week, illness, poor sleep or a hormonal change. A wave does not mean you are back at the start. You now have the skills, and the second time is usually shorter.',
-        'Write your plan now, while you feel well: your early warning signs, your first three actions, and who you will talk to.',
+      { title: 'A flare is not a relapse', art: 'anchor', body: [
+        'Waves may visit again: after a stressful week, an illness, poor sleep, a hormonal change. A flare-up is a flat tyre, not a return to the start. You have the tools now, and the second time is usually shorter.',
+        'Warning signs are things you DO, not things you feel: checking again, Googling, asking, avoiding, dropping practice.',
+      ]},
+      { title: 'Write it while you are well', art: 'map', body: [
+        'Your plan: what I learned about my anxiety; what helps short-term but hurts long-term; what really helps. And the steps for a flare: remind yourself it is temporary, write the forecasts, no checking or reassurance, return quickly to anything you\'ve started avoiding, and, if it doesn\'t settle within a few weeks, see a professional.',
       ]},
     ],
     practice: [{ type: 'form', formId: 'relapsePlan' }],
@@ -480,12 +514,17 @@ export const PROGRAMME: Session[] = [
   {
     id: 'S10.3', phase: 'strengthen', week: 10, title: 'Graduation', minutes: 10,
     cards: [
-      { title: 'You did this', body: [
-        'Ten weeks of practice. You let waves pass, surfed urges, faced what you avoided and gave your watch a gentler job. The learning lives in you now, not in this app.',
-        'From now on: Breathe on most days, practise a ladder rung now and then so the learning stays fresh, and do a monthly check-in here. SURGE is always one tap away.',
+      { title: 'You did this', art: 'graduate', body: [
+        'Ten weeks. You let waves come, surfed urges, stopped paying the loop, felt sensations on purpose, faced what you avoided. The learning lives in you now, not in this app.',
+        'Feeling a little flat after finishing something big is common. It isn\'t a sign of anything going wrong.',
+      ]},
+      { title: 'Keeping it fresh', art: 'calendar', body: [
+        '- A short practice on most days.',
+        '- A booster practice from your ladder now and then, because skipping practice for months lets fear grow back.',
+        '- A monthly visit to Home Shore.',
       ]},
     ],
-    practice: [{ type: 'breathe', minutes: 5 }, { type: 'budget' }],
+    practice: [{ type: 'game', game: 'recipe' }, { type: 'budget' }],
     reflection: 'Write a short note to yourself, to read on a hard day.',
   },
 
@@ -493,12 +532,12 @@ export const PROGRAMME: Session[] = [
   {
     id: 'SW', phase: 'staywell', week: 11, title: 'Monthly check-in', minutes: 8,
     cards: [
-      { title: 'Staying well', body: [
-        'A quick monthly look: answer the questionnaires, glance at your counters, and do one practice from your ladder to keep the learning fresh.',
-        'If the scores are climbing, open your "If it comes back" plan, restart the urge timer, and repeat a few Strengthen sessions.',
+      { title: 'Staying well', art: 'calendar', body: [
+        'A quick monthly visit: answer the questionnaires, glance at your pebbles, and do one booster practice from your ladder or the Body Lab.',
+        'If you notice old behaviours creeping back (checking, searching, avoiding), open your flare-up plan and restart a few Strengthen steps. That is not going backwards. It is maintenance.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'measure', measureId: 'PHQ9' }],
+    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'measure', measureId: 'PHQ9' }, { type: 'game', game: 'bodyLab' }],
     reflection: 'How has this month been?',
   },
 ];

@@ -1,0 +1,121 @@
+/* ═══ v1.3 motion layer: lesson illustrations, lively buttons, screen transitions ═══ */
+.lesson-art { display: block; width: 100%; height: auto; border-radius: 18px; margin: -4px 0 12px; }
+.la-beat { animation: beat 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.la-pulse { animation: pulse 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.la-float { animation: floatY 3.4s ease-in-out infinite; }
+.la-blink { animation: twinkle 1s steps(2) infinite; }
+.la-ring { animation: ring 1.2s ease-out infinite; opacity: 0; }
+.la-steam { animation: steam 2.4s ease-in-out infinite; }
+.la-scan { animation: scan 4s ease-in-out infinite; }
+.la-spin { animation: spin 5s linear infinite; transform-origin: 0 0; }
+.la-node { animation: nodeGlow 3s ease-in-out infinite; }
+.la-wave1 { animation: waveX 8s linear infinite; }
+.la-wave2 { animation: swell 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.la-bob { animation: bob 3.4s ease-in-out infinite; }
+.la-dangle { animation: dangle 2.4s ease-in-out infinite; transform-origin: 160px 0; }
+.la-swim { animation: swim 5s ease-in-out infinite; }
+.la-drop { animation: dropIn 2.4s cubic-bezier(.3, 1.4, .5, 1) infinite; }
+.la-urge { animation: urge 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.la-surf { animation: surfUrge 6s ease-in-out infinite; }
+.la-needle { animation: needle 5s ease-in-out infinite; }
+.la-pop { animation: popLoop 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.la-swap1 { animation: swap1 5s ease-in-out infinite; }
+.la-swap2 { animation: swap2 5s ease-in-out infinite; }
+.la-fill { animation: fillUp 2.6s ease-out infinite; transform-box: fill-box; }
+.la-scroll { animation: scrollLine 2.4s ease-in-out infinite; }
+.la-boat-in { animation: boatIn 4s ease-in-out infinite; }
+.la-boatline { animation: boatLine 5s linear infinite; }
+.la-twinkle { animation: twinkle 2.4s ease-in-out infinite; }
+.la-grow-dn { animation: shrink 4s ease-in-out infinite; transform-box: view-box; }
+.la-grow-up { animation: rise 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.la-climb { animation: climb 5s ease-in-out infinite; }
+.la-climb2 { animation: climb2 6s ease-in-out infinite; }
+.la-unroll { animation: unroll 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center top; }
+.la-yawn { animation: popLoop 4s ease-in-out infinite; }
+.la-thump { animation: thump 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.la-ripple { animation: ringOut 2.4s ease-out infinite; transform-box: fill-box; transform-origin: center; opacity: 0; }
+.la-leaf { animation: leafDrift 6s linear infinite; }
+.la-drive { animation: drive 3s ease-in-out infinite; }
+.la-sprout { animation: sprout 3.6s ease-in-out infinite; }
+.la-walk { animation: walkAcross 9s linear infinite; }
+.la-dash { animation: dash 3s linear infinite; }
+.la-boat-steady { animation: bob 4s ease-in-out infinite; }
+.la-tilt { animation: tilt 4s ease-in-out infinite; transform-origin: 0 0; }
+
+@keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.12); } 30% { transform: scale(1); } 45% { transform: scale(1.08); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.12); opacity: 1; } }
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes ring { 0% { opacity: .9; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.4); } }
+@keyframes steam { 0% { opacity: 0; transform: translateY(4px); } 50% { opacity: .8; } 100% { opacity: 0; transform: translateY(-10px); } }
+@keyframes scan { 0%, 100% { transform: translate(-30px, 0); } 50% { transform: translate(30px, 6px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes nodeGlow { 0%, 70%, 100% { fill: #fff; } 20% { fill: #ffe9a8; } }
+@keyframes swell { 0%, 100% { transform: scaleY(.85); } 50% { transform: scaleY(1.15); } }
+@keyframes dangle { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+@keyframes swim { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(90px); } }
+@keyframes dropIn { 0% { transform: translateY(-40px); opacity: 0; } 30% { transform: translateY(0); opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes urge { 0%, 100% { transform: scaleY(.25); } 40% { transform: scaleY(1); } }
+@keyframes surfUrge { 0%, 100% { transform: translateY(78px); } 40% { transform: translateY(0); } }
+@keyframes needle { 0% { transform: rotate(-60deg); } 30% { transform: rotate(40deg); } 50% { transform: rotate(-10deg); } 70%, 100% { transform: rotate(0deg); } }
+@keyframes popLoop { 0%, 100% { transform: scale(.85); opacity: .6; } 50% { transform: scale(1.1); opacity: 1; } }
+@keyframes swap1 { 0%, 40% { opacity: 1; } 50%, 90% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes swap2 { 0%, 40% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes fillUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes scrollLine { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+@keyframes boatIn { 0% { transform: translate(-200px, 0); opacity: 0; } 40%, 100% { transform: translate(0, 0); opacity: 1; } }
+@keyframes boatLine { from { transform: translateX(-40px); } to { transform: translateX(340px); } }
+@keyframes shrink { 0%, 15% { transform: scaleY(1); } 60%, 100% { transform: scaleY(.25); } }
+@keyframes rise { 0%, 15% { transform: scaleY(1); } 60%, 100% { transform: scaleY(4.5); } }
+@keyframes climb { 0% { transform: translate(0, 0); } 80%, 100% { transform: translate(0, -96px); } }
+@keyframes climb2 { 0% { transform: translate(0, 0); } 80%, 100% { transform: translate(58px, -62px); } }
+@keyframes unroll { 0% { transform: scaleY(.1); } 30%, 100% { transform: scaleY(1); } }
+@keyframes thump { 0%, 100% { transform: scale(1); } 20% { transform: scale(1.06, .9); } }
+@keyframes ringOut { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(3); } }
+@keyframes leafDrift { from { transform: translate(-50px, 0) rotate(0); } to { transform: translate(340px, -8px) rotate(10deg); } }
+@keyframes drive { 0%, 100% { transform: translateX(-6px); } 50% { transform: translateX(6px); } }
+@keyframes sprout { 0%, 100% { transform: scale(1, .7); } 50% { transform: scale(1, 1.08); } }
+@keyframes walkAcross { from { transform: translateX(-60px); } to { transform: translateX(320px); } }
+@keyframes dash { to { stroke-dashoffset: -32; } }
+@keyframes tilt { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+
+/* lively controls */
+.btn, .tile, .chip, .quest, .counter, .land-card, .icon-pick button, .cups button, .tabs button { position: relative; overflow: hidden; }
+.tile, .quest, .land-card { transition: transform .18s cubic-bezier(.3, 1.5, .5, 1), box-shadow .2s; }
+.tile:hover, .quest:hover, .land-card:hover { transform: translateY(-2px); }
+.tile:active, .quest:active, .land-card:active { transform: scale(.96); }
+.tile.play i { display: inline-block; }
+.tile.play:hover i, .tile.play:focus-visible i, .tile.play:active i { animation: wiggle .5s ease; }
+.ripple-dot { position: absolute; border-radius: 50%; pointer-events: none; background: currentColor; opacity: .2; transform: scale(0); animation: rippleOut .6s ease-out forwards; }
+.surge b { animation: breatheText 5s ease-in-out infinite; }
+.tabs button.on svg { animation: tabHop .45s cubic-bezier(.3, 1.6, .5, 1); }
+
+/* entrances: each screen slides in, then cards arrive one after another */
+.page { animation: pageIn .38s cubic-bezier(.2, .9, .3, 1); }
+.page .grid2 > *, .page .quests > *, .page .chest > *, .page .counters > *, .page .land { animation: riseIn .5s cubic-bezier(.2, .9, .3, 1.2) both; }
+.page .grid2 > *:nth-child(2), .page .quests > *:nth-child(2), .page .chest > *:nth-child(2), .page .counters > *:nth-child(2) { animation-delay: .06s; }
+.page .grid2 > *:nth-child(3), .page .quests > *:nth-child(3), .page .chest > *:nth-child(3), .page .counters > *:nth-child(3) { animation-delay: .12s; }
+.page .grid2 > *:nth-child(4), .page .chest > *:nth-child(4), .page .counters > *:nth-child(4) { animation-delay: .18s; }
+.page .grid2 > *:nth-child(n+5), .page .chest > *:nth-child(n+5) { animation-delay: .24s; }
+
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-12deg) scale(1.15); } 75% { transform: rotate(10deg) scale(1.1); } }
+@keyframes rippleOut { to { transform: scale(2.6); opacity: 0; } }
+@keyframes breatheText { 0%, 100% { letter-spacing: .12em; } 50% { letter-spacing: .2em; } }
+@keyframes tabHop { 0% { transform: translateY(0); } 50% { transform: translateY(-6px) scale(1.15); } 100% { transform: translateY(-2px) scale(1.08); } }
+@keyframes pageIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+@keyframes riseIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .2s !important; }
+}
+
+.page-fade { animation: fade .45s ease; }
+
+.la-flip { animation: flip 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+.la-spark { animation: sparkOut 3s ease-in-out infinite; }
+.la-bubble { animation: bubbleUp 2.4s ease-in infinite; }
+.la-weather { animation: drift2 10s ease-in-out infinite; }
+.la-pie { animation: spin 30s linear infinite; }
+@keyframes flip { 0%, 40% { transform: translateY(0); } 55%, 90% { transform: translateY(46px); } 100% { transform: translateY(0); } }
+@keyframes sparkOut { 0%, 40% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes bubbleUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-60px); opacity: 0; } }
+@keyframes drift2 { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(40px); } }

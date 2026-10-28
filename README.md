@@ -25,6 +25,8 @@ practice waters your island and helps it grow.
 | ![Island](docs/screenshots/island.png) | ![Journey](docs/screenshots/journey.png) | ![SURGE](docs/screenshots/surge.png) | ![Lotus](docs/screenshots/lotus.png) |
 | **Surf an urge** | **Worry river** | **Treasures** | **Night island** |
 | ![Surf](docs/screenshots/surf.png) | ![Worry river](docs/screenshots/worry-river.png) | ![Treasures](docs/screenshots/treasures.png) | ![Night](docs/screenshots/night.png) |
+| **Animated lessons** | **Body Lab** | **Sound Garden** | **Theory A or B** |
+| ![Lesson](docs/screenshots/lesson.png) | ![Body Lab](docs/screenshots/body-lab.png) | ![Sound Garden](docs/screenshots/sound-garden.png) | ![Theory](docs/screenshots/theory.png) |
 
 ---
 
@@ -40,13 +42,22 @@ the Island of Calm. It covers:
 
 The full text is in [docs/PROGRAMME.md](docs/PROGRAMME.md).
 
+**Practice games (each teaches a skill, never a distraction):**
+- **Body Lab:** bring on feared sensations on purpose (staring, tensing, spinning, stairs…), with two ratings and three rounds. The standard interoceptive-exposure protocol, made playful. Heart-raising items open only after "My doctor said yes".
+- **Sound Garden:** attention training with nine live island sounds in stereo (focus → switch → spread).
+- **Theory A or B:** weigh "my heart is in danger" against "my alarm is sensitive, and checking keeps it loud", with your own evidence.
+- **The anxiety forecaster:** every practice is an experiment, comparing prediction with what happened.
+- **Fear loop**, **leaves on the stream**, the **struggle switch**, **get curious**, a **ladder** with random draws, and a **tiny-habit** builder.
+
 **Tools that are always one tap away:**
 - **SURGE:** a 2½-minute guided way to float through a wave of anxiety on a calm dusk sea.
 - **Surf an urge:** instead of checking, Tulu rides the urge-wave until it shrinks.
 - **Lotus breathing:** slow breathing (4 in, 6 out) with a lotus that opens and closes.
 - **Worry river:** fold worries into paper boats and look at them at a set worry time.
 - **Inner weather check-in**, pebble counters for checking, and a checking budget that steps down.
-- Daily reminders, a wind-down for sleep, and a safety card.
+- Daily reminders, a wind-down and a night guide for sleep, and a safety card.
+- **For family:** how to help without reassuring (validate, don't answer the heart question).
+- **Urge to go to hospital?** Red flags and 108 first, then a gentle pause for familiar waves.
 
 **Progress without pressure:**
 - three standard questionnaires (GAD-7, Whiteley Index-7 and PHQ-9) shown as a calm "compass";
@@ -74,10 +85,18 @@ anything.** Use it after a doctor has checked your symptoms, and alongside their
 - **Low mood or thoughts of self-harm:** talk to a doctor or a helpline. In India, call
   **Tele-MANAS 14416** (free, 24×7, many languages).
 
-The programme draws on established CBT methods for health anxiety: cognitive-behavioural
-formulation, reducing safety behaviours, exposure and inhibitory learning, Claire Weekes's "face,
-accept, float, let time pass", acceptance and defusion (ACT), and urge surfing. All text is written
-fresh for this app.
+The programme was built from a full reading of 35 books on health anxiety, panic, exposure therapy,
+CBT, ACT, sleep, habits and family support. It covers:
+- internet CBT for health anxiety (Hedman-Lagerlöf);
+- Taylor & Asmundson; Veale & Willson;
+- Barlow & Craske's interoceptive exposure, and Abramowitz on exposure;
+- Mind Over Mood; Burns;
+- Claire Weekes; DARE; Harris's ACT;
+- Brewer's urge work; Carney & Manber on sleep;
+- Thieda on supporting a partner; Fogg and Wendel on habit design.
+
+The core method is exposure plus dropping checking and reassurance. Calming tools are practice,
+never a rescue. All text is written fresh for this app.
 
 ---
 

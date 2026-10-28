@@ -30,7 +30,8 @@ export interface Settings {
 
 export interface Surge { id: string; at: string; strength: number; minutes: number; helped: string[]; note: string; repeat: boolean }
 export interface Urge { id: string; at: string; kind: string; start: number; end: number; minutes: number; outcome: 'surfed' | 'checked' }
-export interface CheckIn { date: string; anxiety: number; sleep: number; mood: string; caffeine: number; moveMin: number }
+export interface SleepLog { lightsOut?: string; toSleep?: string; wakings?: string; rise?: string }
+export interface CheckIn { date: string; anxiety: number; sleep: number; mood: string; caffeine: number; moveMin: number; sleepLog?: SleepLog; emotions?: string[]; context?: string }
 export interface Counts { checks: number; ecg: number; reassurance: number; google: number }
 export interface Worry { id: string; at: string; text: string; status: 'parked' | 'step' | 'letgo'; step?: string }
 export interface MeasureResult { id: string; kind: 'GAD7' | 'PHQ9' | 'WI7'; at: string; answers: number[]; total: number }

@@ -38,10 +38,13 @@ export type Practice =
   | { type: 'measure'; measureId: MeasureId }
   | { type: 'budget' }
   | { type: 'worry-time' }
+  | { type: 'game'; game: import('../components/ui').GameId }
   | { type: 'none' };
 
 export interface Card {
   title?: string;
+  /** animated illustration shown above the card */
+  art?: import('../game/LessonArt').ArtId;
   /** paragraphs; a line starting with "- " renders as a bullet */
   body: string[];
 }

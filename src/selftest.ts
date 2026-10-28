@@ -2,7 +2,7 @@
 import { PROGRAMME } from './content/programme';
 import { FORMS } from './content/forms';
 import { MEASURES, scoreMeasure, triggersSafety } from './content/measures';
-import { SURGE } from './content/scripts';
+import { NIGHT_GUIDE, SURGE, SURGE_REPEAT, URGE_PROMPTS, WIND_DOWN_TEXT } from './content/scripts';
 import { deriveKey, newSalt, open, seal } from './lib/crypto';
 import { crisisText } from './lib/safety';
 import { newData } from './lib/model';
@@ -12,7 +12,8 @@ import { drops, TREASURES } from './game/rewards';
 export interface Check { name: string; ok: boolean; detail?: string }
 
 const HR_NUMBER = /\b(1[0-9]{2}|[6-9][0-9])\s*(bpm|beats)/i;
-const REASSURE = /(you('| a)re (fine|safe|ok|okay)|nothing is wrong|your heart is (fine|healthy|ok))/i;
+const REASSURE = /(you('| a)re (fine|safe|ok|okay)|nothing is wrong|your heart is (fine|healthy|ok|strong)|harmless|can'?t hurt you|cannot hurt you|not dangerous|no danger|perfectly safe)/i;
+const BREATH_CONTROL = /(calm(s|ing)? (your|the) heart|slow(s|ing)? (down )?(your|the) heart|lower(s|ing)? (your|the) heart|breath(e|ing)? (it )?away)/i;
 
 export function contentChecks(): Check[] {
   const out: Check[] = [];
@@ -29,10 +30,13 @@ export function contentChecks(): Check[] {
   out.push({ name: 'every practice points at a real form/measure', ok: missing.length === 0, detail: missing.join(', ') });
   const allText = [
     ...PROGRAMME.flatMap((s) => s.cards.flatMap((c) => [c.title ?? '', ...c.body])),
-    ...SURGE.map((l) => l.text),
+    ...SURGE.map((l) => l.text), ...SURGE_REPEAT.map((l) => l.text), ...URGE_PROMPTS.map((p) => p.text), ...WIND_DOWN_TEXT, ...NIGHT_GUIDE,
   ].join('\n');
   out.push({ name: 'no heart-rate numbers in content', ok: !HR_NUMBER.test(allText) });
   out.push({ name: 'no reassurance phrases in content', ok: !REASSURE.test(allText), detail: allText.match(REASSURE)?.[0] });
+  out.push({ name: 'breathing never framed as calming the heart', ok: !BREATH_CONTROL.test(allText), detail: allText.match(BREATH_CONTROL)?.[0] });
+  out.push({ name: 'every lesson card has an animated illustration', ok: PROGRAMME.every((s) => s.cards.every((c) => !!c.art)) });
+  out.push({ name: 'noticing an urge earns drops even if she checked', ok: (() => { const n = newData(); n.urges.push({ id: 'n', at: new Date().toISOString(), kind: 'ECG', start: 5, end: 5, minutes: 1, outcome: 'checked' }); return drops(n) > 0; })() });
   out.push({ name: 'GAD-7 has 7 items', ok: MEASURES.GAD7.items.length === 7 });
   out.push({ name: 'PHQ-9 has 9 items', ok: MEASURES.PHQ9.items.length === 9 });
   out.push({ name: 'WI-7 has 7 items', ok: MEASURES.WI7.items.length === 7 });

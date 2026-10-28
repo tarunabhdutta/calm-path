@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Back, Chips, Scale, useNav } from '../components/ui';
-import { AUDIO, SURGE, SURGE_REPEAT, URGE_PROMPTS, WIND_DOWN_TEXT } from '../content/scripts';
+import { AUDIO, NIGHT_GUIDE, SURGE, SURGE_REPEAT, URGE_PROMPTS, WIND_DOWN_TEXT } from '../content/scripts';
 import type { Line } from '../content/scripts';
 import { breathTone, hasClip, playClip, stopClip } from '../lib/audio';
 import { useStore } from '../lib/store';
@@ -54,14 +54,16 @@ export function Surge({ practice = false, onFinished }: { practice?: boolean; on
   const [minutes, setMinutes] = useState(['A few minutes']);
   const [helped, setHelped] = useState<string[]>([]);
   const [note, setNote] = useState('');
+  const [how, setHow] = useState<string[]>([]);
+  const [engage, setEngage] = useState<string[]>([]);
   const started = useRef(new Date().toISOString());
 
   const finish = () => {
     if (data && !practice) {
       const mins = { 'Under 2 minutes': 1, 'A few minutes': 4, '5–15 minutes': 10, 'Longer': 25 }[minutes[0]] ?? 4;
-      update((d) => d.surges.push({ id: uid(), at: started.current, strength, minutes: mins, helped, note, repeat: repeated }));
+      update((d) => d.surges.push({ id: uid(), at: started.current, strength, minutes: mins, helped: [...helped, ...how.map((h) => 'how: ' + h), ...engage.map((e) => 'engage: ' + e)], note, repeat: repeated }));
       if (hasClip(AUDIO.win) && data.settings.voice) playClip(AUDIO.win);
-      toast('Logged. You let it pass.');
+      toast('Logged. You met the wave.');
     }
     onFinished ? onFinished() : back();
   };
@@ -79,7 +81,7 @@ export function Surge({ practice = false, onFinished }: { practice?: boolean; on
         <div className="over" style={{ marginTop: 'auto' }}>
           <div className="sheet">
             <div style={{ textAlign: 'center', marginTop: -70 }}><Tulu size={110} mood="calm" /></div>
-            <h1 style={{ textAlign: 'center' }}>{practice ? 'Rehearsal done' : 'You floated through it'}</h1>
+            <h1 style={{ textAlign: 'center' }}>{practice ? 'Rehearsal done' : 'You met the wave'}</h1>
             {practice ? (
               <p className="ink2" style={{ textAlign: 'center' }}>Now you know the way. When a real wave comes, press SURGE and float along.</p>
             ) : (
@@ -91,8 +93,13 @@ export function Surge({ practice = false, onFinished }: { practice?: boolean; on
                     <Scale value={strength} onChange={setStrength} low="ripple" high="huge" />
                     <label className="f">How long did it last, roughly?</label>
                     <Chips options={['Under 2 minutes', 'A few minutes', '5–15 minutes', 'Longer']} value={minutes} onChange={setMinutes} />
-                    <label className="f">What helped you float?</label>
-                    <Chips multi options={['Letting it come', 'Slow breathing out', 'Floating', 'Letting time pass', 'Moving / a small task', 'Nothing yet']} value={helped} onChange={setHelped} />
+                    <label className="f">Honestly, was I gritting my teeth or letting go?</label>
+                    <Chips options={['Gritting my teeth', 'A bit of both', 'Letting go']} value={how} onChange={setHow} />
+                    {how[0] === 'Gritting my teeth' && <p className="muted">That's fine. Letting go is learned wave by wave. Next time, try softening the shoulders and jaw a little earlier.</p>}
+                    <label className="f">What helped me stay with it?</label>
+                    <Chips multi options={['Letting it come', 'Naming the second fear', 'Curiosity', 'Floating', 'Letting time pass', 'Nothing yet']} value={helped} onChange={setHelped} />
+                    <label className="f">Step back into the day: what's next? (Engage)</label>
+                    <Chips options={['Back to what I was doing', 'Make tea, slowly', 'A short walk', 'Call someone (not about my heart)', 'Water the plants', 'Tidy one small thing']} value={engage} onChange={setEngage} />
                     <label className="f">Anything to note? (optional)</label>
                     <input type="text" value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. after a strong tea, while resting" />
                   </>
@@ -123,6 +130,7 @@ export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished
   const [end, setEnd] = useState(4);
   const [total, setTotal] = useState(minutes * 60);
   const [sec, setSec] = useState(0);
+  const [gave, setGave] = useState<string[]>([]);
   const voice = useVoice();
   const at = useRef(new Date().toISOString());
 
@@ -145,14 +153,14 @@ export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished
   const save = (outcome: 'surfed' | 'checked') => {
     if (data) {
       update((d) => {
-        d.urges.push({ id: uid(), at: at.current, kind: kind[0] ?? 'Something else', start, end, minutes: Math.round(sec / 60), outcome });
+        d.urges.push({ id: uid(), at: at.current, kind: (kind[0] ?? 'Something else') + (gave.length ? ' · last check gave: ' + gave[0] : ''), start, end, minutes: Math.round(sec / 60), outcome });
         if (outcome === 'checked') {
           const k = today();
           d.counts[k] ??= emptyCounts();
           d.counts[k][COUNTER_FOR[kind[0] ?? 'Something else']]++;
         }
       });
-      toast(outcome === 'surfed' ? 'Surfed! That urge is a little weaker next time.' : 'Logged honestly. You still paddled out.');
+      toast(outcome === 'surfed' ? 'Noticed and surfed. That urge is a little weaker next time.' : 'Noticed it, logged honestly. Noticing is the first win.');
     }
     onFinished ? onFinished() : back();
   };
@@ -181,8 +189,10 @@ export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished
       {stage === 'end' && (
         <div className="sheet over" style={{ marginTop: 'auto' }}>
           <h1>Back on the shore! 🏝️</h1>
-          <p className="ink2">How big is the wave now? It started at {start}.</p>
+          <p className="ink2">You noticed the urge and stayed with it: that's a win, whatever comes next. How big is the wave now? It started at {start}.</p>
           <Scale value={end} onChange={setEnd} low="ripple" high="huge" />
+          <label className="f">What did your last check really give you, ten minutes later?</label>
+          <Chips options={['Relief for a moment', 'Nothing much', 'More worry', 'I checked again soon after']} value={gave} onChange={setGave} />
           <div className="grid2" style={{ marginTop: 12 }}>
             <button className="btn" onClick={() => save('surfed')}>Surfed it! +3 💧</button>
             <button className="btn soft" onClick={() => save('checked')}>I checked anyway</button>
@@ -198,13 +208,14 @@ export function Breathe({ minutes: initial, onFinished }: { minutes?: number; on
   const { data, update } = useStore();
   const { back, toast } = useNav();
   const [minutes, setMinutes] = useState<number | null>(initial ?? null);
+  const [pace, setPace] = useState<'6' | '5'>('6');
   const [phase, setPhase] = useState<'in' | 'out'>('in');
   const [cycle, setCycle] = useState(0);
   const [running, setRunning] = useState(false);
   const voice = useVoice();
   const tone = data ? data.settings.tone : true;
   const startAt = useRef(0);
-  const IN = 4, OUT = 6;
+  const IN = pace === '6' ? 4 : 6, OUT = 6;
   const cycles = minutes ? Math.round((minutes * 60) / (IN + OUT)) : 0;
 
   useEffect(() => {
@@ -242,10 +253,11 @@ export function Breathe({ minutes: initial, onFinished }: { minutes?: number; on
         <Back />
         <div className="flow">
           <LotusBloom phase="in" running={false} secs={1} />
-          <h1>Lotus breathing</h1>
-          <p className="ink2" style={{ maxWidth: '30ch' }}>The lotus opens as you breathe in for 4, and closes as you breathe out for 6. Every minute waters the island.</p>
+          <h1>Calm-time breathing</h1>
+          <p className="ink2" style={{ maxWidth: '34ch' }}>Daily training for your nervous system, best when you are <b>not</b> in a wave. The lotus opens as you breathe in and closes as you breathe out. Keep it soft and unforced. Start with 5 minutes, build up to 20.</p>
+          <Chips options={['6 a minute (4 in · 6 out)', '5 a minute (6 in · 6 out)']} value={[pace === '6' ? '6 a minute (4 in · 6 out)' : '5 a minute (6 in · 6 out)']} onChange={(v) => setPace(v[0].startsWith('5') ? '5' : '6')} />
           <div className="grid2" style={{ width: '100%', maxWidth: 360 }}>
-            {[1, 3, 5, 10].map((m) => <button key={m} className="btn soft" onClick={() => setMinutes(m)}>{m} min · +{Math.min(10, m)} 💧</button>)}
+            {[3, 5, 10, 20].map((m) => <button key={m} className="btn soft" onClick={() => setMinutes(m)}>{m} min · +{Math.min(10, m)} 💧</button>)}
           </div>
         </div>
       </div>
@@ -287,6 +299,10 @@ export function WindDown() {
         <Tulu size={170} mood="sleep" />
         <div className="caption" key={i}>{WIND_DOWN_TEXT[i]}</div>
         {!audio && <p className="muted">The voice version plays here once the audio is added.</p>}
+        <details className="night-guide">
+          <summary>Awake in the night? 🌙</summary>
+          {NIGHT_GUIDE.map((l) => <p key={l}>{l}</p>)}
+        </details>
       </div>
     </div>
   );
