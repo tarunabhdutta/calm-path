@@ -37,11 +37,11 @@ export function contentChecks(): Check[] {
   out.push({ name: 'breathing never framed as calming the heart', ok: !BREATH_CONTROL.test(allText), detail: allText.match(BREATH_CONTROL)?.[0] });
   out.push({ name: 'every lesson card has an animated illustration', ok: PROGRAMME.every((s) => s.cards.every((c) => !!c.art)) });
   out.push({ name: 'noticing an urge earns drops even if she checked', ok: (() => { const n = newData(); n.urges.push({ id: 'n', at: new Date().toISOString(), kind: 'ECG', start: 5, end: 5, minutes: 1, outcome: 'checked' }); return drops(n) > 0; })() });
-  out.push({ name: 'GAD-7 has 7 items', ok: MEASURES.GAD7.items.length === 7 });
-  out.push({ name: 'PHQ-9 has 9 items', ok: MEASURES.PHQ9.items.length === 9 });
-  out.push({ name: 'WI-7 has 7 items', ok: MEASURES.WI7.items.length === 7 });
+  out.push({ name: 'Anxiety check has 7 items', ok: MEASURES.GAD7.items.length === 7 });
+  out.push({ name: 'Mood check has 9 items', ok: MEASURES.PHQ9.items.length === 9 });
+  out.push({ name: 'Health worry check has 7 items', ok: MEASURES.HW7.items.length === 7 });
   out.push({ name: 'scoring sums answers', ok: scoreMeasure([1, 2, 3, 0, 1, 2, 3]) === 12 });
-  out.push({ name: 'PHQ-9 item 9 > 0 triggers safety', ok: triggersSafety('PHQ9', [0, 0, 0, 0, 0, 0, 0, 0, 1]) && !triggersSafety('PHQ9', [3, 3, 3, 3, 3, 3, 3, 3, 0]) });
+  out.push({ name: 'Mood check item 9 > 0 triggers safety', ok: triggersSafety('PHQ9', [0, 0, 0, 0, 0, 0, 0, 0, 1]) && !triggersSafety('PHQ9', [3, 3, 3, 3, 3, 3, 3, 3, 0]) });
   out.push({ name: 'crisis words detected', ok: crisisText('sometimes I want to die') && crisisText('thinking of self-harm') && !crisisText('my heart was racing again') });
   const d = newData();
   out.push({ name: 'first session is QS1', ok: nextSession(d).session?.id === 'QS1' });

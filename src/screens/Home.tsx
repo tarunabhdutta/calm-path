@@ -163,15 +163,15 @@ export function Tools() {
       <h2>Practice games</h2>
       <div className="grid2">
         <button className="tile play" onClick={() => go({ name: 'game', id: 'bodyLab' })}><i>🧪</i><b>Body Lab</b><span>Feel it on purpose</span></button>
-        <button className="tile play" onClick={() => go({ name: 'game', id: 'soundGarden' })}><i>🎧</i><b>Sound Garden</b><span>Attention training</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'listening' })}><i>🎧</i><b>Listening Garden</b><span>Attention training</span></button>
         <button className="tile play" onClick={() => go({ name: 'game', id: 'forecast' })}><i>⛈️</i><b>Forecaster</b><span>An experiment</span></button>
         <button className="tile play" onClick={() => go({ name: 'game', id: 'ladder' })}><i>🪜</i><b>My ladder</b><span>Climb or draw at random</span></button>
-        <button className="tile play" onClick={() => go({ name: 'game', id: 'theory' })}><i>⚖️</i><b>Theory A or B</b><span>Weigh the evidence</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'theory' })}><i>⚖️</i><b>Two stories</b><span>Weigh the evidence</span></button>
         <button className="tile play" onClick={() => go({ name: 'game', id: 'leaves' })}><i>🍃</i><b>Leaves</b><span>Unhook a thought</span></button>
-        <button className="tile play" onClick={() => go({ name: 'game', id: 'switch' })}><i>🔌</i><b>Struggle switch</b><span>Stop adding sparks</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'switch' })}><i>🔌</i><b>Fight switch</b><span>Stop adding sparks</span></button>
         <button className="tile play" onClick={() => go({ name: 'game', id: 'noting' })}><i>🔍</i><b>Get curious</b><span>Notice, name</span></button>
         <button className="tile play" onClick={() => go({ name: 'game', id: 'fearCycle' })}><i>🌀</i><b>Fear loop</b><span>See it, break it</span></button>
-        <button className="tile play" onClick={() => go({ name: 'game', id: 'recipe' })}><i>🌱</i><b>Tiny habit</b><span>My recipe</span></button>
+        <button className="tile play" onClick={() => go({ name: 'game', id: 'recipe' })}><i>🌱</i><b>Little habit</b><span>My recipe</span></button>
       </div>
       <h2>Help</h2>
       <div className="grid2">

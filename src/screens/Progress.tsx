@@ -91,11 +91,11 @@ export function Progress() {
         <div className="card soft"><h3>{d.surges.length}</h3><span className="muted">waves ridden out</span></div>
         <div className="card soft"><h3>{d.breaths.reduce((a, b) => a + b.minutes, 0)}</h3><span className="muted">minutes of breathing</span></div>
       </div>
-      {(['WI7', 'GAD7', 'PHQ9'] as const).map((k) => (
+      {(['HW7', 'GAD7', 'PHQ9'] as const).map((k) => (
         <div className="card" key={k}>
           <h3>{MEASURES[k].name}</h3>
           <p className="muted">Lower is better. Max {MEASURES[k].max}.</p>
-          <Line points={series(d, k)} max={MEASURES[k].max} color={k === 'WI7' ? 'var(--water)' : k === 'GAD7' ? 'var(--leaf)' : 'var(--sun)'} />
+          <Line points={series(d, k)} max={MEASURES[k].max} color={k === 'HW7' ? 'var(--water)' : k === 'GAD7' ? 'var(--leaf)' : 'var(--sun)'} />
         </div>
       ))}
       <div className="card">

@@ -1,7 +1,8 @@
 import type { Measure } from './types';
 
-// GAD-7 and PHQ-9 (Spitzer, Kroenke, Williams; free to use, no permission required).
-// Whiteley Index-7 (Fink et al. 1999), 5-point version, for health anxiety.
+// Self-checks shown as the "compass".
+//  - Anxiety check (7) and Mood check (9): standard public-domain screening items, free to use.
+//  - Health worry check (7): original items written for this app.
 
 const twoWeeks = 'Over the last 2 weeks, how often have you been bothered by the following problems?';
 const freq = ['Not at all', 'Several days', 'More than half the days', 'Nearly every day'];
@@ -9,7 +10,7 @@ const freq = ['Not at all', 'Several days', 'More than half the days', 'Nearly e
 export const MEASURES: Record<string, Measure> = {
   GAD7: {
     id: 'GAD7',
-    name: 'GAD-7 (general anxiety)',
+    name: 'Anxiety check',
     short: 'Anxiety',
     stem: twoWeeks,
     options: freq,
@@ -26,20 +27,20 @@ export const MEASURES: Record<string, Measure> = {
     max: 21,
     band: (t) => (t <= 4 ? 'minimal' : t <= 9 ? 'mild' : t <= 14 ? 'moderate' : 'severe'),
   },
-  WI7: {
-    id: 'WI7',
-    name: 'Whiteley Index-7 (health worry)',
+  HW7: {
+    id: 'HW7',
+    name: 'Health worry check',
     short: 'Health worry',
-    stem: 'How much does each of these apply to you at present?',
+    stem: 'Thinking about the past week, how much does each of these apply to you?',
     options: ['Not at all', 'A little', 'Moderately', 'Quite a lot', 'A great deal'],
     items: [
-      'Do you worry a lot about your health?',
-      'Do you think there is something seriously wrong with your body?',
-      'Is it hard for you to forget about yourself and think about all sorts of other things?',
-      'If you feel ill and someone tells you that you are looking better, do you become annoyed?',
-      'Do you find that you are often aware of various things happening in your body?',
-      'Are you bothered by many aches and pains?',
-      'Are you afraid of illness?',
+      'I worried about my health',
+      'I felt that something serious might be wrong with my body',
+      'Body sensations grabbed my attention',
+      'I felt an urge to check my body, my pulse or health data',
+      'I looked for reassurance (asking, searching, tests)',
+      'Health worries made me avoid things',
+      'Health worries got in the way of my day',
     ],
     everyDays: 14,
     max: 28,
@@ -47,7 +48,7 @@ export const MEASURES: Record<string, Measure> = {
   },
   PHQ9: {
     id: 'PHQ9',
-    name: 'PHQ-9 (mood)',
+    name: 'Mood check',
     short: 'Mood',
     stem: twoWeeks,
     options: freq,

@@ -13,7 +13,7 @@ import { Journey } from './screens/Journey';
 import { Celebrations } from './game/Celebrate';
 import { Tulu } from './game/Mascot';
 import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from './game/Games';
-import { BodyLab, SoundGarden, SwitchGame, TheoryGame } from './game/Games2';
+import { BodyLab, ListeningGarden, SwitchGame, TheoryGame } from './game/Games2';
 import { Family, HospitalUrge } from './screens/Family';
 import { Progress } from './screens/Progress';
 import { Safety, Settings } from './screens/Settings';
@@ -50,7 +50,7 @@ function Screen({ r }: { r: Route }) {
 
 const FULL = new Set(['surge', 'urge', 'breathe', 'winddown']);
 const GAMES = { fearCycle: FearCycleGame, leaves: LeavesGame, forecast: ForecastGame, ladder: LadderGame, noting: NotingGame, recipe: RecipeGame,
-  bodyLab: BodyLab, soundGarden: SoundGarden, theory: TheoryGame, switch: SwitchGame } as const;
+  bodyLab: BodyLab, listening: ListeningGarden, theory: TheoryGame, switch: SwitchGame } as const;
 const routeKey = (r: Route) => r.name + ('id' in r ? String(r.id) : '') + ('formId' in r ? r.formId : '') + ('entryId' in r ? r.entryId ?? '' : '');
 
 const TABS = [

@@ -1,5 +1,5 @@
-// Screenshot harness, part 2 (v1.3 screens): lessons with animated art, Body Lab, Sound Garden,
-// Theory A/B, struggle switch, leaves, fear loop, family, hospital card, check-in diary.
+// Screenshot harness, part 2 (v1.3 screens): lessons with animated art, Body Lab, Listening Garden,
+// two stories, fight switch, leaves, fear loop, family, hospital card, check-in diary.
 // Temp test data only (law E-04).   npx electron tools/shoot2.cjs <outDir>
 const { app, BrowserWindow, ipcMain, nativeTheme } = require('electron');
 const path = require('node:path');
@@ -40,8 +40,8 @@ app.whenReady().then(async () => {
     await js(`[...document.querySelectorAll('.stone')][0]?.click()`); await shot('31_lesson_welcome', 1500);
     await click('Next'); await shot('32_lesson_theory', 1500);
     await click('Next'); await click('To practice'); await wait(300); await click('⚖️'); await wait(300);
-    await setVal('input[type=text]', 0, 'the thump came while I was relaxed after tea'); await click('Fits B'); await wait(200);
-    await setVal('input[type=text]', 0, 'my heart went to 160'); await click('Fits A'); await wait(200);
+    await setVal('input[type=text]', 0, 'the thump came while I was relaxed after tea'); await click('Fits Alarm'); await wait(200);
+    await setVal('input[type=text]', 0, 'my heart went to 160'); await click('Fits Danger'); await wait(200);
     await full('33_theory_game');
     await js(`[...document.querySelectorAll('button')].find(b=>b.innerText.startsWith('Save'))?.click()`); await wait(400);
     await js(`[...document.querySelectorAll('button')].find(b=>b.innerText.includes('Light the stepping'))?.click()`); await wait(600);
@@ -52,9 +52,9 @@ app.whenReady().then(async () => {
     await setVal('input[type=text]', 0, 'my hands will shake and not stop'); await click('Start'); await shot('36_bodylab_running', 1500);
     await click('I can feel it now'); await wait(300); await click('Stop here'); await wait(300); await click('Yes'); await shot('37_bodylab_rate', 500);
     await click('‹'); await wait(300); await click('‹'); await wait(400);
-    await click('Toolbox'); await wait(300); await click('Sound Garden'); await wait(300); await click('Short'); await shot('38_sound_garden', 3500);
+    await click('Toolbox'); await wait(300); await click('Listening Garden'); await wait(300); await click('Short'); await shot('38_sound_garden', 3500);
     await click('‹'); await wait(400);
-    await click('Toolbox'); await wait(300); await click('Struggle switch'); await wait(300);
+    await click('Toolbox'); await wait(300); await click('Fight switch'); await wait(300);
     await js(`[...document.querySelectorAll('.spark')].slice(0,5).forEach(b=>b.click())`); await shot('39_switch_on', 900);
     await js(`document.querySelector('.big-switch').click()`); await shot('40_switch_off', 1200);
     await click('Got it'); await wait(300);

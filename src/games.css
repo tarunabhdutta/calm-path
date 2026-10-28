@@ -50,7 +50,7 @@
 @keyframes dance { 0%, 100% { transform: rotate(-6deg) translateY(0); } 50% { transform: rotate(6deg) translateY(-8px); } }
 @keyframes wobble { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg) translateY(-2px); } }
 
-/* ═══ v1.3 games: Body Lab, Sound Garden, Theory A/B, struggle switch ═══ */
+/* ═══ v1.3 games: Body Lab, Listening Garden, two stories, fight switch ═══ */
 .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
 .lab-card { border: 2px solid var(--line); background: var(--surface); border-radius: 20px; padding: 8px 10px 12px; text-align: left; display: flex; flex-direction: column; gap: 2px; box-shadow: var(--shadow); animation: riseIn .5s both; }
 .lab-card b { font-weight: 800; }

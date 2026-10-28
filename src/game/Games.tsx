@@ -1,10 +1,10 @@
 // Interactive mini-games. Each one TEACHES a skill from the programme (never distraction):
-//  FearCycleGame  - build your own loop, then break it at the "check" link (CBT formulation)
-//  LeavesGame     - put sticky thoughts on leaves and let them float (ACT defusion)
-//  ForecastGame   - anxiety's forecast vs what really happened (exposure / expectancy violation)
+//  FearCycleGame  - build your own loop, then break it at the "check" link
+//  LeavesGame     - put sticky thoughts on leaves and let them float down the river
+//  ForecastGame   - anxiety's forecast vs what really happened
 //  LadderGame     - climb your facing-fear ladder rung by rung
-//  NotingGame     - map where an urge sits in the body and name it with curiosity (Brewer)
-//  RecipeGame     - "After I…, I will…, then I celebrate" tiny-habit recipe (Fogg)
+//  NotingGame     - map where an urge sits in the body and name it with curiosity
+//  RecipeGame     - "After I…, I will…, then I celebrate" little-habit recipe
 import { useEffect, useMemo, useState } from 'react';
 import { Back, Chips, Scale, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
@@ -111,7 +111,7 @@ export function LeavesGame({ onFinished }: { onFinished?: () => void }) {
   return (
     <div className="app">
       <Back onClick={onFinished} />
-      <h1>Leaves on the stream 🍃</h1>
+      <h1>Leaves on the river 🍃</h1>
       <p className="ink2">Thoughts are words passing through, not facts or orders. Put a sticky thought on a leaf and watch it float by. You don't have to push it away, and you don't have to follow it.</p>
       <div className="stream">
         <svg viewBox="0 0 400 150" preserveAspectRatio="none" className="stream-bg" aria-hidden>
@@ -318,10 +318,10 @@ export function RecipeGame({ onFinished }: { onFinished?: () => void }) {
   return (
     <div className="app">
       <Back onClick={onFinished} />
-      <h1>My tiny habit 🌱</h1>
-      <p className="ink2">Big changes grow from tiny habits tied to something you already do. Build your recipe.</p>
+      <h1>My little habit 🌱</h1>
+      <p className="ink2">Big changes grow from little habits tied to something you already do. Build your recipe.</p>
       <div className="card"><label className="f">1. After I…</label><Chips options={ANCHORS} value={a} onChange={setA} /></div>
-      <div className="card"><label className="f">2. I will… (tiny!)</label><Chips options={TINY} value={b} onChange={setB} /></div>
+      <div className="card"><label className="f">2. I will… (keep it small!)</label><Chips options={TINY} value={b} onChange={setB} /></div>
       <div className="card"><label className="f">3. Then I celebrate by…</label><Chips options={SHINE} value={c} onChange={setC} /></div>
       {ready ? (
         <div className={'recipe-card' + (party ? ' party' : '')}>

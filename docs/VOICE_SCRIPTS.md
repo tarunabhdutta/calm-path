@@ -1,13 +1,14 @@
-# Voice scripts (ElevenLabs or any text-to-speech), Calm Path v1.3
+# Voice scripts (text-to-speech), Calm Path
 
 **Save each finished clip, named exactly as below, into the `voice-audio/` folder of this repository**, then run `npm run build`.
 
-> **Rewritten for v1.3.**
-> - **SURGE** follows Claire Weekes's exact structure: name the first fear, notice the second, face it, go with it (not grit your teeth), float, let time pass. Then a step back into the day (McDonagh's "Engage").
-> - **Breathing** is now calm-time training only. Barlow & Craske, Harris, Hedman-Lagerlöf, Abramowitz and Bourne all warn that breathing used to stop a wave keeps the fear alive.
-> - **The urge script** uses Brewer's RAIN steps.
-> - **New clips:** Body Lab, Sound Garden, Night Guide.
+> **v1.3 scripts (updated 28 Oct 2026, v1.4 naming).**
+> - **SURGE:** name the first fear, notice the second, turn towards the feeling, go with it rather than grit your teeth, float, let time pass, then step back into the day.
+> - **Breathing** is calm-time training only, never a way to stop a wave.
+> - **The urge script:** notice, allow, explore, name.
+> - **Also:** Body Lab, Listening Garden, Night Guide.
 > - No line says "you're safe", "your heart is fine" or "it's harmless", and none promises calm.
+> - **Two wording changes since the first v1.3 scripts (re-record only these if already done): V-03 (no letters before the four steps) and V-08 (the garden is now the "Listening Garden").**
 
 ## How to produce (read once)
 
@@ -17,14 +18,14 @@
 - Avoid "meditation-guru" breathiness and anything that sounds like a news reader.
 
 **Settings (starting point):**
-- Model: **Eleven Multilingual v2**, which obeys `<break>` tags.
+- Use a multilingual neural voice model that supports `<break>` pause tags.
 - Speed **0.85–0.90**, Stability **~65%**, Similarity **~75%**, Style exaggeration **0**.
 - Output: MP3 44.1 kHz.
 
 **Pauses:**
 - `<break time="2.0s" />` gives a pause of up to 3 seconds.
 - `[SILENCE 8s]` means a longer pause. Generate the parts on either side separately and join them
-  with that much silence (Audacity or Vegas), or let the app's build join them.
+  with that much silence (any audio editor), or let the build join them.
 
 **Tone:** curious, warm, steady, slightly matter-of-fact, like a kind coach standing beside her. It
 is not pitying and not hushed.
@@ -106,18 +107,18 @@ tone for the pace; the voice gives the opening, the first few cues and the close
 
 ---
 
-## V-03_URGE_SURF.mp3 — the urge to check, RAIN (about 3 minutes)
+## V-03_URGE_SURF.mp3 — the urge to check (about 3 minutes)  ⚠ CHANGED
 
 > The pull to check is here. <break time="1.0s" /> You noticed it. <break time="0.8s" /> That is already the win. <break time="2.5s" />
 >
-> R: Recognise it. <break time="1.0s" /> Say quietly: "urge to check." <break time="3.0s" />
+> Notice it. <break time="1.0s" /> Say quietly: "urge to check." <break time="3.0s" />
 >
-> A: Allow it. <break time="1.0s" /> You don't have to push it away, <break time="0.8s" /> and you don't have to obey it. <break time="3.0s" />
+> Allow it. <break time="1.0s" /> You don't have to push it away, <break time="0.8s" /> and you don't have to obey it. <break time="3.0s" />
 >
-> I: Investigate, with curiosity. <break time="1.0s" /> Where do you feel it? <break time="1.5s" /> Your chest? <break time="1.0s" /> Your hands? <break time="1.0s" /> Your throat? <break time="2.0s" />
+> Explore it, with curiosity. <break time="1.0s" /> Where do you feel it? <break time="1.5s" /> Your chest? <break time="1.0s" /> Your hands? <break time="1.0s" /> Your throat? <break time="2.0s" />
 > What is it like: <break time="0.8s" /> tight, <break time="0.6s" /> buzzy, <break time="0.6s" /> pulling? <break time="3.0s" />
 >
-> N: Note it in a word, each time it changes. <break time="1.0s" /> "Tight." <break time="2.0s" /> "Pulling." <break time="2.0s" /> "Fading." <break time="3.0s" />
+> Name it in a word, each time it changes. <break time="1.0s" /> "Tight." <break time="2.0s" /> "Pulling." <break time="2.0s" /> "Fading." <break time="3.0s" />
 >
 > [SILENCE 20s]
 >
@@ -180,9 +181,9 @@ tone for the pace; the voice gives the opening, the first few cues and the close
 > Make it as strong as you can. <break time="0.8s" /> Keep going about thirty seconds after the feeling starts. <break time="1.0s" /> No checking, no sitting down to recover, no breathing tricks. <break time="2.0s" />
 > Then rate it, let it settle by itself, and go again. <break time="1.0s" /> Three rounds. <break time="1.0s" /> You're a scientist today.
 
-## V-08_SOUND_GARDEN.mp3 — Sound Garden intro (about 30 seconds)
+## V-08_LISTENING_GARDEN.mp3 — Listening Garden intro (about 30 seconds)  ⚠ CHANGED
 
-> Welcome to the Sound Garden. <break time="1.0s" /> Keep your eyes open, resting on one spot. <break time="1.5s" />
+> Welcome to the Listening Garden. <break time="1.0s" /> Keep your eyes open, resting on one spot. <break time="1.5s" />
 > First you'll focus on one sound at a time, then switch quickly between them, then hear them all at once. <break time="1.5s" />
 > Thoughts and feelings may come. <break time="0.8s" /> Let them, and return to the sounds. <break time="1.0s" /> This is a gym for your attention.
 

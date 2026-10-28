@@ -17,7 +17,7 @@ describe('crypto', () => {
 
 describe('progress', () => {
   it('all measures are due on a new install', () => {
-    expect(measuresDue(newData()).sort()).toEqual(['GAD7', 'PHQ9', 'WI7']);
+    expect(measuresDue(newData()).sort()).toEqual(['GAD7', 'HW7', 'PHQ9']);
   });
   it('weekly rows count surfed urges', () => {
     const d = newData();

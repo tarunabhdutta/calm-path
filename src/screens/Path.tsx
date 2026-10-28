@@ -14,7 +14,7 @@ import { LANDS } from '../game/rewards';
 import { Tulu } from '../game/Mascot';
 import { LessonArt } from '../game/LessonArt';
 import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from '../game/Games';
-import { BodyLab, SoundGarden, SwitchGame, TheoryGame } from '../game/Games2';
+import { BodyLab, ListeningGarden, SwitchGame, TheoryGame } from '../game/Games2';
 
 const PHASES = [
   { key: 'quickstart', title: 'Quick Start', sub: 'Week 1 · one a day' },
@@ -57,9 +57,9 @@ export function PathList() {
 }
 
 const GAME_LABEL: Record<string, string> = {
-  fearCycle: '🌀 Build your fear loop, then break it', leaves: '🍃 Leaves on the stream', forecast: '⛈️→☀️ The anxiety forecaster',
-  ladder: '🪜 Climb your ladder', noting: '🔍 Get curious about the feeling', recipe: '🌱 Make a tiny-habit recipe',
-  bodyLab: '🧪 The Body Lab', soundGarden: '🎧 The Sound Garden', theory: '⚖️ Theory A or B?', switch: '🔌 The struggle switch',
+  fearCycle: '🌀 Build your fear loop, then break it', leaves: '🍃 Leaves on the river', forecast: '⛈️→☀️ The anxiety forecaster',
+  ladder: '🪜 Climb your ladder', noting: '🔍 Get curious about the feeling', recipe: '🌱 Make a little-habit recipe',
+  bodyLab: '🧪 The Body Lab', listening: '🎧 The Listening Garden', theory: '⚖️ Which story fits?', switch: '🔌 The fight switch',
 };
 
 function practiceLabel(p: Practice): string {
@@ -99,7 +99,7 @@ export function SessionView({ id }: { id: string }) {
     if (p.type === 'budget') return <BudgetView week={s.week} onFinished={fin} />;
     if (p.type === 'worry-time') return <WorryTime onFinished={fin} />;
     if (p.type === 'game') {
-      const G = { fearCycle: FearCycleGame, leaves: LeavesGame, forecast: ForecastGame, ladder: LadderGame, noting: NotingGame, recipe: RecipeGame, bodyLab: BodyLab, soundGarden: SoundGarden, theory: TheoryGame, switch: SwitchGame }[p.game];
+      const G = { fearCycle: FearCycleGame, leaves: LeavesGame, forecast: ForecastGame, ladder: LadderGame, noting: NotingGame, recipe: RecipeGame, bodyLab: BodyLab, listening: ListeningGarden, theory: TheoryGame, switch: SwitchGame }[p.game];
       return <G onFinished={fin} />;
     }
   }

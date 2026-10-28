@@ -1,9 +1,9 @@
 // On-screen captions that mirror the voice scripts (docs/VOICE_SCRIPTS.md, v1.3).
 // When a clip's MP3 is bundled it plays alongside; without it, the captions alone guide her at the same pace.
 //
-// SURGE follows Weekes (first fear / second fear; face, go with it, float, let time pass), with
-// McDonagh's light reply and Engage, and Harris's observe-and-make-room. It never promises calm,
-// never says the heart is fine, and never uses the breath to push the feeling away.
+// SURGE: notice the first and second fear, turn towards the feeling, go with it, float, let time
+// pass, then step back into the day. It never promises calm, never says the heart is fine, and
+// never uses the breath to push the feeling away.
 
 export interface Line { text: string; secs: number; breath?: 'out' | 'in' }
 
@@ -36,10 +36,10 @@ export const SURGE_REPEAT: Line[] = [
 
 export const URGE_PROMPTS: { at: number; text: string }[] = [
   { at: 0, text: 'The pull to check is here. You noticed it. That is already the win.' },
-  { at: 10, text: 'R: Recognise it. Say quietly: "urge to check."' },
-  { at: 25, text: 'A: Allow it. You don\'t have to push it away, and you don\'t have to obey it.' },
-  { at: 45, text: 'I: Investigate. Where do you feel it: chest, hands, throat? What is it like: tight, buzzy, pulling?' },
-  { at: 75, text: 'N: Note it in a word, each time it changes. "Tight"… "pulling"… "fading"…' },
+  { at: 10, text: 'Notice it. Say quietly: "urge to check."' },
+  { at: 25, text: 'Allow it. You don\'t have to push it away, and you don\'t have to obey it.' },
+  { at: 45, text: 'Explore it. Where do you feel it: chest, hands, throat? What is it like: tight, buzzy, pulling?' },
+  { at: 75, text: 'Name it in a word, each time it changes. "Tight"… "pulling"… "fading"…' },
   { at: 110, text: 'If the thought says "just one quick check", answer: "Thank you, mind. I\'m surfing this one."' },
   { at: 140, text: 'Ask gently: what did the last check really give me, ten minutes later?' },
   { at: 170, text: 'Every urge you notice and ride makes the next one weaker.' },
@@ -63,7 +63,7 @@ export const AUDIO = {
   exposureStart: 'V-06E_EXPOSURE_START.mp3',
   exposureEnd: 'V-06F_EXPOSURE_END.mp3',
   lab: 'V-07_BODY_LAB.mp3',
-  garden: 'V-08_SOUND_GARDEN.mp3',
+  garden: 'V-08_LISTENING_GARDEN.mp3',
   night: 'V-09_NIGHT_GUIDE.mp3',
 } as const;
 
@@ -78,7 +78,7 @@ export const WIND_DOWN_TEXT = [
   'Sleep can\'t be forced, and it doesn\'t need to be. Resting is enough.',
 ];
 
-/** Night Guide: for waking at night (Carney & Manber; Weekes). */
+/** Night Guide: for waking at night. */
 export const NIGHT_GUIDE = [
   'Awake at night? That happens to everyone. Nothing needs to be done about it.',
   'If you are calm, stay and rest. If you are upset and wide awake for a while, get up, go to another room, and keep the light dim.',

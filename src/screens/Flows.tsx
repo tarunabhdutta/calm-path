@@ -98,7 +98,7 @@ export function Surge({ practice = false, onFinished }: { practice?: boolean; on
                     {how[0] === 'Gritting my teeth' && <p className="muted">That's fine. Letting go is learned wave by wave. Next time, try softening the shoulders and jaw a little earlier.</p>}
                     <label className="f">What helped me stay with it?</label>
                     <Chips multi options={['Letting it come', 'Naming the second fear', 'Curiosity', 'Floating', 'Letting time pass', 'Nothing yet']} value={helped} onChange={setHelped} />
-                    <label className="f">Step back into the day: what's next? (Engage)</label>
+                    <label className="f">Step back into the day: what's next?</label>
                     <Chips options={['Back to what I was doing', 'Make tea, slowly', 'A short walk', 'Call someone (not about my heart)', 'Water the plants', 'Tidy one small thing']} value={engage} onChange={setEngage} />
                     <label className="f">Anything to note? (optional)</label>
                     <input type="text" value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. after a strong tea, while resting" />

@@ -1,8 +1,8 @@
-// v1.3 games built from the book study:
-//  BodyLab      - interoceptive exposure, the Barlow & Craske protocol (gentle items open; strong items need the doctor's OK)
-//  SoundGarden  - Attention Training Technique (Wells, via Veale & Willson): focus → switch → spread
-//  TheoryGame   - Theory A vs Theory B evidence jars and belief ratings (Veale & Willson; Taylor & Asmundson)
-//  SwitchGame   - the struggle switch: clean vs dirty discomfort (Harris)
+// v1.3 games:
+//  BodyLab          - bring on body sensations on purpose (gentle items open; strong items need the doctor's OK)
+//  ListeningGarden  - attention training with island sounds: focus → switch → spread
+//  TheoryGame       - the Danger story vs the Alarm story: evidence jars and belief ratings
+//  SwitchGame       - the fight switch: the feeling itself vs the struggle we add
 import { useEffect, useRef, useState } from 'react';
 import { Back, Chips, Scale, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
@@ -171,7 +171,7 @@ export function BodyLab({ onFinished }: { onFinished?: () => void }) {
   );
 }
 
-/* ═════════════ Sound Garden (attention training) ═════════════ */
+/* ═════════════ Listening Garden (attention training) ═════════════ */
 type Src = { id: string; name: string; icon: string; pan: number; x: number; y: number };
 const SOUNDS: Src[] = [
   { id: 'river', name: 'the river', icon: '🌊', pan: -0.5, x: 22, y: 70 },
@@ -251,7 +251,7 @@ class Garden {
   stop() { if (this.timer) window.clearInterval(this.timer); this.stops.forEach((s) => s()); this.ctx.close().catch(() => {}); }
 }
 
-export function SoundGarden({ onFinished }: { onFinished?: () => void }) {
+export function ListeningGarden({ onFinished }: { onFinished?: () => void }) {
   const { update } = useStore();
   const { back } = useNav();
   const [mins, setMins] = useState<number | null>(null);
@@ -277,7 +277,7 @@ export function SoundGarden({ onFinished }: { onFinished?: () => void }) {
   const begin = (m: number) => { setMins(m); setSec(0); g.current = new Garden(); g.current.start(); };
   const finish = (r: number) => {
     setRating(r);
-    update((d) => { d.entries.soundGarden ??= []; d.entries.soundGarden.push({ id: uid(), at: new Date().toISOString(), values: { minutes: Math.round(sec / 60), selfFocus: r } }); });
+    update((d) => { d.entries.listening ??= []; d.entries.listening.push({ id: uid(), at: new Date().toISOString(), values: { minutes: Math.round(sec / 60), selfFocus: r } }); });
   };
   const ended = !!mins && sec >= total;
   const f = focus.length === 1 ? SOUNDS[focus[0]] : null;
@@ -285,7 +285,7 @@ export function SoundGarden({ onFinished }: { onFinished?: () => void }) {
   return (
     <div className="full garden-screen">
       <Back label="Close" onClick={() => { g.current?.stop(); onFinished ? onFinished() : back(); }} />
-      <h1 style={{ textAlign: 'center' }}>The Sound Garden 🎧</h1>
+      <h1 style={{ textAlign: 'center' }}>The Listening Garden 🎧</h1>
       <div className="garden-map">
         {SOUNDS.map((s, i) => (
           <div key={s.id} className={'garden-src' + (focus.includes(i) ? ' on' : '')} style={{ left: `${s.x}%`, top: `${s.y}%` }}>
@@ -327,7 +327,7 @@ export function SoundGarden({ onFinished }: { onFinished?: () => void }) {
   );
 }
 
-/* ═════════════ Theory A or B ═════════════ */
+/* ═════════════ Two stories ═════════════ */
 export function TheoryGame({ onFinished }: { onFinished?: () => void }) {
   const { data, update } = useStore();
   const { back, go } = useNav();
@@ -352,35 +352,35 @@ export function TheoryGame({ onFinished }: { onFinished?: () => void }) {
   return (
     <div className="app">
       <Back onClick={onFinished} />
-      <h1>Theory A or B? ⚖️</h1>
+      <h1>Which story fits? ⚖️</h1>
       <div className="theory-scale">
         <svg viewBox="0 0 320 150" aria-hidden>
           <rect x="157" y="40" width="6" height="96" rx="3" fill="#a07a4f" /><path d="M140 140 h40 l-6 -10 h-28z" fill="#a07a4f" />
           <g style={{ transform: `rotate(${tilt}deg)`, transformOrigin: '160px 42px', transition: 'transform .8s cubic-bezier(.3,1.4,.5,1)' }}>
             <rect x="40" y="38" width="240" height="6" rx="3" fill="#b98f5f" />
-            <g transform="translate(70 44)"><path d="M-36 0 l-12 40 h96 l-12 -40" fill="none" /><path d="M-40 40 q40 22 80 0z" fill="#f3c1cf" />{ea.slice(0, 8).map((_, i) => <circle key={i} cx={-24 + (i % 4) * 16} cy={32 - Math.floor(i / 4) * 10} r="6" fill="#ef8fb0" className="node-pop" />)}<text y="70" textAnchor="middle" fontSize="12" fontWeight="900" fill="#b0506e">A</text></g>
-            <g transform="translate(250 44)"><path d="M-40 40 q40 22 80 0z" fill="#bfe3cd" />{eb.slice(0, 8).map((_, i) => <circle key={i} cx={-24 + (i % 4) * 16} cy={32 - Math.floor(i / 4) * 10} r="6" fill="#3e8a62" className="node-pop" />)}<text y="70" textAnchor="middle" fontSize="12" fontWeight="900" fill="#2e6b4b">B</text></g>
+            <g transform="translate(70 44)"><path d="M-36 0 l-12 40 h96 l-12 -40" fill="none" /><path d="M-40 40 q40 22 80 0z" fill="#f3c1cf" />{ea.slice(0, 8).map((_, i) => <circle key={i} cx={-24 + (i % 4) * 16} cy={32 - Math.floor(i / 4) * 10} r="6" fill="#ef8fb0" className="node-pop" />)}<text y="70" textAnchor="middle" fontSize="11" fontWeight="900" fill="#b0506e">Danger</text></g>
+            <g transform="translate(250 44)"><path d="M-40 40 q40 22 80 0z" fill="#bfe3cd" />{eb.slice(0, 8).map((_, i) => <circle key={i} cx={-24 + (i % 4) * 16} cy={32 - Math.floor(i / 4) * 10} r="6" fill="#3e8a62" className="node-pop" />)}<text y="70" textAnchor="middle" fontSize="11" fontWeight="900" fill="#2e6b4b">Alarm</text></g>
           </g>
         </svg>
       </div>
       <div className="grid2">
-        <div className="card theory-a"><b>A</b><p>"Something is wrong with my heart; I must watch and check."</p><label className="f">I believe A: {a}%</label><Scale value={a} onChange={setA} max={100} step={5} /></div>
-        <div className="card theory-b"><b>B</b><p>"My alarm is sensitive; watching and checking keep it loud."</p><label className="f">I believe B: {b}%</label><Scale value={b} onChange={setB} max={100} step={5} /></div>
+        <div className="card theory-a"><b>Danger</b><p>"Something is wrong with my heart; I must watch and check."</p><label className="f">I believe it: {a}%</label><Scale value={a} onChange={setA} max={100} step={5} /></div>
+        <div className="card theory-b"><b>Alarm</b><p>"My alarm is sensitive; watching and checking keep it loud."</p><label className="f">I believe it: {b}%</label><Scale value={b} onChange={setB} max={100} step={5} /></div>
       </div>
       <div className="card">
         <label className="f">Add a piece of evidence (a fact you noticed)</label>
         <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. the thump came while I was relaxed after tea" />
-        <div className="grid2" style={{ marginTop: 10 }}><button className="btn soft" onClick={() => add('a')}>Fits A</button><button className="btn" onClick={() => add('b')}>Fits B</button></div>
-        {(ea.length > 0 || eb.length > 0) && <div className="evidence-lists"><ul className="b">{ea.map((x, i) => <li key={'a' + i} className="ev-a">A · {x}</li>)}</ul><ul className="b">{eb.map((x, i) => <li key={'b' + i} className="ev-b">B · {x}</li>)}</ul></div>}
+        <div className="grid2" style={{ marginTop: 10 }}><button className="btn soft" onClick={() => add('a')}>Fits Danger</button><button className="btn" onClick={() => add('b')}>Fits Alarm</button></div>
+        {(ea.length > 0 || eb.length > 0) && <div className="evidence-lists"><ul className="b">{ea.map((x, i) => <li key={'a' + i} className="ev-a">Danger · {x}</li>)}</ul><ul className="b">{eb.map((x, i) => <li key={'b' + i} className="ev-b">Alarm · {x}</li>)}</ul></div>}
       </div>
-      {hist.length > 0 && <p className="muted">Your ratings over time: {hist.slice(-6).map((h) => `A ${h.a} / B ${h.b}`).join(' → ')}</p>}
-      <p className="muted">You don't need to believe B to test it. Act as if B were true for ten weeks, and let the evidence decide.</p>
+      {hist.length > 0 && <p className="muted">Your ratings over time: {hist.slice(-6).map((h) => `Danger ${h.a} / Alarm ${h.b}`).join(' → ')}</p>}
+      <p className="muted">You don't need to believe the Alarm story to test it. Act as if it were true for ten weeks, and let the evidence decide.</p>
       {doneBtn('Save · +3 💧', save)}
     </div>
   );
 }
 
-/* ═════════════ The struggle switch ═════════════ */
+/* ═════════════ The fight switch ═════════════ */
 const SPARKS = ['check the watch', 'Google it', 'ask "am I OK?"', 'brace & tense', '"what if this time…"', 'avoid the stairs'];
 
 export function SwitchGame({ onFinished }: { onFinished?: () => void }) {
@@ -392,16 +392,16 @@ export function SwitchGame({ onFinished }: { onFinished?: () => void }) {
   return (
     <div className="app">
       <Back onClick={onFinished} />
-      <h1>The struggle switch 🔌</h1>
-      <p className="ink2">Clean discomfort is the feeling itself. Dirty discomfort is everything we add by fighting it. Tap the sparks to see the fighting pile up, then flip the switch.</p>
+      <h1>The fight switch 🔌</h1>
+      <p className="ink2">There is the feeling itself, and there is everything we add by fighting it. Tap the sparks to see the fighting pile up, then flip the switch.</p>
       <div className="switch-stage">
         <div className="meter">
-          <div className="meter-clean"><span>clean</span></div>
-          <div className="meter-dirty" style={{ height: `${dirty * 0.72}%` }}><span>{dirty > 10 ? 'added struggle' : ''}</span></div>
+          <div className="meter-clean"><span>feeling</span></div>
+          <div className="meter-dirty" style={{ height: `${dirty * 0.72}%` }}><span>{dirty > 10 ? 'added fight' : ''}</span></div>
         </div>
         <div className="switch-side">
           <button className={'big-switch' + (on ? ' on' : ' off')} onClick={() => { setOn(!on); if (on) update((d) => { d.persistent.switchPractice = { at: new Date().toISOString() }; }); }} aria-pressed={on}>
-            <span className="knob" /><b>{on ? 'STRUGGLE ON' : 'OFF'}</b>
+            <span className="knob" /><b>{on ? 'FIGHTING' : 'OFF'}</b>
           </button>
           <div className="spark-row">
             {SPARKS.map((s, i) => (

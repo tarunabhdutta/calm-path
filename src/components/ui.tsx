@@ -9,7 +9,7 @@ export type Route =
   | { name: 'measure'; id: string } | { name: 'budget' } | { name: 'logs'; formId: string }
   | { name: 'game'; id: GameId; task?: string } | { name: 'family' } | { name: 'hospital' };
 
-export type GameId = 'fearCycle' | 'leaves' | 'forecast' | 'ladder' | 'noting' | 'recipe' | 'bodyLab' | 'soundGarden' | 'theory' | 'switch';
+export type GameId = 'fearCycle' | 'leaves' | 'forecast' | 'ladder' | 'noting' | 'recipe' | 'bodyLab' | 'listening' | 'theory' | 'switch';
 
 interface Nav { route: Route; go: (r: Route) => void; back: () => void; toast: (t: string) => void }
 const NavC = createContext<Nav>(null as unknown as Nav);

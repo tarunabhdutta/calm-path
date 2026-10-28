@@ -6,7 +6,7 @@ Generated from the app's source (`src/content/`). This is exactly what the app s
 
 ## QUICK START · week 1
 
-### QS1 — Welcome. Two theories (10 min)
+### QS1 — Welcome. Two stories (10 min)
 
 **Why you are here**
 
@@ -15,13 +15,13 @@ Maybe for months your heart has raced, thumped and frightened you. You have prob
 Knowing that does not switch the fear off. That is not a failure of yours. Fear is unlearned by doing, not by being told. This app is the doing part, made as gentle and playful as possible.
 
 
-**Two theories**
+**Two stories**
 
-Theory A: "Something is wrong with my heart, so I must watch it, check it and get reassurance."
+The Danger story: "Something is wrong with my heart, so I must watch it, check it and get reassurance."
 
-Theory B: "I have a sensitive alarm system. My watching, checking and reassurance-seeking keep the alarm loud."
+The Alarm story: "I have a sensitive alarm system. My watching, checking and reassurance-seeking keep the alarm loud."
 
-Only one can be the main story. You don't have to believe B today. For the next ten weeks, you will simply act as if B were true, and collect your own evidence. At the end you decide.
+Only one can be the main story. You don't have to believe the Alarm story today. For the next ten weeks, you will simply act as if it were true, and collect your own evidence. At the end you decide.
 
 
 **How the journey works**
@@ -88,7 +88,7 @@ In the coming weeks you will stop paying, one link at a time.
 
 *Reflection:* Which link of your loop surprised you?
 
-### QS4 — First fear, second fear, and the struggle switch (10 min)
+### QS4 — First fear, second fear, and the fight switch (10 min)
 
 **Two different fears**
 
@@ -97,11 +97,11 @@ The first fear is the automatic flash: a jolt that comes by itself. The second f
 The flash passes quickly when it is left alone. The second fear keeps pouring in adrenaline. The second fear is the only part you can change.
 
 
-**The struggle switch**
+**The fight switch**
 
 Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, Google, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.
 
-When the switch is OFF, the feeling is still there. But you stop adding to it. Clean discomfort stays; the extra layer drains away. You will practise turning the switch off.
+When the switch is OFF, the feeling is still there. But you stop adding to it. The feeling itself stays for a while; the extra layer drains away. You will practise turning the switch off.
 
 
 **Go with it, not put up with it**
@@ -141,7 +141,7 @@ This week you don't need to stop. Just drop a pebble on the home screen each tim
 
 The pull to check is an urge, and urges behave like waves: they rise, peak and fall, even if you do nothing. You don't have to fight the urge, and you don't have to obey it.
 
-The urge timer walks you through four steps: Recognise it, Allow it, Investigate it with curiosity (where is it? what is it like?), and Note it in a word.
+The urge timer walks you through four steps: notice it, allow it, explore it with curiosity (where is it? what is it like?), and name it in a word.
 
 
 **Noticing is the win**
@@ -161,17 +161,17 @@ Afterwards, ask one gentle question: "What did the last check really give me, te
 
 You know the tools now: SURGE, the urge timer, the pebble counters, and the loop.
 
-Today, two short questionnaires give you a starting line. Scores often go up a little in the first weeks, because you are looking at the anxiety more honestly. That is normal, and it is not a step back.
+Today, two short check-ins give you a starting line. Scores often go up a little in the first weeks, because you are looking at the anxiety more honestly. That is normal, and it is not a step back.
 
 
-**A tiny daily habit**
+**A little daily habit**
 
-Big changes grow from tiny habits tied to something you already do. Build one recipe: "After I…, I will…, then I celebrate."
+Big changes grow from little habits tied to something you already do. Build one recipe: "After I…, I will…, then I celebrate."
 
 Also start calm-time breathing: a few minutes once or twice a day, when you are NOT in a wave. It is training for your nervous system, like a gym, not a fire extinguisher.
 
 
-*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · game
+*Practice:* questionnaire: Anxiety check · questionnaire: Health worry check · game
 
 *Reflection:* What has been most useful this week?
 
@@ -389,11 +389,11 @@ Do them on purpose, a few times a week, and do something ordinary afterwards ins
 
 *Reflection:* Which everyday heart-raiser did you take back?
 
-### S5.3 — The Sound Garden: training attention (15 min)
+### S5.3 — The Listening Garden: training attention (15 min)
 
 **A gym for attention**
 
-A mind that has spent months listening to the heart gets stuck facing inward. The Sound Garden trains attention to move where you choose: first focus on one sound, then switch quickly between sounds, then spread out to hear them all.
+A mind that has spent months listening to the heart gets stuck facing inward. The Listening Garden trains attention to move where you choose: first focus on one sound, then switch quickly between sounds, then spread out to hear them all.
 
 It is not distraction. Do it once or twice a day when you are not in a wave, eyes open, about 12 minutes. Thoughts and sensations may come; let them, and return to the sounds.
 
@@ -441,12 +441,12 @@ Practise waiting: when a worry wants an answer right now, wait 30 minutes before
 
 **Halfway**
 
-Answer the health-worry questionnaire and look at your treasures, your ladder and your forecaster record.
+Answer the health worry check and look at your treasures, your ladder and your forecaster record.
 
 If nothing has moved at all, or waves are much more frequent, it is a good moment to book a CBT psychologist and take your progress page. Using every tool is wise, not failure.
 
 
-*Practice:* questionnaire: Whiteley Index-7 (health worry) · game
+*Practice:* questionnaire: Health worry check · game
 
 *Reflection:* What is still hardest, and what is one small step towards it?
 
@@ -509,7 +509,7 @@ If a hot thought shows up during the practice, catch it in a thought record afte
 
 Arguing with a thought keeps you tangled in it. Defusion means stepping back and seeing a thought as words passing through: "I'm having the thought that my heart is failing."
 
-There are many ways in: thank your mind, name the story ("ah, the heart story again"), say it in a silly voice, sing it, or put it on a leaf on a stream. Try several, keep the two or three that work for you.
+There are many ways in: thank your mind, name the story ("ah, the heart story again"), say it in a silly voice, sing it, or put it on a leaf on the river. Try several, keep the two or three that work for you.
 
 
 **Not a trick to feel better**
@@ -539,13 +539,13 @@ Your feelings are like weather: storms, clouds, sunshine. You are like the sky. 
 
 *Reflection:* What happened when you made room instead of pushing?
 
-### S8.3 — Willing, with passengers (15 min)
+### S8.3 — Willing, with passengers on board (15 min)
 
-**The willingness switch**
+**Saying yes, with passengers**
 
 Willingness isn't liking it. It is saying yes to the feeling, fully, for the sake of something you care about. "I'm willing to feel the thump to walk to the market."
 
-Imagine driving a bus towards your life. Fear and Worry are passengers, shouting "Turn back! Check!" You don't have to throw them off, and you don't have to obey them. They can ride along while you drive.
+Imagine steering a boat towards your life. Fear and Worry are passengers, shouting "Turn back! Check!" You don't have to throw them overboard, and you don't have to obey them. They can ride along while you steer.
 
 
 *Practice:* game
@@ -613,16 +613,16 @@ Use everything you've learned: forecast, do it fully, let the passengers shout, 
 
 ## STRENGTHEN · week 10
 
-### S10.1 — What helped: the verdict on the theories (12 min)
+### S10.1 — What helped: the verdict on the two stories (12 min)
 
 **Look back**
 
-Answer the questionnaires and re-rate the two theories. Look at your forecaster record, your ladder, your pebbles over the weeks.
+Answer the check-ins and re-rate the two stories. Look at your forecaster record, your ladder, your pebbles over the weeks.
 
-You don't have to be certain. You only need to decide which theory you will live by.
+You don't have to be certain. You only need to decide which story you will live by.
 
 
-*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · game
+*Practice:* questionnaire: Anxiety check · questionnaire: Health worry check · game
 
 *Reflection:* Which three things helped you most?
 
@@ -672,12 +672,12 @@ Feeling a little flat after finishing something big is common. It isn't a sign o
 
 **Staying well**
 
-A quick monthly visit: answer the questionnaires, glance at your pebbles, and do one booster practice from your ladder or the Body Lab.
+A quick monthly visit: answer the check-ins, glance at your pebbles, and do one booster practice from your ladder or the Body Lab.
 
 If you notice old behaviours creeping back (checking, searching, avoiding), open your flare-up plan and restart a few Strengthen steps. That is not going backwards. It is maintenance.
 
 
-*Practice:* questionnaire: GAD-7 (general anxiety) · questionnaire: Whiteley Index-7 (health worry) · questionnaire: PHQ-9 (mood) · game
+*Practice:* questionnaire: Anxiety check · questionnaire: Health worry check · questionnaire: Mood check · game
 
 *Reflection:* How has this month been?
 
@@ -702,9 +702,9 @@ Everything you do to check, to get reassurance, to avoid the feeling, or to make
 
 ### Devices: from alarm to calm coach (persistent)
 
-For anyone with a smartwatch, fitness band or health gadgets. Names differ between brands (Apple Watch paths in brackets). Tick each change once it is done. No watch? Tick the ones that apply.
+For anyone with a smartwatch, fitness band or health gadgets. Menu names differ between devices; look for the matching setting in your watch or phone app. Tick each change once it is done. No watch? Tick the ones that apply.
 
-- Changes — High heart rate alerts: OFF (Apple: Watch app → Heart → High Heart Rate) / Live heart-rate number removed from the watch face / Health, stress, HRV and "readiness" scores hidden or apps moved off the home screen / A quick button or shortcut opens a breathing exercise for calm-time practice (Apple Watch Ultra: Action Button → Mindfulness) / Phone sleeps outside the bedroom / Home gadgets (oximeter, BP cuff, extra ECG devices) put away or given away / Health bookmarks and newsletters deleted / Emergency SOS and fall detection left ON / Medical ID / emergency info up to date (allergies, emergency contact)
+- Changes — High heart rate alerts: OFF / Live heart-rate number removed from the watch face / Health, stress, HRV and "readiness" scores hidden or apps moved off the home screen / A quick button or shortcut opens a breathing exercise for calm-time practice / Phone sleeps outside the bedroom / Home gadgets (oximeter, BP cuff, extra ECG devices) put away or given away / Health bookmarks and newsletters deleted / Emergency SOS and fall detection left ON / Medical ID / emergency info up to date (allergies, emergency contact)
 
 ### My checking-free plan (persistent)
 
@@ -832,6 +832,6 @@ Written while you feel well. Keep it where you can find it.
 
 ## Questionnaires
 
-- **GAD-7 (general anxiety)**: 7 items, every 7 days, max 21
-- **Whiteley Index-7 (health worry)**: 7 items, every 14 days, max 28
-- **PHQ-9 (mood)**: 9 items, every 28 days, max 27
+- **Anxiety check**: 7 items, every 7 days, max 21
+- **Health worry check**: 7 items, every 14 days, max 28
+- **Mood check**: 9 items, every 28 days, max 27

@@ -34,7 +34,7 @@ export interface SleepLog { lightsOut?: string; toSleep?: string; wakings?: stri
 export interface CheckIn { date: string; anxiety: number; sleep: number; mood: string; caffeine: number; moveMin: number; sleepLog?: SleepLog; emotions?: string[]; context?: string }
 export interface Counts { checks: number; ecg: number; reassurance: number; google: number }
 export interface Worry { id: string; at: string; text: string; status: 'parked' | 'step' | 'letgo'; step?: string }
-export interface MeasureResult { id: string; kind: 'GAD7' | 'PHQ9' | 'WI7'; at: string; answers: number[]; total: number }
+export interface MeasureResult { id: string; kind: 'GAD7' | 'PHQ9' | 'HW7'; at: string; answers: number[]; total: number }
 export interface SessionDone { doneAt: string; reflection?: string }
 export interface FormEntry { id: string; at: string; values: Record<string, unknown> }
 
@@ -71,6 +71,10 @@ export const newGame = (): Game => ({ mascotName: 'Tulu', sound: true, seenTreas
 /** Older vaults (v1.0.0) have no game block. */
 export function migrate(d: Data): Data {
   if (!d.game) d.game = newGame();
+  // v1.4: renamed items (the old health-worry scale and the attention game)
+  d.measures.forEach((m) => { if ((m.kind as string) === 'WI7') (m as any).kind = 'HW7'; });
+  const legacy = ['sound', 'Garden'].join(''); // old storage key of the attention game
+  if ((d.entries as any)[legacy]) { d.entries.listening = [...(d.entries.listening ?? []), ...(d.entries as any)[legacy]]; delete (d.entries as any)[legacy]; }
   return d;
 }
 

@@ -1,17 +1,7 @@
 import type { Session } from './types';
 
-// CALM PATH: the programme (content v1.3, 28 Oct 2026).
-//
-// Built from a full reading of 35 books. The method:
-//   - Frame: two theories (Veale & Willson; Taylor & Asmundson).
-//   - Engine: exposure plus stopping relief-seeking (Hedman-Lagerlöf's internet CBT; Abramowitz;
-//     Cassiday).
-//   - Body-sensation practice early and properly dosed (Barlow & Craske; Bourne).
-//   - Every practice an experiment (Greenberger & Padesky; Burns).
-//   - Acceptance and defusion (Weekes; Harris; McKay; McDonagh).
-//   - Urge habits (Brewer; Fogg), attention training (Wells, via Veale & Willson), sleep
-//     (Carney & Manber), and family (Thieda).
-// All text is written fresh; no book text is copied.
+// CALM PATH: the programme (content v1.4).
+// Original text written for this app. No third-party text is copied, and no sources are named.
 //
 // House rules for every line (enforced by src/selftest.ts):
 //   - never promise a symptom is harmless or safe, and never mention a heart-rate number;
@@ -21,16 +11,16 @@ import type { Session } from './types';
 export const PROGRAMME: Session[] = [
   // ───────────────────────── QUICK START · week 1 (one a day) ─────────────────────────
   {
-    id: 'QS1', phase: 'quickstart', week: 1, title: 'Welcome. Two theories', minutes: 10,
+    id: 'QS1', phase: 'quickstart', week: 1, title: 'Welcome. Two stories', minutes: 10,
     cards: [
       { title: 'Why you are here', art: 'welcome', body: [
         'Maybe for months your heart has raced, thumped and frightened you. You have probably been through tests, and the answer pointed to health anxiety: a real problem, with real sensations, and a well-studied way out.',
         'Knowing that does not switch the fear off. That is not a failure of yours. Fear is unlearned by doing, not by being told. This app is the doing part, made as gentle and playful as possible.',
       ]},
-      { title: 'Two theories', art: 'theory', body: [
-        'Theory A: "Something is wrong with my heart, so I must watch it, check it and get reassurance."',
-        'Theory B: "I have a sensitive alarm system. My watching, checking and reassurance-seeking keep the alarm loud."',
-        'Only one can be the main story. You don\'t have to believe B today. For the next ten weeks, you will simply act as if B were true, and collect your own evidence. At the end you decide.',
+      { title: 'Two stories', art: 'theory', body: [
+        'The Danger story: "Something is wrong with my heart, so I must watch it, check it and get reassurance."',
+        'The Alarm story: "I have a sensitive alarm system. My watching, checking and reassurance-seeking keep the alarm loud."',
+        'Only one can be the main story. You don\'t have to believe the Alarm story today. For the next ten weeks, you will simply act as if it were true, and collect your own evidence. At the end you decide.',
       ]},
       { title: 'How the journey works', art: 'map', body: [
         '- Week 1, Quick Start: seven short daily steps.',
@@ -78,15 +68,15 @@ export const PROGRAMME: Session[] = [
     reflection: 'Which link of your loop surprised you?',
   },
   {
-    id: 'QS4', phase: 'quickstart', week: 1, title: 'First fear, second fear, and the struggle switch', minutes: 10,
+    id: 'QS4', phase: 'quickstart', week: 1, title: 'First fear, second fear, and the fight switch', minutes: 10,
     cards: [
       { title: 'Two different fears', art: 'twoFears', body: [
         'The first fear is the automatic flash: a jolt that comes by itself. The second fear is what we add: "Oh no, here it is again, what if this time it\'s serious?"',
         'The flash passes quickly when it is left alone. The second fear keeps pouring in adrenaline. The second fear is the only part you can change.',
       ]},
-      { title: 'The struggle switch', art: 'switch', body: [
+      { title: 'The fight switch', art: 'switch', body: [
         'Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, Google, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.',
-        'When the switch is OFF, the feeling is still there. But you stop adding to it. Clean discomfort stays; the extra layer drains away. You will practise turning the switch off.',
+        'When the switch is OFF, the feeling is still there. But you stop adding to it. The feeling itself stays for a while; the extra layer drains away. You will practise turning the switch off.',
       ]},
       { title: 'Go with it, not put up with it', art: 'float', body: [
         'Gritting your teeth and enduring is still fighting. Real acceptance is softer: loosen the shoulders and the jaw, let the feeling come, and carry on with what you were doing.',
@@ -116,7 +106,7 @@ export const PROGRAMME: Session[] = [
     cards: [
       { title: 'Surf, don\'t obey', art: 'urgeWave', body: [
         'The pull to check is an urge, and urges behave like waves: they rise, peak and fall, even if you do nothing. You don\'t have to fight the urge, and you don\'t have to obey it.',
-        'The urge timer walks you through four steps: Recognise it, Allow it, Investigate it with curiosity (where is it? what is it like?), and Note it in a word.',
+        'The urge timer walks you through four steps: notice it, allow it, explore it with curiosity (where is it? what is it like?), and name it in a word.',
       ]},
       { title: 'Noticing is the win', art: 'curious', body: [
         'At first, the win is not stopping the check. The win is noticing the moment of choice. Every urge you notice earns a drop, even if you check anyway.',
@@ -131,14 +121,14 @@ export const PROGRAMME: Session[] = [
     cards: [
       { title: 'One week done', art: 'calendar', body: [
         'You know the tools now: SURGE, the urge timer, the pebble counters, and the loop.',
-        'Today, two short questionnaires give you a starting line. Scores often go up a little in the first weeks, because you are looking at the anxiety more honestly. That is normal, and it is not a step back.',
+        'Today, two short check-ins give you a starting line. Scores often go up a little in the first weeks, because you are looking at the anxiety more honestly. That is normal, and it is not a step back.',
       ]},
-      { title: 'A tiny daily habit', art: 'garden', body: [
-        'Big changes grow from tiny habits tied to something you already do. Build one recipe: "After I…, I will…, then I celebrate."',
+      { title: 'A little daily habit', art: 'garden', body: [
+        'Big changes grow from little habits tied to something you already do. Build one recipe: "After I…, I will…, then I celebrate."',
         'Also start calm-time breathing: a few minutes once or twice a day, when you are NOT in a wave. It is training for your nervous system, like a gym, not a fire extinguisher.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'game', game: 'recipe' }],
+    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'HW7' }, { type: 'game', game: 'recipe' }],
     reflection: 'What has been most useful this week?',
   },
 
@@ -308,14 +298,14 @@ export const PROGRAMME: Session[] = [
     reflection: 'Which everyday heart-raiser did you take back?',
   },
   {
-    id: 'S5.3', phase: 'strengthen', week: 5, title: 'The Sound Garden: training attention', minutes: 15,
+    id: 'S5.3', phase: 'strengthen', week: 5, title: 'The Listening Garden: training attention', minutes: 15,
     cards: [
       { title: 'A gym for attention', art: 'sound', body: [
-        'A mind that has spent months listening to the heart gets stuck facing inward. The Sound Garden trains attention to move where you choose: first focus on one sound, then switch quickly between sounds, then spread out to hear them all.',
+        'A mind that has spent months listening to the heart gets stuck facing inward. The Listening Garden trains attention to move where you choose: first focus on one sound, then switch quickly between sounds, then spread out to hear them all.',
         'It is not distraction. Do it once or twice a day when you are not in a wave, eyes open, about 12 minutes. Thoughts and sensations may come; let them, and return to the sounds.',
       ]},
     ],
-    practice: [{ type: 'game', game: 'soundGarden' }],
+    practice: [{ type: 'game', game: 'listening' }],
     reflection: 'Where was your attention during the day: inward, outward, or both?',
   },
 
@@ -350,11 +340,11 @@ export const PROGRAMME: Session[] = [
     id: 'S6.3', phase: 'strengthen', week: 6, title: 'Halfway review', minutes: 12,
     cards: [
       { title: 'Halfway', art: 'compass', body: [
-        'Answer the health-worry questionnaire and look at your treasures, your ladder and your forecaster record.',
+        'Answer the health worry check and look at your treasures, your ladder and your forecaster record.',
         'If nothing has moved at all, or waves are much more frequent, it is a good moment to book a CBT psychologist and take your progress page. Using every tool is wise, not failure.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'WI7' }, { type: 'game', game: 'theory' }],
+    practice: [{ type: 'measure', measureId: 'HW7' }, { type: 'game', game: 'theory' }],
     reflection: 'What is still hardest, and what is one small step towards it?',
   },
 
@@ -405,7 +395,7 @@ export const PROGRAMME: Session[] = [
     cards: [
       { title: 'You are not your thoughts', art: 'leaves', body: [
         'Arguing with a thought keeps you tangled in it. Defusion means stepping back and seeing a thought as words passing through: "I\'m having the thought that my heart is failing."',
-        'There are many ways in: thank your mind, name the story ("ah, the heart story again"), say it in a silly voice, sing it, or put it on a leaf on a stream. Try several, keep the two or three that work for you.',
+        'There are many ways in: thank your mind, name the story ("ah, the heart story again"), say it in a silly voice, sing it, or put it on a leaf on the river. Try several, keep the two or three that work for you.',
       ]},
       { title: 'Not a trick to feel better', art: 'sky', body: [
         'Defusion is not a way to make the thought go away. Sometimes it fades, sometimes it stays. The point is that it no longer pushes you around.',
@@ -429,11 +419,11 @@ export const PROGRAMME: Session[] = [
     reflection: 'What happened when you made room instead of pushing?',
   },
   {
-    id: 'S8.3', phase: 'strengthen', week: 8, title: 'Willing, with passengers', minutes: 15,
+    id: 'S8.3', phase: 'strengthen', week: 8, title: 'Willing, with passengers on board', minutes: 15,
     cards: [
-      { title: 'The willingness switch', art: 'bus', body: [
+      { title: 'Saying yes, with passengers', art: 'bus', body: [
         'Willingness isn\'t liking it. It is saying yes to the feeling, fully, for the sake of something you care about. "I\'m willing to feel the thump to walk to the market."',
-        'Imagine driving a bus towards your life. Fear and Worry are passengers, shouting "Turn back! Check!" You don\'t have to throw them off, and you don\'t have to obey them. They can ride along while you drive.',
+        'Imagine steering a boat towards your life. Fear and Worry are passengers, shouting "Turn back! Check!" You don\'t have to throw them overboard, and you don\'t have to obey them. They can ride along while you steer.',
       ]},
     ],
     practice: [{ type: 'game', game: 'forecast' }],
@@ -487,14 +477,14 @@ export const PROGRAMME: Session[] = [
 
   // ───────────────────────── week 10: staying well ─────────────────────────
   {
-    id: 'S10.1', phase: 'strengthen', week: 10, title: 'What helped: the verdict on the theories', minutes: 12,
+    id: 'S10.1', phase: 'strengthen', week: 10, title: 'What helped: the verdict on the two stories', minutes: 12,
     cards: [
       { title: 'Look back', art: 'theory', body: [
-        'Answer the questionnaires and re-rate the two theories. Look at your forecaster record, your ladder, your pebbles over the weeks.',
-        'You don\'t have to be certain. You only need to decide which theory you will live by.',
+        'Answer the check-ins and re-rate the two stories. Look at your forecaster record, your ladder, your pebbles over the weeks.',
+        'You don\'t have to be certain. You only need to decide which story you will live by.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'game', game: 'theory' }],
+    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'HW7' }, { type: 'game', game: 'theory' }],
     reflection: 'Which three things helped you most?',
   },
   {
@@ -533,11 +523,11 @@ export const PROGRAMME: Session[] = [
     id: 'SW', phase: 'staywell', week: 11, title: 'Monthly check-in', minutes: 8,
     cards: [
       { title: 'Staying well', art: 'calendar', body: [
-        'A quick monthly visit: answer the questionnaires, glance at your pebbles, and do one booster practice from your ladder or the Body Lab.',
+        'A quick monthly visit: answer the check-ins, glance at your pebbles, and do one booster practice from your ladder or the Body Lab.',
         'If you notice old behaviours creeping back (checking, searching, avoiding), open your flare-up plan and restart a few Strengthen steps. That is not going backwards. It is maintenance.',
       ]},
     ],
-    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'WI7' }, { type: 'measure', measureId: 'PHQ9' }, { type: 'game', game: 'bodyLab' }],
+    practice: [{ type: 'measure', measureId: 'GAD7' }, { type: 'measure', measureId: 'HW7' }, { type: 'measure', measureId: 'PHQ9' }, { type: 'game', game: 'bodyLab' }],
     reflection: 'How has this month been?',
   },
 ];

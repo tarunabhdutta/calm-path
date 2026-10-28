@@ -1,5 +1,4 @@
-// For family & friends (Thieda; Cassiday; Barlow & Craske; Veale & Willson; Bourne):
-// validate, don't reassure; support practice; look after yourself.
+// For family & friends: validate, don't reassure; support practice; look after yourself.
 // And the "urge to go to hospital" card: red flags first, never discourages a real emergency.
 import { useState } from 'react';
 import { Back, Body, useNav } from '../components/ui';
@@ -14,11 +13,11 @@ const SECTIONS: { title: string; art: ArtId; body: string[] }[] = [
     'Answering "Is my heart OK?", even lovingly, feeds the fear. The relief lasts minutes, and the question comes back hungrier. The kindest help is warmth without the answer.',
     'Say: "I can see you\'re scared. I\'m right here. We agreed I won\'t answer the heart question. Let\'s do the steps together." Then stop. No facts, no "you\'re fine", no checking her pulse for her.',
   ]},
-  { title: 'In a wave: CARE', art: 'float', body: [
-    '- Calm: your calm is part of the treatment. Slow voice, short sentences.',
-    '- Acknowledge: "This is really hard right now."',
-    '- Remind her of the plan: "Shall we press SURGE together?"',
-    '- Encourage her to stay, and to step back into the day afterwards.',
+  { title: 'In a wave: four steps', art: 'float', body: [
+    '- Stay calm: your calm is part of the help. Slow voice, short sentences.',
+    '- Name it kindly: "This is really hard right now."',
+    '- Point to the plan: "Shall we press SURGE together?"',
+    '- Encourage staying with it, and stepping back into the day afterwards.',
     'Don\'t say "fight it", "pull yourself together" or "just relax". Do say "let it come, go with it".',
   ]},
   { title: 'Things not to do', art: 'hook', body: [

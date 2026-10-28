@@ -33,15 +33,15 @@ export const FORMS: Record<string, FormDef> = {
     id: 'watchSetup',
     title: 'Devices: from alarm to calm coach',
     kind: 'persistent',
-    intro: 'For anyone with a smartwatch, fitness band or health gadgets. Names differ between brands (Apple Watch paths in brackets). Tick each change once it is done. No watch? Tick the ones that apply.',
+    intro: 'For anyone with a smartwatch, fitness band or health gadgets. Menu names differ between devices; look for the matching setting in your watch or phone app. Tick each change once it is done. No watch? Tick the ones that apply.',
     fields: [
       {
         id: 'steps', label: 'Changes', type: 'checklist',
         options: [
-          'High heart rate alerts: OFF (Apple: Watch app → Heart → High Heart Rate)',
+          'High heart rate alerts: OFF',
           'Live heart-rate number removed from the watch face',
           'Health, stress, HRV and "readiness" scores hidden or apps moved off the home screen',
-          'A quick button or shortcut opens a breathing exercise for calm-time practice (Apple Watch Ultra: Action Button → Mindfulness)',
+          'A quick button or shortcut opens a breathing exercise for calm-time practice',
           'Phone sleeps outside the bedroom',
           'Home gadgets (oximeter, BP cuff, extra ECG devices) put away or given away',
           'Health bookmarks and newsletters deleted',

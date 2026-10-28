@@ -2,8 +2,8 @@
   "name": "calm-path",
   "productName": "Calm Path",
   "private": true,
-  "version": "1.3.0",
-  "description": "Calm Path - a free, offline, playful companion for recovering from health anxiety",
+  "version": "1.4.0",
+  "description": "Calm Path: an offline, playful companion for recovering from health anxiety",
   "author": "Tarunabh Dutta",
   "type": "module",
   "main": "electron/main.cjs",
@@ -89,6 +89,6 @@
       "artifactName": "Calm-Path-Setup-${version}.exe"
     }
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "repository": "https://github.com/tarunabhdutta/calm-path"
 }

@@ -64,7 +64,7 @@ export interface Session {
   gentleAlternative?: Practice[];
 }
 
-export type MeasureId = 'GAD7' | 'PHQ9' | 'WI7';
+export type MeasureId = 'GAD7' | 'PHQ9' | 'HW7';
 
 export interface Measure {
   id: MeasureId;
