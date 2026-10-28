@@ -99,7 +99,7 @@ The flash passes quickly when it is left alone. The second fear keeps pouring in
 
 **The fight switch**
 
-Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, Google, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.
+Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, search online, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.
 
 When the switch is OFF, the feeling is still there. But you stop adding to it. The feeling itself stays for a while; the extra layer drains away. You will practise turning the switch off.
 
@@ -119,7 +119,7 @@ A test: can the thump be there while you keep reading this sentence? Then you ar
 
 **The relief trap**
 
-Looking at the watch, taking an ECG, feeling the pulse, Googling, asking "am I OK?": each brings a few minutes of relief. And the relief is the trap.
+Looking at the watch, taking an ECG, feeling the pulse, searching online, asking "am I OK?": each brings a few minutes of relief. And the relief is the trap.
 
 Relief teaches the brain two things: that the sensation was dangerous, and that you were safe only because you checked. So the next sensation feels more urgent, and the next check is needed sooner.
 
@@ -183,7 +183,7 @@ Also start calm-time breathing: a few minutes once or twice a day, when you are 
 
 Safety behaviours are the things we do to prevent, check on or escape a feared outcome. They feel protective, but they rob the brain of the chance to learn that the feared thing doesn't come.
 
-Some are obvious: the watch, the pulse, the ECG, Googling, asking. Some hide: avoiding stairs, keeping the phone close, sitting down at the first flutter, avoiding coffee or heat, scanning the body, counting, replaying reassurance in your head, staying busy so you never feel it.
+Some are obvious: the watch, the pulse, the ECG, searching online, asking. Some hide: avoiding stairs, keeping the phone close, sitting down at the first flutter, avoiding coffee or heat, scanning the body, counting, replaying reassurance in your head, staying busy so you never feel it.
 
 
 **Body "hacks" count too**
@@ -219,7 +219,7 @@ A home pulse oximeter, a blood-pressure cuff you would never own if you weren't 
 
 **One source at a time**
 
-Stopping everything at once is very hard. Instead, make a plan for each source: watch, pulse, ECG, gadgets, Googling, asking someone, scanning the body. For each one, choose stop, cap ("once a day, not at night") or delay ("wait 30 minutes"), and keep the rule the same on good and bad days.
+Stopping everything at once is very hard. Instead, make a plan for each source: watch, pulse, ECG, gadgets, searching online, asking someone, scanning the body. For each one, choose stop, cap ("once a day, not at night") or delay ("wait 30 minutes"), and keep the rule the same on good and bad days.
 
 The destination is no checking at all. Each week, tighten one rule.
 
@@ -257,7 +257,7 @@ This is a team plan, not a rejection. They are not saying no to you. You are bot
 
 *Reflection:* How did it feel to make this plan together?
 
-### S3.2 — Doctor Google and real doctors (12 min)
+### S3.2 — Searching online and real doctors (12 min)
 
 **More information is not more certainty**
 
@@ -632,7 +632,7 @@ You don't have to be certain. You only need to decide which story you will live 
 
 Waves may visit again: after a stressful week, an illness, poor sleep, a hormonal change. A flare-up is a flat tyre, not a return to the start. You have the tools now, and the second time is usually shorter.
 
-Warning signs are things you DO, not things you feel: checking again, Googling, asking, avoiding, dropping practice.
+Warning signs are things you DO, not things you feel: checking again, searching online, asking, avoiding, dropping practice.
 
 
 **Write it while you are well**
@@ -713,7 +713,7 @@ One line per source. Choose STOP, CAP ("once a day, never at night") or DELAY ("
 - ⌚ Watch / heart-rate screen
 - ✋ Feeling my pulse
 - 📈 ECG / gadgets
-- 🔎 Googling symptoms
+- 🔎 Searching symptoms online
 - 💬 Asking "am I OK?"
 - 🫀 Scanning my body / listening for beats
 - 🩺 Extra doctor visits / tests

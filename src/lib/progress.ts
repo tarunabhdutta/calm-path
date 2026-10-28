@@ -76,7 +76,7 @@ export function weekly(d: Data, weeks = 10, now = new Date()): WeekRow[] {
   d.breaths.forEach((b) => { const r = hit(b.at); if (r) r.breaths++; });
   Object.entries(d.counts).forEach(([date, c]) => {
     const r = hit(date);
-    if (r) { r.checks += c.checks + c.ecg + c.google; r.reassurance += c.reassurance; }
+    if (r) { r.checks += c.checks + c.ecg + c.search; r.reassurance += c.reassurance; }
   });
   return Object.values(rows);
 }

@@ -75,7 +75,7 @@ export const PROGRAMME: Session[] = [
         'The flash passes quickly when it is left alone. The second fear keeps pouring in adrenaline. The second fear is the only part you can change.',
       ]},
       { title: 'The fight switch', art: 'switch', body: [
-        'Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, Google, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.',
+        'Imagine a switch at the back of your mind. When it is ON, you fight the feeling: you check, search online, ask, brace, avoid. Every fight adds sparks: more fear on top of the fear.',
         'When the switch is OFF, the feeling is still there. But you stop adding to it. The feeling itself stays for a while; the extra layer drains away. You will practise turning the switch off.',
       ]},
       { title: 'Go with it, not put up with it', art: 'float', body: [
@@ -90,7 +90,7 @@ export const PROGRAMME: Session[] = [
     id: 'QS5', phase: 'quickstart', week: 1, title: 'Why checking backfires', minutes: 10,
     cards: [
       { title: 'The relief trap', art: 'hook', body: [
-        'Looking at the watch, taking an ECG, feeling the pulse, Googling, asking "am I OK?": each brings a few minutes of relief. And the relief is the trap.',
+        'Looking at the watch, taking an ECG, feeling the pulse, searching online, asking "am I OK?": each brings a few minutes of relief. And the relief is the trap.',
         'Relief teaches the brain two things: that the sensation was dangerous, and that you were safe only because you checked. So the next sensation feels more urgent, and the next check is needed sooner.',
       ]},
       { title: 'The slot machine', art: 'counter', body: [
@@ -138,7 +138,7 @@ export const PROGRAMME: Session[] = [
     cards: [
       { title: 'Safety behaviours', art: 'backpack', body: [
         'Safety behaviours are the things we do to prevent, check on or escape a feared outcome. They feel protective, but they rob the brain of the chance to learn that the feared thing doesn\'t come.',
-        'Some are obvious: the watch, the pulse, the ECG, Googling, asking. Some hide: avoiding stairs, keeping the phone close, sitting down at the first flutter, avoiding coffee or heat, scanning the body, counting, replaying reassurance in your head, staying busy so you never feel it.',
+        'Some are obvious: the watch, the pulse, the ECG, searching online, asking. Some hide: avoiding stairs, keeping the phone close, sitting down at the first flutter, avoiding coffee or heat, scanning the body, counting, replaying reassurance in your head, staying busy so you never feel it.',
       ]},
       { title: 'Body "hacks" count too', art: 'detective', body: [
         'Splashing cold water on the face, bearing down, coughing, pressing the neck, special breathing tricks aimed at the heartbeat, sleep-position rules, checking stress or HRV scores: these are all ways of controlling the heart. They are safety behaviours too, and some carry real medical risk. Put them on the list.',
@@ -166,7 +166,7 @@ export const PROGRAMME: Session[] = [
     id: 'S2.3', phase: 'strengthen', week: 2, title: 'Your checking-free plan', minutes: 12,
     cards: [
       { title: 'One source at a time', art: 'jars', body: [
-        'Stopping everything at once is very hard. Instead, make a plan for each source: watch, pulse, ECG, gadgets, Googling, asking someone, scanning the body. For each one, choose stop, cap ("once a day, not at night") or delay ("wait 30 minutes"), and keep the rule the same on good and bad days.',
+        'Stopping everything at once is very hard. Instead, make a plan for each source: watch, pulse, ECG, gadgets, searching online, asking someone, scanning the body. For each one, choose stop, cap ("once a day, not at night") or delay ("wait 30 minutes"), and keep the rule the same on good and bad days.',
         'The destination is no checking at all. Each week, tighten one rule.',
       ]},
       { title: 'Costs and benefits', art: 'scale', body: [
@@ -195,7 +195,7 @@ export const PROGRAMME: Session[] = [
     reflection: 'How did it feel to make this plan together?',
   },
   {
-    id: 'S3.2', phase: 'strengthen', week: 3, title: 'Doctor Google and real doctors', minutes: 12,
+    id: 'S3.2', phase: 'strengthen', week: 3, title: 'Searching online and real doctors', minutes: 12,
     cards: [
       { title: 'More information is not more certainty', art: 'search', body: [
         'Searching symptoms feels like gathering facts, but there is always one more page and one more rare possibility, and fear finds the worst one. From today, symptom searches become paper boats in the worry river.',
@@ -492,7 +492,7 @@ export const PROGRAMME: Session[] = [
     cards: [
       { title: 'A flare is not a relapse', art: 'anchor', body: [
         'Waves may visit again: after a stressful week, an illness, poor sleep, a hormonal change. A flare-up is a flat tyre, not a return to the start. You have the tools now, and the second time is usually shorter.',
-        'Warning signs are things you DO, not things you feel: checking again, Googling, asking, avoiding, dropping practice.',
+        'Warning signs are things you DO, not things you feel: checking again, searching online, asking, avoiding, dropping practice.',
       ]},
       { title: 'Write it while you are well', art: 'map', body: [
         'Your plan: what I learned about my anxiety; what helps short-term but hurts long-term; what really helps. And the steps for a flare: remind yourself it is temporary, write the forecasts, no checking or reassurance, return quickly to anything you\'ve started avoiding, and, if it doesn\'t settle within a few weeks, see a professional.',

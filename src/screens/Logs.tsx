@@ -189,7 +189,7 @@ const COUNTERS: { k: keyof Counts; label: string; icon: string }[] = [
   { k: 'checks', label: 'Checked watch / pulse', icon: '⌚' },
   { k: 'ecg', label: 'Took ECG', icon: '📈' },
   { k: 'reassurance', label: 'Asked "am I OK?"', icon: '💬' },
-  { k: 'google', label: 'Googled', icon: '🔎' },
+  { k: 'search', label: 'Searched online', icon: '🔎' },
 ];
 
 export function Counters() {

@@ -129,9 +129,9 @@ export function Surge({ practice = false, onFinished }: { practice?: boolean; on
   );
 }
 
-const URGE_KINDS = ['Heart rate / watch', 'ECG', 'Feeling my pulse', 'Googling', 'Asking someone', 'Something else'];
-const COUNTER_FOR: Record<string, 'checks' | 'ecg' | 'google' | 'reassurance'> = {
-  'Heart rate / watch': 'checks', 'ECG': 'ecg', 'Feeling my pulse': 'checks', 'Googling': 'google', 'Asking someone': 'reassurance', 'Something else': 'checks',
+const URGE_KINDS = ['Heart rate / watch', 'ECG', 'Feeling my pulse', 'Searching online', 'Asking someone', 'Something else'];
+const COUNTER_FOR: Record<string, 'checks' | 'ecg' | 'search' | 'reassurance'> = {
+  'Heart rate / watch': 'checks', 'ECG': 'ecg', 'Feeling my pulse': 'checks', 'Searching online': 'search', 'Asking someone': 'reassurance', 'Something else': 'checks',
 };
 
 export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished?: () => void }) {

@@ -25,7 +25,7 @@ export const FORMS: Record<string, FormDef> = {
     fields: [
       {
         id: 'items', label: 'Safety behaviours', type: 'rated-list',
-        help: 'Ideas: watch heart rate, ECG app, feeling the pulse, BP cuff or oximeter, Googling, asking "am I OK?", body scanning, health or stress scores, sitting down at the first flutter, avoiding stairs, heat, coffee or exercise, keeping the phone close, staying near a hospital, never being alone, cold-water splashes, bearing down or coughing to steer the heartbeat, special breathing to stop it, sleep-position rules, counting or replaying reassurance in my head, keeping busy so I never feel it.',
+        help: 'Ideas: watch heart rate, ECG app, feeling the pulse, BP cuff or oximeter, searching online, asking "am I OK?", body scanning, health or stress scores, sitting down at the first flutter, avoiding stairs, heat, coffee or exercise, keeping the phone close, staying near a hospital, never being alone, cold-water splashes, bearing down or coughing to steer the heartbeat, special breathing to stop it, sleep-position rules, counting or replaying reassurance in my head, keeping busy so I never feel it.',
       },
     ],
   },
@@ -60,7 +60,7 @@ export const FORMS: Record<string, FormDef> = {
       { id: 'watch', label: '⌚ Watch / heart-rate screen', type: 'text', placeholder: 'e.g. CAP: once a day, after lunch' },
       { id: 'pulse', label: '✋ Feeling my pulse', type: 'text', placeholder: 'e.g. STOP: hands on my lap instead' },
       { id: 'ecg', label: '📈 ECG / gadgets', type: 'text', placeholder: 'e.g. STOP: device in the cupboard' },
-      { id: 'google', label: '🔎 Googling symptoms', type: 'text', placeholder: 'e.g. DELAY: park it in the worry river' },
+      { id: 'search', label: '🔎 Searching symptoms online', type: 'text', placeholder: 'e.g. DELAY: park it in the worry river' },
       { id: 'asking', label: '💬 Asking "am I OK?"', type: 'text', placeholder: 'e.g. use our reassurance plan' },
       { id: 'scanning', label: '🫀 Scanning my body / listening for beats', type: 'text', placeholder: 'e.g. notice it, name it, return to the task' },
       { id: 'doctor', label: '🩺 Extra doctor visits / tests', type: 'text', placeholder: 'e.g. follow my medical plan, wait-a-week rule' },
@@ -212,7 +212,7 @@ export const FORMS: Record<string, FormDef> = {
     intro: 'Written while you feel well. Keep it where you can find it.',
     fields: [
       { id: 'learned', label: 'What I have learned about my anxiety', type: 'textarea' },
-      { id: 'traps', label: 'Things that help short-term but hurt long-term', type: 'textarea', placeholder: 'checking, Googling, asking, avoiding…' },
+      { id: 'traps', label: 'Things that help short-term but hurt long-term', type: 'textarea', placeholder: 'checking, searching online, asking, avoiding…' },
       { id: 'helped', label: 'What really helps me', type: 'textarea' },
       { id: 'signs', label: 'My early warning signs (things I DO)', type: 'textarea', placeholder: 'e.g. checking the watch again, searching, avoiding walks, dropping practice' },
       { id: 'risky', label: 'High-risk times', type: 'textarea', placeholder: 'e.g. stressful weeks, illness, poor sleep, hormonal changes' },

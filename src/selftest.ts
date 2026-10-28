@@ -57,7 +57,7 @@ export function contentChecks(): Check[] {
   b.measures.push({ id: 'y', kind: 'GAD7', at: new Date().toISOString(), answers: [3, 3, 3, 3, 3, 3, 3], total: 21 });
   out.push({ name: 'island: a high score earns the same as a low one', ok: drops(a) === drops(b) });
   const c = newData();
-  c.counts['2026-10-26'] = { checks: 9, ecg: 4, reassurance: 6, google: 3 };
+  c.counts['2026-10-26'] = { checks: 9, ecg: 4, reassurance: 6, search: 3 };
   out.push({ name: 'island: checking earns nothing', ok: drops(c) === 0 });
   const e = newData();
   e.urges.push({ id: 's', at: new Date().toISOString(), kind: 'ECG', start: 8, end: 3, minutes: 3, outcome: 'surfed' });

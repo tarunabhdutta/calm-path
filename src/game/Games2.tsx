@@ -331,7 +331,7 @@ export function TheoryGame({ onFinished }: { onFinished?: () => void }) {
 }
 
 /* ═════════════ The fight switch ═════════════ */
-const SPARKS = ['check the watch', 'Google it', 'ask "am I OK?"', 'brace & tense', '"what if this time…"', 'avoid the stairs'];
+const SPARKS = ['check the watch', 'search it online', 'ask "am I OK?"', 'brace & tense', '"what if this time…"', 'avoid the stairs'];
 
 export function SwitchGame({ onFinished }: { onFinished?: () => void }) {
   useScene('M-11', 'A-01');

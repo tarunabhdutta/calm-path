@@ -37,7 +37,7 @@ export interface Surge { id: string; at: string; strength: number; minutes: numb
 export interface Urge { id: string; at: string; kind: string; start: number; end: number; minutes: number; outcome: 'surfed' | 'checked' }
 export interface SleepLog { lightsOut?: string; toSleep?: string; wakings?: string; rise?: string }
 export interface CheckIn { date: string; anxiety: number; sleep: number; mood: string; caffeine: number; moveMin: number; sleepLog?: SleepLog; emotions?: string[]; context?: string }
-export interface Counts { checks: number; ecg: number; reassurance: number; google: number }
+export interface Counts { checks: number; ecg: number; reassurance: number; search: number }
 export interface Worry { id: string; at: string; text: string; status: 'parked' | 'step' | 'letgo'; step?: string }
 export interface MeasureResult { id: string; kind: 'GAD7' | 'PHQ9' | 'HW7'; at: string; answers: number[]; total: number }
 export interface SessionDone { doneAt: string; reflection?: string }
@@ -79,11 +79,13 @@ export function migrate(d: Data): Data {
   // v1.4: renamed items (the old health-worry scale and the attention game)
   d.measures.forEach((m) => { if ((m.kind as string) === 'WI7') (m as any).kind = 'HW7'; });
   const legacy = ['sound', 'Garden'].join(''); // old storage key of the attention game
+  const oldSearch = ['goo', 'gle'].join(''); // old name of the "searching online" counter (before v1.6.3)
+  for (const c of Object.values(d.counts ?? {})) { const o = c as any; if (o[oldSearch] !== undefined) { o.search = (o.search ?? 0) + o[oldSearch]; delete o[oldSearch]; } }
   if ((d.entries as any)[legacy]) { d.entries.listening = [...(d.entries.listening ?? []), ...(d.entries as any)[legacy]]; delete (d.entries as any)[legacy]; }
   return d;
 }
 
-export const emptyCounts = (): Counts => ({ checks: 0, ecg: 0, reassurance: 0, google: 0 });
+export const emptyCounts = (): Counts => ({ checks: 0, ecg: 0, reassurance: 0, search: 0 });
 
 export function newData(p: Partial<Profile> = {}): Data {
   return {

@@ -101,7 +101,7 @@ export function Progress() {
       <div className="card">
         <h3>Checking and reassurance, per week</h3>
         <p className="muted">The goal is for these to shrink.</p>
-        <Bars rows={rows as any} keys={[{ k: 'checks', label: 'checks (watch, pulse, ECG, Google)', color: 'var(--water)' }, { k: 'reassurance', label: 'asked for reassurance', color: 'var(--sun)' }]} />
+        <Bars rows={rows as any} keys={[{ k: 'checks', label: 'checks (watch, pulse, ECG, searching online)', color: 'var(--water)' }, { k: 'reassurance', label: 'asked for reassurance', color: 'var(--sun)' }]} />
       </div>
       <div className="card">
         <h3>Urges, per week</h3>
