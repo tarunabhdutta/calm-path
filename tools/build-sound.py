@@ -79,6 +79,32 @@ def trim_silence(x, thresh_db=-60):
     return x[on[0]:on[-1] + 1] if len(on) else x
 
 
+KEEP_TONE = {'L-05'}  # the bee's buzz IS the sound to listen to
+ONLY = set(filter(None, os.environ.get('ONLY', '').split(',')))  # e.g. ONLY=L-05 rebuilds one sound
+
+
+def hum_notches(x):
+    """A steady drone (a narrow tone present nearly all the time, e.g. the 199 Hz hum the sound
+    generator adds) -> narrow notch filters on it and its harmonics. Natural sounds come and go and are kept."""
+    from scipy.ndimage import median_filter
+    m = x.mean(axis=1)
+    k = len(m) // 8192
+    frames = np.abs(np.fft.rfft(m[:k * 8192].reshape(k, 8192) * np.hanning(8192), axis=1))
+    fr = np.fft.rfftfreq(8192, 1 / 48000)
+    db = 20 * np.log10(frames.mean(0) + 1e-12)
+    prom = db - median_filter(db, 51)
+    band = np.where((fr > 60) & (fr < 1200))[0]
+    i = band[np.argmax(prom[band])]
+    if prom[i] < 8:
+        return ''
+    fdb = 20 * np.log10(frames[:, i] + 1e-12)
+    med = 20 * np.log10(np.median(frames[:, max(0, i - 25):i + 25], axis=1) + 1e-12)
+    if ((fdb - med) > 8).mean() < 0.8:
+        return ''
+    f0 = fr[i]
+    return ','.join(f'equalizer=f={f0 * h:.1f}:t=q:w=12:g=-{24 if h == 1 else 15}' for h in (1, 2, 3, 4) if f0 * h < 2000)
+
+
 def make_loop(x, xf_sec=1.5):
     """Folds the tail over the head with an equal-power cross-fade, so the file loops without a seam."""
     n = int(xf_sec * 48000)
@@ -93,7 +119,7 @@ def make_loop(x, xf_sec=1.5):
 def main():
     manifest = {}
     # ── voice ──
-    for f in sorted(os.listdir(SRC['V'])):
+    for f in ([] if ONLY else sorted(os.listdir(SRC['V']))):
         if not re.match(r'^V-\d\d[A-Z]?_[A-Z_]+\.mp3$', f):
             continue
         loudnorm(os.path.join(SRC['V'], f), os.path.join(VOICE_OUT, f),
@@ -107,7 +133,11 @@ def main():
             m = re.match(r'^([' + kinds + r']-\d\d)_', f)
             if m:
                 ids.setdefault(m.group(1), folder)
+    if os.path.exists(MANIFEST):
+        manifest.update(json.load(open(MANIFEST, encoding='utf-8')))
     for sid in sorted(ids):
+        if ONLY and sid not in ONLY:
+            continue
         folder = ids[sid]
         f = pick(folder, sid)
         src = os.path.join(folder, f)
@@ -121,9 +151,13 @@ def main():
             loudnorm(tmp, out, 'highpass=f=30', -24, -2, ['-c:a', 'aac', '-b:a', '96k'])
         elif kind in 'AL':
             ch = 1 if kind == 'L' else 2
-            x = make_loop(trim_silence(pcm(src, ch)))
+            x = trim_silence(pcm(src))
+            notch = '' if sid in KEEP_TONE else hum_notches(x)
+            if notch:
+                print(f'  {sid}: steady drone removed ({notch.split(":")[0].split("=")[-1]} Hz and harmonics)')
+            x = make_loop(x if ch == 2 else x.mean(axis=1, keepdims=True))
             write_wav(x, tmp)
-            loudnorm(tmp, out, 'highpass=f=40', -26 if kind == 'L' else -30, -3, ['-c:a', 'aac', '-b:a', '64k'])
+            loudnorm(tmp, out, 'highpass=f=40' + (',' + notch if notch else ''), -26 if kind == 'L' else -30, -3, ['-c:a', 'aac', '-b:a', '64k'])
         elif kind == 'F':
             x = trim_silence(pcm(src), -55)
             act = x.mean(axis=1)
