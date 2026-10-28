@@ -12,6 +12,8 @@ import { BudgetView, FormView, LogsView, MeasureView, SessionView } from './scre
 import { Journey } from './screens/Journey';
 import { Celebrations } from './game/Celebrate';
 import { VoiceCaption } from './components/VoiceCaption';
+import { SoundDirector } from './components/SoundDirector';
+import { fx } from './lib/sound';
 import { AUDIO } from './content/scripts';
 import { isPlaying, playClip } from './lib/audio';
 import { Tulu } from './game/Mascot';
@@ -152,7 +154,7 @@ export default function App() {
     try { last = localStorage.getItem('cp.lastOpen'); localStorage.setItem('cp.lastOpen', today); } catch { /* storage unavailable */ }
     if (!last || !data.settings.voice) return;
     if ((Date.parse(today) - Date.parse(last)) / 86_400_000 < 2) return;
-    const once = () => window.setTimeout(() => { if (!isPlaying()) playClip(AUDIO.missed); }, 400);
+    const once = () => window.setTimeout(() => { if (!isPlaying()) { fx('S-05'); window.setTimeout(() => playClip(AUDIO.missed), 2200); } }, 400);
     window.addEventListener('pointerdown', once, { once: true });
     return () => window.removeEventListener('pointerdown', once);
   }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -168,6 +170,7 @@ export default function App() {
         <Tabs />
         <Celebrations />
         <VoiceCaption />
+        <SoundDirector route={r} />
       </>
     )}</NavProvider>
   );

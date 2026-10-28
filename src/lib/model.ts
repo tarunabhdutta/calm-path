@@ -26,7 +26,12 @@ export interface Settings {
   tone: boolean;
   theme: 'auto' | 'light' | 'dark';
   budgetLevel: 0 | 1 | 2 | 3 | 4;  // 0 = not set yet
+  sound?: SoundPrefs;  // added in v1.6; older data gets the defaults
 }
+
+export interface SoundPrefs { music: number; ambience: number; effects: number; voice: number; quiet: boolean; captions: boolean; breatheMusic: boolean }
+export const DEFAULT_SOUND: SoundPrefs = { music: 0.6, ambience: 0.7, effects: 0.8, voice: 1, quiet: false, captions: true, breatheMusic: false };
+export const soundPrefs = (s: Settings): SoundPrefs => ({ ...DEFAULT_SOUND, ...s.sound });
 
 export interface Surge { id: string; at: string; strength: number; minutes: number; helped: string[]; note: string; repeat: boolean }
 export interface Urge { id: string; at: string; kind: string; start: number; end: number; minutes: number; outcome: 'surfed' | 'checked' }

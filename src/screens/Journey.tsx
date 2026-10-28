@@ -1,4 +1,5 @@
 // The journey map: ten lands, one per week, each session a stepping stone.
+import { fx } from '../lib/sound';
 import { useEffect, useRef } from 'react';
 import { useNav } from '../components/ui';
 import { useStore } from '../lib/store';
@@ -53,7 +54,7 @@ export function Journey() {
                   <button key={s.id} ref={isNext ? here : undefined}
                     className={'stone' + (isDone ? ' done' : '') + (isNext ? ' next' : '') + (!open ? ' locked' : '') + (X[i % 4] > 60 ? ' flip' : '')}
                     style={{ top: 10 + i * 92, ['--x' as any]: `${X[i % 4]}%` }}
-                    disabled={!open} onClick={() => go({ name: 'session', id: s.id })}
+                    disabled={!open} onClick={() => { fx('F-10'); go({ name: 'session', id: s.id }); }}
                     aria-label={`${s.title}${isDone ? ', done' : isNext ? ', next' : ', not yet'}`}>
                     <span className="stone-disc">{isDone ? '✓' : isNext ? (readyOn ? '⏳' : '✦') : '·'}
                       {isNext && <span className="stone-tulu"><Tulu size={58} mood={readyOn ? 'sleep' : 'happy'} /></span>}</span>

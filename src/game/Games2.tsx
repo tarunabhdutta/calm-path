@@ -3,6 +3,8 @@
 //  ListeningGarden  - attention training with island sounds: focus → switch → spread
 //  TheoryGame       - the Danger story vs the Alarm story: evidence jars and belief ratings
 //  SwitchGame       - the fight switch: the feeling itself vs the struggle we add
+import { fx, garden, holdMusic } from '../lib/sound';
+import { useScene } from '../lib/useScene';
 import { useEffect, useRef, useState } from 'react';
 import { useIntroClip } from '../components/VoiceCaption';
 import { AUDIO } from '../content/scripts';
@@ -50,6 +52,7 @@ function LabTulu({ anim, running }: { anim: string; running: boolean }) {
 }
 
 export function BodyLab({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-10', 'A-01');
   const { data, update } = useStore();
   const { back, go } = useNav();
   const ok = !!data!.profile.doctorOkBodyPractice;
@@ -72,7 +75,9 @@ export function BodyLab({ onFinished }: { onFinished?: () => void }) {
     if (timer.current) window.clearInterval(timer.current);
     timer.current = window.setInterval(() => setLeft((l) => { if (l <= 1) { window.clearInterval(timer.current!); then(); return 0; } return l - 1; }), 1000);
   };
-  const start = () => { setFelt(false); setStage('go'); tick(ex!.secs, () => setStage('rate')); };
+  const start = () => { setFelt(false); setStage('go'); fx('F-21'); tick(ex!.secs, () => { fx('F-22'); setStage('rate'); }); };
+  useEffect(() => { holdMusic(stage === 'go'); }, [stage]);
+  useEffect(() => () => holdMusic(false), []);
   const iFeelIt = () => { if (felt) return; setFelt(true); setLeft((l) => Math.max(l, 30)); };
   const saveRound = () => {
     const v: LabEntry = { exercise: ex!.id, round, anxiety: anx, similarity: sim, prediction, happened: happened.join(', '), date: today() };
@@ -175,86 +180,25 @@ export function BodyLab({ onFinished }: { onFinished?: () => void }) {
 }
 
 /* ═════════════ Listening Garden (attention training) ═════════════ */
-type Src = { id: string; name: string; icon: string; pan: number; x: number; y: number };
+type Src = { id: string; file: string; name: string; icon: string; pan: number; x: number; y: number };
+// Six recorded sources, each isolated and placed in its own spot (headphones make the left/right clear).
 const SOUNDS: Src[] = [
-  { id: 'river', name: 'the river', icon: '🌊', pan: -0.5, x: 22, y: 70 },
-  { id: 'bird', name: 'the bird', icon: '🐦', pan: -0.8, x: 14, y: 22 },
-  { id: 'chimes', name: 'the wind chimes', icon: '🎐', pan: 0.7, x: 80, y: 26 },
-  { id: 'frog', name: 'the frog', icon: '🐸', pan: 0.55, x: 74, y: 76 },
-  { id: 'rain', name: 'the rain on leaves', icon: '🌧️', pan: 0, x: 50, y: 18 },
-  { id: 'bell', name: 'the temple bell', icon: '🔔', pan: 0.95, x: 92, y: 52 },
-  { id: 'crickets', name: 'the crickets', icon: '🦗', pan: -0.95, x: 8, y: 50 },
-  { id: 'knock', name: 'the woodpecker', icon: '🪵', pan: 0.25, x: 60, y: 46 },
-  { id: 'breeze', name: 'the breeze in the bamboo', icon: '🎋', pan: -0.25, x: 36, y: 40 },
+  { id: 'bird', file: 'L-01', name: 'the bird', icon: '🐦', pan: -0.75, x: 14, y: 22 },
+  { id: 'stream', file: 'L-02', name: 'the stream', icon: '🌊', pan: 0.7, x: 78, y: 72 },
+  { id: 'breeze', file: 'L-03', name: 'the breeze in the leaves', icon: '🍃', pan: 0, x: 50, y: 16 },
+  { id: 'chimes', file: 'L-04', name: 'the wooden chimes', icon: '🎐', pan: 0.25, x: 62, y: 40 },
+  { id: 'bee', file: 'L-05', name: 'the bee', icon: '🐝', pan: 0.85, x: 88, y: 30 },
+  { id: 'frog', file: 'L-06', name: 'the frog', icon: '🐸', pan: -0.5, x: 22, y: 76 },
 ];
 
 class Garden {
-  ctx = new AudioContext();
-  master = this.ctx.createGain();
-  stops: (() => void)[] = [];
-  noise: AudioBuffer;
-  timer: number | null = null;
-  constructor() {
-    this.master.gain.value = 0.55;
-    this.master.connect(this.ctx.destination);
-    const n = this.ctx.createBuffer(1, this.ctx.sampleRate * 2, this.ctx.sampleRate);
-    const ch = n.getChannelData(0);
-    for (let i = 0; i < ch.length; i++) ch[i] = Math.random() * 2 - 1;
-    this.noise = n;
-  }
-  out(pan: number, vol: number) {
-    const g = this.ctx.createGain(); g.gain.value = vol;
-    const p = this.ctx.createStereoPanner(); p.pan.value = pan;
-    g.connect(p).connect(this.master);
-    return g;
-  }
-  loopNoise(pan: number, type: BiquadFilterType, freq: number, q: number, vol: number, wobble = 0) {
-    const s = this.ctx.createBufferSource(); s.buffer = this.noise; s.loop = true;
-    const f = this.ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
-    const o = this.out(pan, vol);
-    s.connect(f).connect(o); s.start();
-    let lfo: OscillatorNode | null = null;
-    if (wobble) { lfo = this.ctx.createOscillator(); lfo.frequency.value = 0.08; const lg = this.ctx.createGain(); lg.gain.value = wobble; lfo.connect(lg).connect(o.gain); lfo.start(); }
-    this.stops.push(() => { s.stop(); lfo?.stop(); });
-  }
-  ping(pan: number, freq: number, dur: number, vol: number, type: OscillatorType = 'sine', sweep = 0) {
-    const t = this.ctx.currentTime, o = this.ctx.createOscillator(), g = this.out(pan, 0);
-    o.type = type; o.frequency.setValueAtTime(freq, t); if (sweep) o.frequency.linearRampToValueAtTime(freq + sweep, t + dur * 0.6);
-    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    o.connect(g); o.start(t); o.stop(t + dur + 0.05);
-  }
-  burst(pan: number, freq: number, vol: number) {
-    const t = this.ctx.currentTime, s = this.ctx.createBufferSource(); s.buffer = this.noise;
-    const f = this.ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 6;
-    const g = this.out(pan, 0); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
-    s.connect(f).connect(g); s.start(t); s.stop(t + 0.1);
-  }
-  start() {
-    const S = Object.fromEntries(SOUNDS.map((s) => [s.id, s.pan]));
-    this.loopNoise(S.river, 'lowpass', 380, 0.7, 0.5, 0.15);
-    this.loopNoise(S.rain, 'bandpass', 3800, 1.4, 0.12, 0.06);
-    this.loopNoise(S.breeze, 'bandpass', 900, 0.6, 0.16, 0.14);
-    const next: Record<string, number> = {};
-    const due = (id: string, min: number, max: number) => {
-      const now = this.ctx.currentTime;
-      if (!next[id]) next[id] = now + Math.random() * min;
-      if (now >= next[id]) { next[id] = now + min + Math.random() * (max - min); return true; }
-      return false;
-    };
-    const penta = [523, 587, 659, 784, 880, 1047];
-    this.timer = window.setInterval(() => {
-      if (due('bird', 1.5, 4)) [0, 0.14, 0.28].forEach((d, i) => window.setTimeout(() => this.ping(S.bird, 2600 + i * 180, 0.12, 0.08, 'sine', 900), d * 1000));
-      if (due('chimes', 2, 5)) this.ping(S.chimes, penta[Math.floor(Math.random() * penta.length)] * 2, 2.2, 0.06);
-      if (due('frog', 3, 6)) [0, 0.22].forEach((d) => window.setTimeout(() => this.ping(S.frog, 140, 0.16, 0.12, 'triangle', -30), d * 1000));
-      if (due('bell', 7, 12)) [420, 846, 1270].forEach((f, i) => this.ping(S.bell, f, 4 - i, 0.05 / (i + 1)));
-      if (due('crickets', 1.2, 3)) [0, 0.06, 0.12, 0.18].forEach((d) => window.setTimeout(() => this.ping(S.crickets, 4600, 0.04, 0.03), d * 1000));
-      if (due('knock', 2.5, 7)) { const n = 2 + Math.floor(Math.random() * 4); for (let i = 0; i < n; i++) window.setTimeout(() => this.burst(S.knock, 1100, 0.25), i * 90 + Math.random() * 40); }
-    }, 200);
-  }
-  stop() { if (this.timer) window.clearInterval(this.timer); this.stops.forEach((s) => s()); this.ctx.close().catch(() => {}); }
+  private g: { stop(): void } | null = null;
+  start() { this.g = garden(SOUNDS.map((s) => ({ id: s.file, pan: s.pan }))); }
+  stop() { this.g?.stop(); this.g = null; }
 }
 
 export function ListeningGarden({ onFinished }: { onFinished?: () => void }) {
+  useScene(null, null);
   const { update } = useStore();
   const { back } = useNav();
   const [mins, setMins] = useState<number | null>(null);
@@ -334,6 +278,7 @@ export function ListeningGarden({ onFinished }: { onFinished?: () => void }) {
 
 /* ═════════════ Two stories ═════════════ */
 export function TheoryGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-11', 'A-01');
   const { data, update } = useStore();
   const { back, go } = useNav();
   const t = (data!.persistent.theory ?? {}) as { a?: number; b?: number; ea?: string[]; eb?: string[]; history?: { at: string; a: number; b: number }[] };
@@ -375,7 +320,7 @@ export function TheoryGame({ onFinished }: { onFinished?: () => void }) {
       <div className="card">
         <label className="f">Add a piece of evidence (a fact you noticed)</label>
         <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. the thump came while I was relaxed after tea" />
-        <div className="grid2" style={{ marginTop: 10 }}><button className="btn soft" onClick={() => add('a')}>Fits Danger</button><button className="btn" onClick={() => add('b')}>Fits Alarm</button></div>
+        <div className="grid2" style={{ marginTop: 10 }}><button className="btn soft" onClick={() => { fx('F-16'); add('a'); }}>Fits Danger</button><button className="btn" onClick={() => { fx('F-16'); add('b'); }}>Fits Alarm</button></div>
         {(ea.length > 0 || eb.length > 0) && <div className="evidence-lists"><ul className="b">{ea.map((x, i) => <li key={'a' + i} className="ev-a">Danger · {x}</li>)}</ul><ul className="b">{eb.map((x, i) => <li key={'b' + i} className="ev-b">Alarm · {x}</li>)}</ul></div>}
       </div>
       {hist.length > 0 && <p className="muted">Your ratings over time: {hist.slice(-6).map((h) => `Danger ${h.a} / Alarm ${h.b}`).join(' → ')}</p>}
@@ -389,6 +334,7 @@ export function TheoryGame({ onFinished }: { onFinished?: () => void }) {
 const SPARKS = ['check the watch', 'Google it', 'ask "am I OK?"', 'brace & tense', '"what if this time…"', 'avoid the stairs'];
 
 export function SwitchGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-11', 'A-01');
   const { update } = useStore();
   const { back } = useNav();
   const [on, setOn] = useState(true);
@@ -405,7 +351,7 @@ export function SwitchGame({ onFinished }: { onFinished?: () => void }) {
           <div className="meter-dirty" style={{ height: `${dirty * 0.72}%` }}><span>{dirty > 10 ? 'added fight' : ''}</span></div>
         </div>
         <div className="switch-side">
-          <button className={'big-switch' + (on ? ' on' : ' off')} onClick={() => { setOn(!on); if (on) update((d) => { d.persistent.switchPractice = { at: new Date().toISOString() }; }); }} aria-pressed={on}>
+          <button className={'big-switch' + (on ? ' on' : ' off')} onClick={() => { setOn(!on); if (on) fx('F-15'); if (on) update((d) => { d.persistent.switchPractice = { at: new Date().toISOString() }; }); }} aria-pressed={on}>
             <span className="knob" /><b>{on ? 'FIGHTING' : 'OFF'}</b>
           </button>
           <div className="spark-row">

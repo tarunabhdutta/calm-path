@@ -16,3 +16,6 @@ public/audio/*.mp3
 *.calmpath
 # private checks (contain the words they guard against)
 tests/private.test.ts
+voice-audio/
+public/sound/
+.sound-tmp/

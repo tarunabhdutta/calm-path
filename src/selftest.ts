@@ -1,3 +1,7 @@
+import manifest from './content/soundManifest.json';
+import type { Route } from './components/ui';
+import { sceneFor } from './lib/scenes';
+import { hasSound } from './lib/sound';
 // In-app self-test, run by the packaged PC app with --self-test (law E-03) and by the unit tests.
 import { PROGRAMME } from './content/programme';
 import { FORMS } from './content/forms';
@@ -77,8 +81,30 @@ export async function cryptoCheck(): Promise<Check[]> {
   ];
 }
 
+/** The sound world: every sound a screen asks for exists, the quiet places stay quiet, and the files play. */
+export async function soundChecks(): Promise<Check[]> {
+  const d = newData({ name: 'Test' });
+  const routes: Route[] = [{ name: 'home' }, { name: 'path' }, { name: 'surge' }, { name: 'urge' }, { name: 'breathe' }, { name: 'winddown' },
+    { name: 'checkin' }, { name: 'worry' }, { name: 'family' }, { name: 'safety' }, { name: 'hospital' }, { name: 'game', id: 'listening' }, { name: 'game', id: 'bodyLab' }];
+  const missing = routes.flatMap((r) => sceneFor(r, d)).filter((id): id is string => !!id && !hasSound(id));
+  const quiet = (r: Route) => sceneFor(r, d)[0] === null;
+  const out: Check[] = [
+    { name: 'every scene sound is bundled', ok: missing.length === 0, detail: missing.join(', ') },
+    { name: 'SURGE has no music (ambience only)', ok: quiet({ name: 'surge' }) },
+    { name: 'silence zones have no music', ok: quiet({ name: 'safety' }) && quiet({ name: 'hospital' }) && sceneFor({ name: 'game', id: 'listening' }, d).every((x) => x === null) },
+    { name: 'all 71 sound files listed', ok: ['M', 'A', 'L', 'F', 'S'].every((k) => Object.keys(manifest).some((id) => id.startsWith(k))) && Object.keys(manifest).length === 71, detail: String(Object.keys(manifest).length) },
+  ];
+  out.push({ name: 'this device can play the sound files (AAC)', ok: !!new Audio().canPlayType('audio/mp4; codecs="mp4a.40.2"') });
+  try {
+    const r = await fetch('./sound/F-01.m4a');
+    const buf = await new AudioContext().decodeAudioData(await r.arrayBuffer());
+    out.push({ name: 'a bundled sound decodes', ok: buf.duration > 0, detail: buf.duration.toFixed(2) + ' s' });
+  } catch (e) { out.push({ name: 'a bundled sound decodes', ok: false, detail: String(e) }); }
+  return out;
+}
+
 export async function runSelfTest(): Promise<{ pass: boolean; checks: Check[] }> {
-  const checks = [...contentChecks(), ...(await cryptoCheck())];
+  const checks = [...contentChecks(), ...(await cryptoCheck()), ...(await soundChecks())];
   if (window.calmDesk) {
     try {
       await window.calmDesk.writeVault('{"selftest":1}');

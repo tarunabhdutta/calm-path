@@ -5,6 +5,8 @@
 //  LadderGame     - climb your facing-fear ladder rung by rung
 //  NotingGame     - map where an urge sits in the body and name it with curiosity
 //  RecipeGame     - "After I…, I will…, then I celebrate" little-habit recipe
+import { fx } from '../lib/sound';
+import { useScene } from '../lib/useScene';
 import { useEffect, useMemo, useState } from 'react';
 import { useIntroClip } from '../components/VoiceCaption';
 import { AUDIO } from '../content/scripts';
@@ -28,6 +30,7 @@ const LINKS = [
 ];
 
 export function FearCycleGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-11', 'A-01');
   const { data, update } = useStore();
   const { back, go } = useNav();
   const saved = (data!.persistent.fearCycle ?? {}) as Record<string, string>;
@@ -72,7 +75,7 @@ export function FearCycleGame({ onFinished }: { onFinished?: () => void }) {
           <div className="row" style={{ marginTop: 10 }}>
             <button className="btn ghost" disabled={step === 0} onClick={() => setStep(step - 1)}>Back</button>
             {step < 4 ? <button className="btn grow" onClick={() => setStep(step + 1)}>Next link</button>
-              : <button className="btn grow" disabled={filled < 5} onClick={() => setBroken(true)}>See how to break it ✂️</button>}
+              : <button className="btn grow" disabled={filled < 5} onClick={() => { fx('F-17'); setBroken(true); }}>See how to break it ✂️</button>}
           </div>
         </div>
       ) : (
@@ -95,6 +98,7 @@ const TECHNIQUES = [
 ];
 
 export function LeavesGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-09', 'A-07');
   const { update } = useStore();
   const { back, go } = useNav();
   const [text, setText] = useState('');
@@ -103,6 +107,7 @@ export function LeavesGame({ onFinished }: { onFinished?: () => void }) {
   const [grip, setGrip] = useState(7);
   const [after, setAfter] = useState<number | null>(null);
   const send = () => {
+    fx('F-12');
     if (!text.trim()) return;
     if (crisisText(text)) { go({ name: 'safety', crisis: true }); return; }
     const T = TECHNIQUES.find((x) => x.id === tech)!;
@@ -149,6 +154,7 @@ export function LeavesGame({ onFinished }: { onFinished?: () => void }) {
 
 /* ───────────── Anxiety forecaster (expectancy violation) ───────────── */
 export function ForecastGame({ onFinished, task: initialTask }: { onFinished?: () => void; task?: string }) {
+  useScene('M-11', 'A-01');
   const { data, update } = useStore();
   const { back } = useNav();
   const log = data!.entries.exposureLog ?? [];
@@ -186,7 +192,7 @@ export function ForecastGame({ onFinished, task: initialTask }: { onFinished?: (
           <label className="f">How sure is it? {conf}%</label>
           <div className="forecast-meter"><div className="cloud-fill" style={{ width: `${conf}%` }}>{conf > 60 ? '⛈️' : conf > 30 ? '🌧️' : '⛅'}</div></div>
           <Scale value={conf} onChange={setConf} max={100} step={5} low="not at all" high="certain" />
-          <button className="btn block" style={{ marginTop: 12 }} disabled={!task.trim() || !fear.trim()} onClick={() => setStage('doing')}>I'm going to do it 💪</button>
+          <button className="btn block" style={{ marginTop: 12 }} disabled={!task.trim() || !fear.trim()} onClick={() => { fx('F-04'); setStage('doing'); }}>I'm going to do it 💪</button>
         </div>
       )}
       {stage === 'doing' && (
@@ -194,7 +200,7 @@ export function ForecastGame({ onFinished, task: initialTask }: { onFinished?: (
           <Tulu size={110} mood="excited" />
           <h3>Go and do it fully</h3>
           <p>No checking, no reassurance, no escaping early. Let the feelings come along for the ride. Stay until the end, or a little longer. Come back here afterwards.</p>
-          <button className="btn block" onClick={() => setStage('after')}>I've done it</button>
+          <button className="btn block" onClick={() => { fx('F-04'); setStage('after'); }}>I've done it</button>
         </div>
       )}
       {stage === 'after' && (
@@ -220,6 +226,7 @@ export function ForecastGame({ onFinished, task: initialTask }: { onFinished?: (
 
 /* ───────────── Ladder climb ───────────── */
 export function LadderGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-11', 'A-01');
   const { data } = useStore();
   const { go } = useNav();
   const rungs = useMemo(() => ([...(((data!.persistent.ladder?.rungs) ?? []) as { text: string; rating: number }[])]).filter((r) => r.text.trim()).sort((a, b) => a.rating - b.rating), [data]);
@@ -253,7 +260,7 @@ export function LadderGame({ onFinished }: { onFinished?: () => void }) {
           </div>
           <p className="muted">A rung is climbed after two practices without safety behaviours, whatever the fear did. Fear going down is a bonus; doing it anyway is the win.</p>
           {rungs.length > 1 && <button className="btn soft block" style={{ marginBottom: 8 }} onClick={() => { const pool = rungs.slice(0, Math.min(rungs.length, at + 3)); const r = pool[Math.floor(Math.random() * pool.length)]; go({ name: 'game', id: 'forecast', task: r.text }); }}>🎲 Draw a rung at random</button>}
-          {at < rungs.length && <button className="btn block" onClick={() => go({ name: 'game', id: 'forecast', task: rungs[at].text })}>Practise "{rungs[at].text}"</button>}
+          {at < rungs.length && <button className="btn block" onClick={() => { fx('F-13'); go({ name: 'game', id: 'forecast', task: rungs[at].text }); }}>Practise "{rungs[at].text}"</button>}
           <button className="link" onClick={() => go({ name: 'form', formId: 'ladder' })}>Edit my ladder</button>
         </>
       )}
@@ -271,6 +278,7 @@ const SPOTS = [
 const WORDS = ['tight', 'fluttery', 'buzzy', 'warm', 'heavy', 'pulsing', 'restless', 'cold', 'shaky'];
 
 export function NotingGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-11', 'A-01');
   const { back } = useNav();
   const [spots, setSpots] = useState<string[]>([]);
   const [words, setWords] = useState<string[]>([]);
@@ -289,7 +297,7 @@ export function NotingGame({ onFinished }: { onFinished?: () => void }) {
         </svg>
         {SPOTS.map((s) => (
           <button key={s.id} className={'spot' + (spots.includes(s.id) ? ' on' : '')} style={{ left: `${s.x}%`, top: `${s.y}%` }}
-            onClick={() => setSpots(spots.includes(s.id) ? spots.filter((x) => x !== s.id) : [...spots, s.id])} aria-label={s.label}>
+            onClick={() => { if (!spots.includes(s.id)) fx('F-18'); setSpots(spots.includes(s.id) ? spots.filter((x) => x !== s.id) : [...spots, s.id]); }} aria-label={s.label}>
             <span className="spot-glow" />
           </button>
         ))}
@@ -311,6 +319,7 @@ const TINY = ['I will breathe with the lotus for 1 minute', 'I will do my 30-sec
 const SHINE = ['Say "I did it!"', 'Do a little Tulu wiggle', 'Smile and nod', 'Fist pump 💪'];
 
 export function RecipeGame({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-11', 'A-01');
   const { data, update } = useStore();
   const { back } = useNav();
   const prev = (data!.persistent.habitRecipe ?? {}) as Record<string, string>;
@@ -332,7 +341,7 @@ export function RecipeGame({ onFinished }: { onFinished?: () => void }) {
           <p><b>{a[0]}</b>,<br />{b[0].charAt(0).toLowerCase() + b[0].slice(1)},<br />then I'll <b>{c[0].charAt(0).toLowerCase() + c[0].slice(1)}</b>.</p>
           {party && <div className="tulu-dance"><Tulu size={90} mood="excited" /></div>}
           {!party ? <button className="btn block" onClick={() => setParty(true)}>Practise the celebration now 🎉</button>
-            : <Done label="Save my recipe" onClick={() => { update((d) => { d.persistent.habitRecipe = { anchor: a[0], tiny: b[0], shine: c[0] }; }); onFinished ? onFinished() : back(); }} />}
+            : <Done label="Save my recipe" onClick={() => { fx('F-19'); update((d) => { d.persistent.habitRecipe = { anchor: a[0], tiny: b[0], shine: c[0] }; }); onFinished ? onFinished() : back(); }} />}
         </div>
       ) : null}
     </div>

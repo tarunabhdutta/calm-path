@@ -5,7 +5,8 @@ import { CRISIS_LINES, RED_FLAGS } from '../lib/safety';
 import { backupRaw, isDesk } from '../lib/storage';
 import { scheduleReminders } from '../lib/notify';
 import type { Reminders } from '../lib/model';
-import { today } from '../lib/model';
+import { soundPrefs, today } from '../lib/model';
+import type { SoundPrefs } from '../lib/model';
 
 export function Safety({ crisis = false }: { crisis?: boolean }) {
   const { data } = useStore();
@@ -53,6 +54,8 @@ export function Settings() {
   const { data, update, snapshot, restore } = useStore();
   const { toast } = useNav();
   const d = data!;
+  const sp = soundPrefs(d.settings);
+  const setSound = (p: Partial<SoundPrefs>) => update((x) => { x.settings.sound = { ...soundPrefs(x.settings), ...p }; });
   const [info, setInfo] = useState<{ dataDir: string; backupDir: string; version: string } | null>(null);
   const [pending, setPending] = useState<string | null>(null);   // a backup that needs its old PIN
   const [restorePin, setRestorePin] = useState('');
@@ -134,7 +137,17 @@ export function Settings() {
       <div className="card">
         <label className="check"><input type="checkbox" checked={d.settings.voice} onChange={(e) => update((x) => { x.settings.voice = e.target.checked; })} /><span>Voice guidance (when the audio is installed)</span></label>
         <label className="check"><input type="checkbox" checked={d.settings.tone} onChange={(e) => update((x) => { x.settings.tone = e.target.checked; })} /><span>Soft breathing tone</span></label>
-        <label className="check"><input type="checkbox" checked={d.game.sound} onChange={(e) => update((x) => { x.game.sound = e.target.checked; })} /><span>Little chimes for drops and treasures</span></label>
+        <label className="check"><input type="checkbox" checked={d.game.sound} onChange={(e) => update((x) => { x.game.sound = e.target.checked; })} /><span>Little sounds for drops and treasures</span></label>
+        <label className="check"><input type="checkbox" checked={sp.quiet} onChange={(e) => setSound({ quiet: e.target.checked })} /><span>Quiet mode (no music, nature sounds or effects; the voice stays)</span></label>
+        <label className="check"><input type="checkbox" checked={sp.captions} onChange={(e) => setSound({ captions: e.target.checked })} /><span>Show captions when the voice speaks</span></label>
+        <label className="check"><input type="checkbox" checked={sp.breatheMusic} onChange={(e) => setSound({ breatheMusic: e.target.checked })} /><span>Soft music during breathing practice</span></label>
+        {([['music', 'Music'], ['ambience', 'Nature sounds'], ['effects', 'Effects'], ['voice', 'Voice']] as const).map(([k, label]) => (
+          <div key={k} style={{ marginTop: 6 }}>
+            <label className="f">{label}: {Math.round(sp[k] * 100)}%</label>
+            <input type="range" min={0} max={1} step={0.05} value={sp[k]} disabled={sp.quiet && k !== 'voice'} onChange={(e) => setSound({ [k]: Number(e.target.value) })} />
+          </div>
+        ))}
+        <p className="muted">Music rests during SURGE, the Listening Garden and active Body Lab rounds, so your attention stays on the practice.</p>
         <label className="f">Your island friend's name</label>
         <input type="text" value={d.game.mascotName} maxLength={20} onChange={(e) => update((x) => { x.game.mascotName = e.target.value; })} placeholder="Tulu" />
         <label className="f">Theme</label>

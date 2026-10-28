@@ -1,3 +1,4 @@
+import { fx } from './sound';
 import type { Reminders } from './model';
 import { isDesk } from './storage';
 
@@ -23,11 +24,13 @@ export async function scheduleReminders(r: Reminders): Promise<string> {
       if (perm.display !== 'granted') return 'Notifications are not allowed. Turn them on in Android settings.';
       await ln.cancel({ notifications: ITEMS.map((i) => ({ id: i.id })) });
       if (!r.enabled) return 'Reminders are off.';
-      await ln.createChannel?.({ id: 'calm', name: 'Calm reminders', importance: 3, vibration: false });
+      // v1.6: a new channel carries the soft reminder sound (a channel's sound cannot change once made)
+      await ln.deleteChannel?.({ id: 'calm' }).catch?.(() => {});
+      await ln.createChannel?.({ id: 'calm-sound', name: 'Calm reminders', importance: 3, vibration: false, sound: 'reminder.ogg' });
       await ln.schedule({
         notifications: ITEMS.map((i) => {
           const [hour, minute] = (r[i.key] as string).split(':').map(Number);
-          return { id: i.id, title: i.title, body: i.body, channelId: 'calm', schedule: { on: { hour, minute }, allowWhileIdle: true } };
+          return { id: i.id, title: i.title, body: i.body, channelId: 'calm-sound', sound: 'reminder.ogg', schedule: { on: { hour, minute }, allowWhileIdle: true } };
         }),
       });
       return 'Daily reminders are set.';
@@ -49,6 +52,6 @@ function startDeskTicker(r: Reminders) {
     const hm = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
     if (hm === lastFired) return;
     const hit = ITEMS.find((i) => r[i.key] === hm);
-    if (hit) { lastFired = hm; window.calmDesk!.notify(hit.title, hit.body); }
+    if (hit) { lastFired = hm; window.calmDesk!.notify(hit.title, hit.body); fx('F-23'); }
   }, 20_000);
 }

@@ -1,3 +1,4 @@
+import { fx } from '../lib/sound';
 import React, { createContext, useContext, useState } from 'react';
 
 // Navigation: a small stack of routes, no router library.
@@ -31,7 +32,7 @@ export function NavProvider({ children, initial = { name: 'home' }, onExit }: {
     setStack((s) => (s.length > 1 ? s.slice(0, -1) : s));
     window.scrollTo(0, 0);
   };
-  const toast = (t: string) => { setMsg(t); window.setTimeout(() => setMsg(null), 2600); };
+  const toast = (t: string) => { fx('F-07'); setMsg(t); window.setTimeout(() => setMsg(null), 2600); };
   return (
     <NavC.Provider value={{ route, go, back, toast }}>
       {children(route)}

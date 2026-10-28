@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { fx } from '../lib/sound';
 import { Back, Body, Chips, Scale, useNav } from '../components/ui';
 import { PROGRAMME, sessionById } from '../content/programme';
 import { FORMS } from '../content/forms';
@@ -106,6 +107,8 @@ export function SessionView({ id }: { id: string }) {
 
   const complete = () => {
     update((d) => { d.sessions[id] = { doneAt: new Date().toISOString(), reflection }; });
+    const landDone = PROGRAMME.filter((x) => x.week === s.week).every((x) => x.id === id || data!.sessions[x.id]);
+    fx(landDone ? 'S-04' : 'S-03');
     if (crisisText(reflection)) { update((d) => d.safetyEvents.push({ at: new Date().toISOString(), source: 'reflection' })); }
     toast('Stepping stone lit! The path goes on.');
     back();
@@ -130,9 +133,9 @@ export function SessionView({ id }: { id: string }) {
             <Body lines={s.cards[page].body} />
           </div>
           <div className="row spread">
-            <button className="btn ghost" disabled={page === 0} onClick={() => setPage(page - 1)}>Previous</button>
+            <button className="btn ghost" disabled={page === 0} onClick={() => { fx('F-04'); setPage(page - 1); }}>Previous</button>
             <span className="muted">{page + 1} / {s.cards.length}</span>
-            <button className="btn" onClick={() => setPage(page + 1)}>{page === s.cards.length - 1 ? 'To practice' : 'Next'}</button>
+            <button className="btn" onClick={() => { fx('F-04'); setPage(page + 1); }}>{page === s.cards.length - 1 ? 'To practice' : 'Next'}</button>
           </div>
         </>
       ) : (

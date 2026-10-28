@@ -1,5 +1,6 @@
 // Gentle celebrations: drops floating up, a treasure found, the island growing.
 // Watches the data, so every flow gets it for free. Each moment plays once (data.game.seen*).
+import { fx, hasSound } from '../lib/sound';
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../lib/store';
 import { drops, earned, level, LEVELS, TREASURES } from './rewards';
@@ -13,7 +14,16 @@ function tone(freq: number, at: number, dur: number, vol = 0.05) {
   g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
   o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + dur + 0.05);
 }
-export function chime(kind: 'drop' | 'treasure' | 'grow') {
+// What arrives at each island level makes its own small sound after the fanfare.
+const ARRIVES: Record<number, string> = { 1: 'F-09', 2: 'F-09', 3: 'F-09', 4: 'F-09', 5: 'F-14', 6: 'F-28', 7: 'F-30', 8: 'F-09', 9: 'F-29', 10: 'F-31' };
+
+export function chime(kind: 'drop' | 'treasure' | 'grow', lvl = 0) {
+  const rec = { drop: 'F-08', treasure: 'S-01', grow: 'S-02' }[kind];
+  if (hasSound(rec)) {
+    fx(rec);
+    if (kind === 'grow' && ARRIVES[lvl]) window.setTimeout(() => fx(ARRIVES[lvl]), 1600);
+    return;
+  }
   try {
     if (kind === 'drop') { tone(784, 0, 0.35); tone(1175, 0.09, 0.45, 0.035); }
     else if (kind === 'treasure') [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.11, 0.6, 0.045));
@@ -57,7 +67,7 @@ export function Celebrations() {
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const m = queue[0];
-  useEffect(() => { if (m && data?.game.sound) chime(m.kind === 'grow' ? 'grow' : 'treasure'); }, [m]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (m && data?.game.sound) chime(m.kind === 'grow' ? 'grow' : 'treasure', m.kind === 'grow' ? m.level : 0); }, [m]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

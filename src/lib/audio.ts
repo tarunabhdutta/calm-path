@@ -1,5 +1,6 @@
 import manifest from '../content/audioManifest.json';
 import captions from '../content/captions.json';
+import { duck } from './sound';
 
 // Voice clips bundled at build time (tools/sync-audio.mjs) and a soft synthesized breathing tone.
 // Captions (tools/make-captions.py) carry the script text, timed to each recording.
@@ -20,6 +21,8 @@ export function onSpeaking(l: (s: Speaking | null) => void) { listeners.add(l); 
 let current: HTMLAudioElement | null = null;
 let raf = 0;
 let currentFile = '';
+let voiceVolume = 1;
+export const setVoiceVolume = (v: number) => { voiceVolume = v; if (current) current.volume = v; };
 export const isPlaying = () => current !== null;
 
 /** Length of a bundled clip in seconds (0 when unknown). */
@@ -41,6 +44,8 @@ export function playClip(f: string, onEnd?: () => void, onFail?: () => void): bo
   const a = new Audio(`./audio/${f}`);
   current = a;
   currentFile = f;
+  a.volume = voiceVolume;
+  duck(true);
   const tick = () => {
     if (current !== a) return;
     const text = cueAt(f, a.currentTime);
@@ -48,12 +53,12 @@ export function playClip(f: string, onEnd?: () => void, onFail?: () => void): bo
     raf = requestAnimationFrame(tick);
   };
   a.onended = () => {
-    if (current === a) { cancelAnimationFrame(raf); current = null; emit({ clip: f, text: '', ended: true }); emit(null); }
+    if (current === a) { cancelAnimationFrame(raf); current = null; duck(false); emit({ clip: f, text: '', ended: true }); emit(null); }
     onEnd?.();
   };
   a.play().then(() => { raf = requestAnimationFrame(tick); }).catch(() => {
     if (current !== a) return;
-    current = null; emit(null);
+    current = null; duck(false); emit(null);
     (onFail ?? onEnd)?.();
   });
   return true;
@@ -64,7 +69,7 @@ export function stopClipIf(f: string) { if (current && currentFile === f) stopCl
 
 export function stopClip() {
   cancelAnimationFrame(raf);
-  if (current) { current.pause(); current.src = ''; current = null; }
+  if (current) { current.pause(); current.src = ''; current = null; duck(false); }
   if (speaking) emit(null);
 }
 

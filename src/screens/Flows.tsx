@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import { fx } from '../lib/sound';
+import { useScene } from '../lib/useScene';
 import { Back, Chips, Scale, useNav } from '../components/ui';
 import { AUDIO, NIGHT_GUIDE, SURGE, SURGE_REPEAT, URGE_PROMPTS, WIND_DOWN_TEXT } from '../content/scripts';
 import type { Line } from '../content/scripts';
 import { breathTone, clipDuration, hasClip, playClip, stopClip } from '../lib/audio';
 import { useSpeaking } from '../components/VoiceCaption';
 import { useStore } from '../lib/store';
-import { today, uid, emptyCounts } from '../lib/model';
+import { today, uid, emptyCounts, soundPrefs } from '../lib/model';
 import { LotusBloom, Ocean, SurfScene } from '../game/Scenes';
 import { Tulu } from '../game/Mascot';
 
@@ -56,6 +58,7 @@ function Timeline({ lines, clip, onDone }: { lines: Line[]; clip: string; onDone
 }
 
 export function Surge({ practice = false, onFinished }: { practice?: boolean; onFinished?: () => void }) {
+  useScene(null, 'A-03');
   const { data, update } = useStore();
   const { back, go, toast } = useNav();
   const [stage, setStage] = useState<'play' | 'repeat' | 'log'>('play');
@@ -132,6 +135,7 @@ const COUNTER_FOR: Record<string, 'checks' | 'ecg' | 'google' | 'reassurance'> =
 };
 
 export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished?: () => void }) {
+  useScene('M-08', 'A-04');
   const { data, update } = useStore();
   const { back, toast } = useNav();
   const [stage, setStage] = useState<'start' | 'surf' | 'end'>('start');
@@ -147,7 +151,7 @@ export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished
   useEffect(() => {
     if (stage !== 'surf') return;
     if (sec === 0 && total === minutes * 60 && voice) playClip(AUDIO.urge);
-    if (sec >= total) { stopClip(); setStage('end'); return; }
+    if (sec >= total) { stopClip(); fx('F-20'); setStage('end'); return; }
     const t = window.setTimeout(() => setSec(sec + 1), 1000);
     return () => window.clearTimeout(t);
   }, [stage, sec, total]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -196,7 +200,7 @@ export function Urge({ minutes = 3, onFinished }: { minutes?: number; onFinished
         <div className="flow over top">
           <div className="caption glass small" key={prompt} aria-live="polite">{prompt}</div>
           <div className="timer-pill">{Math.floor(left / 60)}:{String(left % 60).padStart(2, '0')}</div>
-          <button className="link" onClick={() => { stopClip(); setStage('end'); }}>I'm back on the shore</button>
+          <button className="link" onClick={() => { stopClip(); fx('F-20'); setStage('end'); }}>I'm back on the shore</button>
         </div>
       )}
       {stage === 'end' && (
@@ -227,6 +231,7 @@ export function Breathe({ minutes: initial, onFinished }: { minutes?: number; on
   const [running, setRunning] = useState(false);
   const voice = useVoice();
   const tone = data ? data.settings.tone : true;
+  useScene(data && soundPrefs(data.settings).breatheMusic ? 'M-07' : null, 'A-08');
   const startAt = useRef(0);
   const IN = pace === '6' ? 4 : 6, OUT = 6;
   const cycles = minutes ? Math.round((minutes * 60) / (IN + OUT)) : 0;
@@ -247,6 +252,7 @@ export function Breathe({ minutes: initial, onFinished }: { minutes?: number; on
 
   const begin = () => {
     startAt.current = Date.now();
+    fx('F-14');
     if (voice && hasClip(AUDIO.breatheIntro)) playClip(AUDIO.breatheIntro, () => setRunning(true));
     else setRunning(true);
   };
@@ -307,6 +313,7 @@ export function WindDown() {
   }, [i, audio]); // eslint-disable-line react-hooks/exhaustive-deps
   if (audio && speaking?.clip === AUDIO.winddown && speaking.text) said.current = speaking.text;
   const text = audio ? said.current : WIND_DOWN_TEXT[i];
+  useEffect(() => { fx('F-26', 0.8); }, []);
   const night = (open: boolean) => { if (open && voice) playClip(AUDIO.night); else if (!open) stopClip(); };
   return (
     <div className="full night-screen">

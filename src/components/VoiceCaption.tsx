@@ -1,3 +1,5 @@
+import { useStore } from '../lib/store';
+import { soundPrefs } from '../lib/model';
 import { useEffect, useState } from 'react';
 import { onSpeaking, playClip, stopClipIf } from '../lib/audio';
 import type { Speaking } from '../lib/audio';
@@ -24,6 +26,7 @@ export function useIntroClip(clip: string, on: boolean) {
 /** Captions for every other clip: a quiet bar at the bottom of the screen. */
 export function VoiceCaption() {
   const s = useSpeaking();
-  if (!s || !s.text || OWN.has(s.clip)) return null;
+  const { data } = useStore();
+  if (!s || !s.text || OWN.has(s.clip) || (data && !soundPrefs(data.settings).captions)) return null;
   return <div className="voice-caption" aria-live="polite" key={s.text}>{s.text}</div>;
 }

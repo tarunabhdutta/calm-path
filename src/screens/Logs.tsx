@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { fx } from '../lib/sound';
+import { useScene } from '../lib/useScene';
 import { useIntroClip } from '../components/VoiceCaption';
 import { Back, Chips, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
@@ -147,6 +149,7 @@ export function WorryBox() {
 }
 
 export function WorryTime({ onFinished }: { onFinished?: () => void }) {
+  useScene('M-09', 'A-07');
   const { data, update } = useStore();
   const { back } = useNav();
   const [steps, setSteps] = useState<Record<string, string>>({});
@@ -154,6 +157,7 @@ export function WorryTime({ onFinished }: { onFinished?: () => void }) {
   const parked = data!.worries.filter((w) => w.status === 'parked');
   const settle = (id: string, status: 'step' | 'letgo') => {
     if (status === 'letgo') {
+      fx('F-11');
       setLeaving((l) => [...l, id]);
       window.setTimeout(() => update((d) => { const w = d.worries.find((x) => x.id === id)!; w.status = 'letgo'; }), 1400);
     } else update((d) => { const w = d.worries.find((x) => x.id === id)!; w.status = 'step'; w.step = steps[id]; });
