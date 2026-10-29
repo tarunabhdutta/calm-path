@@ -1,4 +1,4 @@
-// The journey map: ten lands, one per week, each session a stepping stone.
+// The levels map: ten levels (lands), one per week, each mission a stepping stone.
 import { fx } from '../lib/sound';
 import { useEffect, useRef } from 'react';
 import { useNav } from '../components/ui';
@@ -6,6 +6,7 @@ import { useStore } from '../lib/store';
 import { PROGRAMME } from '../content/programme';
 import { coreCount, doneCount, nextSession } from '../lib/progress';
 import { LANDS } from '../game/rewards';
+import { friendlyDate } from '../lib/pathway';
 import { Tulu } from '../game/Mascot';
 
 const X = [22, 50, 78, 50]; // zigzag positions (% of width)
@@ -21,8 +22,8 @@ export function Journey() {
 
   return (
     <div className="app">
-      <h1>The journey</h1>
-      <p className="muted">{doneCount(d)} of {coreCount()} stepping stones · ten lands to explore</p>
+      <h1>Levels</h1>
+      <p className="muted">10 levels, about one week each. Finish every mission in a level to open the next one. {doneCount(d)} of {coreCount()} missions done.</p>
       <div className="bar"><i style={{ width: `${(doneCount(d) / coreCount()) * 100}%` }} /></div>
 
       {weeks.map((w) => {
@@ -37,8 +38,8 @@ export function Journey() {
             <header>
               <span className="land-icon big">{land.icon}</span>
               <div>
-                <small>{w === 11 ? 'Stay well' : `Week ${w}`}</small>
-                <h2>{land.name} {allDone && <span className="pill done">explored</span>}</h2>
+                <small>{w === 11 ? 'After level 10 · once a month' : `Level ${w} of 10 · about a week`}</small>
+                <h2>{land.name} {allDone && <span className="pill done">complete</span>}</h2>
                 <p className="muted">{land.line}</p>
               </div>
             </header>
@@ -59,8 +60,8 @@ export function Journey() {
                     <span className="stone-disc">{isDone ? '✓' : isNext ? (readyOn ? '⏳' : '✦') : '·'}
                       {isNext && <span className="stone-tulu"><Tulu size={58} mood={readyOn ? 'sleep' : 'happy'} /></span>}</span>
                     <span className="stone-label">
-                      <b>{s.title}</b>
-                      <small>{isDone ? 'explored · tap to revisit' : isNext ? (readyOn ? `opens ${readyOn}` : `${s.minutes} min · +5 💧`) : `${s.minutes} min`}</small>
+                      <b>{w === 11 ? s.title : `Mission ${i + 1}: ${s.title}`}</b>
+                      <small>{isDone ? 'done ✓ · tap to read again' : isNext ? (readyOn ? `opens ${friendlyDate(readyOn)}` : `${s.minutes} min · +5 💧`) : `${s.minutes} min`}</small>
                     </span>
                   </button>
                 );

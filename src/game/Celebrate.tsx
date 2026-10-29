@@ -3,7 +3,8 @@
 import { fx, hasSound } from '../lib/sound';
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../lib/store';
-import { drops, earned, level, LEVELS, TREASURES } from './rewards';
+import { drops, earned, LANDS, level, LEVELS, TREASURES } from './rewards';
+import { levelsDone, missionsIn, toolsOpenedBy } from '../lib/pathway';
 import { Island } from './Island';
 
 let ctx: AudioContext | null = null;
@@ -31,7 +32,7 @@ export function chime(kind: 'drop' | 'treasure' | 'grow', lvl = 0) {
   } catch { /* no audio */ }
 }
 
-type Moment = { kind: 'treasure'; id: string } | { kind: 'grow'; level: number };
+type Moment = { kind: 'treasure'; id: string } | { kind: 'grow'; level: number } | { kind: 'levelDone'; level: number };
 
 export function Celebrations() {
   const { data, update } = useStore();
@@ -51,23 +52,27 @@ export function Celebrations() {
         return;
       }
     }
+    // v1.7 levels: an older vault counts the levels it already finished as seen, quietly.
+    const lvDone = levelsDone(data).length;
+    if (g.levelsSeen === undefined) { update((d) => { d.game.levelsSeen = lvDone; }); return; }
+    const newLevels = lvDone > g.levelsSeen ? [lvDone] : [];
     const newT = got.filter((id) => !g.seenTreasures.includes(id));
     const grew = lvl > g.seenLevel;
     const gained = nDrops - g.seenDrops;
-    if (gained <= 0 && !newT.length && !grew) return;
+    if (gained <= 0 && !newT.length && !grew && !newLevels.length) return;
     if (gained > 0) {
       setFloater({ n: gained, key: Date.now() });
       if (g.sound) chime('drop');
       window.setTimeout(() => setFloater(null), 2200);
     }
-    if (newT.length || grew) {
-      setQueue((q) => [...q, ...(grew ? [{ kind: 'grow', level: lvl } as Moment] : []), ...newT.map((id) => ({ kind: 'treasure', id }) as Moment)]);
+    if (newT.length || grew || newLevels.length) {
+      setQueue((q) => [...q, ...newLevels.map((l) => ({ kind: 'levelDone', level: l }) as Moment), ...(grew ? [{ kind: 'grow', level: lvl } as Moment] : []), ...newT.map((id) => ({ kind: 'treasure', id }) as Moment)]);
     }
-    update((d) => { d.game.seenDrops = nDrops; d.game.seenLevel = Math.max(d.game.seenLevel, lvl); d.game.seenTreasures = Array.from(new Set([...d.game.seenTreasures, ...newT])); });
+    update((d) => { d.game.levelsSeen = Math.max(d.game.levelsSeen ?? 0, lvDone); d.game.seenDrops = nDrops; d.game.seenLevel = Math.max(d.game.seenLevel, lvl); d.game.seenTreasures = Array.from(new Set([...d.game.seenTreasures, ...newT])); });
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const m = queue[0];
-  useEffect(() => { if (m && data?.game.sound) chime(m.kind === 'grow' ? 'grow' : 'treasure', m.kind === 'grow' ? m.level : 0); }, [m]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (m && data?.game.sound) chime(m.kind === 'treasure' ? 'treasure' : 'grow', m.kind === 'grow' ? m.level : 0); }, [m]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -80,7 +85,20 @@ export function Celebrations() {
         <div className="moment-back" onClick={() => setQueue((q) => q.slice(1))}>
           <div className="moment" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="celebration">
             <div className="confetti" aria-hidden>{Array.from({ length: 22 }).map((_, i) => <i key={i} style={{ ['--i' as any]: i, left: `${(i * 37) % 100}%`, animationDelay: `${((i * 7) % 11) * 0.09}s`, animationDuration: `${2 + ((i * 5) % 7) * 0.25}s` }} />)}</div>
-            {m.kind === 'treasure' ? (() => {
+            {m.kind === 'levelDone' ? (() => {
+              const next = m.level + 1;
+              const tools = missionsIn(next).flatMap((x) => toolsOpenedBy(x.id)).map((t) => t.name);
+              return (
+                <>
+                  <div className="moment-icon">{LANDS[m.level].icon}</div>
+                  <p className="moment-kicker">Level {m.level} complete!</p>
+                  <h1>{LANDS[m.level].name}</h1>
+                  <p className="ink2">{next <= 10
+                    ? `Level ${next} is open: ${LANDS[next].name}. Its first mission is on your home screen.${tools.length ? ` In this level you will learn: ${tools.join(', ')}.` : ''}`
+                    : 'You finished all ten levels. A short visit once a month keeps it strong.'}</p>
+                </>
+              );
+            })() : m.kind === 'treasure' ? (() => {
               const t = TREASURES.find((x) => x.id === m.id)!;
               return (
                 <>

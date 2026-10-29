@@ -12,6 +12,7 @@ import { crisisText } from '../lib/safety';
 import { Breathe, Surge, Urge } from './Flows';
 import { WorryTime } from './Logs';
 import { LANDS } from '../game/rewards';
+import { GOALS, missionNo, missionsIn, toolsOpenedBy } from '../lib/pathway';
 import { Tulu } from '../game/Mascot';
 import { LessonArt } from '../game/LessonArt';
 import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from '../game/Games';
@@ -110,7 +111,8 @@ export function SessionView({ id }: { id: string }) {
     const landDone = PROGRAMME.filter((x) => x.week === s.week).every((x) => x.id === id || data!.sessions[x.id]);
     fx(landDone ? 'S-04' : 'S-03');
     if (crisisText(reflection)) { update((d) => d.safetyEvents.push({ at: new Date().toISOString(), source: 'reflection' })); }
-    toast('Stepping stone lit! The path goes on.');
+    const opened = data!.sessions[id] ? [] : toolsOpenedBy(id);
+    toast(opened.length ? `Mission complete! New tool open: ${opened.map((t) => t.name).join(', ')}` : 'Mission complete! Well done.');
     back();
   };
 
@@ -120,9 +122,15 @@ export function SessionView({ id }: { id: string }) {
       <div className="land-banner" style={{ background: `linear-gradient(135deg, ${LANDS[s.week].sky[0]}, ${LANDS[s.week].sky[1]})` }}>
         <span className="land-icon big">{LANDS[s.week].icon}</span>
         <div className="grow">
-          <small>{LANDS[s.week].name} · {s.phase === 'quickstart' ? 'Quick Start' : s.phase === 'staywell' ? 'Stay Well' : `week ${s.week}`} · {s.minutes} min</small>
+          <small>{s.phase === 'staywell' ? 'Stay well · monthly' : `Level ${s.week} · Mission ${missionNo(s)} of ${missionsIn(s.week).length}`} · about {s.minutes} min</small>
           <h1 style={{ margin: '2px 0 0' }}>{s.title}</h1>
         </div>
+      </div>
+      {page === 0 && <p className="mission-goal"><b>In this mission:</b> {GOALS[s.id]}</p>}
+      <div className="steps3" aria-label={`Step ${onCards ? 1 : 2} of 3`}>
+        <span className={onCards ? 'on' : 'done'}>1 Read</span>
+        <span className={onCards ? '' : 'on'}>2 Practise</span>
+        <span className={onCards ? '' : 'on'}>3 Finish</span>
       </div>
       {onCards && <div className="pager-dots" aria-hidden>{s.cards.map((_, k) => <i key={k} className={k <= page ? 'on' : ''} />)}<i className="flag">🏁</i></div>}
       {onCards ? (
@@ -135,28 +143,28 @@ export function SessionView({ id }: { id: string }) {
           <div className="row spread">
             <button className="btn ghost" disabled={page === 0} onClick={() => { fx('F-04'); setPage(page - 1); }}>Previous</button>
             <span className="muted">{page + 1} / {s.cards.length}</span>
-            <button className="btn" onClick={() => { fx('F-04'); setPage(page + 1); }}>{page === s.cards.length - 1 ? 'To practice' : 'Next'}</button>
+            <button className="btn" onClick={() => { fx('F-04'); setPage(page + 1); }}>{page === s.cards.length - 1 ? 'Go to step 2: Practise' : 'Next'}</button>
           </div>
         </>
       ) : (
         <>
-          <div className="tulu-says"><Tulu size={70} mood="excited" /><p>Now let's practise! Each one helps our island grow.</p></div>
+          <div className="tulu-says"><Tulu size={70} mood="excited" /><p>Step 2: tap the practice below and do it. Then answer the question and press Finish.</p></div>
           {gated && <div className="banner">The heart-raising exercises unlock once your cardiologist has said yes (Settings → Doctor said yes). For now, use the gentle exercises. They work too.</div>}
           {practice.map((p, i) => (
             <button key={i} className="tile" style={{ width: '100%', margin: '6px 0' }} onClick={() => setActive(i)}>
               <div className="row spread"><b>{practiceLabel(p)}</b>{doneP[i] && <span className="pill done">done</span>}</div>
-              <span>Tap to start</span>
+              <span>{doneP[i] ? 'Done ✓' : 'Tap to start'}</span>
             </button>
           ))}
           {s.reflection && (
             <div className="card">
-              <label className="f">{s.reflection}</label>
+              <label className="f">Step 3: {s.reflection}</label>
               <textarea value={reflection} onChange={(e) => setReflection(e.target.value)} placeholder="A few words are enough" />
             </div>
           )}
           <div className="row">
             <button className="btn ghost" onClick={() => setPage(s.cards.length - 1)}>Reread</button>
-            <button className="btn grow" onClick={complete}>{data!.sessions[id] ? 'Save' : 'Light the stepping stone · +5 💧'}</button>
+            <button className="btn grow" onClick={complete}>{data!.sessions[id] ? 'Save' : 'Finish the mission · +5 💧'}</button>
           </div>
         </>
       )}

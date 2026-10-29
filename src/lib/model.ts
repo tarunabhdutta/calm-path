@@ -69,9 +69,13 @@ export interface Game {
   seenTreasures: string[];
   seenLevel: number;
   seenDrops: number;
+  /** v1.7: the "how Calm Path works" guide has been shown */
+  tutorialSeen?: boolean;
+  /** v1.7: how many finished levels have had their "Level complete" moment */
+  levelsSeen?: number;
 }
 
-export const newGame = (): Game => ({ mascotName: 'Tulu', sound: true, seenTreasures: [], seenLevel: 0, seenDrops: 0 });
+export const newGame = (): Game => ({ mascotName: 'Tulu', sound: true, seenTreasures: [], seenLevel: 0, seenDrops: 0, tutorialSeen: false, levelsSeen: 0 });
 
 /** Older vaults (v1.0.0) have no game block. */
 export function migrate(d: Data): Data {

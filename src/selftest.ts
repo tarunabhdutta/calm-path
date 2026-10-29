@@ -12,6 +12,7 @@ import { crisisText } from './lib/safety';
 import { newData } from './lib/model';
 import { nextSession } from './lib/progress';
 import { drops, TREASURES } from './game/rewards';
+import { currentLevel, GOALS, isOpen, TOOLS } from './lib/pathway';
 
 export interface Check { name: string; ok: boolean; detail?: string }
 
@@ -32,6 +33,14 @@ export function contentChecks(): Check[] {
     }
   }
   out.push({ name: 'every practice points at a real form/measure', ok: missing.length === 0, detail: missing.join(', ') });
+  // v1.7 game path: every mission has a plain goal; every tool opens with a real mission; a new person starts on level 1 with only the first tools open
+  const noGoal = PROGRAMME.filter((s) => !GOALS[s.id]).map((s) => s.id);
+  out.push({ name: 'every mission has a plain goal', ok: noGoal.length === 0, detail: noGoal.join(', ') });
+  const badTool = TOOLS.filter((t) => t.opensWith && !ids.includes(t.opensWith)).map((t) => t.id);
+  out.push({ name: 'every tool opens with a real mission', ok: badTool.length === 0, detail: badTool.join(', ') });
+  const fresh = newData({ name: 'Test' });
+  const openAtStart = TOOLS.filter((t) => isOpen(fresh, t)).map((t) => t.id).sort().join(',');
+  out.push({ name: 'a new person starts on level 1 with only the first tools open', ok: currentLevel(fresh) === 1 && openAtStart === 'breathe,checkin,surge,winddown', detail: openAtStart });
   const allText = [
     ...PROGRAMME.flatMap((s) => s.cards.flatMap((c) => [c.title ?? '', ...c.body])),
     ...SURGE.map((l) => l.text), ...SURGE_REPEAT.map((l) => l.text), ...URGE_PROMPTS.map((p) => p.text), ...WIND_DOWN_TEXT, ...NIGHT_GUIDE,

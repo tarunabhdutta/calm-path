@@ -22,6 +22,7 @@ import { BodyLab, ListeningGarden, SwitchGame, TheoryGame } from './game/Games2'
 import { Family, HospitalUrge } from './screens/Family';
 import { Progress } from './screens/Progress';
 import { Safety, Settings } from './screens/Settings';
+import { Guide } from './screens/Guide';
 
 function Screen({ r }: { r: Route }) {
   switch (r.name) {
@@ -50,6 +51,7 @@ function Screen({ r }: { r: Route }) {
     }
     case 'family': return <Family />;
     case 'hospital': return <HospitalUrge />;
+    case 'guide': return <GuideRoute />;
   }
 }
 
@@ -59,8 +61,8 @@ const GAMES = { fearCycle: FearCycleGame, leaves: LeavesGame, forecast: Forecast
 const routeKey = (r: Route) => r.name + ('id' in r ? String(r.id) : '') + ('formId' in r ? r.formId : '') + ('entryId' in r ? r.entryId ?? '' : '');
 
 const TABS = [
-  { name: 'home', label: 'Island' }, { name: 'path', label: 'Journey' }, { name: 'tools', label: 'Toolbox' },
-  { name: 'progress', label: 'Treasures' }, { name: 'settings', label: 'Settings' },
+  { name: 'home', label: 'Home' }, { name: 'path', label: 'Levels' }, { name: 'tools', label: 'Tools' },
+  { name: 'progress', label: 'Rewards' }, { name: 'settings', label: 'Settings' },
 ] as const;
 
 function Tabs() {
@@ -105,6 +107,11 @@ function BringAcross() {
       )}
     </div>
   );
+}
+
+function GuideRoute() {
+  const { back } = useNav();
+  return <Guide onDone={back} />;
 }
 
 function Setup() {
@@ -162,6 +169,8 @@ export default function App() {
   if (status === 'loading') return <div className="full" />;
   if (status === 'setup') return <Setup />;
   if (status === 'legacy') return <BringAcross />;
+  // First visit (and the first visit after the v1.7 update): how the levels and missions work.
+  if (data && !data.game.tutorialSeen) return <Guide onDone={() => undefined} />;
   return (
     <NavProvider>{(r) => (
       <>

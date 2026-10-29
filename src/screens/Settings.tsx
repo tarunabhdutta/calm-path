@@ -52,7 +52,7 @@ export function Safety({ crisis = false }: { crisis?: boolean }) {
 
 export function Settings() {
   const { data, update, snapshot, restore } = useStore();
-  const { toast } = useNav();
+  const { toast, go } = useNav();
   const d = data!;
   const sp = soundPrefs(d.settings);
   const setSound = (p: Partial<SoundPrefs>) => update((x) => { x.settings.sound = { ...soundPrefs(x.settings), ...p }; });
@@ -95,6 +95,9 @@ export function Settings() {
   return (
     <div className="app">
       <h1>Settings</h1>
+      <button className="tile play" style={{ width: '100%', marginBottom: 10 }} onClick={() => go({ name: 'guide' })}>
+        <i>🧭</i><b>How Calm Path works</b><span>The levels, missions and buttons, in five short cards</span>
+      </button>
       {msg && <div className="banner">{msg}</div>}
 
       <h2>People and safety</h2>

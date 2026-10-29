@@ -58,7 +58,8 @@ export function Progress() {
   const surfed = d.urges.filter((u) => u.outcome === 'surfed').length;
   return (
     <div className="app">
-      <h1>Treasures</h1>
+      <h1>Rewards</h1>
+      <p className="muted" style={{ marginTop: -6 }}>Treasures you find by practising, and charts of how far you have come.</p>
       <p className="muted">{earned(d).length} of {TREASURES.length} found · {drops(d)} 💧 earned · {gardenDays(d)} island days</p>
       <div className="chest">
         {TREASURES.map((t) => {

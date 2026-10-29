@@ -352,3 +352,40 @@ svg.chart { width: 100%; height: auto; display: block; }
   .counters { grid-template-columns: repeat(2, 1fr); }
   .chest { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── v1.7 the game path: level strip, today's mission, three steps, locked tools, the guide ── */
+.level-strip { width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; margin: 14px 0 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); }
+.level-strip b { display: block; font-weight: 800; }
+.level-strip .muted { display: block; font-size: .86rem; }
+.level-strip .bar { margin-top: 6px; }
+.level-no { flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 66px; height: 66px; border-radius: 50%; background: var(--leaf); color: var(--surface); font-weight: 900; font-size: 1.6rem; line-height: 1; text-align: center; }
+.level-no small { display: block; font-size: .6rem; font-weight: 800; letter-spacing: .05em; }
+.mission-card { display: block; width: 100%; border-radius: 26px; padding: 18px; margin: 12px 0 4px; box-shadow: var(--shadow); color: #24352d; border: 3px solid var(--leaf); }
+.mission-card small { display: block; color: #4f6258; font-weight: 900; letter-spacing: .06em; font-size: .74rem; }
+.mission-card b { display: block; font-size: 1.3rem; font-weight: 900; margin: 4px 0 2px; }
+.mission-card p { margin: 4px 0 10px; color: #3c4f45; font-weight: 600; }
+.mission-card .btn { color: #fff; }
+.mission-go { font-size: 1.1rem; min-height: 58px; }
+.mission-wait { background: rgba(255, 255, 255, .6); border-radius: 14px; padding: 10px 12px; }
+.g-steps { display: flex; gap: 6px; margin: 0 0 12px; }
+.g-steps i { font-style: normal; flex: 1; text-align: center; background: rgba(255, 255, 255, .7); border-radius: 99px; padding: 5px 4px; font-weight: 800; font-size: .8rem; color: #3e8a62; }
+.steps3 { display: flex; gap: 6px; margin: 10px 0 4px; }
+.steps3 span { flex: 1; text-align: center; border-radius: 99px; padding: 6px 4px; font-weight: 800; font-size: .85rem; background: var(--surface-2); color: var(--muted); }
+.steps3 span.on { background: var(--leaf); color: var(--surface); }
+.steps3 span.done { background: var(--leaf-soft); color: var(--leaf); }
+.mission-goal { background: var(--leaf-soft); border-radius: 16px; padding: 10px 14px; margin: 10px 0 0; color: var(--ink-2); }
+.tile.locked { opacity: .55; filter: grayscale(.6); }
+.tile.locked:active { transform: none; }
+.guide h1 { margin: 4px 0 6px; }
+.guide-tulu { text-align: center; margin-top: 4px; }
+.guide-p { font-size: 1.08rem; line-height: 1.5; color: var(--ink-2); margin: 8px 0; }
+.guide-art { margin: 10px 0; animation: fade .4s; }
+.guide .surge { pointer-events: none; }
+.g-mock { pointer-events: none; }
+.g-levels { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 12px; background: var(--surface-2); border-radius: 20px; }
+.g-levels span { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; background: var(--surface); color: var(--muted); border: 2px solid var(--line); }
+.g-levels span.on { background: var(--leaf); color: var(--surface); border-color: var(--leaf); transform: scale(1.12); }
+.g-rings { display: flex; gap: 10px; justify-content: space-around; padding: 12px; background: var(--surface-2); border-radius: 20px; }
+.g-rings span { display: flex; flex-direction: column; align-items: center; gap: 6px; font-weight: 800; font-size: .85rem; color: var(--ink-2); }
+.g-rings em { font-style: normal; font-size: 1.6rem; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; border: 6px solid var(--leaf); background: var(--surface); }
+.g-island { border-radius: 20px; overflow: hidden; }

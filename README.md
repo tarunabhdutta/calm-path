@@ -13,6 +13,12 @@ waters your island and helps it grow.
 - **Offline and private.** No account, no sign-up, no ads, no tracking. Your entries stay on your own device.
 - **Android app, Windows app, and a web app** that also installs on iPhone and Mac.
 
+**How it works (v1.7): like a game, one step at a time.** There are **10 levels**, about a week each.
+Every level has a few short **missions** (10–15 minutes: read a few cards, do one practice, answer one
+question). The home screen always shows **today's mission** with one Start button, the blue **SURGE**
+button for moments of fear, and **three daily rings** to fill. New tools **open as the missions teach
+them**, so nobody faces 30 buttons on day one. Five short cards explain all of this on first open.
+
 | Your island | The journey | SURGE | Calm-time breathing |
 |---|---|---|---|
 | ![Island](docs/screenshots/island.png) | ![Journey](docs/screenshots/journey.png) | ![SURGE](docs/screenshots/surge.png) | ![Lotus](docs/screenshots/lotus.png) |
@@ -38,7 +44,7 @@ every lesson card. It covers:
 - **The anxiety forecaster:** every practice is an experiment.
 - **Fear loop**, **leaves on the river**, **fight switch**, **get curious**, **ladder** (with random draws) and **little-habit builder**.
 
-**Always one tap away:**
+**Open from day one:** SURGE, calm-time breathing, the daily check-in, wind-down, the safety card and the family page. **The rest open with their mission:**
 - **SURGE**, for a wave of anxiety.
 - **Surf an urge**, instead of checking.
 - **Calm-time breathing**.

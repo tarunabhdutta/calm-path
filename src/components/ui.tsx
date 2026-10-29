@@ -8,7 +8,7 @@ export type Route =
   | { name: 'checkin' } | { name: 'worry' } | { name: 'worrytime' } | { name: 'safety'; crisis?: boolean }
   | { name: 'session'; id: string } | { name: 'form'; formId: string; entryId?: string }
   | { name: 'measure'; id: string } | { name: 'budget' } | { name: 'logs'; formId: string }
-  | { name: 'game'; id: GameId; task?: string } | { name: 'family' } | { name: 'hospital' };
+  | { name: 'game'; id: GameId; task?: string } | { name: 'family' } | { name: 'hospital' } | { name: 'guide' };
 
 export type GameId = 'fearCycle' | 'leaves' | 'forecast' | 'ladder' | 'noting' | 'recipe' | 'bodyLab' | 'listening' | 'theory' | 'switch';
 
