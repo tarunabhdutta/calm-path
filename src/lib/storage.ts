@@ -10,7 +10,10 @@ export interface DeskBridge {
   exportFile(name: string, json: string): Promise<string | null>;
   info(): Promise<{ dataDir: string; backupDir: string; version: string }>;
   chooseBackupDir(): Promise<string | null>;
-  notify(title: string, body: string): void;
+  notify(title: string, body: string, route?: string): void;
+  /** v1.9: the PC keeps the reminder plan itself, so reminders come even when the window is closed. */
+  schedule?(plan: string, opts: { enabled: boolean; startWithPc: boolean }): void;
+  onOpen?(cb: (route: string) => void): void;
 }
 
 declare global {

@@ -2,7 +2,7 @@
   "name": "calm-path",
   "productName": "Calm Path",
   "private": true,
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Calm Path: an offline, playful companion for recovering from health anxiety",
   "author": "Tarunabh Dutta",
   "type": "module",
@@ -48,6 +48,7 @@
     "files": [
       "dist/**/*",
       "electron/**/*",
+    "build/icon.png",
       "package.json",
       "!node_modules/**/*"
     ],

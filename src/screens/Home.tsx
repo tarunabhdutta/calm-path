@@ -11,6 +11,7 @@ import { Counters, UndoCounter } from './Logs';
 import { Island } from '../game/Island';
 import { TULU_LINES } from '../game/Mascot';
 import { CountUp } from '../lib/motion';
+import { nextToday } from '../lib/notify';
 import { drops, gardenDays, LANDS, level, LEVELS, nextLevelProgress, quests } from '../game/rewards';
 
 function Ring({ p, done, icon }: { p: number; done: boolean; icon: string }) {
@@ -127,6 +128,19 @@ export function Home() {
       </button>
 
       {session && <MissionCard />}
+
+      {(() => {
+        const nr = nextToday(d);
+        return (
+          <button className="next-rem" onClick={() => go({ name: 'settings' })}>
+            <span className="bell" aria-hidden>🔔</span>
+            {nr ? <span className="grow">Next reminder: <b>{nr.label}</b> at {nr.time}</span>
+              : d.settings.reminders.enabled ? <span className="grow">No more reminders today. Rest well.</span>
+              : <span className="grow">Reminders are off. <b>Turn them on</b></span>}
+            <span className="go-arrow">›</span>
+          </button>
+        );
+      })()}
 
       <button className="surge" onClick={() => go({ name: 'surge' })} aria-label="SURGE: guided help for a wave of anxiety">
         <svg className="surge-waves" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden>

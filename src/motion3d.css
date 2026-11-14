@@ -148,7 +148,7 @@ span.beacon { display: block; border-radius: 16px; }
 .practice-tile .go-tap { display: inline-block; margin-left: 6px; animation: nudge 1.2s ease-in-out infinite; }
 .pill.done { animation: pop .5s cubic-bezier(.3, 1.6, .5, 1); }
 
-/* ── the guide: five cards, each a tiny moving picture ── */
+/* ── the guide: six cards, each a tiny moving picture ── */
 .guide-art.turn-fwd { animation: cardFwd .6s cubic-bezier(.2, .9, .25, 1.08) both; }
 .guide-art.turn-back { animation: cardBack .6s cubic-bezier(.2, .9, .25, 1.08) both; }
 .guide-tulu.hop svg { animation: hop .6s cubic-bezier(.3, 1.6, .5, 1); }
@@ -210,3 +210,20 @@ span.beacon { display: block; border-radius: 16px; }
   .rv { opacity: 1; }
   .tile, .quest, .mission-card, .island-card, .level-strip, .land-card, .tilt, .stone-disc, .rung { transform: none !important; }
 }
+
+/* ── v1.9 reminders that stay with you ── */
+.next-rem { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; margin: 10px 0 4px; padding: 10px 14px; border-radius: 18px; border: 1px dashed var(--line); background: var(--surface); color: var(--ink-2); font-size: .92rem; }
+.next-rem .bell { display: inline-block; font-size: 1.2rem; transform-origin: 50% 10%; animation: bellRing 6s ease-in-out 1.5s infinite; }
+@keyframes bellRing { 0%, 80%, 100% { transform: rotate(0); } 83% { transform: rotate(16deg); } 86% { transform: rotate(-14deg); } 89% { transform: rotate(10deg); } 92% { transform: rotate(-6deg); } 95% { transform: rotate(2deg); } }
+.rem-msg { background: var(--water-soft); color: var(--ink); border-radius: 14px; padding: 10px 12px; margin: 10px 0 0; font-weight: 700; animation: lineIn .4s both; }
+.g-rem { display: grid; place-items: center; padding: 6px 0; }
+.g-phone { position: relative; width: 210px; height: 190px; border-radius: 28px; padding: 30px 10px 10px; background: linear-gradient(160deg, #2e7590, #1c4f63); box-shadow: 0 16px 30px rgba(0, 0, 0, .25), inset 0 0 0 6px #10303c; overflow: hidden;
+  transform: perspective(700px) rotateX(10deg) rotateY(-14deg); animation: phoneSway 7s ease-in-out infinite; }
+@keyframes phoneSway { 0%, 100% { transform: perspective(700px) rotateX(10deg) rotateY(-14deg); } 50% { transform: perspective(700px) rotateX(6deg) rotateY(10deg); } }
+.g-time { position: absolute; top: 8px; left: 0; right: 0; text-align: center; color: #fff; font-weight: 900; font-size: .8rem; opacity: .8; }
+.g-note { background: rgba(255, 255, 255, .95); color: #24352d; border-radius: 14px; padding: 7px 10px; margin-bottom: 8px; font-size: .74rem; line-height: 1.25; display: flex; flex-direction: column; animation: noteDrop 6s cubic-bezier(.2, 1.3, .4, 1) infinite; }
+.g-note b { font-size: .8rem; }
+.g-note.two { animation-delay: 1.2s; }
+@keyframes noteDrop { 0%, 8% { transform: translateY(-80px); opacity: 0; } 18%, 85% { transform: none; opacity: 1; } 95%, 100% { transform: translateY(-10px); opacity: 0; } }
+.g-bell { display: inline-block; transform-origin: 50% 10%; animation: bellRing 3s ease-in-out infinite; }
+.g-rem-on { margin-top: 6px; }

@@ -2,7 +2,7 @@
 // Data:    %APPDATA%\Calm Path\calmpath.vault   (override: CALMPATH_DATA_DIR)
 // Backups: chosen in Settings; default Documents\Calm Path Backups (override: CALMPATH_BACKUP_DIR)
 // Self-test: "Calm Path.exe" --self-test  -> writes selftest.json, exit code 0/1
-const { app, BrowserWindow, ipcMain, dialog, Notification, shell } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Notification, shell, Tray, Menu, nativeImage, powerMonitor } = require('electron');
 const path = require('node:path');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -86,13 +86,83 @@ ipcMain.handle('desk:chooseBackupDir', async () => {
   const desk = readDesk(); desk.backupDir = r.filePaths[0]; writeDesk(desk);
   return r.filePaths[0];
 });
-ipcMain.on('desk:notify', (_e, title, body) => { if (Notification.isSupported()) new Notification({ title, body, silent: true }).show(); });
+// ── Reminders that stay with you (v1.9) ──
+// The page hands over its plan; the shell keeps it, fires it on time even with the window closed,
+// catches up within 90 minutes after sleep, and opens the right practice when a reminder is clicked.
+const HIDDEN = process.argv.includes('--hidden');
+let plan = [];
+let keepRunning = true;
+let quitting = false;
+try { const desk = readDesk(); plan = desk.plan || []; keepRunning = desk.keepRunning !== false; } catch { /* first run */ }
+
+function showWin(route) {
+  if (!win) return;
+  if (win.isMinimized()) win.restore();
+  win.show(); win.focus();
+  if (route) win.webContents.send('desk:open', route);
+}
+function remind(title, body, route) {
+  if (!Notification.isSupported()) return;
+  const n = new Notification({ title, body, silent: false, icon: path.join(__dirname, '..', 'build', 'icon.png') });
+  n.on('click', () => showWin(route));
+  n.show();
+}
+ipcMain.on('desk:notify', (_e, title, body, route) => remind(title, body, route));
+
+const dayKey = (t) => { const d = new Date(t); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
+function checkReminders() {
+  if (SELF_TEST || !plan.length) return;
+  const now = Date.now();
+  const desk = readDesk();
+  const fired = desk.fired || {};
+  let changed = false;
+  for (const p of plan) {
+    let due;
+    if (p.daily) {
+      const [h, m] = String(p.daily).split(':').map(Number);
+      const t = new Date(); t.setHours(h, m, 0, 0); due = t.getTime();
+    } else due = p.at;
+    if (!due || now < due || now - due > 90 * 60_000) continue;
+    const key = p.daily ? `${p.id}@${dayKey(due)}` : `${p.id}@${p.at}`;
+    if (fired[key]) continue;
+    fired[key] = now; changed = true;
+    remind(p.title, p.body, JSON.stringify(p.route));
+  }
+  if (changed) {
+    for (const k of Object.keys(fired)) if (now - fired[k] > 3 * 86_400_000) delete fired[k];
+    desk.fired = fired; writeDesk(desk);
+  }
+}
+ipcMain.on('desk:schedule', (_e, planJson, opts) => {
+  try { plan = opts.enabled ? JSON.parse(planJson) : []; } catch { plan = []; }
+  keepRunning = !!opts.enabled;
+  const desk = readDesk(); desk.plan = plan; desk.keepRunning = keepRunning; writeDesk(desk);
+  if (app.isPackaged && !SELF_TEST) app.setLoginItemSettings({ openAtLogin: !!(opts.enabled && opts.startWithPc), args: ['--hidden'] });
+  tray?.setToolTip(keepRunning ? 'Calm Path: reminders are on' : 'Calm Path');
+  checkReminders();
+});
+
+let tray = null;
+function makeTray() {
+  if (SELF_TEST || tray) return;
+  const img = nativeImage.createFromPath(path.join(__dirname, '..', 'build', 'icon.png')).resize({ width: 16, height: 16 });
+  tray = new Tray(img);
+  tray.setToolTip(keepRunning ? 'Calm Path: reminders are on' : 'Calm Path');
+  tray.setContextMenu(Menu.buildFromTemplate([
+    { label: 'Open Calm Path', click: () => showWin() },
+    { label: 'SURGE: help right now', click: () => showWin(JSON.stringify({ name: 'surge' })) },
+    { label: 'Slow breathing', click: () => showWin(JSON.stringify({ name: 'breathe' })) },
+    { type: 'separator' },
+    { label: 'Quit (reminders stop until you open it again)', click: () => { quitting = true; app.quit(); } },
+  ]));
+  tray.on('click', () => showWin());
+}
 
 let win = null;
 function createWindow() {
   win = new BrowserWindow({
     width: 560, height: 920, minWidth: 380, minHeight: 600,
-    title: 'Calm Path', backgroundColor: '#f4f7f3', autoHideMenuBar: true, show: !SELF_TEST,
+    title: 'Calm Path', backgroundColor: '#f4f7f3', autoHideMenuBar: true, show: !SELF_TEST && !HIDDEN,
     icon: path.join(__dirname, '..', 'build', 'icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true },
   });
@@ -101,6 +171,13 @@ function createWindow() {
   win.webContents.setWindowOpenHandler(({ url }) => { if (/^https?:/.test(url)) shell.openExternal(url); return { action: 'deny' }; });
   win.webContents.on('will-navigate', (e, url) => { if (!url.startsWith('file:')) e.preventDefault(); });
   win.loadFile(path.join(__dirname, '..', 'dist', 'index.html'));
+  // closing the window keeps Calm Path in the tray while reminders are on (said once, in a reminder)
+  win.on('close', (e) => {
+    if (quitting || SELF_TEST || !keepRunning) return;
+    e.preventDefault(); win.hide();
+    const desk = readDesk();
+    if (!desk.trayTold) { desk.trayTold = true; writeDesk(desk); remind('Calm Path is still here', 'It waits quietly near the clock to bring your reminders. Right-click its icon to quit.'); }
+  });
 
   if (SELF_TEST) {
     win.webContents.on('did-finish-load', async () => {
@@ -122,12 +199,17 @@ function createWindow() {
 
 if (!SELF_TEST && !app.requestSingleInstanceLock()) app.quit();
 else {
-  app.on('second-instance', () => { if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
+  app.on('second-instance', () => showWin());
   app.setAppUserModelId('com.tdfilmstudio.calmpath');
   app.whenReady().then(() => {
     createWindow();
+    makeTray();
     autoBackup();
     setInterval(autoBackup, 3600_000);
+    setInterval(checkReminders, 30_000);
+    setTimeout(checkReminders, 5_000);
+    powerMonitor.on('resume', () => setTimeout(checkReminders, 3_000));
   });
-  app.on('window-all-closed', () => app.quit());
+  app.on('before-quit', () => { quitting = true; });
+  app.on('window-all-closed', () => { if (!keepRunning || SELF_TEST) app.quit(); });
 }

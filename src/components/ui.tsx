@@ -1,5 +1,6 @@
 import { fx } from '../lib/sound';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { takePendingRoute } from '../lib/notify';
 
 // Navigation: a small stack of routes, no router library.
 export type Route =
@@ -36,6 +37,13 @@ export function NavProvider({ children, initial = { name: 'home' }, onExit }: {
     setStack((s) => (s.length > 1 ? s.slice(0, -1) : s));
     window.scrollTo(0, 0);
   };
+  // a tapped reminder opens its own practice (now, or as soon as the app is ready)
+  useEffect(() => {
+    const open = () => { const r = takePendingRoute(); if (r) go(r); };
+    open();
+    window.addEventListener('calm:open', open);
+    return () => window.removeEventListener('calm:open', open);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const toast = (t: string) => { fx('F-07'); setMsg(t); window.setTimeout(() => setMsg(null), 3200); };
   return (
     <NavC.Provider value={{ route, dir, go, back, toast }}>

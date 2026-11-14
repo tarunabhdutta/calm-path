@@ -6,6 +6,7 @@ import { useStore } from '../lib/store';
 import { Tulu } from '../game/Mascot';
 import { Island } from '../game/Island';
 import { useSwipe } from '../lib/motion';
+import { scheduleReminders } from '../lib/notify';
 
 function Levels() {
   return (
@@ -58,6 +59,29 @@ function SurgeMock() {
   );
 }
 
+function ReminderMock() {
+  return (
+    <div className="g-rem" aria-hidden>
+      <div className="g-phone">
+        <span className="g-time">9:30</span>
+        <div className="g-note"><b><span className="g-bell">🔔</span> Today's mission is waiting</b><span>Level 1 · Mission 2. About 10 minutes.</span></div>
+        <div className="g-note two"><b>🪷 Time to breathe</b><span>Five slow minutes.</span></div>
+      </div>
+    </div>
+  );
+}
+
+function ReminderButton() {
+  const { data } = useStore();
+  const [msg, setMsg] = useState('');
+  return (
+    <div className="g-rem-on">
+      <button className="btn water block" onClick={async () => data && setMsg(await scheduleReminders(data))}>🔔 Turn on my reminders</button>
+      {msg && <p className="rem-msg" role="status">{msg}</p>}
+    </div>
+  );
+}
+
 const CARDS = [
   { title: 'Calm Path works like a game', art: <Levels />, body: [
     'There are 10 levels. Each level takes about one week.',
@@ -76,6 +100,10 @@ const CARDS = [
     'Any time, day or night, press the blue SURGE button.',
     'A calm voice guides you step by step, and every word is written on screen.',
   ]},
+  { title: 'Gentle reminders keep you company', art: <ReminderMock />, body: [
+    'Calm Path reminds you through the day: a morning check-in, two times to breathe, worry time, wind-down, and your mission on the days one is open.',
+    'Tap a reminder and the right practice opens. You can change every time in Settings.',
+  ], extra: <ReminderButton /> },
   { title: 'Your island grows as you practise', art: <div className="g-island"><span className="g-drop">💧</span><span className="g-drop">💧</span><span className="g-drop">💧</span><Island level={3} /></div>, body: [
     'Everything you practise earns water drops 💧. The drops grow Tulu\'s island.',
     'New tools open as you finish missions. You will always see which mission opens each one.',
@@ -108,6 +136,7 @@ export function Guide({ onDone }: { onDone: () => void }) {
         <div className={`guide-art turn-${turn}`} key={i}>{c.art}</div>
         {c.body.map((b) => <p key={b} className="guide-p">{b}</p>)}
       </div>
+      {'extra' in c && c.extra}
       <div className="row" style={{ marginTop: 16 }}>
         <button className="btn ghost" disabled={i === 0} onClick={() => { fx('F-04'); setI(i - 1); }}>Back</button>
         <span className="grow beacon" style={{ display: 'block', borderRadius: 16, ['--beacon' as any]: 'var(--leaf-2)' }}>

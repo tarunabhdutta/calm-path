@@ -9,5 +9,7 @@ contextBridge.exposeInMainWorld('calmDesk', {
   exportFile: (name, json) => ipcRenderer.invoke('file:export', name, json),
   info: () => ipcRenderer.invoke('desk:info'),
   chooseBackupDir: () => ipcRenderer.invoke('desk:chooseBackupDir'),
-  notify: (title, body) => ipcRenderer.send('desk:notify', title, body),
+  notify: (title, body, route) => ipcRenderer.send('desk:notify', title, body, route),
+  schedule: (plan, opts) => ipcRenderer.send('desk:schedule', plan, opts),
+  onOpen: (cb) => ipcRenderer.on('desk:open', (_e, route) => cb(route)),
 });

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Back, useNav } from '../components/ui';
 import { useStore } from '../lib/store';
 import { CRISIS_LINES, RED_FLAGS } from '../lib/safety';
 import { backupRaw, isDesk } from '../lib/storage';
-import { scheduleReminders } from '../lib/notify';
+import { DAILY, exactAlarmsAllowed, openExactAlarmSetting, scheduleReminders, testReminder } from '../lib/notify';
 import type { Reminders } from '../lib/model';
 import { soundPrefs, today } from '../lib/model';
 import type { SoundPrefs } from '../lib/model';
@@ -64,7 +64,18 @@ export function Settings() {
   useEffect(() => { if (isDesk()) window.calmDesk!.info().then(setInfo); }, []);
 
   const setRem = (k: keyof Reminders, v: string | boolean) => update((x) => { (x.settings.reminders as any)[k] = v; });
-  const applyReminders = async () => setMsg(await scheduleReminders(d.settings.reminders));
+  const [remMsg, setRemMsg] = useState('');
+  const [exact, setExact] = useState<boolean | null>(null);
+  useEffect(() => { void exactAlarmsAllowed().then(setExact); }, []);
+  // settings save as you change them; reminders are re-planned straight away, no extra button needed
+  const remKey = JSON.stringify(d.settings.reminders);
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    const t = window.setTimeout(async () => setRemMsg(await scheduleReminders(d)), 500);
+    return () => window.clearTimeout(t);
+  }, [remKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const applyReminders = async () => { setRemMsg(await scheduleReminders(d)); setExact(await exactAlarmsAllowed()); };
   const doBackup = async () => {
     const raw = snapshot();
     if (raw) { const where = await backupRaw(raw); toast('Backup saved'); setMsg('Backup saved: ' + where); }
@@ -96,7 +107,7 @@ export function Settings() {
     <div className="app">
       <h1>Settings</h1>
       <button className="tile play" style={{ width: '100%', marginBottom: 10 }} onClick={() => go({ name: 'guide' })}>
-        <i>🧭</i><b>How Calm Path works</b><span>The levels, missions and buttons, in five short cards</span>
+        <i>🧭</i><b>How Calm Path works</b><span>The levels, missions, buttons and reminders, in six short cards</span>
       </button>
       {msg && <div className="banner">{msg}</div>}
 
@@ -124,16 +135,37 @@ export function Settings() {
         )}
       </div>
 
-      <h2>Reminders</h2>
+      <h2 id="reminders">Reminders</h2>
       <div className="card">
+        <p className="ink2" style={{ marginTop: 0 }}>Calm Path reminds you gently through the day, so you never have to remember on your own. Tap a reminder and it opens the right practice.</p>
         <label className="check"><input type="checkbox" checked={d.settings.reminders.enabled} onChange={(e) => setRem('enabled', e.target.checked)} /><span>Daily gentle reminders</span></label>
-        {([['checkin', 'Morning check-in'], ['breathe1', 'Breathe (1)'], ['breathe2', 'Breathe (2)'], ['worry', 'Worry time'], ['winddown', 'Wind down']] as const).map(([k, label]) => (
-          <div className="row" key={k} style={{ marginTop: 8 }}>
-            <span className="grow">{label}</span>
-            <input type="time" style={{ width: 140 }} value={d.settings.reminders[k]} onChange={(e) => setRem(k, e.target.value)} />
-          </div>
-        ))}
-        <button className="btn soft block" style={{ marginTop: 12 }} onClick={applyReminders}>Apply reminders</button>
+        {d.settings.reminders.enabled && (
+          <>
+            <div className="row rem-row" style={{ marginTop: 8 }}>
+              <span className="grow">🧭 Today's mission <small className="muted">(only on days one is open)</small></span>
+              <input type="time" style={{ width: 140 }} value={d.settings.reminders.mission ?? '09:30'} onChange={(e) => setRem('mission', e.target.value)} />
+            </div>
+            {DAILY.map((i) => (
+              <div className="row rem-row" key={i.key} style={{ marginTop: 8 }}>
+                <span className="grow">{{ checkin: '⛅', breathe1: '🪷', breathe2: '🪷', worry: '🫙', winddown: '🌙' }[i.key as string]} {i.label}</span>
+                <input type="time" style={{ width: 140 }} value={d.settings.reminders[i.key] as string} onChange={(e) => setRem(i.key, e.target.value)} />
+              </div>
+            ))}
+            <p className="muted" style={{ marginTop: 10 }}>If you don't open Calm Path for three days, one kind note will check on you. Never more than that.</p>
+            {isDesk() && (
+              <label className="check"><input type="checkbox" checked={d.settings.reminders.startWithPc !== false} onChange={(e) => setRem('startWithPc', e.target.checked)} />
+                <span>Start Calm Path quietly with Windows, so reminders come even when you haven't opened it</span></label>
+            )}
+          </>
+        )}
+        <div className="row wrap" style={{ marginTop: 12 }}>
+          <button className="btn soft grow" onClick={applyReminders}>Apply reminders</button>
+          <button className="btn soft grow" onClick={async () => setRemMsg(await testReminder())}>🔔 Send me a sample</button>
+        </div>
+        {exact === false && (
+          <button className="btn ghost block" style={{ marginTop: 10 }} onClick={() => void openExactAlarmSetting()}>Allow reminders exactly on time</button>
+        )}
+        {remMsg && <p className="rem-msg" role="status">{remMsg}</p>}
       </div>
 
       <h2>Sound and look</h2>

@@ -13,6 +13,7 @@ import { newData } from './lib/model';
 import { nextSession } from './lib/progress';
 import { drops, TREASURES } from './game/rewards';
 import { currentLevel, GOALS, isOpen, TOOLS } from './lib/pathway';
+import { planReminders } from './lib/notify';
 
 export interface Check { name: string; ok: boolean; detail?: string }
 
@@ -45,6 +46,21 @@ export function contentChecks(): Check[] {
     ...PROGRAMME.flatMap((s) => s.cards.flatMap((c) => [c.title ?? '', ...c.body])),
     ...SURGE.map((l) => l.text), ...SURGE_REPEAT.map((l) => l.text), ...URGE_PROMPTS.map((p) => p.text), ...WIND_DOWN_TEXT, ...NIGHT_GUIDE,
   ].join('\n');
+  // v1.9 reminders that stay with you
+  {
+    const n = newData(); const now = new Date(2026, 10, 14, 8, 0);
+    const pl = planReminders(n, now);
+    const m = pl.find((p) => p.id === 106);
+    out.push({ name: 'reminders: five daily practices, the mission and a still-here note', ok: pl.filter((p) => p.daily).length === 5 && !!m && pl.some((p) => p.id === 107), detail: String(pl.length) });
+    out.push({ name: "reminders: today's mission at the mission time, opening the mission", ok: !!m && new Date(m.at!).getHours() === 9 && new Date(m.at!).getDate() === 14 && m.route.name === 'session' });
+    n.sessions.QS1 = { doneAt: new Date(2026, 10, 14, 7, 0).toISOString(), reflection: '' };
+    const m2 = planReminders(n, now).find((p) => p.id === 106);
+    out.push({ name: 'reminders: after a mission, the next reminder is the day it opens', ok: !!m2 && new Date(m2.at!).getDate() === 15 && /open today/.test(m2.title) });
+    const still = planReminders(n, now).find((p) => p.id === 107);
+    out.push({ name: 'reminders: one kind note after three quiet days, never a scolding', ok: !!still && new Date(still.at!).getDate() === 17 && !/miss(ed)?|streak|lost|fail/i.test(still.body) });
+    n.settings.reminders.enabled = false;
+    out.push({ name: 'reminders: switched off means nothing at all', ok: planReminders(n, now).length === 0 });
+  }
   out.push({ name: 'no heart-rate numbers in content', ok: !HR_NUMBER.test(allText) });
   out.push({ name: 'no reassurance phrases in content', ok: !REASSURE.test(allText), detail: allText.match(REASSURE)?.[0] });
   out.push({ name: 'breathing never framed as calming the heart', ok: !BREATH_CONTROL.test(allText), detail: allText.match(BREATH_CONTROL)?.[0] });

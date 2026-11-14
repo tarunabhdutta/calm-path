@@ -18,6 +18,10 @@ export interface Reminders {
   breathe2: string;
   worry: string;
   winddown: string;
+  /** v1.9: when the day's mission reminder comes (only on days a mission is open). */
+  mission?: string;
+  /** v1.9, PC only: start quietly with Windows so reminders still come. Default on. */
+  startWithPc?: boolean;
 }
 
 export interface Settings {
@@ -104,7 +108,7 @@ export function newData(p: Partial<Profile> = {}): Data {
       ...p,
     },
     settings: {
-      reminders: { enabled: true, checkin: '08:30', breathe1: '11:30', breathe2: '17:30', worry: '19:30', winddown: '22:15' },
+      reminders: { enabled: true, checkin: '08:30', breathe1: '11:30', breathe2: '17:30', worry: '19:30', winddown: '22:15', mission: '09:30', startWithPc: true },
       voice: true, tone: true, theme: 'auto', motion: 'full', budgetLevel: 0,
     },
     sessions: {}, surges: [], urges: [], checkins: [], counts: {}, worries: [], breaths: [],

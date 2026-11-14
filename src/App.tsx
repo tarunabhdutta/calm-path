@@ -134,7 +134,7 @@ function Setup() {
   const finish = async () => {
     const d = newData({ name: name.trim() });
     await create(d);
-    void scheduleReminders(d.settings.reminders);
+    void scheduleReminders(d);
   };
   return (
     <div className="full">
@@ -167,7 +167,9 @@ export default function App() {
     if (theme === 'auto') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
-  useEffect(() => { if (status === 'open' && data) void scheduleReminders(data.settings.reminders); }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Reminders are re-planned on every open and after every mission, so the mission reminder always points at the next one.
+  const doneMissions = data ? Object.keys(data.sessions).length : 0;
+  useEffect(() => { if (status === 'open' && data) void scheduleReminders(data); }, [status, doneMissions]); // eslint-disable-line react-hooks/exhaustive-deps
   // After two or more days away: a friendly "welcome back" on her first tap (never a "missed" tone).
   useEffect(() => {
     if (status !== 'open' || !data) return;

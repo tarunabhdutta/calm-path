@@ -72,6 +72,15 @@ These rules are checked automatically on every build.
 - On the levels map, the path you have walked is drawn in green, the next stone sends out rings, and levels not yet open sit in drifting fog.
 - **Settings → Movement on screen → Gentle** turns almost all movement off. The phone's own "reduce motion" setting does the same.
 
+**Reminders that stay with you (v1.9):**
+- Five daily reminders (morning check-in, two breathing times, worry time, wind-down), plus one on each day a new mission opens. Every time can be changed in **Settings → Reminders**.
+- **Tapping a reminder opens the practice it is about**, not just the app.
+- If the app is not opened for three days, one kind note checks in. Never more than that, and never a "you missed" tone.
+- The home screen always shows the next reminder still to come today.
+- **🔔 Send me a sample** shows and plays a real reminder in five seconds, so you know what to expect.
+- **Phone:** real Android alarms that come even when the app is closed and after a restart. A button opens "Alarms and reminders" for on-time delivery.
+- **PC:** closing the window keeps Calm Path waiting near the clock (tray), where right-click gives SURGE and slow breathing. It starts quietly with Windows. A reminder missed while the PC was asleep arrives when it wakes, if within 90 minutes.
+
 ## ⚠️ Important
 Calm Path is a self-help companion. **It is not a medical device and does not diagnose or treat
 anything.** Use it after a doctor has checked your symptoms, and alongside their care.
