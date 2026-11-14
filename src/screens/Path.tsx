@@ -14,6 +14,7 @@ import { WorryTime } from './Logs';
 import { LANDS } from '../game/rewards';
 import { GOALS, missionNo, missionsIn, toolsOpenedBy } from '../lib/pathway';
 import { Tulu } from '../game/Mascot';
+import { useSwipe } from '../lib/motion';
 import { LessonArt } from '../game/LessonArt';
 import { FearCycleGame, ForecastGame, LadderGame, LeavesGame, NotingGame, RecipeGame } from '../game/Games';
 import { BodyLab, ListeningGarden, SwitchGame, TheoryGame } from '../game/Games2';
@@ -82,13 +83,20 @@ export function SessionView({ id }: { id: string }) {
   const s = sessionById(id)!;
   const { data, update } = useStore();
   const { back, toast } = useNav();
-  const [page, setPage] = useState(0);
+  const [page, setPageRaw] = useState(0);
+  const [turn, setTurn] = useState<'fwd' | 'back'>('fwd');
+  const setPage = (n: number) => { setTurn(n < page ? 'back' : 'fwd'); setPageRaw(n); };
   const [doneP, setDoneP] = useState<Record<number, boolean>>({});
   const [active, setActive] = useState<number | null>(null);
   const [reflection, setReflection] = useState(data!.sessions[id]?.reflection ?? '');
   const gated = s.needsDoctorOk && !data!.profile.doctorOkBodyPractice;
   const practice = gated && s.gentleAlternative ? s.gentleAlternative : s.practice;
   const onCards = page < s.cards.length;
+  const allPractised = practice.every((_, j) => doneP[j]);
+  const swipe = useSwipe(
+    () => { if (page < s.cards.length - 1) { fx('F-04'); setPage(page + 1); } },
+    () => { if (page > 0) { fx('F-04'); setPage(page - 1); } },
+  );
 
   if (active !== null) {
     const p = practice[active];
@@ -127,15 +135,15 @@ export function SessionView({ id }: { id: string }) {
         </div>
       </div>
       {page === 0 && <p className="mission-goal"><b>In this mission:</b> {GOALS[s.id]}</p>}
-      <div className="steps3" aria-label={`Step ${onCards ? 1 : 2} of 3`}>
+      <div className="steps3" aria-label={`Step ${onCards ? 1 : allPractised ? 3 : 2} of 3`}>
         <span className={onCards ? 'on' : 'done'}>1 Read</span>
-        <span className={onCards ? '' : 'on'}>2 Practise</span>
-        <span className={onCards ? '' : 'on'}>3 Finish</span>
+        <span className={onCards ? '' : allPractised ? 'done' : 'on'}>2 Practise</span>
+        <span className={!onCards && allPractised ? 'on' : ''}>3 Finish</span>
       </div>
-      {onCards && <div className="pager-dots" aria-hidden>{s.cards.map((_, k) => <i key={k} className={k <= page ? 'on' : ''} />)}<i className="flag">🏁</i></div>}
+      {onCards && <div className="pager-dots" aria-hidden>{s.cards.map((_, k) => <i key={k} className={k === page ? 'on here' : k < page ? 'on' : ''} />)}<i className="flag">🏁</i></div>}
       {onCards ? (
         <>
-          <div className="card lesson" key={page}>
+          <div className={`card lesson swipe-zone turn-${turn}`} key={page} {...swipe}>
             {s.cards[page].art && <LessonArt id={s.cards[page].art!} />}
             {s.cards[page].title && <h3>{s.cards[page].title}</h3>}
             <Body lines={s.cards[page].body} />
@@ -143,19 +151,26 @@ export function SessionView({ id }: { id: string }) {
           <div className="row spread">
             <button className="btn ghost" disabled={page === 0} onClick={() => { fx('F-04'); setPage(page - 1); }}>Previous</button>
             <span className="muted">{page + 1} / {s.cards.length}</span>
-            <button className="btn" onClick={() => { fx('F-04'); setPage(page + 1); }}>{page === s.cards.length - 1 ? 'Go to step 2: Practise' : 'Next'}</button>
+            <span className={page === s.cards.length - 1 ? 'beacon' : ''} style={{ display: 'inline-block', borderRadius: 16 }}>
+              <button className="btn" onClick={() => { fx('F-04'); setPage(page + 1); }}>{page === s.cards.length - 1 ? 'Go to step 2: Practise' : 'Next ›'}</button>
+            </span>
           </div>
         </>
       ) : (
         <>
           <div className="tulu-says"><Tulu size={70} mood="excited" /><p>Step 2: tap the practice below and do it. Then answer the question and press Finish.</p></div>
           {gated && <div className="banner">The heart-raising exercises unlock once your cardiologist has said yes (Settings → Doctor said yes). For now, use the gentle exercises. They work too.</div>}
-          {practice.map((p, i) => (
-            <button key={i} className="tile" style={{ width: '100%', margin: '6px 0' }} onClick={() => setActive(i)}>
-              <div className="row spread"><b>{practiceLabel(p)}</b>{doneP[i] && <span className="pill done">done</span>}</div>
-              <span>{doneP[i] ? 'Done ✓' : 'Tap to start'}</span>
-            </button>
-          ))}
+          {practice.map((p, i) => {
+            const firstOpen = !doneP[i] && practice.findIndex((_, j) => !doneP[j]) === i;
+            return (
+              <span key={i} className={firstOpen ? 'beacon' : ''} style={{ display: 'block', borderRadius: 22, margin: '6px 0' }}>
+                <button className="tile practice-tile" style={{ width: '100%' }} onClick={() => setActive(i)}>
+                  <div className="row spread"><b>{practiceLabel(p)}</b>{doneP[i] && <span className="pill done">done</span>}</div>
+                  <span>{doneP[i] ? 'Done ✓' : <>Tap to start<span className="go-tap">›</span></>}</span>
+                </button>
+              </span>
+            );
+          })}
           {s.reflection && (
             <div className="card">
               <label className="f">Step 3: {s.reflection}</label>
@@ -164,7 +179,9 @@ export function SessionView({ id }: { id: string }) {
           )}
           <div className="row">
             <button className="btn ghost" onClick={() => setPage(s.cards.length - 1)}>Reread</button>
-            <button className="btn grow" onClick={complete}>{data!.sessions[id] ? 'Save' : 'Finish the mission · +5 💧'}</button>
+            <span className={'grow' + (allPractised && !data!.sessions[id] ? ' beacon' : '')} style={{ display: 'block', borderRadius: 16 }}>
+              <button className="btn block" onClick={complete}>{data!.sessions[id] ? 'Save' : 'Finish the mission · +5 💧'}</button>
+            </span>
           </div>
         </>
       )}

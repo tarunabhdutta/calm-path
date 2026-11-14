@@ -1,0 +1,212 @@
+/* ═══ v1.8 motion and depth layer ═══
+   Laws (from the studio's motion doctrine, adapted for a calm app):
+   - every entrance anticipates, overshoots a touch and settles; secondary items follow 0.06–0.08 s behind the lead;
+   - one focal point per screen: the single next step carries the beacon, nothing else glows;
+   - only transform and opacity move, so it stays smooth on low-cost phones;
+   - loops are slow (3–8 s) and soft: this is an app for calm, never a slot machine. */
+
+/* ── 3D tilt: cards lean toward the pointer and dip under a finger ── */
+.tile, .quest, .mission-card, .island-card, .level-strip, .land-card, .tilt, .stone-disc, .rung {
+  --rx: 0deg; --ry: 0deg; --lift: 0px; --press: 1;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift)) scale(var(--press));
+  transition: transform .5s cubic-bezier(.2, 1.4, .4, 1), box-shadow .3s ease;
+  transform-style: preserve-3d; will-change: transform;
+}
+.tilting { transition: transform .12s ease-out, box-shadow .3s ease; }
+.tile:not(:disabled):hover, .quest:hover, .level-strip:hover, .land-card:hover { --lift: -3px; box-shadow: 0 14px 30px rgba(48, 74, 58, .16), 0 2px 4px rgba(48, 74, 58, .08); }
+.tile:not(:disabled):active, .quest:active, .level-strip:active, .land-card:active, .mission-card:active, .stone:active .stone-disc { --press: .96; }
+.mission-card, .island-card, .level-strip, .quest, .tile { position: relative; overflow: hidden; }
+/* a soft light that follows the finger across the card */
+.tile::before, .quest::before, .mission-card::before, .level-strip::before, .island-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; z-index: 3; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 55%);
+  mix-blend-mode: soft-light;
+}
+.tilting::before { opacity: 1; }
+/* icons float above the card surface */
+.tile.play i, .quest .ring, .level-no, .mission-card .land-float { transform: translateZ(26px); }
+
+/* ── screens turn like pages: forward from the right, back from the left ── */
+.page.fwd { animation: turnFwd .55s cubic-bezier(.2, .9, .25, 1.05) both; transform-origin: 0% 50%; }
+.page.back { animation: turnBack .5s cubic-bezier(.2, .9, .25, 1.05) both; transform-origin: 100% 50%; }
+.page.tab { animation: tabIn .45s cubic-bezier(.2, .9, .3, 1.1) both; }
+@keyframes turnFwd { from { opacity: 0; transform: perspective(1400px) translateX(42px) rotateY(-9deg) translateZ(-30px); } to { opacity: 1; transform: none; } }
+@keyframes turnBack { from { opacity: 0; transform: perspective(1400px) translateX(-42px) rotateY(9deg) translateZ(-30px); } to { opacity: 1; transform: none; } }
+@keyframes tabIn { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: none; } }
+
+/* ── reveal: each card rises up and tips forward into place ── */
+.rv { opacity: 0; }
+.rv.rv-in { opacity: 1; animation: rise3d .7s cubic-bezier(.18, .95, .3, 1.12) backwards; }
+@keyframes rise3d {
+  0% { opacity: 0; transform: perspective(900px) translateY(26px) rotateX(-22deg) scale(.96); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: perspective(900px) translateY(0) rotateX(0) scale(1); }
+}
+
+/* ── the tab bar: a soft pill slides to the open tab ── */
+.tabs .in { position: relative; }
+.tab-glow { position: absolute; top: 6px; bottom: 8px; left: 0; width: 20%; transform: translateX(calc(var(--at) * 100%)); transition: transform .55s cubic-bezier(.3, 1.45, .45, 1); pointer-events: none; }
+.tab-glow::before { content: ""; position: absolute; inset: 0 14%; border-radius: 18px; background: var(--leaf-soft); }
+.tabs button { position: relative; z-index: 1; }
+
+/* ── the beacon: a soft ring that breathes out from the one next step ── */
+.beacon { position: relative; isolation: isolate; }
+span.beacon { display: block; border-radius: 16px; }
+.beacon::after {
+  content: ""; position: absolute; inset: -4px; border-radius: inherit; pointer-events: none; z-index: -1;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--beacon, var(--sun)) 60%, transparent);
+  animation: beacon 2.6s cubic-bezier(.3, .6, .4, 1) infinite;
+}
+@keyframes beacon { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--beacon, var(--sun)) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 16px color-mix(in srgb, var(--beacon, var(--sun)) 0%, transparent); } }
+/* a band of light sweeps across a primary button every few seconds */
+.shine { overflow: hidden; }
+.shine > .shine-band { position: absolute; top: 0; bottom: 0; left: -40%; width: 30%; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent); transform: skewX(-18deg); animation: shineSweep 4.2s ease-in-out 1s infinite; }
+@keyframes shineSweep { 0%, 55% { left: -40%; } 85%, 100% { left: 130%; } }
+/* a pointing finger for first-timers */
+.tap-hint { position: absolute; right: 22px; bottom: -6px; font-size: 2rem; pointer-events: none; z-index: 4; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .25)); animation: tapHint 2.2s cubic-bezier(.4, 0, .3, 1) infinite; }
+@keyframes tapHint { 0%, 100% { transform: translate(10px, 18px) rotate(-12deg); } 40% { transform: translate(0, 0) rotate(-12deg); } 50% { transform: translate(0, 4px) rotate(-12deg) scale(.92); } 60% { transform: translate(0, 0) rotate(-12deg); } }
+
+/* ── Home ── */
+.mission-card { background-size: 180% 180% !important; animation: skyDrift 14s ease-in-out infinite alternate; }
+@keyframes skyDrift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+.mission-card .land-float { position: absolute; right: 14px; top: 12px; font-size: 2.6rem; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .18)); animation: floatLand 5s ease-in-out infinite; pointer-events: none; }
+@keyframes floatLand { 0%, 100% { transform: translateZ(26px) translateY(0) rotate(-4deg); } 50% { transform: translateZ(26px) translateY(-7px) rotate(4deg); } }
+.mission-card > small, .mission-card > b, .mission-card > p { padding-right: 52px; }
+.mission-go { position: relative; }
+/* the three steps light up one after another, so the order is plain */
+.g-steps i { position: relative; overflow: hidden; }
+.mission-card .g-steps i, .guide .g-steps i { animation: stepLight 6s ease-in-out infinite; }
+.mission-card .g-steps i:nth-child(2), .guide .g-steps i:nth-child(2) { animation-delay: 1.2s; }
+.mission-card .g-steps i:nth-child(3), .guide .g-steps i:nth-child(3) { animation-delay: 2.4s; }
+@keyframes stepLight { 0%, 30%, 100% { background: rgba(255, 255, 255, .7); color: #3e8a62; transform: none; } 8%, 20% { background: #3e8a62; color: #fff; transform: translateY(-2px) scale(1.06); } }
+
+/* the level number is a coin that spins in */
+.level-no { animation: coinIn 1.1s cubic-bezier(.2, .9, .3, 1.2) both; }
+@keyframes coinIn { from { transform: translateZ(26px) rotateY(-540deg) scale(.6); opacity: 0; } to { transform: translateZ(26px) rotateY(0) scale(1); opacity: 1; } }
+/* progress bars fill from empty */
+.bar i { animation: barFill 1.2s cubic-bezier(.25, .9, .3, 1) .25s backwards; position: relative; overflow: hidden; }
+.bar i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent); transform: translateX(-100%); animation: barGleam 3.6s ease-in-out 1.6s infinite; }
+@keyframes barFill { from { width: 0; } }
+@keyframes barGleam { 0%, 60% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+/* rings draw closed */
+.ring svg circle + circle { animation: ringDraw 1.3s cubic-bezier(.3, .9, .3, 1) .3s backwards; }
+@keyframes ringDraw { from { stroke-dashoffset: var(--c); } }
+.ring span { animation: ringIcon 4.5s ease-in-out infinite; }
+.quest:nth-child(2) .ring span { animation-delay: .6s; }
+.quest:nth-child(3) .ring span { animation-delay: 1.2s; }
+@keyframes ringIcon { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3px) rotate(-6deg); } }
+.ring.done::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 3px solid var(--leaf-2); animation: ringDone 2.8s ease-out infinite; }
+@keyframes ringDone { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+.stat-pill .count-up { font-variant-numeric: tabular-nums; }
+.stat-pill:first-child { animation: dropWobble 6s ease-in-out 2s infinite; }
+@keyframes dropWobble { 0%, 90%, 100% { transform: none; } 94% { transform: translateY(-3px) rotate(-4deg); } 97% { transform: translateY(0) rotate(3deg); } }
+.surge { animation: surgeBreath 7s ease-in-out infinite; }
+@keyframes surgeBreath { 0%, 100% { box-shadow: 0 10px 24px rgba(59, 136, 166, .28); } 50% { box-shadow: 0 14px 34px rgba(59, 136, 166, .45); } }
+.island-card { perspective: 900px; }
+
+/* ── Levels map ── */
+.trail-done { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: trailDraw 2.2s cubic-bezier(.4, 0, .2, 1) .5s forwards; }
+@keyframes trailDraw { to { stroke-dashoffset: 0; } }
+.stone.next .stone-disc::before, .stone.next .stone-disc::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 3px solid rgba(242, 165, 65, .7); animation: stoneRing 2.6s ease-out infinite; pointer-events: none; }
+.stone.next .stone-disc::after { animation-delay: 1.3s; }
+@keyframes stoneRing { from { transform: scale(.95); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+.stone.done .stone-disc { box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .12), 0 6px 0 #2e6a4a, 0 10px 14px rgba(0, 0, 0, .18); }
+.stone-tulu { animation: tuluWait 3.2s ease-in-out infinite; }
+@keyframes tuluWait { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-5px); } }
+.land .land-icon { display: inline-block; animation: floatLand2 6s ease-in-out infinite; }
+@keyframes floatLand2 { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-5px) rotate(3deg); } }
+.land.fog::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(40% 30% at 20% 30%, rgba(255, 255, 255, .55), transparent 70%), radial-gradient(45% 35% at 75% 60%, rgba(255, 255, 255, .5), transparent 70%), radial-gradient(35% 25% at 40% 85%, rgba(255, 255, 255, .45), transparent 70%);
+  background-size: 200% 100%; animation: fogDrift 18s ease-in-out infinite alternate; }
+@keyframes fogDrift { from { background-position: 0% 0%; } to { background-position: 100% 0%; } }
+.land.fog header { padding-right: 92px; }
+.land.fog .fog-lock { position: absolute; right: 14px; top: 14px; z-index: 3; background: rgba(255, 255, 255, .85); border-radius: 99px; padding: 3px 10px; font-size: .74rem; font-weight: 800; color: #4f6258; }
+.land.complete::after { content: "✦"; position: absolute; right: 16px; top: 10px; color: #f2a541; font-size: 1.2rem; animation: twinkle 2.4s ease-in-out infinite; }
+
+/* ── a mission: three steps, cards that turn like pages ── */
+.steps3 { position: relative; }
+.steps3 span { transition: background .4s, color .4s, transform .4s cubic-bezier(.3, 1.6, .5, 1); }
+.steps3 span.on { transform: translateY(-2px) scale(1.04); box-shadow: 0 4px 10px rgba(62, 138, 98, .3); }
+.steps3 span.done::before { content: "✓ "; }
+.pager-dots i { transition: background .4s, width .5s cubic-bezier(.3, 1.6, .5, 1); }
+.pager-dots i.here { width: 34px; background: var(--leaf); }
+.pager-dots i.flag { animation: flagWave 2.4s ease-in-out infinite; transform-origin: 20% 100%; display: inline-block; }
+@keyframes flagWave { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+.lesson.turn-fwd { animation: cardFwd .6s cubic-bezier(.2, .9, .25, 1.08) both; transform-origin: 0% 50%; }
+.lesson.turn-back { animation: cardBack .6s cubic-bezier(.2, .9, .25, 1.08) both; transform-origin: 100% 50%; }
+@keyframes cardFwd { from { opacity: 0; transform: perspective(1100px) rotateY(-24deg) translateX(36px); } to { opacity: 1; transform: none; } }
+@keyframes cardBack { from { opacity: 0; transform: perspective(1100px) rotateY(24deg) translateX(-36px); } to { opacity: 1; transform: none; } }
+.lesson h3, .lesson p, .lesson ul { animation: lineIn .55s cubic-bezier(.2, .9, .3, 1.1) backwards; }
+.lesson > :nth-child(2) { animation-delay: .12s; } .lesson > :nth-child(3) { animation-delay: .2s; } .lesson > :nth-child(4) { animation-delay: .28s; }
+.lesson > :nth-child(5) { animation-delay: .36s; } .lesson > :nth-child(n+6) { animation-delay: .44s; }
+@keyframes lineIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.swipe-zone { touch-action: pan-y; }
+.tulu-says svg { flex: none; }
+.tulu-says { animation: saysIn .6s cubic-bezier(.2, 1.3, .4, 1) both; }
+@keyframes saysIn { from { opacity: 0; transform: scale(.9) translateY(10px); } to { opacity: 1; transform: none; } }
+.practice-tile .go-tap { display: inline-block; margin-left: 6px; animation: nudge 1.2s ease-in-out infinite; }
+.pill.done { animation: pop .5s cubic-bezier(.3, 1.6, .5, 1); }
+
+/* ── the guide: five cards, each a tiny moving picture ── */
+.guide-art.turn-fwd { animation: cardFwd .6s cubic-bezier(.2, .9, .25, 1.08) both; }
+.guide-art.turn-back { animation: cardBack .6s cubic-bezier(.2, .9, .25, 1.08) both; }
+.guide-tulu.hop svg { animation: hop .6s cubic-bezier(.3, 1.6, .5, 1); }
+.guide .guide-p { animation: lineIn .55s cubic-bezier(.2, .9, .3, 1.1) backwards; }
+.guide .guide-p:nth-of-type(2) { animation-delay: .15s; } .guide .guide-p:nth-of-type(3) { animation-delay: .3s; }
+/* card 1: ten levels; level 1 opens, then a lock falls away from level 2 */
+.g-levels span { position: relative; animation: lvlIn .6s cubic-bezier(.2, 1.4, .4, 1) backwards; animation-delay: calc(var(--k) * .07s); }
+@keyframes lvlIn { from { opacity: 0; transform: perspective(500px) rotateY(90deg) scale(.6); } }
+.g-levels span.on { animation: lvlIn .6s cubic-bezier(.2, 1.4, .4, 1) backwards, lvlGlow 2.4s ease-in-out 1s infinite; }
+@keyframes lvlGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(125, 202, 160, .6); } 50% { box-shadow: 0 0 0 10px rgba(125, 202, 160, 0); } }
+.g-levels span.two { animation: lvlIn .6s cubic-bezier(.2, 1.4, .4, 1) backwards, lvlOpen 6s ease-in-out 1.2s infinite; }
+@keyframes lvlOpen { 0%, 45% { background: var(--surface); color: var(--muted); } 55%, 90% { background: var(--leaf); color: var(--surface); transform: scale(1.12); } 100% { background: var(--surface); color: var(--muted); } }
+.g-levels span em { position: absolute; right: -6px; top: -8px; font-style: normal; font-size: .8rem; }
+.g-levels span.two em { animation: lockOff 6s ease-in 1.2s infinite; }
+@keyframes lockOff { 0%, 38% { opacity: 1; transform: none; } 48% { opacity: 1; transform: translateY(-6px) rotate(-20deg); } 58%, 100% { opacity: 0; transform: translateY(24px) rotate(40deg); } }
+.g-levels .g-check { position: absolute; inset: 0; display: grid; place-items: center; }
+/* card 2: a finger presses Start */
+.g-mock.mission-card { position: relative; }
+.g-mock .btn { display: inline-block; position: relative; }
+.g-mock .g-press { animation: pressBtn 6s ease-in-out infinite; }
+@keyframes pressBtn { 0%, 66%, 76%, 100% { transform: none; } 70% { transform: translateY(3px) scale(.96); } }
+.g-finger { position: absolute; right: 30%; bottom: -10px; font-size: 1.9rem; pointer-events: none; animation: fingerTap 6s ease-in-out infinite; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .25)); }
+@keyframes fingerTap { 0%, 50% { transform: translate(40px, 40px); opacity: 0; } 62% { transform: translate(0, 0); opacity: 1; } 70% { transform: translate(0, 5px) scale(.9); } 78%, 90% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(40px, 40px); opacity: 0; } }
+/* card 3: three rings fill one after another */
+.g-rings svg { width: 64px; height: 64px; display: block; }
+.g-rings .g-ring { position: relative; display: grid; place-items: center; }
+.g-rings .g-ring em { position: absolute; inset: 0; border: 0; width: auto; height: auto; background: none; display: grid; place-items: center; font-size: 1.5rem; }
+.g-rings circle.fill { stroke-dasharray: 170; stroke-dashoffset: 170; animation: gRing 7.5s ease-in-out infinite; }
+.g-rings span:nth-child(2) circle.fill { animation-delay: 1.4s; }
+.g-rings span:nth-child(3) circle.fill { animation-delay: 2.8s; }
+@keyframes gRing { 0% { stroke-dashoffset: 170; } 18%, 80% { stroke-dashoffset: 0; } 92%, 100% { stroke-dashoffset: 170; } }
+/* card 4: SURGE, with its waves and a gentle press */
+.guide .surge { animation: surgeBreath 4s ease-in-out infinite; }
+.g-surge-tap { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px; border-radius: 50%; border: 3px solid #fff; animation: surgeTap 3.6s ease-out infinite; pointer-events: none; }
+@keyframes surgeTap { 0%, 60% { transform: scale(.3); opacity: 0; } 65% { opacity: .9; } 100% { transform: scale(4); opacity: 0; } }
+/* card 5: drops fall and the island grows */
+.g-island { position: relative; }
+.g-drop { position: absolute; top: -10%; font-size: 1.4rem; animation: dropFall 3.6s cubic-bezier(.5, 0, .9, .6) infinite; pointer-events: none; z-index: 2; }
+.g-drop:nth-child(2) { left: 30%; animation-delay: 1.2s; } .g-drop:nth-child(3) { left: 62%; animation-delay: 2.4s; } .g-drop:nth-child(1) { left: 46%; }
+@keyframes dropFall { 0% { transform: translateY(0) scale(.8); opacity: 0; } 10% { opacity: 1; } 60% { transform: translateY(260%) scale(1); opacity: 1; } 70%, 100% { transform: translateY(280%) scale(1.6); opacity: 0; } }
+
+/* ── messages and celebrations ── */
+.toast { animation: toastIn .55s cubic-bezier(.2, 1.4, .4, 1) both; display: flex; gap: 8px; align-items: center; justify-content: center; }
+.toast-spark { color: var(--sun); animation: spin 3s linear infinite; display: inline-block; }
+@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) perspective(600px) translateY(30px) rotateX(-50deg) scale(.9); } to { opacity: 1; transform: translateX(-50%); } }
+.moment { animation: momentIn .75s cubic-bezier(.2, 1.3, .4, 1) both; transform-origin: 50% 0%; }
+@keyframes momentIn { from { opacity: 0; transform: perspective(900px) rotateX(-60deg) translateY(-30px) scale(.9); } to { opacity: 1; transform: none; } }
+.moment-icon { position: relative; display: inline-block; isolation: isolate; animation: iconSpin 1.2s cubic-bezier(.2, .9, .3, 1.2) both, bounce 2.4s ease-in-out 1.2s infinite; }
+@keyframes iconSpin { from { transform: perspective(500px) rotateY(-720deg) scale(.3); opacity: 0; } to { transform: none; opacity: 1; } }
+.moment-icon::before { content: ""; position: absolute; left: 50%; top: 50%; width: 220px; height: 220px; margin: -110px; z-index: -1; border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(242, 165, 65, .22) 0 10deg, transparent 10deg 30deg); animation: spin 14s linear infinite; mask: radial-gradient(circle, #000 30%, transparent 70%); }
+
+/* ── Gentle movement, and the system "reduce motion" setting ── */
+[data-motion="gentle"] *, [data-motion="gentle"] *::before, [data-motion="gentle"] *::after { animation-iteration-count: 1 !important; }
+[data-motion="gentle"] .page, [data-motion="gentle"] .rv-in, [data-motion="gentle"] .lesson, [data-motion="gentle"] .guide-art { animation: fade .3s ease both !important; }
+[data-motion="gentle"] .beacon::after, [data-motion="gentle"] .shine-band, [data-motion="gentle"] .tap-hint, [data-motion="gentle"] .land.fog::before { animation: none !important; }
+[data-motion="gentle"] .tile, [data-motion="gentle"] .quest, [data-motion="gentle"] .mission-card, [data-motion="gentle"] .level-strip { transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; }
+  .tile, .quest, .mission-card, .island-card, .level-strip, .land-card, .tilt, .stone-disc, .rung { transform: none !important; }
+}

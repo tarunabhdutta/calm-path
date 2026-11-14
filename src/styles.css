@@ -117,8 +117,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .go-arrow { font-size: 2rem; color: #6b7a71; }
 
 /* ── tiles ── */
-.tile { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 14px; text-align: left; min-height: 84px; box-shadow: var(--shadow); transition: transform .15s; }
-.tile:active { transform: scale(.97); }
+.tile { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 14px; text-align: left; min-height: 84px; box-shadow: var(--shadow); }
 .tile b { display: block; font-weight: 800; }
 .tile span { color: var(--muted); font-size: .84rem; }
 .tile.play i { display: block; font-style: normal; font-size: 2rem; line-height: 1.1; margin-bottom: 4px; }
@@ -375,7 +374,7 @@ svg.chart { width: 100%; height: auto; display: block; }
 .steps3 span.done { background: var(--leaf-soft); color: var(--leaf); }
 .mission-goal { background: var(--leaf-soft); border-radius: 16px; padding: 10px 14px; margin: 10px 0 0; color: var(--ink-2); }
 .tile.locked { opacity: .55; filter: grayscale(.6); }
-.tile.locked:active { transform: none; }
+
 .guide h1 { margin: 4px 0 6px; }
 .guide-tulu { text-align: center; margin-top: 4px; }
 .guide-p { font-size: 1.08rem; line-height: 1.5; color: var(--ink-2); margin: 8px 0; }

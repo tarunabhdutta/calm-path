@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Icon, NavProvider, useNav } from './components/ui';
 import type { Route } from './components/ui';
 import { useStore } from './lib/store';
@@ -23,6 +23,9 @@ import { Family, HospitalUrge } from './screens/Family';
 import { Progress } from './screens/Progress';
 import { Safety, Settings } from './screens/Settings';
 import { Guide } from './screens/Guide';
+import { installTilt, revealIn } from './lib/motion';
+
+installTilt();
 
 function Screen({ r }: { r: Route }) {
   switch (r.name) {
@@ -67,9 +70,11 @@ const TABS = [
 
 function Tabs() {
   const { route, go } = useNav();
-  if (!TABS.some((t) => t.name === route.name)) return null;
+  const at = TABS.findIndex((t) => t.name === route.name);
+  if (at < 0) return null;
   return (
-    <nav className="tabs"><div className="in">
+    <nav className="tabs"><div className="in" style={{ ['--at' as any]: at }}>
+      <span className="tab-glow" aria-hidden />
       {TABS.map((t) => (
         <button key={t.name} className={route.name === t.name ? 'on' : ''} onClick={() => go({ name: t.name } as Route)}>
           {Icon[t.name]}{t.label}
@@ -107,6 +112,14 @@ function BringAcross() {
       )}
     </div>
   );
+}
+
+/** One screen, turned in from the right going forward, from the left going back. */
+function Page({ r }: { r: Route }) {
+  const { dir } = useNav();
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => revealIn(ref.current), []);
+  return <div ref={ref} className={FULL.has(r.name) ? 'page-fade' : `page ${dir}`}><Screen r={r} /></div>;
 }
 
 function GuideRoute() {
@@ -148,6 +161,8 @@ function Setup() {
 export default function App() {
   const { status, data } = useStore();
   const theme = data?.settings.theme ?? 'auto';
+  const motion = data?.settings.motion ?? 'full';
+  useEffect(() => { document.documentElement.dataset.motion = motion; }, [motion]);
   useEffect(() => {
     if (theme === 'auto') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', theme);
@@ -175,7 +190,7 @@ export default function App() {
     <NavProvider>{(r) => (
       <>
         {/* full-screen scenes fade (a transform would break their fixed backgrounds); other screens slide in */}
-        <div key={routeKey(r)} className={FULL.has(r.name) ? 'page-fade' : 'page'}><Screen r={r} /></div>
+        <Page key={routeKey(r)} r={r} />
         <Tabs />
         <Celebrations />
         <VoiceCaption />

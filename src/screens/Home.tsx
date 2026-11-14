@@ -10,6 +10,7 @@ import { FORMS } from '../content/forms';
 import { Counters, UndoCounter } from './Logs';
 import { Island } from '../game/Island';
 import { TULU_LINES } from '../game/Mascot';
+import { CountUp } from '../lib/motion';
 import { drops, gardenDays, LANDS, level, LEVELS, nextLevelProgress, quests } from '../game/rewards';
 
 function Ring({ p, done, icon }: { p: number; done: boolean; icon: string }) {
@@ -19,7 +20,7 @@ function Ring({ p, done, icon }: { p: number; done: boolean; icon: string }) {
       <svg viewBox="0 0 56 56" aria-hidden>
         <circle cx="28" cy="28" r={r} fill="none" stroke="var(--surface-2)" strokeWidth="6" />
         <circle cx="28" cy="28" r={r} fill="none" stroke="var(--leaf)" strokeWidth="6" strokeLinecap="round"
-          strokeDasharray={c} strokeDashoffset={c * (1 - p)} transform="rotate(-90 28 28)" style={{ transition: 'stroke-dashoffset .8s' }} />
+          strokeDasharray={c} strokeDashoffset={c * (1 - p)} transform="rotate(-90 28 28)" style={{ transition: 'stroke-dashoffset .8s', ['--c' as any]: c }} />
       </svg>
       <span>{done ? '✓' : icon}</span>
     </div>
@@ -35,8 +36,10 @@ function MissionCard() {
   const sw = session.phase === 'staywell';
   const land = LANDS[session.week];
   const tomorrow = readyOn && readyOn === addDays(today(), 1);
+  const firstTime = Object.keys(d.sessions).length === 0;
   return (
     <div className="mission-card" style={{ background: `linear-gradient(135deg, ${land.sky[0]}, ${land.sky[1]})` }}>
+      <span className="land-float" aria-hidden>{land.icon}</span>
       <small>{readyOn ? 'NEXT MISSION' : "TODAY'S MISSION"} · {sw ? 'STAY WELL' : `LEVEL ${session.week} · MISSION ${missionNo(session)} OF ${missionsIn(session.week).length}`}</small>
       <b>{sw ? 'Monthly visit' : session.title}</b>
       <p>{GOALS[session.id]}</p>
@@ -45,7 +48,12 @@ function MissionCard() {
       ) : (
         <>
           <span className="g-steps"><i>1 Read</i><i>2 Practise</i><i>3 Finish</i></span>
-          <button className="btn block mission-go" onClick={() => go({ name: 'session', id: session.id })}>Start · about {session.minutes} minutes</button>
+          <span className="beacon" style={{ ['--beacon' as any]: 'var(--leaf-2)' }}>
+            <button className="btn block mission-go shine" onClick={() => go({ name: 'session', id: session.id })}>
+              <span className="shine-band" aria-hidden />Start · about {session.minutes} minutes
+            </button>
+            {firstTime && <span className="tap-hint" aria-hidden>👆</span>}
+          </span>
         </>
       )}
     </div>
@@ -93,8 +101,8 @@ export function Home() {
           <p className="muted" style={{ margin: 0 }}>{name} is waiting on your island</p>
         </div>
         <div className="pills">
-          <span className="stat-pill" title="Drops: earned by practising">💧 {drops(d)}</span>
-          <span className="stat-pill" title="Days you practised. It only ever goes up.">🌿 {gardenDays(d)}</span>
+          <span className="stat-pill" title="Drops: earned by practising">💧 <CountUp value={drops(d)} /></span>
+          <span className="stat-pill" title="Days you practised. It only ever goes up.">🌿 <CountUp value={gardenDays(d)} /></span>
         </div>
       </div>
 
@@ -107,7 +115,7 @@ export function Home() {
       <button className="level-strip" onClick={() => go({ name: 'path' })}>
         {cur <= 10 ? (
           <>
-            <span className="level-no"><small>LEVEL</small>{cur}<small>of 10</small></span>
+            <span className="level-no"><small>LEVEL</small><CountUp value={cur} ms={700} /><small>of 10</small></span>
             <span className="grow"><b>{LANDS[cur].icon} {LANDS[cur].name}</b>
               <span className="muted">{doneInLevel} of {inLevel.length} missions done</span>
               <span className="bar thin"><i style={{ width: `${(doneInLevel / inLevel.length) * 100}%` }} /></span></span>

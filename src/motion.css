@@ -80,23 +80,13 @@
 
 /* lively controls */
 .btn, .tile, .chip, .quest, .counter, .land-card, .icon-pick button, .cups button, .tabs button { position: relative; overflow: hidden; }
-.tile, .quest, .land-card { transition: transform .18s cubic-bezier(.3, 1.5, .5, 1), box-shadow .2s; }
-.tile:hover, .quest:hover, .land-card:hover { transform: translateY(-2px); }
-.tile:active, .quest:active, .land-card:active { transform: scale(.96); }
 .tile.play i { display: inline-block; }
 .tile.play:hover i, .tile.play:focus-visible i, .tile.play:active i { animation: wiggle .5s ease; }
 .ripple-dot { position: absolute; border-radius: 50%; pointer-events: none; background: currentColor; opacity: .2; transform: scale(0); animation: rippleOut .6s ease-out forwards; }
 .surge b { animation: breatheText 5s ease-in-out infinite; }
 .tabs button.on svg { animation: tabHop .45s cubic-bezier(.3, 1.6, .5, 1); }
 
-/* entrances: each screen slides in, then cards arrive one after another */
-.page { animation: pageIn .38s cubic-bezier(.2, .9, .3, 1); }
-.page .grid2 > *, .page .quests > *, .page .chest > *, .page .counters > *, .page .land { animation: riseIn .5s cubic-bezier(.2, .9, .3, 1.2) both; }
-.page .grid2 > *:nth-child(2), .page .quests > *:nth-child(2), .page .chest > *:nth-child(2), .page .counters > *:nth-child(2) { animation-delay: .06s; }
-.page .grid2 > *:nth-child(3), .page .quests > *:nth-child(3), .page .chest > *:nth-child(3), .page .counters > *:nth-child(3) { animation-delay: .12s; }
-.page .grid2 > *:nth-child(4), .page .chest > *:nth-child(4), .page .counters > *:nth-child(4) { animation-delay: .18s; }
-.page .grid2 > *:nth-child(n+5), .page .chest > *:nth-child(n+5) { animation-delay: .24s; }
-
+/* entrances moved to motion3d.css (v1.8) */
 @keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-12deg) scale(1.15); } 75% { transform: rotate(10deg) scale(1.1); } }
 @keyframes rippleOut { to { transform: scale(2.6); opacity: 0; } }
 @keyframes breatheText { 0%, 100% { letter-spacing: .12em; } 50% { letter-spacing: .2em; } }

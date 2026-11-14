@@ -12,7 +12,8 @@ export type Route =
 
 export type GameId = 'fearCycle' | 'leaves' | 'forecast' | 'ladder' | 'noting' | 'recipe' | 'bodyLab' | 'listening' | 'theory' | 'switch';
 
-interface Nav { route: Route; go: (r: Route) => void; back: () => void; toast: (t: string) => void }
+export type Dir = 'fwd' | 'back' | 'tab';
+interface Nav { route: Route; dir: Dir; go: (r: Route) => void; back: () => void; toast: (t: string) => void }
 const NavC = createContext<Nav>(null as unknown as Nav);
 export const useNav = () => useContext(NavC);
 
@@ -21,22 +22,25 @@ export function NavProvider({ children, initial = { name: 'home' }, onExit }: {
 }) {
   const [stack, setStack] = useState<Route[]>([initial]);
   const [msg, setMsg] = useState<string | null>(null);
+  const [dir, setDir] = useState<Dir>('tab');
   const route = stack[stack.length - 1];
   const tabs = ['home', 'path', 'tools', 'progress', 'settings'];
   const go = (r: Route) => {
+    setDir(tabs.includes(r.name) ? 'tab' : 'fwd');
     setStack((s) => (tabs.includes(r.name) ? [r] : [...s, r]));
     window.scrollTo(0, 0);
   };
   const back = () => {
     if (stack.length <= 1) { onExit?.(); return; }
+    setDir('back');
     setStack((s) => (s.length > 1 ? s.slice(0, -1) : s));
     window.scrollTo(0, 0);
   };
-  const toast = (t: string) => { fx('F-07'); setMsg(t); window.setTimeout(() => setMsg(null), 2600); };
+  const toast = (t: string) => { fx('F-07'); setMsg(t); window.setTimeout(() => setMsg(null), 3200); };
   return (
-    <NavC.Provider value={{ route, go, back, toast }}>
+    <NavC.Provider value={{ route, dir, go, back, toast }}>
       {children(route)}
-      {msg && <div className="toast" role="status">{msg}</div>}
+      {msg && <div className="toast" role="status" key={msg}><span className="toast-spark" aria-hidden>✦</span>{msg}</div>}
     </NavC.Provider>
   );
 }

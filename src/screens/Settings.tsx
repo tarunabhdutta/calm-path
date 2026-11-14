@@ -157,6 +157,11 @@ export function Settings() {
         <select value={d.settings.theme} onChange={(e) => update((x) => { x.settings.theme = e.target.value as any; })}>
           <option value="auto">Follow the device</option><option value="light">Light</option><option value="dark">Dark</option>
         </select>
+        <label className="f">Movement on screen</label>
+        <select value={d.settings.motion ?? 'full'} onChange={(e) => update((x) => { x.settings.motion = e.target.value as any; })}>
+          <option value="full">Full: cards tilt, pictures move</option><option value="gentle">Gentle: very little movement</option>
+        </select>
+        <p className="muted">Choose Gentle if movement on screen feels too busy. Your phone's own "reduce motion" setting also turns it down.</p>
       </div>
 
       <h2>Data and privacy</h2>

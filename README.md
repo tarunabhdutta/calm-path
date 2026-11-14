@@ -63,6 +63,15 @@ every lesson card. It covers:
 
 These rules are checked automatically on every build.
 
+**Movement that shows the way (v1.8):**
+- Cards tilt in 3D toward your finger and dip when pressed, like real buttons.
+- Screens turn like pages: forward from the right, back from the left. Lesson and guide cards can be swiped.
+- Cards rise into view one after another, and numbers count up.
+- One soft glowing ring always marks the next thing to tap. First-timers also get a pointing finger on Start.
+- Each "How Calm Path works" card has a small moving demonstration: levels unlocking, a finger pressing Start, the three rings filling, SURGE, and drops growing the island.
+- On the levels map, the path you have walked is drawn in green, the next stone sends out rings, and levels not yet open sit in drifting fog.
+- **Settings → Movement on screen → Gentle** turns almost all movement off. The phone's own "reduce motion" setting does the same.
+
 ## ⚠️ Important
 Calm Path is a self-help companion. **It is not a medical device and does not diagnose or treat
 anything.** Use it after a doctor has checked your symptoms, and alongside their care.

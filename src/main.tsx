@@ -5,6 +5,7 @@ import { StoreProvider } from './lib/store';
 import './styles.css';
 import './motion.css';
 import './games.css';
+import './motion3d.css';
 import '@fontsource-variable/nunito';
 import { runSelfTest } from './selftest';
 

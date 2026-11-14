@@ -25,6 +25,8 @@ export interface Settings {
   voice: boolean;
   tone: boolean;
   theme: 'auto' | 'light' | 'dark';
+  /** v1.8: 'gentle' turns the movement down (no 3D tilt, no looping animation). */
+  motion?: 'full' | 'gentle';
   budgetLevel: 0 | 1 | 2 | 3 | 4;  // 0 = not set yet
   sound?: SoundPrefs;  // added in v1.6; older data gets the defaults
 }
@@ -103,7 +105,7 @@ export function newData(p: Partial<Profile> = {}): Data {
     },
     settings: {
       reminders: { enabled: true, checkin: '08:30', breathe1: '11:30', breathe2: '17:30', worry: '19:30', winddown: '22:15' },
-      voice: true, tone: true, theme: 'auto', budgetLevel: 0,
+      voice: true, tone: true, theme: 'auto', motion: 'full', budgetLevel: 0,
     },
     sessions: {}, surges: [], urges: [], checkins: [], counts: {}, worries: [], breaths: [],
     measures: [], persistent: {}, entries: {}, safetyEvents: [], game: newGame(),

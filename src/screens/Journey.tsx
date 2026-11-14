@@ -8,6 +8,7 @@ import { coreCount, doneCount, nextSession } from '../lib/progress';
 import { LANDS } from '../game/rewards';
 import { friendlyDate } from '../lib/pathway';
 import { Tulu } from '../game/Mascot';
+import { lessMotion } from '../lib/motion';
 
 const X = [22, 50, 78, 50]; // zigzag positions (% of width)
 
@@ -17,7 +18,11 @@ export function Journey() {
   const d = data!;
   const { session: next, readyOn } = nextSession(d);
   const here = useRef<HTMLButtonElement | null>(null);
-  useEffect(() => { here.current?.scrollIntoView({ block: 'center' }); }, []);
+  // Start at the top, then glide down the path to where you are, so the way you came is visible.
+  useEffect(() => {
+    const t = window.setTimeout(() => here.current?.scrollIntoView({ block: 'center', behavior: lessMotion() ? 'auto' : 'smooth' }), lessMotion() ? 0 : 650);
+    return () => window.clearTimeout(t);
+  }, []);
   const weeks = Array.from(new Set(PROGRAMME.map((s) => s.week)));
 
   return (
@@ -33,8 +38,12 @@ export function Journey() {
         const reached = stones.some((s) => d.sessions[s.id] || s.id === next?.id);
         const h = stones.length * 92 + 20;
         const pts = stones.map((_, i) => `${X[i % 4]},${46 + i * 92}`).join(' ');
+        // the walked part of the trail: up to the last finished stone, or to the next one
+        const reach = stones.reduce((n, s, i) => (d.sessions[s.id] || s.id === next?.id ? i : n), -1);
+        const walked = stones.slice(0, reach + 1).map((_, i) => `${X[i % 4]},${46 + i * 92}`).join(' ');
         return (
-          <section key={w} className={'land' + (reached ? '' : ' fog')} style={{ background: `linear-gradient(180deg, ${land.sky[0]}, ${land.sky[1]})` }}>
+          <section key={w} className={'land' + (reached ? '' : ' fog') + (allDone ? ' complete' : '')} style={{ background: `linear-gradient(180deg, ${land.sky[0]}, ${land.sky[1]})` }}>
+            {!reached && <span className="fog-lock">🔒 opens later</span>}
             <header>
               <span className="land-icon big">{land.icon}</span>
               <div>
@@ -46,6 +55,7 @@ export function Journey() {
             <div className="stones" style={{ height: h }}>
               <svg className="trail" viewBox={`0 0 100 ${h}`} preserveAspectRatio="none" aria-hidden>
                 <polyline points={pts} fill="none" stroke="rgba(90,110,90,.35)" strokeWidth="1.2" strokeDasharray="2 2.5" vectorEffect="non-scaling-stroke" />
+                {reach > 0 && <polyline className="trail-done" points={walked} fill="none" stroke="rgba(62,138,98,.75)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />}
               </svg>
               {stones.map((s, i) => {
                 const isDone = !!d.sessions[s.id];
