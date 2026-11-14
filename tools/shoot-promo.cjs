@@ -40,6 +40,9 @@ app.whenReady().then(async () => {
   await dbg.sendCommand('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: Z, mobile: true });
   const shot = async (name, settle = 900) => {
     await wait(settle);
+    // v1.8 rise-in: finish every card's entrance so no still catches a half-risen card
+    await win.webContents.executeJavaScript(`document.querySelectorAll('.rv').forEach(e => { e.classList.remove('rv','rv-in'); e.style.animationDelay=''; })`);
+    await wait(120);
     let data = null;
     for (let k = 0; k < 3 && !data; k++) {
       data = await Promise.race([dbg.sendCommand('Page.captureScreenshot', { format: 'png' }).then((r) => r.data), wait(15000).then(() => null)]);
@@ -81,10 +84,10 @@ app.whenReady().then(async () => {
     await shot('welcome', 400);
     await click('Start my island'); await wait(1200);
     await js(`window.__calmUpdate((d) => { d.settings.voice = false; d.settings.sound = { music: 0, ambience: 0, effects: 0, voice: 0, quiet: true, captions: true, breatheMusic: false }; })`);
-    // ── step 3: the five guide cards
-    for (let i = 1; i <= 5; i++) {
-      await shot('guide_' + i, i === 1 ? 900 : 700);
-      if (i < 5) { await mark('guide_next', 'Next'); await click('Next'); }
+    // ── step 3: the six guide cards (v1.9 adds "Gentle reminders keep you company")
+    for (let i = 1; i <= 6; i++) {
+      await shot('guide_' + i, i === 1 ? 900 : 1100);
+      if (i < 6) { await mark('guide_next', 'Next'); await click('Next'); }
     }
     await mark('guide_start', 'Start Level 1');
     await click('Start Level 1'); await wait(900); await closeMoments(); await top();
@@ -93,6 +96,7 @@ app.whenReady().then(async () => {
     await markSel('home_mission', '.mission-card');
     await markSel('home_go', '.mission-go');
     await shot('home', 700);
+    await scrollTo('.next-rem', 'center'); await wait(300); await markSel('home_nextrem', '.next-rem'); await shot('home_nextrem', 600); await top();
     await scrollTo('.surge', 'start'); await wait(300);
     await markSel('home_surge2', '.surge');
     await markSel('home_rings', '.quests');
@@ -205,7 +209,12 @@ app.whenReady().then(async () => {
     await tab('Tools'); await click('Safety card'); await shot('safety', 900); await back();
     await js(`window.__calmUpdate((d) => { d.settings.voice = true; d.settings.sound = undefined; })`);
     await tab('Settings'); await mark('settings_guide', 'How Calm Path works'); await shot('settings', 600);
+    await js(`[...document.querySelectorAll('label, h2, h3, b')].find(h => /Movement on screen/.test(h.innerText))?.scrollIntoView({block:'center'})`); await shot('settings_movement', 700);
+    await top();
     await js(`[...document.querySelectorAll('h2')].find(h => h.innerText.includes('Sound'))?.scrollIntoView({block:'start'})`); await shot('settings_sound', 700);
+    // v1.9 reminders: the section, then the times and the two buttons
+    await js(`document.getElementById('reminders')?.scrollIntoView({block:'start'})`); await shot('settings_reminders', 700);
+    await js(`window.scrollBy(0, 330)`); await mark('settings_sample', '🔔 Send me a sample'); await shot('settings_reminders_times', 700);
   } catch (e) {
     console.error('SHOOT ERROR', e);
   }
